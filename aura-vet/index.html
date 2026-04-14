@@ -6,14 +6,14 @@
 <title>Aura Vet — Sistema de gestion para veterinarias | Yusta Labs</title>
 <meta name="description" content="Pacientes, vacunas y turnos en un solo lugar. El sistema que tu veterinaria necesitaba. Sin fichas de papel, sin vacunas vencidas sin avisar. Pago unico.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080810;--surface:#0f0f1c;--card:#13131f;
-  --border:rgba(59,91,219,0.15);--border2:rgba(59,91,219,0.3);
-  --blue:#3B5BDB;--blue-light:#4C6EF5;--cyan:#06D6A0;--cyan-dim:rgba(6,214,160,0.1);
-  --text:#eeeef5;--muted:#6b6b8a;--muted2:#9999bb;--white:#ffffff;
+  --bg:#060C0A;--surface:#0C1510;--card:#111C15;
+  --border:rgba(34,139,100,0.15);--border2:rgba(34,139,100,0.3);
+  --blue:#228B64;--blue-light:#2DBF8A;--cyan:#7EC8A4;--cyan-dim:rgba(126,200,164,0.1);
+  --text:#eef5f0;--muted:#6a7d72;--muted2:#9abfaa;--white:#ffffff;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
@@ -41,9 +41,9 @@ button{cursor:pointer;font-family:'Barlow',sans-serif}
 .mobile-menu a:hover{color:var(--cyan);background:var(--cyan-dim)}
 #hero{min-height:100vh;display:flex;align-items:center;padding:100px clamp(20px,5vw,60px) 80px;position:relative;overflow:hidden}
 .hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");background-size:200px;opacity:.4;pointer-events:none}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,91,219,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,91,219,.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black 20%,transparent 75%);pointer-events:none}
-.hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(59,91,219,.12) 0%,transparent 65%);pointer-events:none}
-.hero-glow2{position:absolute;bottom:0;right:-10%;width:500px;height:400px;background:radial-gradient(ellipse,rgba(6,214,160,.06) 0%,transparent 65%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(34,139,100,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(34,139,100,.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black 20%,transparent 75%);pointer-events:none}
+.hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(34,139,100,.12) 0%,transparent 65%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:0;right:-10%;width:500px;height:400px;background:radial-gradient(ellipse,rgba(126,200,164,.06) 0%,transparent 65%);pointer-events:none}
 .hero-content{position:relative;max-width:780px}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:100px;padding:7px 18px;margin-bottom:32px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
@@ -119,7 +119,8 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .feature-desc{font-size:13px;color:var(--muted);line-height:1.6}
 .feature-highlight{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
 #pricing{background:var(--surface);border-top:1px solid var(--border)}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px}
+.hero h1 { font-family: 'Nunito', sans-serif !important; font-weight: 900; letter-spacing: -1.5px; }
 .pricing-addons{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
 .price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;position:relative;overflow:hidden}
 .price-card.featured{border-color:var(--blue);background:linear-gradient(145deg,#0d1220,#111926)}
@@ -219,6 +220,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
+  <div style="position:absolute;top:20%;right:8%;width:320px;height:320px;background:radial-gradient(circle,rgba(34,139,100,0.08) 0%,transparent 70%);pointer-events:none;filter:blur(30px);"></div>
+  <div style="position:absolute;bottom:15%;left:5%;font-size:120px;opacity:0.03;pointer-events:none;">🐾</div>
   <div class="hero-content">
     <div class="hero-badge">Sistema para veterinarias</div>
     <h1>El sistema que<br><span class="accent">tu veterinaria</span><br><span class="dim">necesitaba.</span></h1>
@@ -242,6 +245,42 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <div class="hero-stat"><div class="num"><span>87%</span></div><div class="label">mas barato que agencias</div></div>
       <div class="hero-stat"><div class="num"><span>30</span> min</div><div class="label">para tener el sistema listo</div></div>
       <div class="hero-stat"><div class="num"><span>$0</span></div><div class="label">costo de servidor mensual</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- EL PROBLEMA REAL -->
+<section id="problema" style="padding:80px clamp(20px,5vw,60px);background:var(--surface);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:560px;margin:0 auto 48px;">
+      <div class="section-label">El problema real</div>
+      <h2 class="section-title">¿Te suena<br>alguna de estas?</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px;">
+      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:28px;">
+        <div style="font-size:2rem;margin-bottom:14px;">🐾</div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;font-style:italic;">"Llevo el historial de cada paciente en cuadernos. Cuando una mascota vuelve, no sé qué vacunas le dimos ni cuándo fue la última desparasitación."</p>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(239,68,68,0.1);font-size:11px;color:rgba(239,68,68,0.7);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Control médico</div>
+      </div>
+      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:28px;">
+        <div style="font-size:2rem;margin-bottom:14px;">📅</div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;font-style:italic;">"Se me olvidan los recordatorios de vacunas. Los dueños no vuelven porque nadie les avisa, y pierdo el seguimiento de todos."</p>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(239,68,68,0.1);font-size:11px;color:rgba(239,68,68,0.7);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Seguimiento de pacientes</div>
+      </div>
+      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:28px;">
+        <div style="font-size:2rem;margin-bottom:14px;">💸</div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;font-style:italic;">"No sé cuánto facturé el mes. Las consultas, los productos y las cirugías están mezclados y no tengo un resumen claro."</p>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(239,68,68,0.1);font-size:11px;color:rgba(239,68,68,0.7);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Desorden financiero</div>
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:240px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">La solución</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.7rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px;">Aura Vet organiza tu clínica. Automáticamente.</h3>
+        <p style="font-size:14px;color:var(--muted2);line-height:1.6;">Sin cuadernos, sin vacunas perdidas, sin clientes que no vuelven. Un sistema pensado para veterinarias argentinas.</p>
+      </div>
+      <a href="/aura-vet/demo" target="_blank" class="btn-demo" style="flex-shrink:0;">Ver cómo funciona →</a>
     </div>
   </div>
 </section>
@@ -389,12 +428,93 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   </div>
 </section>
 
+<!-- CALCULADORA ROI -->
+<section id="roi" style="padding:80px clamp(20px,5vw,60px);background:var(--surface);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:560px;margin:0 auto 48px;">
+      <div class="section-label">Calculá tu retorno</div>
+      <h2 class="section-title">¿Cuánto te cuesta<br><span style="color:var(--cyan)">no tener Aura?</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:24px;letter-spacing:.5px;">Ingresá los datos de tu negocio</h3>
+        <div style="display:flex;flex-direction:column;gap:22px;">
+          <div>
+            <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">Consultas promedio por día</label>
+            <input type="range" id="roi-s1" min="3" max="30" value="10" oninput="calcROI()" style="width:100%;accent-color:var(--blue);">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;"><span>3</span><span id="roi-s1-val" style="color:var(--white);font-weight:700;">10 consultas</span><span>30</span></div>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">Precio promedio por consulta</label>
+            <input type="range" id="roi-s2" min="3000" max="25000" step="500" value="8000" oninput="calcROI()" style="width:100%;accent-color:var(--blue);">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;"><span>$3.000</span><span id="roi-s2-val" style="color:var(--white);font-weight:700;">$8.000</span><span>$25.000</span></div>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">% de operaciones que se pierden sin sistema</label>
+            <input type="range" id="roi-pct" min="5" max="35" value="15" oninput="calcROI()" style="width:100%;accent-color:var(--blue);">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;"><span>5%</span><span id="roi-pct-val" style="color:var(--white);font-weight:700;">15%</span><span>35%</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(239,68,68,0.8);margin-bottom:8px;">Perdés por mes</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:#ef4444;line-height:1;" id="roi-perdida">$0</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;">en turnos que no se siguen y pacientes que no vuelven</div>
+        </div>
+        <div style="background:rgba(var(--blue-rgb,59,91,219),0.06);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:8px;">Aura te cuesta (pago único)</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);line-height:1;">USD 450</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;">se recupera en <span id="roi-meses" style="color:var(--white);font-weight:700;">menos de 1 mes</span></div>
+        </div>
+        <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Ganás extra por mes</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;" id="roi-ganancia">$0</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;">con operaciones recuperadas y gestión eficiente</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Calculé%20mi%20ROI%20y%20me%20interesa%20Aura%20Vet." target="_blank" class="btn-primary" style="text-align:center;justify-content:center;">Quiero recuperar esa plata →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIO -->
+<section id="testimonio" style="padding:64px clamp(20px,5vw,60px);background:var(--bg);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="max-width:680px;margin:0 auto;text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:4rem;color:var(--blue);line-height:1;margin-bottom:20px;opacity:.6;">❝</div>
+      <blockquote style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.35;margin-bottom:28px;">"Perdía el 30% de mis pacientes recurrentes porque nadie les recordaba la vacuna anual. Ahora el Fidelizador manda un WhatsApp automático y el 80% renueva. Triplicamos los controles preventivos."</blockquote>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(var(--blue-rgb,59,91,219),0.15);border:2px solid rgba(var(--blue-rgb,59,91,219),0.35);display:flex;align-items:center;justify-content:center;font-size:18px;">🐾</div>
+        <div style="text-align:left;">
+          <div style="font-size:14px;font-weight:700;color:var(--white);">Dr. Sebastián Mora</div>
+          <div style="font-size:12px;color:var(--muted);">Veterinario — Clínica Veterinaria El Pinar, Córdoba</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="wrap">
     <div class="fade">
       <div class="section-label">Precios</div>
       <h2 class="section-title">Pago unico.<br>Tuyo para siempre.</h2>
       <p class="section-desc">Sin contratos en dolares, sin licencias imposibles. Precios pensados para veterinarias argentinas reales.</p>
+    </div>
+    <div class="reveal reveal-delay-1" style="margin-bottom:20px;">
+      <div style="background:var(--card);border:1px dashed var(--border2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:260px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">✨ Plan Starter</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:6px;">Aura Vet Lite · Para empezar</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.65;">Historial clínico, agenda y turnos. Ideal para veterinarios a domicilio o clínicas unipersonales. <strong style="color:var(--muted2);">Sin stock avanzado · Sin cuentas corrientes · 1 usuario · Soporte por email</strong>. Upgradeás al plan completo cuando quieras.</p>
+        </div>
+        <div style="text-align:center;flex-shrink:0;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1rem;color:var(--muted2);">USD </span>199</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Pago único · Setup DIY</div>
+          <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20Aura%20Vet%20Lite." target="_blank" class="btn-secondary" style="white-space:nowrap;font-size:13px;padding:10px 22px;">Arrancar chiquito →</a>
+        </div>
+      </div>
     </div>
     <div class="pricing-grid fade fade-delay-1">
       <div class="price-card">
@@ -416,6 +536,26 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
           <div class="price-feature muted">Migracion de base de datos</div>
         </div>
         <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20Aura%20Vet%20para%20mi%20veterinaria." target="_blank" class="btn-secondary btn-full">Quiero mi sistema →</a>
+      </div>
+      <div class="price-card" style="border:2px solid var(--blue);background:linear-gradient(145deg,rgba(34,139,100,0.08),transparent);position:relative;">
+        <div style="position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:0 0 0 12px;">Combo All-in</div>
+        <div class="price-badge" style="background:rgba(34,139,100,0.15);border-color:rgba(34,139,100,0.35);color:var(--blue-light);">App + 3 Agentes</div>
+        <div class="price-name">Combo All-in</div>
+        <div class="price-desc">Sistema completo + Recepcionista, Fidelizador y Almacenero configurados y funcionando desde el día 1.</div>
+        <div class="price-listed">USD 1.150 por separado</div>
+        <div class="price-amount"><span class="currency">USD </span>950</div>
+        <div class="price-tag">✓ Ahorrás USD 200</div>
+        <div class="price-cuotas-note">+ <strong>USD 69/mes mantenimiento</strong></div>
+        <hr class="price-divider">
+        <div class="price-features">
+          <div class="price-feature">Aura Vet completo</div>
+          <div class="price-feature">3 agentes IA listos para usar</div>
+          <div class="price-feature">Setup e integración incluida</div>
+          <div class="price-feature">Dashboard unificado</div>
+          <div class="price-feature">Prioridad en soporte</div>
+          <div class="price-feature">Capacitación incluida</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Combo%20All-in%20de%20Aura%20Vet." target="_blank" class="btn-primary btn-full">Quiero el combo →</a>
       </div>
       <div class="price-card featured">
         <div class="price-badge">Mas completo</div>
@@ -442,7 +582,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
         <div class="price-badge addon-badge">Servicio adicional</div>
         <div class="price-name">Pack Mejoras</div>
         <div class="price-desc">Actualizaciones, nuevas funciones o cambios en tu sistema existente.</div>
-        <div class="price-amount addon-amount"><span class="currency">USD </span>80</div>
+        <div class="price-amount addon-amount"><span class="currency">USD </span>100</div>
         <div class="price-features" style="margin-top:16px">
           <div class="price-feature">Nuevos modulos o funciones</div>
           <div class="price-feature">Ajustes y cambios de logica</div>
@@ -453,9 +593,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       </div>
       <div class="price-card addon">
         <div class="price-badge addon-badge">Servicio adicional</div>
-        <div class="price-name">Migracion</div>
-        <div class="price-desc">Pasamos toda tu informacion actual al sistema. Excel, papel, otro software — no importa.</div>
-        <div class="price-amount addon-amount"><span class="currency">USD </span>50</div>
+        <div class="price-name">Migración Pro</div>
+        <div class="price-desc">Migración completa con limpieza de datos, unificación de duplicados y carga histórica de 2+ años de historia clínica.</div>
+        <div class="price-amount addon-amount"><span class="currency">USD </span>150</div>
         <div class="price-features" style="margin-top:16px">
           <div class="price-feature">Desde Excel, Google Sheets o CSV</div>
           <div class="price-feature">Pacientes, historiales, vacunas</div>
@@ -472,55 +612,145 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
 
 <!-- AGENTES -->
 <section id="agentes" style="padding:100px 0;background:var(--bg);border-top:1px solid var(--border);">
-  <div class="wrap">
-    <div style="text-align:center;max-width:680px;margin:0 auto 60px;">
-      <div class="section-label">Servicio exclusivo &middot; Yusta Labs</div>
-      <h2 class="section-title">Tus pr&oacute;ximos empleados<br><span>no cobran sueldo</span></h2>
-      <p class="section-desc">Un <strong>empleado virtual</strong> es un agente de inteligencia artificial programado para hacer una tarea espec&iacute;fica de tu negocio &mdash; solo, sin errores, las 24 horas.</p>
+<div class="wrap">
+  <div style="text-align:center;max-width:700px;margin:0 auto 16px;">
+    <div class="section-label">Empleados virtuales · Yusta Labs</div>
+    <h2 class="section-title">La app es la clínica digital.<br><span style="color:var(--cyan)">Los agentes son quien la opera.</span></h2>
+  </div>
+  <div style="max-width:780px;margin:0 auto 32px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 36px;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;">¿Qué hacen exactamente?</div>
+    <p style="font-size:15px;color:var(--text);line-height:1.75;margin-bottom:12px;"><strong>Los agentes viven dentro de Aura Vet.</strong> No son un chatbot separado. Cuando un dueño pide turno para su mascota por WhatsApp, la Recepcionista <strong style="color:var(--cyan);">agenda la consulta directamente</strong> con el historial del paciente adjunto. Cuando llega el momento de la vacuna anual, el Fidelizador <strong style="color:var(--cyan);">detecta al paciente, le escribe al dueño y coordina el turno.</strong></p>
+    <p style="font-size:14px;color:var(--muted2);line-height:1.7;">Vos seguís siendo el veterinario y el que toma las decisiones clínicas. Ellos hacen el trabajo administrativo — responder, recordar, cargar, seguir. La información del paciente queda clara, legible y siempre visible. El 30% de pacientes que no volvían porque nadie les recordaba, ahora vuelven.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de atención</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">La Recepcionista</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Un cliente escribe a las 10pm: "Mi perro se lastimó, ¿tienen turno mañana?" El agente consulta la agenda y reserva al instante, sin que vos lo veas hasta la mañana.</div>
+      <div style="font-size:12px;color:var(--cyan);font-weight:600;margin-top:10px;line-height:1.5;">→ Resuelve: turnos que se pierden entre el WhatsApp y el papel</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">&#128242;</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de mensajes</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Recordador</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Manda mensajes por WhatsApp a tus clientes autom&aacute;ticamente &mdash; turnos, vencimientos, cobros pendientes.</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💳</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de cobros</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Cobrador</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Consultas o tratamientos con saldo pendiente. El agente hace el seguimiento automático, educado, y registra cada promesa de pago.</div>
+      <div style="font-size:12px;color:var(--cyan);font-weight:600;margin-top:10px;line-height:1.5;">→ Resuelve: cuentas corrientes de clientes B2B sin cobrar</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💊</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de stock</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Almacenero</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Vacunas, medicamentos, insumos quirúrgicos. El agente monitorea el stock mínimo y te avisa cuando hay que reponer — sin sorpresas.</div>
+      <div style="font-size:12px;color:var(--cyan);font-weight:600;margin-top:10px;line-height:1.5;">→ Resuelve: quedarte sin vacuna antirrábica en pleno operativo</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de datos</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Analista</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Informe semanal: cuántas consultas atendiste, qué especies, facturación del período y cuáles pacientes tocan revisión pronto.</div>
+      <div style="font-size:12px;color:var(--cyan);font-weight:600;margin-top:10px;line-height:1.5;">→ Resuelve: no saber qué tratamientos te dejan más plata</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📱</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de contenido</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Community</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Posts de concientización, consejos de salud animal, novedades del consultorio. Contenido que educa y fideliza a los dueños de mascotas.</div>
+      <div style="font-size:12px;color:var(--cyan);font-weight:600;margin-top:10px;line-height:1.5;">→ Resuelve: no tener tiempo para publicar tips de cuidado en redes</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💌</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de retención</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Fidelizador</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Firulais tiene la vacuna antirrábica en 2 semanas. El agente avisa al dueño con tiempo, antes de que lo olvide. Sin llamadas, sin papeles.</div>
+      <div style="font-size:12px;color:var(--cyan);font-weight:600;margin-top:10px;line-height:1.5;">→ Resuelve: pacientes que no vuelven porque nadie les recuerda la vacuna</div>
+    </div>
+  </div>
+  <!-- Pricing box agentes -->
+  <div style="margin-bottom:32px;">
+    <div style="text-align:center;margin-bottom:24px;">
+      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:8px;">Comprás el agente una vez.<br><span style="color:var(--cyan)">Lo mantenemos funcionando siempre.</span></h3>
+      <p style="font-size:13px;color:var(--muted);max-width:500px;margin:0 auto;">Las APIs de WhatsApp e IA van a <strong style="color:var(--text)">tu nombre</strong> — vos tenés el control, nosotros no tocamos eso.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Por agente</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>300</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Setup completo</div>
+        <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ USD 29/mes mantenimiento</div>
+        <div style="font-size:12px;color:var(--muted);">O en <strong style="color:var(--text)">6 cuotas de USD 50</strong> sin interés</div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">&#128202;</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de reportes</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Contador</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Genera y env&iacute;a tu informe mensual por email. Ventas, deudas, stock &mdash; listo el primero de cada mes.</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">&#128276;</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de alertas</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Vigilante</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Monitorea tu stock y tus m&eacute;tricas. Te avisa en el momento exacto si algo necesita atenci&oacute;n.</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">&#128172;</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de atenci&oacute;n</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Recepcionista</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Responde consultas frecuentes, confirma turnos y recaba datos &mdash; sin que vos est&eacute;s al tel&eacute;fono.</div>
+      <div style="background:var(--card);border:2px solid rgba(var(--blue-rgb,59,91,219),0.4);border-radius:14px;padding:28px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:0 0 0 10px;">Más elegido</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:10px;">Combo 3 agentes</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;color:var(--blue-light);line-height:1;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>800</div>
+          <div style="font-size:12px;color:var(--muted);text-decoration:line-through;">900</div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Ahorrás USD 100</div>
+        <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ USD 69/mes mantenimiento</div>
+        <div style="font-size:12px;color:var(--muted);">O en <strong style="color:var(--text)">6 cuotas de USD 133</strong> sin interés</div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:40px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:48px;margin-bottom:32px;">
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:12px;line-height:1.6;max-width:640px;margin-left:auto;margin-right:auto;">Mantenimiento cubre hosting, monitoreo y soporte. Las APIs de WhatsApp e IA van a tu nombre.</div>
+    <div style="background:rgba(126,200,164,0.06);border:1px dashed rgba(126,200,164,0.3);border-radius:12px;padding:14px 20px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
       <div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:16px;line-height:1.2;">Un pago &uacute;nico.<br>Empleados para siempre.</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px;">Programamos los agentes espec&iacute;ficos que necesita tu negocio. Cada uno cumple una funci&oacute;n concreta, adaptada a tu rubro. El precio base cubre la implementaci&oacute;n de los agentes fundamentales.</p>
-        <p style="font-size:12px;color:var(--muted);line-height:1.6;">A mayor complejidad o cantidad de integraciones, se cotiza un adicional. Siempre transparente, sin sorpresas.</p>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:3px;">💡 Plan anual</div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.5;">Pagás <strong style="color:var(--white);">10 meses y usás 12</strong>. Equivale a USD 24/mes (individual) o USD 58/mes (combo).</div>
       </div>
-      <div style="width:1px;background:var(--border);align-self:stretch;"></div>
-      <div style="text-align:center;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Precio base desde</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:4rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;"><span style="font-size:1.8rem;vertical-align:top;margin-top:12px;display:inline-block;color:var(--cyan);">USD </span>300</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Pago &uacute;nico &middot; Setup completo incluido</div>
-        
-        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Las APIs externas (WhatsApp, IA) se contratan <strong style="color:var(--text);">a nombre del cliente</strong> &mdash; sin costos para Yusta Labs.</div>
-      </div>
+      <div style="font-size:11px;color:var(--muted);flex-shrink:0;">Ahorrás USD 58 al año / USD 138 (combo)</div>
     </div>
     <div style="text-align:center;">
-      <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary">Quiero mis agentes &rarr;</a>
+      <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:9px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;">Quiero mis agentes →</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FLUJO VISUAL -->
+<section id="flujo" style="padding:80px clamp(20px,5vw,60px);background:var(--surface);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:560px;margin:0 auto 48px;">
+      <div class="section-label">Cómo funciona</div>
+      <h2 class="section-title">Del mensaje al turno<br>en 30 segundos.</h2>
+      <p style="font-size:15px;color:var(--muted2);line-height:1.65;margin-top:12px;">El dueño de la mascota escribe por WhatsApp. El agente responde, revisa disponibilidad y agenda la consulta.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:start;position:relative;">
+      <div style="position:absolute;top:36px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,var(--border),var(--blue),var(--cyan),var(--border));z-index:0;"></div>
+      <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
+        <div style="width:72px;height:72px;border-radius:18px;background:#075E54;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;box-shadow:0 0 20px rgba(7,94,84,0.3);">💬</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">1 — Dueño escribe</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Hola, necesito turno para Firulais, ¿tienen el martes?</div>
+      </div>
+      <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
+        <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--blue-rgb,59,91,219),0.15);border:1px solid rgba(var(--blue-rgb,59,91,219),0.3);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">🤖</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">2 — Agente responde</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Consulta agenda, responde con disponibilidad y confirma el turno</div>
+      </div>
+      <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
+        <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--cyan-rgb,6,214,160),0.08);border:1px solid rgba(var(--cyan-rgb,6,214,160),0.2);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">🐕</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">3 — Consulta agendada</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Turno creado con historial del paciente adjunto</div>
+      </div>
+      <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
+        <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--blue-rgb,59,91,219),0.08);border:1px solid rgba(var(--blue-rgb,59,91,219),0.15);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">📊</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">4 — Vos sabés todo</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Panel actualizado. Resumen diario a las 9am en tu WhatsApp</div>
+      </div>
+    </div>
+    <div style="margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">24/7</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">Opera sin parar, sin vacaciones</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">&lt;30s</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">Tiempo promedio de respuesta</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">0 errores</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">Sin olvidos, sin duplicados</div>
+      </div>
     </div>
   </div>
 </section>
@@ -587,6 +817,24 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
 </a>
 
 <script>
+function calcROI(){
+  const s1=+document.getElementById('roi-s1').value;
+  const s2=+document.getElementById('roi-s2').value;
+  const pct=+document.getElementById('roi-pct').value/100;
+  const perdidoMes=Math.round(s1*25*s2*pct);
+  const ganancia=Math.round(perdidoMes*0.85);
+  const costoUSD=450;
+  const dolarBlue=1250;
+  const costoPesos=costoUSD*dolarBlue;
+  const meses=perdidoMes>0?Math.max(1,Math.ceil(costoPesos/perdidoMes)):99;
+  document.getElementById('roi-s1-val').textContent=s1+' consultas';
+  document.getElementById('roi-s2-val').textContent='$'+s2.toLocaleString('es-AR');
+  document.getElementById('roi-pct-val').textContent=Math.round(pct*100)+'%';
+  document.getElementById('roi-perdida').textContent='$'+perdidoMes.toLocaleString('es-AR');
+  document.getElementById('roi-ganancia').textContent='$'+ganancia.toLocaleString('es-AR');
+  document.getElementById('roi-meses').textContent=meses<=1?'menos de 1 mes':meses+' meses';
+}
+calcROI();
 const nav=document.getElementById('nav')
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40))
 const burger=document.getElementById('burger'),mobileMenu=document.getElementById('mobileMenu')

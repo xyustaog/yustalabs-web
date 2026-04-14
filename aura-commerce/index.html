@@ -6,23 +6,14 @@
 <title>Aura Commerce — Sistema de gestión para tu negocio | Yusta Labs</title>
 <meta name="description" content="El sistema de gestión que tu negocio necesitaba. Diseñado para comercios argentinos. Sin servidores, sin costos mensuales, tuyo para siempre.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080810;
-  --surface:#0f0f1c;
-  --card:#13131f;
-  --border:rgba(59,91,219,0.15);
-  --border2:rgba(59,91,219,0.3);
-  --blue:#3B5BDB;
-  --blue-light:#4C6EF5;
-  --cyan:#06D6A0;
-  --cyan-dim:rgba(6,214,160,0.1);
-  --text:#eeeef5;
-  --muted:#6b6b8a;
-  --muted2:#9999bb;
-  --white:#ffffff;
+  --bg:#060A0C;--surface:#0A1214;--card:#0F181C;
+  --border:rgba(8,145,178,0.15);--border2:rgba(8,145,178,0.3);
+  --blue:#0891B2;--blue-light:#0EA5C9;--cyan:#22D3EE;--cyan-dim:rgba(34,211,238,0.1);
+  --text:#eef4f8;--muted:#60707a;--muted2:#90b0c0;--white:#ffffff;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
@@ -89,7 +80,7 @@ img{max-width:100%}
 }
 .hero-grid{
   position:absolute;inset:0;
-  background-image:linear-gradient(rgba(59,91,219,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,91,219,.06) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(8,145,178,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(8,145,178,.06) 1px,transparent 1px);
   background-size:60px 60px;
   mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black 20%,transparent 75%);
   pointer-events:none;
@@ -97,13 +88,13 @@ img{max-width:100%}
 .hero-glow{
   position:absolute;top:-20%;left:50%;transform:translateX(-50%);
   width:800px;height:600px;
-  background:radial-gradient(ellipse,rgba(59,91,219,.12) 0%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(8,145,178,.12) 0%,transparent 65%);
   pointer-events:none;
 }
 .hero-glow2{
   position:absolute;bottom:0;right:-10%;
   width:500px;height:400px;
-  background:radial-gradient(ellipse,rgba(6,214,160,.06) 0%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(34,211,238,.06) 0%,transparent 65%);
   pointer-events:none;
 }
 .hero-content{position:relative;max-width:780px}
@@ -122,6 +113,7 @@ img{max-width:100%}
   line-height:.92;letter-spacing:-1px;color:var(--white);
   margin-bottom:8px;
 }
+.hero h1 { font-family: 'Inter', sans-serif !important; font-weight: 900; letter-spacing: -2.5px; }
 .hero h1 .accent{color:var(--cyan)}
 .hero h1 .dim{color:var(--muted2)}
 .hero-sub{
@@ -275,7 +267,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 
 /* ── PRICING ── */
 #pricing{background:var(--surface);border-top:1px solid var(--border)}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px}
 .pricing-grid-4{grid-template-columns:repeat(4,1fr)}
 .price-card{
   background:var(--card);border:1px solid var(--border);
@@ -472,6 +464,8 @@ footer{
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
+  <div style="position:absolute;top:20%;right:-5%;width:450px;height:450px;background:radial-gradient(circle,rgba(8,145,178,0.12) 0%,transparent 70%);pointer-events:none;filter:blur(40px);"></div>
+  <div style="position:absolute;bottom:15%;right:10%;font-size:130px;opacity:0.03;pointer-events:none;">🛒</div>
   <div class="hero-content">
     <div class="hero-badge">Sistema de gestión</div>
     <h1>
@@ -516,6 +510,42 @@ footer{
 </section>
 
 <!-- RUBROS -->
+
+<!-- EL PROBLEMA REAL -->
+<section id="problema" style="padding:80px clamp(20px,5vw,60px);background:var(--surface);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:560px;margin:0 auto 48px;">
+      <div class="section-label">El problema real</div>
+      <h2 class="section-title">¿Te suena<br>alguna de estas?</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px;">
+      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:28px;">
+        <div style="font-size:2rem;margin-bottom:14px;">🏪</div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;font-style:italic;">"El punto de venta lo llevo con una caja registradora o en papel. No sé qué vendí hoy hasta que cuento la caja a la noche, y muchas veces no cierra."</p>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(239,68,68,0.1);font-size:11px;color:rgba(239,68,68,0.7);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Control de caja</div>
+      </div>
+      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:28px;">
+        <div style="font-size:2rem;margin-bottom:14px;">📊</div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;font-style:italic;">"No sé qué productos rotan más ni cuáles me generan pérdidas. Compro de todo por las dudas y tengo plata inmovilizada en stock que no se mueve."</p>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(239,68,68,0.1);font-size:11px;color:rgba(239,68,68,0.7);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Gestión de inventario</div>
+      </div>
+      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:28px;">
+        <div style="font-size:2rem;margin-bottom:14px;">👤</div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;font-style:italic;">"Mis clientes frecuentes no los tengo registrados. No tengo forma de avisarles de promociones o de recuperar a los que dejaron de venir."</p>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(239,68,68,0.1);font-size:11px;color:rgba(239,68,68,0.7);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Fidelización</div>
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:240px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">La solución</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.7rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px;">Aura Commerce digitaliza tu comercio. Hoy.</h3>
+        <p style="font-size:14px;color:var(--muted2);line-height:1.6;">Punto de venta, stock y fidelización integrados. Para comercios minoristas argentinos que quieren vender más con menos esfuerzo.</p>
+      </div>
+      <a href="/aura-commerce/demo" target="_blank" class="btn-demo" style="flex-shrink:0;">Ver cómo funciona →</a>
+    </div>
+  </div>
+</section>
+
 <section id="rubros">
   <div class="wrap">
     <div class="fade">
@@ -670,6 +700,73 @@ footer{
   </div>
 </section>
 
+<!-- CALCULADORA ROI -->
+<section id="roi" style="padding:80px clamp(20px,5vw,60px);background:var(--surface);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:560px;margin:0 auto 48px;">
+      <div class="section-label">Calculá tu retorno</div>
+      <h2 class="section-title">¿Cuánto te cuesta<br><span style="color:var(--cyan)">no tener Aura?</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:24px;letter-spacing:.5px;">Ingresá los datos de tu negocio</h3>
+        <div style="display:flex;flex-direction:column;gap:22px;">
+          <div>
+            <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">Ventas promedio por día</label>
+            <input type="range" id="roi-s1" min="10" max="200" value="50" oninput="calcROI()" style="width:100%;accent-color:var(--blue);">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;"><span>10</span><span id="roi-s1-val" style="color:var(--white);font-weight:700;">50 ventas</span><span>200</span></div>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">Ticket promedio por venta</label>
+            <input type="range" id="roi-s2" min="2000" max="30000" step="500" value="8000" oninput="calcROI()" style="width:100%;accent-color:var(--blue);">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;"><span>$2.000</span><span id="roi-s2-val" style="color:var(--white);font-weight:700;">$8.000</span><span>$30.000</span></div>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">% de operaciones que se pierden sin sistema</label>
+            <input type="range" id="roi-pct" min="5" max="35" value="15" oninput="calcROI()" style="width:100%;accent-color:var(--blue);">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:5px;"><span>5%</span><span id="roi-pct-val" style="color:var(--white);font-weight:700;">15%</span><span>35%</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(239,68,68,0.8);margin-bottom:8px;">Perdés por mes</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:#ef4444;line-height:1;" id="roi-perdida">$0</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;">en ventas no registradas, stock mal gestionado y clientes sin fidelizar</div>
+        </div>
+        <div style="background:rgba(var(--blue-rgb,59,91,219),0.06);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:8px;">Aura te cuesta (pago único)</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);line-height:1;">USD 450</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;">se recupera en <span id="roi-meses" style="color:var(--white);font-weight:700;">menos de 1 mes</span></div>
+        </div>
+        <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Ganás extra por mes</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;" id="roi-ganancia">$0</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;">con operaciones recuperadas y gestión eficiente</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Calculé%20mi%20ROI%20y%20me%20interesa%20Aura%20Commerce." target="_blank" class="btn-primary" style="text-align:center;justify-content:center;">Quiero recuperar esa plata →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIO -->
+<section id="testimonio" style="padding:64px clamp(20px,5vw,60px);background:var(--bg);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="max-width:680px;margin:0 auto;text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:4rem;color:var(--blue);line-height:1;margin-bottom:20px;opacity:.6;">❝</div>
+      <blockquote style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.35;margin-bottom:28px;">"Antes cerraba la caja a la noche y nunca me daba. Con Aura tengo el resumen en tiempo real y el Analista me dice qué productos subir. Aumenté el margen promedio un 12% en el primer mes."</blockquote>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(var(--blue-rgb,59,91,219),0.15);border:2px solid rgba(var(--blue-rgb,59,91,219),0.35);display:flex;align-items:center;justify-content:center;font-size:18px;">🏪</div>
+        <div style="text-align:left;">
+          <div style="font-size:14px;font-weight:700;color:var(--white);">Martín Herrera</div>
+          <div style="font-size:12px;color:var(--muted);">Dueño — Almacén Don Martín, Villa Urquiza</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section id="pricing">
   <div class="wrap">
@@ -697,6 +794,26 @@ footer{
         </div>
         <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20la%20Aplicaci%C3%B3n%20de%20Aura%20Commerce." target="_blank" class="btn-secondary btn-full">Quiero mi sistema →</a>
       </div>
+      <div class="price-card" style="border:2px solid var(--blue);background:linear-gradient(145deg,rgba(8,145,178,0.08),transparent);position:relative;">
+        <div style="position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:0 0 0 12px;">Combo All-in</div>
+        <div class="price-badge" style="background:rgba(8,145,178,0.15);border-color:rgba(8,145,178,0.35);color:var(--blue-light);">App + 3 Agentes</div>
+        <div class="price-name">Combo All-in</div>
+        <div class="price-desc">Sistema completo + Recepcionista, Almacenero y Fidelizador funcionando desde el día 1.</div>
+        <div class="price-listed">USD 1.200 por separado</div>
+        <div class="price-amount"><span class="currency">USD </span>1.000</div>
+        <div class="price-tag">✓ Ahorrás USD 200</div>
+        <div class="price-cuotas-note">+ <strong>USD 69/mes mantenimiento</strong></div>
+        <hr class="price-divider">
+        <div class="price-features">
+          <div class="price-feature">Aura Commerce completo</div>
+          <div class="price-feature">3 agentes IA listos</div>
+          <div class="price-feature">Setup e integración incluida</div>
+          <div class="price-feature">Dashboard unificado</div>
+          <div class="price-feature">Prioridad en soporte</div>
+          <div class="price-feature">Capacitación incluida</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Combo%20All-in%20de%20Aura%20Commerce." target="_blank" class="btn-primary btn-full">Quiero el combo →</a>
+      </div>
       <div class="price-card featured">
         <div class="price-badge">Más completo</div>
         <div class="price-name">Plan Premium</div>
@@ -718,7 +835,7 @@ footer{
       <div class="price-card">
         <div class="price-badge">Servicio adicional</div>
         <div class="price-name">Pack Mejoras</div>
-        <div class="price-amount"><span class="currency">USD </span>80</div>
+        <div class="price-amount"><span class="currency">USD </span>100</div>
         <div class="price-tag">✓ Actualizaciones y nuevas funciones</div>
         <hr class="price-divider">
         <div class="price-features">
@@ -731,9 +848,9 @@ footer{
       </div>
       <div class="price-card">
         <div class="price-badge">Servicio adicional</div>
-        <div class="price-name">Migración</div>
-        <div class="price-amount"><span class="currency">USD </span>50</div>
-        <div class="price-tag">✓ Tus datos pasados al sistema</div>
+        <div class="price-name">Migración Pro</div>
+        <div class="price-amount"><span class="currency">USD </span>150</div>
+        <div class="price-tag">✓ Migración completa de productos, clientes e histórico de ventas con validación</div>
         <hr class="price-divider">
         <div class="price-features">
           <div class="price-feature">Desde Excel, Google Sheets o CSV</div>
@@ -752,55 +869,146 @@ footer{
 
 <!-- AGENTES -->
 <section id="agentes" style="padding:100px 0;background:var(--bg);border-top:1px solid var(--border);">
-  <div class="wrap">
-    <div class="fade" style="text-align:center;max-width:680px;margin:0 auto 60px;">
-      <div class="section-label">Servicio exclusivo · Yusta Labs</div>
-      <h2 class="section-title">Tus próximos empleados<br><span>no cobran sueldo</span></h2>
-      <p class="section-desc">Un <strong>empleado virtual</strong> es un agente de inteligencia artificial programado para hacer una tarea específica de tu negocio — solo, sin errores, las 24 horas.</p>
+<div class="wrap">
+  <div style="text-align:center;max-width:700px;margin:0 auto 16px;">
+    <div class="section-label">Empleados virtuales · Yusta Labs</div>
+    <h2 class="section-title">La app es tu comercio digital.<br><span style="color:var(--cyan)">Los agentes son tu equipo invisible.</span></h2>
+  </div>
+  <div style="max-width:780px;margin:0 auto 32px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 36px;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;">¿Qué hacen exactamente?</div>
+    <p style="font-size:15px;color:var(--text);line-height:1.75;margin-bottom:12px;"><strong>Los agentes viven dentro de Aura Commerce.</strong> Cuando un cliente consulta por un producto, la Recepcionista <strong style="color:var(--cyan);">responde, reserva y confirma la venta</strong>. Cuando baja el stock de un producto que rota, el Almacenero <strong style="color:var(--cyan);">te avisa y sugiere reponer antes de quedarte sin.</strong></p>
+    <p style="font-size:14px;color:var(--muted2);line-height:1.7;">Vos seguís siendo el dueño del local y el que decide qué vender. Ellos atienden, cobran, controlan stock y fidelizan. La caja cierra sin errores. Los reportes llegan automáticos. Los clientes frecuentes vuelven porque alguien les escribe. El margen promedio sube un 12% porque sabés qué rota y qué no.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de atención</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Recepcionista</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Consultas de productos, precios, disponibilidad y horarios de atención. El agente responde por WhatsApp sin que vos tengas que estar siempre al teléfono.</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.5px;">→ Resuelve: consultas de disponibilidad de productos a cualquier hora</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;" class="fade fade-delay-1 agentes-empleados-grid">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">📲</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de mensajes</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Recordador</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Manda mensajes por WhatsApp a tus clientes automáticamente — turnos, vencimientos, cobros pendientes.</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💳</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de cobros</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Cobrador</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Cuentas corrientes, pagos pendientes, cuotas vencidas. El agente hace el seguimiento sistemático — sin perseguir a buenos clientes, sin dejar pasar a los que deben.</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.5px;">→ Resuelve: cuentas corrientes y reservas sin concretar</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📦</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de stock</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Almacenero</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Stock de todos tus productos con alertas de mínimo y órdenes de compra automáticas a proveedores. Sin sorpresa de "no tengo" en el mostrador.</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.5px;">→ Resuelve: quiebres de stock en productos estrella</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de datos</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Analista</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Ventas del mes, clientes más rentables, productos que rotan mejor. Tu reporte semanal llega solo — listo para tomar decisiones.</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.5px;">→ Resuelve: no saber qué productos te dejan más margen real</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📱</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de contenido</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Promotor</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Promociones, novedades, liquidaciones. El agente genera el contenido y te lo manda listo para publicar en Instagram o mandarlo por WhatsApp.</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.5px;">→ Resuelve: publicar nuevos productos y promos sin tiempo</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">💌</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de retención</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Fidelizador</div>
+      <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Clientes que no compraron en 30 días. El agente los re-activa con una oferta personalizada basada en su historial — no un mensaje copia-pega.</div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:.5px;">→ Resuelve: clientes frecuentes que dejaron de volver sin avisar</div>
+    </div>
+  </div>
+  <!-- Pricing box agentes -->
+  <div style="margin-bottom:32px;">
+    <div style="text-align:center;margin-bottom:24px;">
+      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:10px;">Comprás el agente una vez.<br><span style="color:var(--cyan)">Lo mantenemos funcionando siempre.</span></h3>
+      <p style="font-size:14px;color:var(--muted2);max-width:560px;margin:0 auto;line-height:1.7;">Las APIs de WhatsApp e IA van a <strong>tu nombre</strong> — vos tenés el control total, sin costos ocultos ni dependencia de nuestra plataforma.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 28px;text-align:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Solo agentes</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:3.5rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;"><span style="font-size:1.5rem;vertical-align:top;margin-top:10px;display:inline-block;color:var(--cyan);">USD </span>300</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Pago único · Setup completo incluido</div>
+        <div style="font-size:12px;color:var(--muted2);margin-bottom:20px;">+ <strong style="color:var(--text);">USD 29/mes mantenimiento</strong></div>
+        <ul style="list-style:none;padding:0;margin:0 0 24px;text-align:left;">
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;border-bottom:1px solid var(--border);">✓ Hasta 3 agentes IA configurados</li>
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;border-bottom:1px solid var(--border);">✓ Integración con WhatsApp Business</li>
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;border-bottom:1px solid var(--border);">✓ Entrenamiento con datos de tu negocio</li>
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;">✓ Soporte 30 días post-entrega</li>
+        </ul>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" style="display:block;padding:12px;border-radius:9px;background:transparent;border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:700;text-decoration:none;text-align:center;">Quiero agentes →</a>
       </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">📊</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de reportes</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Contador</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Genera y envía tu informe mensual por email. Ventas, deudas, stock — listo el primero de cada mes.</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">🔔</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de alertas</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Vigilante</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Monitorea tu stock y tus métricas. Te avisa en el momento exacto si algo necesita atención.</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">💬</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de atención</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Recepcionista</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Responde consultas frecuentes, confirma turnos y recaba datos — sin que vos estés al teléfono.</div>
+      <div style="background:linear-gradient(135deg,rgba(var(--blue-rgb),.2),rgba(var(--cyan-rgb),.12));border:1px solid rgba(var(--cyan-rgb),.4);border-radius:16px;padding:32px 28px;text-align:center;position:relative;">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:#000;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;">Más elegido</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;">Sistema + Agentes</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:3.5rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;"><span style="font-size:1.5rem;vertical-align:top;margin-top:10px;display:inline-block;color:var(--cyan);">USD </span>800</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Pago único · Todo incluido</div>
+        <div style="font-size:12px;color:var(--muted2);margin-bottom:20px;">+ <strong style="color:var(--text);">USD 69/mes mantenimiento</strong></div>
+        <ul style="list-style:none;padding:0;margin:0 0 24px;text-align:left;">
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;border-bottom:1px solid var(--border);">✓ Sistema Aura Commerce completo</li>
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;border-bottom:1px solid var(--border);">✓ Hasta 5 agentes IA configurados</li>
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;border-bottom:1px solid var(--border);">✓ Integración total sistema ↔ agentes</li>
+          <li style="font-size:13px;color:var(--muted2);padding:6px 0;">✓ Soporte extendido 60 días</li>
+        </ul>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20combo%20Sistema%20%2B%20Agentes%20de%20Aura%20Commerce." target="_blank" style="display:block;padding:12px;border-radius:9px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;text-decoration:none;text-align:center;">Quiero el combo →</a>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:40px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:48px;margin-bottom:32px;" class="fade fade-delay-2 agentes-precio-grid">
+    <div style="max-width:700px;margin:0 auto 14px;font-size:12px;color:var(--muted);text-align:center;line-height:1.6;">Mantenimiento cubre hosting, monitoreo y soporte. Las APIs de WhatsApp e IA van a tu nombre.</div>
+    <div style="background:rgba(34,211,238,0.06);border:1px dashed rgba(34,211,238,0.3);border-radius:12px;padding:14px 20px;margin-top:10px;max-width:700px;margin-left:auto;margin-right:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
       <div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:16px;line-height:1.2;">Un pago único.<br>Empleados para siempre.</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px;">Programamos los agentes específicos que necesita tu negocio. Cada uno cumple una función concreta, adaptada a tu rubro. El precio base cubre la implementación de los agentes fundamentales.</p>
-        <p style="font-size:12px;color:var(--muted);line-height:1.6;">A mayor complejidad o cantidad de integraciones, se cotiza un adicional. Siempre transparente, sin sorpresas.</p>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:3px;">💡 Plan anual</div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.5;">Pagás <strong style="color:var(--white);">10 meses y usás 12</strong>. Equivale a USD 24/mes o USD 58/mes (combo).</div>
       </div>
-      <div style="width:1px;background:var(--border);align-self:stretch;"></div>
-      <div style="text-align:center;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Precio base desde</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:4rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;"><span style="font-size:1.8rem;vertical-align:top;margin-top:12px;display:inline-block;color:var(--cyan);">USD </span>300</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Pago único · Setup completo incluido</div>
-        
-        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Las APIs externas (WhatsApp, IA) se contratan <strong style="color:var(--text);">a nombre del cliente</strong> — sin costos para Yusta Labs.</div>
-      </div>
+      <div style="font-size:11px;color:var(--muted);flex-shrink:0;">Ahorrás USD 58/año (individual) · USD 138 (combo)</div>
     </div>
-    <div style="text-align:center;" class="fade fade-delay-3">
-      <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary">Quiero mis agentes →</a>
+    <div style="text-align:center;margin-top:24px;">
+      <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:9px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;">Quiero mis agentes →</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FLUJO VISUAL -->
+<section style="padding:100px 0;background:var(--surface);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:640px;margin:0 auto 64px;" class="fade">
+      <div class="section-label">Cómo funciona</div>
+      <h2 class="section-title">De la venta al resumen<br><span style="color:var(--cyan)">en tiempo real.</span></h2>
+      <p style="font-size:15px;color:var(--muted2);line-height:1.75;">Registrás una venta, Aura actualiza el stock, registra el cliente y te da el resumen del día automaticamente.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:center;max-width:900px;margin:0 auto;" class="fade fade-delay-1">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">🛒</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Paso 1</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;color:var(--white);margin-bottom:8px;">Se realiza una venta</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Vendiste 3 unidades de producto A y 1 de producto B</div>
+      </div>
+      <div style="font-size:1.4rem;color:var(--cyan);text-align:center;padding:0 8px;">→</div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">⚡</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Paso 2</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;color:var(--white);margin-bottom:8px;">Aura procesa</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Registra la venta, descuenta stock y actualiza el perfil del cliente</div>
+      </div>
+      <div style="font-size:1.4rem;color:var(--cyan);text-align:center;padding:0 8px;">→</div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">💰</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Paso 3</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;color:var(--white);margin-bottom:8px;">Todo registrado</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Caja actualizada, stock descontado, cliente fidelizado</div>
+      </div>
+      <div style="font-size:1.4rem;color:var(--cyan);text-align:center;padding:0 8px;">→</div>
+      <div style="background:linear-gradient(135deg,rgba(var(--blue-rgb),.18),rgba(var(--cyan-rgb),.12));border:1px solid rgba(var(--cyan-rgb),.35);border-radius:16px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">📊</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Resultado</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;color:var(--white);margin-bottom:8px;">Resumen del día</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.6;">Total vendido, mejores productos, clientes del día — en segundos</div>
+      </div>
     </div>
   </div>
 </section>
@@ -918,6 +1126,24 @@ footer{
 
 <script>
 // NAV scroll
+function calcROI(){
+  const s1=+document.getElementById('roi-s1').value;
+  const s2=+document.getElementById('roi-s2').value;
+  const pct=+document.getElementById('roi-pct').value/100;
+  const perdidoMes=Math.round(s1*25*s2*pct);
+  const ganancia=Math.round(perdidoMes*0.85);
+  const costoUSD=450;
+  const dolarBlue=1250;
+  const costoPesos=costoUSD*dolarBlue;
+  const meses=perdidoMes>0?Math.max(1,Math.ceil(costoPesos/perdidoMes)):99;
+  document.getElementById('roi-s1-val').textContent=s1+' ventas';
+  document.getElementById('roi-s2-val').textContent='$'+s2.toLocaleString('es-AR');
+  document.getElementById('roi-pct-val').textContent=Math.round(pct*100)+'%';
+  document.getElementById('roi-perdida').textContent='$'+perdidoMes.toLocaleString('es-AR');
+  document.getElementById('roi-ganancia').textContent='$'+ganancia.toLocaleString('es-AR');
+  document.getElementById('roi-meses').textContent=meses<=1?'menos de 1 mes':meses+' meses';
+}
+calcROI();
 const nav = document.getElementById('nav')
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40))
 
