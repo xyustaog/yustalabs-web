@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Auto — Sistema de gesti&oacute;n para talleres mec&aacute;nicos | Yusta Labs</title>
+<meta name="description" content="&Oacute;rdenes de trabajo, repuestos y clientes en un solo lugar. El sistema que tu taller necesitaba. Sin papeles ni planillas perdidas. Pago &uacute;nico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080810;--surface:#0f0f1c;--card:#13131f;
+  --border:rgba(59,91,219,0.15);--border2:rgba(59,91,219,0.3);
+  --blue:#3B5BDB;--blue-light:#4C6EF5;--cyan:#06D6A0;--cyan-dim:rgba(6,214,160,0.1);
+  --text:#eeeef5;--muted:#6b6b8a;--muted2:#9999bb;--white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:'Barlow',sans-serif}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(20px,5vw,60px);height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,16,0.7);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-color:var(--border)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-yl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2)}
+.nav-brand-sep{color:var(--border2);margin:0 4px}
+.nav-brand-ac{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-link{padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;color:var(--muted);transition:.2s;border:none;background:none;letter-spacing:.3px}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.nav-cta{padding:8px 18px;border-radius:7px;background:var(--cyan);color:#080810;font-size:13px;font-weight:700;letter-spacing:.3px;border:none;transition:.2s}
+.nav-cta:hover{background:#05c090;transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px;cursor:pointer}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:1px;transition:.3s}
+.mobile-menu{position:fixed;inset:0;z-index:999;background:rgba(8,8,16,0.97);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);padding:10px 24px;border-radius:10px;transition:.2s}
+.mobile-menu a:hover{color:var(--cyan);background:var(--cyan-dim)}
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px clamp(20px,5vw,60px) 80px;position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");background-size:200px;opacity:.4;pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,91,219,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,91,219,.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,black 20%,transparent 75%);pointer-events:none}
+.hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(59,91,219,.12) 0%,transparent 65%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:0;right:-10%;width:500px;height:400px;background:radial-gradient(ellipse,rgba(6,214,160,.06) 0%,transparent 65%);pointer-events:none}
+.hero-content{position:relative;max-width:780px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:100px;padding:7px 18px;margin-bottom:32px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(52px,8vw,96px);font-weight:900;line-height:.92;letter-spacing:-1px;color:var(--white);margin-bottom:8px}
+.hero h1 .accent{color:var(--cyan)}
+.hero h1 .dim{color:var(--muted2)}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--muted2);max-width:540px;line-height:1.65;margin:24px 0 40px;font-weight:400}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+.hero-pill{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.02)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;border:none;transition:.2s;letter-spacing:.2px}
+.btn-primary:hover{background:var(--blue-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,91,219,.3)}
+.btn-demo{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:var(--cyan);color:#080810;font-size:15px;font-weight:700;border:none;transition:.2s;letter-spacing:.2px}
+.btn-demo:hover{background:#05c090;transform:translateY(-2px);box-shadow:0 8px 24px rgba(6,214,160,.3)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:rgba(255,255,255,.04);color:var(--text);font-size:15px;font-weight:600;border:1px solid var(--border2);transition:.2s}
+.btn-secondary:hover{background:rgba(255,255,255,.07);border-color:rgba(59,91,219,.5);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
+.hero-stat .num{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--white);line-height:1}
+.hero-stat .num span{color:var(--cyan)}
+.hero-stat .label{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3px}
+section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
+.wrap{max-width:1100px;margin:0 auto}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.5px;color:var(--white);margin-bottom:14px}
+.section-desc{font-size:16px;color:var(--muted2);max-width:540px;line-height:1.7;margin-bottom:48px}
+.fade{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.fade.visible{opacity:1;transform:translateY(0)}
+.fade-delay-1{transition-delay:.1s}
+.fade-delay-2{transition-delay:.2s}
+#modulos{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:40px;background:rgba(0,0,0,.3);border-radius:12px;padding:8px}
+.tab{flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border-radius:8px;font-size:14px;font-weight:600;background:none;border:none;color:var(--muted);cursor:pointer;transition:.2s;white-space:nowrap}
+.tab:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.tab.active{background:var(--card);color:var(--white);box-shadow:0 2px 12px rgba(0,0,0,.3);border:1px solid var(--border2)}
+.tab-icon{font-size:18px}
+.tab-panel{display:none}
+.tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.panel-pain{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:12px;padding:20px 24px;margin-bottom:24px}
+.panel-pain-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(239,68,68,.8);margin-bottom:8px}
+.panel-pain p{font-size:15px;color:var(--text);line-height:1.6}
+.panel-features{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
+.panel-feature{display:flex;align-items:flex-start;gap:12px}
+.panel-feature-icon{width:32px;height:32px;border-radius:8px;background:var(--cyan-dim);border:1px solid rgba(6,214,160,.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;margin-top:1px}
+.panel-feature-text strong{display:block;font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px}
+.panel-feature-text span{font-size:13px;color:var(--muted)}
+.panel-demo{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;overflow:hidden}
+.demo-header{display:flex;align-items:center;gap:8px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.demo-dot{width:10px;height:10px;border-radius:50%}
+.demo-dot-r{background:#ff5f57}.demo-dot-y{background:#febc2e}.demo-dot-g{background:#28c840}
+.demo-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-left:auto}
+.demo-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.demo-kpi{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:12px}
+.demo-kpi-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.demo-kpi-value{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--white)}
+.demo-kpi-value.cyan{color:var(--cyan)}
+.demo-kpi-value.blue{color:var(--blue-light)}
+.demo-kpi-value.warn{color:#fab005}
+.demo-kpi-value.red{color:#ef4444}
+.demo-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.demo-row:last-child{border-bottom:none}
+.demo-badge{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.badge-green{background:rgba(6,214,160,.12);color:var(--cyan)}
+.badge-yellow{background:rgba(250,176,5,.12);color:#fab005}
+.badge-red{background:rgba(239,68,68,.12);color:#ef4444}
+#features{background:var(--bg)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.feature-card{background:var(--bg);padding:32px;transition:.2s}
+.feature-card:hover{background:var(--surface)}
+.feature-icon{width:44px;height:44px;border-radius:10px;background:var(--cyan-dim);border:1px solid rgba(6,214,160,.2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.feature-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
+.feature-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.feature-highlight{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+#pricing{background:var(--surface);border-top:1px solid var(--border)}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.pricing-addons{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;position:relative;overflow:hidden}
+.price-card.featured{border-color:var(--blue);background:linear-gradient(145deg,#0d1220,#111926)}
+.price-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.price-card.addon{padding:24px 28px;border-style:dashed}
+.price-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,91,219,.12);border:1px solid rgba(59,91,219,.25);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px}
+.price-badge.addon-badge{background:rgba(6,214,160,.08);border-color:rgba(6,214,160,.2);color:var(--cyan)}
+.price-name{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
+.price-desc{font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.5}
+.price-amount{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:900;color:var(--white);line-height:1;margin:16px 0 4px}
+.price-amount.addon-amount{font-size:42px}
+.price-amount .currency{font-size:24px;vertical-align:top;margin-top:10px;display:inline-block;color:var(--muted2)}
+.price-amount .suffix{font-size:20px;color:var(--muted)}
+.price-tag{display:inline-block;background:rgba(6,214,160,.1);border:1px solid rgba(6,214,160,.2);border-radius:6px;padding:5px 12px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:24px}
+.price-divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.price-features{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.price-feature{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted2)}
+.price-feature::before{content:'\2713';color:var(--cyan);font-weight:700;flex-shrink:0;margin-top:1px}
+.price-feature.muted{color:var(--muted)}
+.price-feature.muted::before{content:'\00B7';color:var(--muted)}
+.btn-full{width:100%;justify-content:center;padding:14px}
+.price-note{background:rgba(59,91,219,.06);border:1px solid var(--border);border-radius:12px;padding:18px 22px;text-align:center;font-size:14px;color:var(--muted2)}
+.price-note strong{color:var(--text)}
+.price-listed{font-size:11px;color:var(--muted);text-decoration:line-through;letter-spacing:.02em;margin-bottom:2px}
+.price-cuotas-note{font-size:12px;color:var(--muted2);margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+.price-cuotas-note strong{color:var(--text);font-weight:600}
+#whyus{background:var(--bg)}
+.comp-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table th{background:rgba(59,91,219,.08);color:var(--muted);font-size:11px;font-weight:700;padding:14px 18px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.comp-table th.highlight{color:var(--cyan);background:rgba(6,214,160,.06)}
+.comp-table td{padding:13px 18px;font-size:14px;border-bottom:1px solid rgba(59,91,219,.06);color:var(--muted2)}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table td.service{color:var(--text);font-weight:500}
+.comp-table td.highlight{color:var(--cyan);font-weight:700;background:rgba(6,214,160,.04);font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.5px}
+.comp-table tr:hover td{background:rgba(255,255,255,.02)}
+.comp-chip{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.chip-green{background:rgba(6,214,160,.12);color:var(--cyan)}
+.chip-blue{background:rgba(59,91,219,.12);color:var(--blue-light)}
+.why-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.why-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.why-card-num{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:900;color:var(--blue-light);line-height:1}
+.why-card-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white)}
+.why-card-desc{font-size:13px;color:var(--muted);line-height:1.6}
+#cta{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px);position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,91,219,.12) 0%,transparent 65%);pointer-events:none}
+.cta-label{display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,68px);font-weight:900;color:var(--white);line-height:1;margin-bottom:16px}
+.cta-sub{font-size:17px;color:var(--muted2);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-whatsapp{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:10px;background:#25D366;color:#fff;font-size:16px;font-weight:700;border:none;transition:.2s;letter-spacing:.3px}
+.btn-whatsapp:hover{background:#20bf5a;transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.25)}
+.btn-whatsapp svg{width:22px;height:22px}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clamp(20px,5vw,60px)}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.footer-brand span{color:var(--cyan)}
+.footer-links{display:flex;gap:24px}
+.footer-link{font-size:13px;color:var(--muted);transition:.2s}
+.footer-link:hover{color:var(--text)}
+.footer-copy{font-size:12px;color:var(--muted);letter-spacing:.3px}
+.float-wa{position:fixed;bottom:28px;right:28px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:.2s;border:none}
+.float-wa:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.45)}
+.float-wa svg{width:28px;height:28px;fill:#fff}
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:flex}.tab-panel.active{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr 1fr}.pricing-grid,.pricing-addons{grid-template-columns:1fr}.why-cards{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.tabs{flex-direction:column}.tab{min-width:auto}.features-grid{grid-template-columns:1fr}.why-cards{grid-template-columns:1fr}.hero-stats{gap:24px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand">
+    <a href="https://yustalabs.com"><span class="nav-brand-yl">Yusta Labs</span></a>
+    <span class="nav-brand-sep">/</span>
+    <span class="nav-brand-ac">Aura Auto</span>
+  </div>
+  <div class="nav-links">
+    <a href="#modulos" class="nav-link">El sistema</a>
+    <a href="#features" class="nav-link">Qu&eacute; incluye</a>
+    <a href="#pricing" class="nav-link">Precios</a>
+    <a href="#whyus" class="nav-link">Por qu&eacute; Aura</a>
+    <a href="/aura-auto/demo" target="_blank" class="nav-cta">Ver demo &#8594;</a>
+  </div>
+  <button class="nav-burger" id="burger" aria-label="Men&uacute;"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#modulos" onclick="closeMobile()">El sistema</a>
+  <a href="#features" onclick="closeMobile()">Qu&eacute; incluye</a>
+  <a href="#pricing" onclick="closeMobile()">Precios</a>
+  <a href="#whyus" onclick="closeMobile()">Por qu&eacute; Aura</a>
+  <a href="/aura-auto/demo" target="_blank" onclick="closeMobile()" style="color:var(--cyan)">&#128295; Ver demo</a>
+</div>
+
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Sistema para talleres mec&aacute;nicos</div>
+    <h1>El sistema que<br><span class="accent">tu taller</span><br><span class="dim">necesitaba.</span></h1>
+    <p class="hero-sub">&Oacute;rdenes de trabajo, repuestos y clientes en un solo lugar. Sin papeles ni planillas perdidas. <strong style="color:var(--text)">Pago &uacute;nico. Tuyo para siempre.</strong></p>
+    <div class="hero-pills">
+      <span class="hero-pill">&#128295; Talleres generales</span>
+      <span class="hero-pill">&#128663; Mec&aacute;nica r&aacute;pida</span>
+      <span class="hero-pill">&#127950; Chapa y pintura</span>
+      <span class="hero-pill">&#128268; Electricidad automotriz</span>
+      <span class="hero-pill">&#128734; Gomer&iacute;a</span>
+      <span class="hero-pill">&#10052;&#65039; Aire acondicionado</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="/aura-auto/demo" target="_blank" class="btn-demo">Ver demo en vivo &#8594;</a>
+      <a href="https://wa.me/541132609254?text=Hola!%20Quiero%20ver%20una%20demo%20de%20Aura%20Auto%20para%20mi%20taller." target="_blank" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hablar con nosotros
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num"><span>87%</span></div><div class="label">m&aacute;s barato que agencias</div></div>
+      <div class="hero-stat"><div class="num"><span>30</span> min</div><div class="label">para tener el sistema listo</div></div>
+      <div class="hero-stat"><div class="num"><span>$0</span></div><div class="label">costo de servidor mensual</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="modulos">
+  <div class="wrap">
+    <div class="fade">
+      <div class="section-label">El sistema</div>
+      <h2 class="section-title">Todo lo que tu taller<br>necesita, en un solo lugar.</h2>
+      <p class="section-desc">Cada m&oacute;dulo est&aacute; pensado para el flujo real de un taller mec&aacute;nico argentino. No es software gen&eacute;rico.</p>
+    </div>
+    <div class="fade fade-delay-1">
+      <div class="tabs" role="tablist">
+        <button class="tab active" onclick="switchTab('ordenes')" role="tab"><span class="tab-icon">&#128203;</span> &Oacute;rdenes de trabajo</button>
+        <button class="tab" onclick="switchTab('repuestos')" role="tab"><span class="tab-icon">&#128297;</span> Repuestos</button>
+        <button class="tab" onclick="switchTab('clientes')" role="tab"><span class="tab-icon">&#128100;</span> Clientes y veh&iacute;culos</button>
+        <button class="tab" onclick="switchTab('presupuestos')" role="tab"><span class="tab-icon">&#128176;</span> Presupuestos y caja</button>
+      </div>
+    </div>
+
+    <div class="tab-panel active" id="panel-ordenes">
+      <div>
+        <div class="panel-pain"><div class="panel-pain-label">El problema real</div><p>"Las &oacute;rdenes de trabajo est&aacute;n en papeles que se pierden. No s&eacute; en qu&eacute; estado est&aacute; cada auto sin preguntar al mec&aacute;nico."</p></div>
+        <div class="panel-features">
+          <div class="panel-feature"><div class="panel-feature-icon">&#128203;</div><div class="panel-feature-text"><strong>&Oacute;rdenes de trabajo digitales</strong><span>Cre&aacute;s la orden en segundos. Todo queda registrado.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128260;</div><div class="panel-feature-text"><strong>Estado: ingresado / en progreso / listo</strong><span>Sab&eacute;s en qu&eacute; est&aacute; cada auto sin preguntar a nadie.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128295;</div><div class="panel-feature-text"><strong>Registro de mano de obra y materiales</strong><span>Cu&aacute;nto se us&oacute;, qu&eacute; repuestos, qu&eacute; horas de trabajo.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128197;</div><div class="panel-feature-text"><strong>Historial por veh&iacute;culo</strong><span>Todo lo que se le hizo a cada auto, desde el primer d&iacute;a.</span></div></div>
+        </div>
+        <a href="/aura-auto/demo" target="_blank" class="btn-demo">Ver demo de &oacute;rdenes &#8594;</a>
+      </div>
+      <div class="panel-demo">
+        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Auto &mdash; &Oacute;rdenes</span></div>
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi"><div class="demo-kpi-label">&Oacute;rdenes abiertas</div><div class="demo-kpi-value cyan">12</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">En progreso</div><div class="demo-kpi-value warn">7</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Listas hoy</div><div class="demo-kpi-value blue">4</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Facturaci&oacute;n mes</div><div class="demo-kpi-value cyan">$1.8M</div></div>
+        </div>
+        <div class="demo-row"><span>Ford Fiesta 2019 &mdash; AB123CD</span><span class="demo-badge badge-yellow">En progreso</span></div>
+        <div class="demo-row"><span>VW Gol 2020 &mdash; AC456EF</span><span class="demo-badge badge-green">Listo</span></div>
+        <div class="demo-row"><span>Fiat Cronos 2021 &mdash; AD789GH</span><span class="demo-badge badge-red">Ingresado</span></div>
+        <div class="demo-row"><span>Toyota Hilux 2022 &mdash; AE012IJ</span><span class="demo-badge badge-yellow">Esperando repuesto</span></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-repuestos">
+      <div>
+        <div class="panel-pain"><div class="panel-pain-label">El problema real</div><p>"Promet&iacute; un repuesto que no ten&iacute;a en stock. Tuve que llamar al cliente para avisar del retraso."</p></div>
+        <div class="panel-features">
+          <div class="panel-feature"><div class="panel-feature-icon">&#128230;</div><div class="panel-feature-text"><strong>Stock de repuestos en tiempo real</strong><span>Sab&eacute;s qu&eacute; ten&eacute;s y qu&eacute; te falta antes de prometer.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128276;</div><div class="panel-feature-text"><strong>Alertas de bajo stock</strong><span>Te avisa cuando un repuesto est&aacute; por agotarse.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128269;</div><div class="panel-feature-text"><strong>B&uacute;squeda por c&oacute;digo o nombre</strong><span>Encontr&aacute;s el repuesto en segundos, sin revolver estantes.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128666;</div><div class="panel-feature-text"><strong>Control de proveedores</strong><span>Qu&eacute; proveedor tiene qu&eacute;, a qu&eacute; precio y cu&aacute;ndo entrega.</span></div></div>
+        </div>
+        <a href="/aura-auto/demo" target="_blank" class="btn-demo">Ver demo de repuestos &#8594;</a>
+      </div>
+      <div class="panel-demo">
+        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Auto &mdash; Repuestos</span></div>
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi"><div class="demo-kpi-label">Repuestos en stock</div><div class="demo-kpi-value cyan">342</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Stock bajo</div><div class="demo-kpi-value warn">18</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Sin stock</div><div class="demo-kpi-value red">5</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Proveedores</div><div class="demo-kpi-value blue">8</div></div>
+        </div>
+        <div class="demo-row"><span>Filtro aceite W712</span><span class="demo-badge badge-green">OK</span></div>
+        <div class="demo-row"><span>Pastillas freno Fiat</span><span class="demo-badge badge-yellow">Stock bajo</span></div>
+        <div class="demo-row"><span>Correa distribuci&oacute;n VW</span><span class="demo-badge badge-red">Sin stock</span></div>
+        <div class="demo-row"><span>Buj&iacute;as NGK</span><span class="demo-badge badge-green">OK</span></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-clientes">
+      <div>
+        <div class="panel-pain"><div class="panel-pain-label">El problema real</div><p>"Cuando vuelve un cliente tengo que preguntarle qu&eacute; le hab&iacute;amos hecho al auto la vez anterior. No tengo el historial."</p></div>
+        <div class="panel-features">
+          <div class="panel-feature"><div class="panel-feature-icon">&#128100;</div><div class="panel-feature-text"><strong>Ficha por cliente y veh&iacute;culo</strong><span>Nombre, tel&eacute;fono, patente, modelo. Todo en un lugar.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128197;</div><div class="panel-feature-text"><strong>Historial completo de reparaciones</strong><span>Todo lo que se le hizo a cada auto, con fechas y montos.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128276;</div><div class="panel-feature-text"><strong>Pr&oacute;xima service programada</strong><span>Sab&eacute;s cu&aacute;ndo le toca el pr&oacute;ximo service a cada veh&iacute;culo.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128222;</div><div class="panel-feature-text"><strong>Contacto r&aacute;pido del due&ntilde;o</strong><span>Un toque y le avis&aacute;s que el auto est&aacute; listo.</span></div></div>
+        </div>
+        <a href="/aura-auto/demo" target="_blank" class="btn-demo">Ver demo de clientes &#8594;</a>
+      </div>
+      <div class="panel-demo">
+        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Auto &mdash; Clientes</span></div>
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi"><div class="demo-kpi-label">Clientes activos</div><div class="demo-kpi-value cyan">156</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Veh&iacute;culos registrados</div><div class="demo-kpi-value">203</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Services este mes</div><div class="demo-kpi-value blue">34</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Pr&oacute;ximos vencimientos</div><div class="demo-kpi-value warn">12</div></div>
+        </div>
+        <div class="demo-row"><span>Juan P&eacute;rez &mdash; Ford Focus</span><span class="demo-badge badge-green">Service 15.000km</span></div>
+        <div class="demo-row"><span>Mar&iacute;a L&oacute;pez &mdash; VW Polo</span><span class="demo-badge badge-green">Cambio aceite</span></div>
+        <div class="demo-row"><span>Carlos Ruiz &mdash; Fiat Argo</span><span class="demo-badge badge-yellow">Frenos completos</span></div>
+        <div class="demo-row"><span>Ana Garc&iacute;a &mdash; Toyota Etios</span><span class="demo-badge badge-green">Alineaci&oacute;n</span></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-presupuestos">
+      <div>
+        <div class="panel-pain"><div class="panel-pain-label">El problema real</div><p>"Los presupuestos los hago a mano o por WhatsApp. No s&eacute; si el que presupuest&eacute; volvi&oacute; o se fue a otro taller."</p></div>
+        <div class="panel-features">
+          <div class="panel-feature"><div class="panel-feature-icon">&#128176;</div><div class="panel-feature-text"><strong>Presupuestos profesionales en segundos</strong><span>Arm&aacute;s el presupuesto y se lo mand&aacute;s al cliente al toque.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128202;</div><div class="panel-feature-text"><strong>Seguimiento: enviado / aceptado / vencido</strong><span>Sab&eacute;s qu&eacute; pas&oacute; con cada presupuesto sin llamar.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128179;</div><div class="panel-feature-text"><strong>Cierre de caja diario</strong><span>Cu&aacute;nto entr&oacute; hoy, por qu&eacute; medio, todo claro.</span></div></div>
+          <div class="panel-feature"><div class="panel-feature-icon">&#128200;</div><div class="panel-feature-text"><strong>Facturaci&oacute;n mensual</strong><span>Resumen del mes para saber c&oacute;mo viene el taller.</span></div></div>
+        </div>
+        <a href="/aura-auto/demo" target="_blank" class="btn-demo">Ver demo de presupuestos &#8594;</a>
+      </div>
+      <div class="panel-demo">
+        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Auto &mdash; Presupuestos</span></div>
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi"><div class="demo-kpi-label">Presupuestos abiertos</div><div class="demo-kpi-value cyan">8</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Aceptados mes</div><div class="demo-kpi-value blue">23</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Tasa conversi&oacute;n</div><div class="demo-kpi-value cyan">68%</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Cobrado hoy</div><div class="demo-kpi-value warn">$87.000</div></div>
+        </div>
+        <div class="demo-row"><span>Presup #142 Service completo $45.000</span><span class="demo-badge badge-green">Aceptado</span></div>
+        <div class="demo-row"><span>Presup #143 Embrague $120.000</span><span class="demo-badge badge-yellow">Pendiente</span></div>
+        <div class="demo-row"><span>Presup #144 Frenos+discos $65.000</span><span class="demo-badge badge-green">Enviado</span></div>
+        <div class="demo-row"><span>Presup #145 Tren delantero $95.000</span><span class="demo-badge badge-red">Vencido</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="fade">
+      <div class="section-label">Qu&eacute; incluye</div>
+      <h2 class="section-title">Todo lo que necesit&aacute;s,<br>sin lo que no us&aacute;s.</h2>
+      <p class="section-desc">Cada sistema incluye el mismo n&uacute;cleo poderoso, adaptado al vocabulario y flujo de un taller mec&aacute;nico.</p>
+    </div>
+    <div class="features-grid fade fade-delay-1">
+      <div class="feature-card"><div class="feature-icon">&#128203;</div><div class="feature-title">&Oacute;rdenes de trabajo digitales</div><div class="feature-desc">Estado de cada auto en tiempo real. Sin papeles que se pierden ni preguntas al mec&aacute;nico.</div><span class="feature-highlight">Esencial</span></div>
+      <div class="feature-card"><div class="feature-icon">&#128297;</div><div class="feature-title">Stock de repuestos</div><div class="feature-desc">Alertas de bajo stock y b&uacute;squeda r&aacute;pida. Nunca m&aacute;s promet&eacute;s algo que no ten&eacute;s.</div></div>
+      <div class="feature-card"><div class="feature-icon">&#128100;</div><div class="feature-title">Historial por cliente y veh&iacute;culo</div><div class="feature-desc">Todo lo que se le hizo a cada auto. El cliente vuelve y ya sab&eacute;s qu&eacute; necesita.</div></div>
+      <div class="feature-card"><div class="feature-icon">&#128176;</div><div class="feature-title">Presupuestos profesionales</div><div class="feature-desc">En segundos, con seguimiento. Sab&eacute;s si aceptaron o se fueron a otro taller.</div><span class="feature-highlight">Favorito</span></div>
+      <div class="feature-card"><div class="feature-icon">&#128276;</div><div class="feature-title">Alertas de service</div><div class="feature-desc">Avis&aacute; a tus clientes cu&aacute;ndo les toca. Fideliz&aacute; sin esfuerzo.</div></div>
+      <div class="feature-card"><div class="feature-icon">&#128202;</div><div class="feature-title">Reportes de facturaci&oacute;n</div><div class="feature-desc">Cu&aacute;nto facturaste, qu&eacute; trabajos son m&aacute;s rentables. Tom&aacute;s decisiones con datos.</div></div>
+      <div class="feature-card"><div class="feature-icon">&#128421;</div><div class="feature-title">Sin servidores</div><div class="feature-desc">Costo mensual de infraestructura: $0. Sin hosting, sin sorpresas, sin contratos.</div><span class="feature-highlight">&Uacute;nico</span></div>
+      <div class="feature-card"><div class="feature-icon">&#9201;</div><div class="feature-title">Instalaci&oacute;n en 30 min</div><div class="feature-desc">No necesit&aacute;s t&eacute;cnico ni conocimientos previos. Lo instalamos y te ense&ntilde;amos ese mismo d&iacute;a.</div></div>
+      <div class="feature-card"><div class="feature-icon">&#128172;</div><div class="feature-title">Soporte WhatsApp</div><div class="feature-desc">&iquest;Algo no anda? Nos escrib&iacute;s y respondemos el mismo d&iacute;a. Sin tickets, sin esperas.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="fade">
+      <div class="section-label">Precios</div>
+      <h2 class="section-title">Pago &uacute;nico.<br>Tuyo para siempre.</h2>
+      <p class="section-desc">Sin contratos en d&oacute;lares, sin licencias imposibles. Precios pensados para talleres mec&aacute;nicos argentinos reales.</p>
+    </div>
+    <div class="pricing-grid fade fade-delay-1">
+      <div class="price-card">
+        <div class="price-badge">Pago &uacute;nico</div>
+        <div class="price-name">Aplicaci&oacute;n</div>
+        <div class="price-desc">Tu sistema listo para usar. Sos due&ntilde;o de Aura Auto para siempre.</div>
+        <div class="price-listed">USD 480 con financiamiento</div>
+        <div class="price-amount"><span class="currency">USD </span>400</div>
+        <div class="price-tag">✓ Pagando al contado — ahorrás USD 80</div>
+        <div class="price-cuotas-note">O <strong>6 cuotas de USD 80/mes</strong></div>
+        <hr class="price-divider">
+        <div class="price-features">
+          <div class="price-feature">Sistema completo para tu taller</div>
+          <div class="price-feature">&Oacute;rdenes de trabajo y estados</div>
+          <div class="price-feature">Stock de repuestos y proveedores</div>
+          <div class="price-feature">Dashboard + reportes + exportaci&oacute;n Excel</div>
+          <div class="price-feature">Usuarios ilimitados</div>
+          <div class="price-feature">Soporte por WhatsApp</div>
+          <div class="price-feature muted">Migraci&oacute;n de base de datos</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20Aura%20Auto%20para%20mi%20taller." target="_blank" class="btn-secondary btn-full">Quiero mi sistema &#8594;</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">M&aacute;s completo</div>
+        <div class="price-name">Plan Premium</div>
+        <div class="price-desc">Aplicaci&oacute;n completamente desarrollada + migramos toda tu data desde Excel o donde sea.</div>
+        <div class="price-listed">USD 720 con financiamiento</div>
+        <div class="price-amount"><span class="currency">USD </span>600</div>
+        <div class="price-tag">✓ Pagando al contado — ahorrás USD 120</div>
+        <div class="price-cuotas-note">O <strong>6 cuotas de USD 120/mes</strong></div>
+        <hr class="price-divider">
+        <div class="price-features">
+          <div class="price-feature">Todo lo del plan Aplicaci&oacute;n</div>
+          <div class="price-feature">Desarrollo completamente personalizado</div>
+          <div class="price-feature">Migraci&oacute;n de base de datos incluida</div>
+          <div class="price-feature">Carga de clientes, veh&iacute;culos y datos actuales</div>
+          <div class="price-feature">Capacitaci&oacute;n del equipo</div>
+          <div class="price-feature">Soporte prioritario</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Plan%20Premium%20de%20Aura%20Auto." target="_blank" class="btn-primary btn-full">Quiero el Premium &#8594;</a>
+      </div>
+    </div>
+    <div class="pricing-addons fade fade-delay-2">
+      <div class="price-card addon">
+        <div class="price-badge addon-badge">Servicio adicional</div>
+        <div class="price-name">Pack Mejoras</div>
+        <div class="price-desc">Actualizaciones, nuevas funciones o cambios en tu sistema existente.</div>
+        <div class="price-amount addon-amount"><span class="currency">USD </span>80</div>
+        <div class="price-features" style="margin-top:16px">
+          <div class="price-feature">Nuevos m&oacute;dulos o funciones</div>
+          <div class="price-feature">Ajustes y cambios de l&oacute;gica</div>
+          <div class="price-feature">Mejoras de dise&ntilde;o o flujo</div>
+          <div class="price-feature">Entrega r&aacute;pida</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Pack%20Mejoras%20para%20Aura%20Auto." target="_blank" class="btn-secondary btn-full">Consultar &#8594;</a>
+      </div>
+      <div class="price-card addon">
+        <div class="price-badge addon-badge">Servicio adicional</div>
+        <div class="price-name">Migraci&oacute;n</div>
+        <div class="price-desc">Pasamos toda tu informaci&oacute;n actual al sistema. Excel, papel, otro software &mdash; no importa.</div>
+        <div class="price-amount addon-amount"><span class="currency">USD </span>50</div>
+        <div class="price-features" style="margin-top:16px">
+          <div class="price-feature">Desde Excel, Google Sheets o CSV</div>
+          <div class="price-feature">Clientes, veh&iacute;culos, historial</div>
+          <div class="price-feature">Verificaci&oacute;n y limpieza de datos</div>
+          <div class="price-feature">Sin p&eacute;rdida de informaci&oacute;n</div>
+        </div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20la%20Migraci%C3%B3n%20para%20Aura%20Auto." target="_blank" class="btn-secondary btn-full">Consultar &#8594;</a>
+      </div>
+    </div>
+    <div class="price-note fade fade-delay-2">&#10022; Pago &uacute;nico &middot; Sin mensualidades ni licencias &middot; Precios en USD &middot; IVA no incluido &middot; <strong>Demo gratuita sin compromiso</strong> · Financiación disponible en 6 cuotas</div>
+  </div>
+</section>
+
+
+<!-- AGENTES -->
+<section id="agentes" style="padding:100px 0;background:var(--bg);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="text-align:center;max-width:680px;margin:0 auto 60px;">
+      <div class="section-label">Servicio exclusivo &middot; Yusta Labs</div>
+      <h2 class="section-title">Tus pr&oacute;ximos empleados<br><span>no cobran sueldo</span></h2>
+      <p class="section-desc">Un <strong>empleado virtual</strong> es un agente de inteligencia artificial programado para hacer una tarea espec&iacute;fica de tu negocio &mdash; solo, sin errores, las 24 horas.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#128242;</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de mensajes</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Recordador</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Manda mensajes por WhatsApp a tus clientes autom&aacute;ticamente &mdash; turnos, vencimientos, cobros pendientes.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#128202;</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de reportes</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Contador</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Genera y env&iacute;a tu informe mensual por email. Ventas, deudas, stock &mdash; listo el primero de cada mes.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#128276;</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de alertas</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Vigilante</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Monitorea tu stock y tus m&eacute;tricas. Te avisa en el momento exacto si algo necesita atenci&oacute;n.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">&#128172;</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Agente de atenci&oacute;n</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:10px;">El Recepcionista</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">Responde consultas frecuentes, confirma turnos y recaba datos &mdash; sin que vos est&eacute;s al tel&eacute;fono.</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:40px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:48px;margin-bottom:32px;">
+      <div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:16px;line-height:1.2;">Un pago &uacute;nico.<br>Empleados para siempre.</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px;">Programamos los agentes espec&iacute;ficos que necesita tu negocio. Cada uno cumple una funci&oacute;n concreta, adaptada a tu rubro. El precio base cubre la implementaci&oacute;n de los agentes fundamentales.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.6;">A mayor complejidad o cantidad de integraciones, se cotiza un adicional. Siempre transparente, sin sorpresas.</p>
+      </div>
+      <div style="width:1px;background:var(--border);align-self:stretch;"></div>
+      <div style="text-align:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Precio base desde</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:4rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;"><span style="font-size:1.8rem;vertical-align:top;margin-top:12px;display:inline-block;color:var(--cyan);">USD </span>300</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Pago &uacute;nico &middot; Setup completo incluido</div>
+        
+        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Las APIs externas (WhatsApp, IA) se contratan <strong style="color:var(--text);">a nombre del cliente</strong> &mdash; sin costos para Yusta Labs.</div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary">Quiero mis agentes &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section id="whyus">
+  <div class="wrap">
+    <div class="fade">
+      <div class="section-label">Por qu&eacute; Aura</div>
+      <h2 class="section-title">87% m&aacute;s barato<br>que la competencia.</h2>
+      <p class="section-desc">El mercado cobra precios de agencia. Nosotros creemos que todo taller merece acceso a tecnolog&iacute;a real.</p>
+    </div>
+    <div class="comp-table-wrap fade fade-delay-1">
+      <table class="comp-table">
+        <thead><tr><th>Servicio</th><th>Freelancer</th><th>Agencia Peque&ntilde;a</th><th>Agencia Grande</th><th class="highlight">Aura Auto</th></tr></thead>
+        <tbody>
+          <tr><td class="service">Sistema de gesti&oacute;n a medida</td><td>$1.200.000+</td><td>$6.000.000+</td><td>$15.000.000+</td><td class="highlight">USD 400 – USD 600 <span class="comp-chip chip-green">90% menos</span></td></tr>
+          <tr><td class="service">Mantenimiento mensual</td><td>$80.000/mes</td><td>$150.000+/mes</td><td>$400.000+/mes</td><td class="highlight">$0/mes <span class="comp-chip chip-green">Gratis</span></td></tr>
+          <tr><td class="service">Tiempo de entrega</td><td>2-4 meses</td><td>3-6 meses</td><td>6-12 meses</td><td class="highlight">5-15 d&iacute;as <span class="comp-chip chip-blue">R&aacute;pido</span></td></tr>
+          <tr><td class="service">Soporte t&eacute;cnico</td><td>Variable</td><td>Ticketing</td><td>Contrato</td><td class="highlight">WhatsApp directo <span class="comp-chip chip-green">Inmediato</span></td></tr>
+          <tr><td class="service">Modificaciones futuras</td><td>$15.000-$80.000/h</td><td>$80.000+/sesi&oacute;n</td><td>$150.000+/sesi&oacute;n</td><td class="highlight">$50.000/pack <span class="comp-chip chip-blue">Fijo</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="why-cards fade fade-delay-2">
+      <div class="why-card"><div class="why-card-num">45K+</div><div class="why-card-title">Talleres mec&aacute;nicos en Argentina</div><div class="why-card-desc">Son los que nunca tuvieron acceso a un sistema real porque los precios del mercado son imposibles para una PyME.</div></div>
+      <div class="why-card"><div class="why-card-num">$0</div><div class="why-card-title">Costo mensual</div><div class="why-card-desc">Sin hosting, sin servidor, sin abono. El sistema corre en infraestructura gratuita que siempre va a existir.</div></div>
+      <div class="why-card"><div class="why-card-num">30'</div><div class="why-card-title">De instalaci&oacute;n</div><div class="why-card-desc">Lo instalamos nosotros. No necesit&aacute;s un t&eacute;cnico ni conocimientos previos. En 30 minutos tu equipo ya lo usa.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="fade">
+    <div class="cta-label">&iquest;Listo para arrancar?</div>
+    <h2 class="cta-title">Probalo antes<br>de decidir.</h2>
+    <p class="cta-sub">Entr&aacute; a la demo en vivo o habl&aacute; con nosotros. Te mostramos el sistema adaptado a tu taller en 15 minutos.</p>
+    <div class="cta-btns">
+      <a href="/aura-auto/demo" target="_blank" class="btn-demo" style="padding:16px 36px;font-size:16px">Ver demo en vivo &#8594;</a>
+      <a href="https://wa.me/541132609254?text=Hola!%20Quiero%20ver%20una%20demo%20de%20Aura%20Auto%20para%20mi%20taller." target="_blank" class="btn-whatsapp">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Consultar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Yusta Labs / <span>Aura Auto</span></div>
+    <div class="footer-links">
+      <a href="https://yustalabs.com" class="footer-link">yustalabs.com</a>
+      <a href="https://yustalabs.com/aura-fit" class="footer-link">Aura Fit</a>
+      <a href="https://yustalabs.com/aura-food" class="footer-link">Aura Food</a>
+      <a href="https://yustalabs.com/aura-commerce" class="footer-link">Aura Commerce</a>
+      <a href="https://wa.me/541132609254" target="_blank" class="footer-link">WhatsApp</a>
+    </div>
+    <div class="footer-copy">&copy; Yusta Labs 2026 &mdash; Hecho en Argentina &#127462;&#127479;</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/541132609254?text=Hola!%20Quiero%20info%20sobre%20Aura%20Auto." target="_blank" class="float-wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const nav=document.getElementById('nav')
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40))
+const burger=document.getElementById('burger'),mobileMenu=document.getElementById('mobileMenu')
+burger.addEventListener('click',()=>{mobileMenu.classList.toggle('open');burger.classList.toggle('open')})
+function closeMobile(){mobileMenu.classList.remove('open');burger.classList.remove('open')}
+function switchTab(id){
+  const ids=['ordenes','repuestos','clientes','presupuestos']
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id))
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+id))
+}
+const fades=document.querySelectorAll('.fade')
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.12})
+fades.forEach(f=>observer.observe(f))
+</script>
+</body>
+</html>

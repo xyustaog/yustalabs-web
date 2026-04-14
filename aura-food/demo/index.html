@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Food — Demo en vivo · Yusta Labs</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%;overflow:hidden;background:#080810;font-family:'Inter',sans-serif}
+    .topbar{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      height:44px;background:#0d0d1a;border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:16px;
+    }
+    .topbar-left{display:flex;align-items:center;gap:12px}
+    .topbar-logo{font-weight:800;font-size:13px;letter-spacing:.5px;color:#fff;text-decoration:none}
+    .topbar-logo span{color:#06d6a0}
+    .topbar-sep{width:1px;height:16px;background:rgba(255,255,255,.12)}
+    .topbar-name{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.3px}
+    .topbar-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+      background:rgba(6,214,160,.12);border:1px solid rgba(6,214,160,.25);color:#06d6a0;
+      padding:2px 8px;border-radius:4px}
+    .topbar-right{display:flex;align-items:center;gap:10px}
+    .topbar-btn{font-size:12px;font-weight:600;padding:5px 14px;border-radius:6px;text-decoration:none;
+      border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);
+      transition:.15s;cursor:pointer;background:none}
+    .topbar-btn:hover{border-color:rgba(255,255,255,.3);color:#fff}
+    .topbar-btn.primary{background:#06d6a0;border-color:#06d6a0;color:#080810}
+    .topbar-btn.primary:hover{background:#05c090;border-color:#05c090}
+    iframe{position:fixed;top:44px;left:0;right:0;bottom:0;width:100%;height:calc(100% - 44px);border:none}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="/" class="topbar-logo">Yusta<span>Labs</span></a>
+      <div class="topbar-sep"></div>
+      <span class="topbar-name">Aura Food</span>
+      <span class="topbar-badge">Demo</span>
+    </div>
+    <div class="topbar-right">
+      <a href="/aura-food" class="topbar-btn">← Volver</a>
+      <a href="https://wa.me/541132609254?text=Hola!%20Quiero%20más%20info%20sobre%20Aura Food." target="_blank" class="topbar-btn primary">Quiero mi sistema →</a>
+    </div>
+  </div>
+  <iframe src="https://aura-food-demo.vercel.app" title="Aura Food Demo" allowfullscreen></iframe>
+</body>
+</html>
