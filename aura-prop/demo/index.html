@@ -1,48 +1,2609 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura Prop — Demo en vivo · Yusta Labs</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%;overflow:hidden;background:#080810;font-family:'Inter',sans-serif}
-    .topbar{
-      position:fixed;top:0;left:0;right:0;z-index:100;
-      height:44px;background:#0d0d1a;border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:16px;
-    }
-    .topbar-left{display:flex;align-items:center;gap:12px}
-    .topbar-logo{font-weight:800;font-size:13px;letter-spacing:.5px;color:#fff;text-decoration:none}
-    .topbar-logo span{color:#06d6a0}
-    .topbar-sep{width:1px;height:16px;background:rgba(255,255,255,.12)}
-    .topbar-name{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.3px}
-    .topbar-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-      background:rgba(6,214,160,.12);border:1px solid rgba(6,214,160,.25);color:#06d6a0;
-      padding:2px 8px;border-radius:4px}
-    .topbar-right{display:flex;align-items:center;gap:10px}
-    .topbar-btn{font-size:12px;font-weight:600;padding:5px 14px;border-radius:6px;text-decoration:none;
-      border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);
-      transition:.15s;cursor:pointer;background:none}
-    .topbar-btn:hover{border-color:rgba(255,255,255,.3);color:#fff}
-    .topbar-btn.primary{background:#06d6a0;border-color:#06d6a0;color:#080810}
-    .topbar-btn.primary:hover{background:#05c090;border-color:#05c090}
-    iframe{position:fixed;top:44px;left:0;right:0;bottom:0;width:100%;height:calc(100% - 44px);border:none}
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aura Prop — Sistema de Gestión Inmobiliaria | Yusta Labs</title>
+<meta name="description" content="Aura Prop: sistema de gestión integral para inmobiliarias y administradores de propiedades. Administrá propiedades, contratos, inquilinos, cobros y liquidaciones. Demo por Yusta Labs.">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F7F4;
+  --surf:#FFFFFF;
+  --card:#FFFFFF;
+  --sidebar:#1A2744;
+  --sidebar-text:#E8E4DC;
+  --sidebar-muted:rgba(232,228,220,0.5);
+  --sidebar-active:rgba(201,169,110,0.15);
+  --primary:#1A2744;
+  --accent:#8B6914;
+  --text:#1A1A2E;
+  --muted:#6B7280;
+  --brd:#E5E7EB;
+  --tbl-header:#F9FAFB;
+  --danger:#C0392B;
+  --danger-light:#FADBD8;
+  --success:#1E7E4B;
+  --success-light:#D4F1DB;
+  --warning:#D97706;
+  --warning-light:#FEF3C7;
+  --rad:4px;
+  /* Design tokens v2 */
+  --navy-900:#0F1A2E;
+  --navy-800:#1A2744;
+  --navy-700:#243247;
+  --gold-500:#B88C2E;
+  --gold-600:#8B6914;
+  --gold-100:#F5E9C8;
+  --bg-subtle:#F9FAFB;
+  --shadow-sm:0 1px 2px rgba(15,26,46,0.04);
+  --shadow-md:0 4px 8px rgba(15,26,46,0.06);
+  --shadow-lg:0 12px 24px rgba(15,26,46,0.08);
+  --shadow-gold:0 4px 12px rgba(184,140,46,0.2);
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;
+  --font-mono:'JetBrains Mono',monospace;
+}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;font-weight:400}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font:inherit}
+input,select,textarea{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--surf);border:1px solid var(--brd);color:var(--text);border-radius:var(--rad);padding:8px 10px;width:100%;outline:none;font-size:13px;font-weight:400}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+select option{background:var(--surf)}
+label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;font-weight:600}
+h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:500}
+h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:500}
+
+/* Sidebar */
+#sidebar{
+  width:220px;
+  background:var(--sidebar);
+  display:flex;
+  flex-direction:column;
+  padding:0;
+  position:fixed;
+  top:0;left:0;height:100vh;
+  z-index:100;
+  transition:.25s;
+  overflow:hidden;
+}
+.logo{
+  display:flex;
+  flex-direction:column;
+  padding:28px 20px 24px;
+  border-bottom:1px solid rgba(232,228,220,0.1);
+}
+.logo-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  font-weight:400;
+  color:#FFFFFF;
+  letter-spacing:0.04em;
+}
+.logo-subtitle{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:11px;
+  color:var(--sidebar-muted);
+  margin-top:4px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+nav a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 20px;
+  color:var(--sidebar-muted);
+  border-left:3px solid transparent;
+  transition:.15s;
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+}
+nav a:hover{color:var(--sidebar-text);background:rgba(255,255,255,0.04)}
+nav a.active{color:var(--sidebar-text);border-left-color:var(--accent);background:var(--sidebar-active)}
+nav a svg{width:16px;height:16px;flex-shrink:0;opacity:0.7}
+nav a.active svg{opacity:1}
+.sidebar-footer{
+  padding:16px 20px;
+  border-top:1px solid rgba(232,228,220,0.1);
+  margin-top:auto;
+}
+.sidebar-footer a{
+  font-size:11px;
+  color:var(--sidebar-muted);
+  text-decoration:none;
+  transition:color .15s;
+  letter-spacing:0.04em;
+}
+.sidebar-footer a:hover{color:var(--accent)}
+.sidebar-footer .powered{
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:0.04em;
+}
+
+/* Main */
+#main{margin-left:220px;flex:1;padding:32px;min-height:100vh;background:var(--bg)}
+.page{display:none}.page.active{display:block}
+
+/* Cards & KPIs */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.kpi{
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-radius:var(--rad);
+  padding:20px 20px 16px;
+  border-left:3px solid var(--accent);
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+.kpi-val{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:400;
+  margin:8px 0 4px;
+  color:var(--text);
+  line-height:1;
+}
+.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.card{
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-radius:var(--rad);
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Section heading accent */
+.section-heading-accent{
+  border-left:3px solid var(--accent);
+  padding-left:10px;
+  font-family:'Playfair Display',serif;
+  font-size:14px;
+  font-weight:500;
+  color:var(--text);
+  margin-bottom:14px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{
+  text-align:left;
+  padding:8px 12px;
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  border-bottom:2px solid var(--brd);
+  background:var(--tbl-header);
+  font-weight:600;
+  white-space:nowrap;
+  position:sticky;top:0;z-index:1;
+}
+td{padding:6px 12px;border-bottom:1px solid var(--brd);vertical-align:middle;color:var(--text);height:40px;line-height:1.3}
+td.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:13px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(139,105,20,0.04)}
+/* Hover-reveal action buttons in tables */
+tr .row-actions{opacity:0;transition:opacity .15s}
+tr:hover .row-actions{opacity:1}
+
+/* Badges */
+.badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.b-grn{background:rgba(30,126,75,0.1);color:var(--success)}
+.b-red{background:rgba(192,57,43,0.1);color:var(--danger)}
+.b-yel{background:rgba(146,102,10,0.1);color:var(--warning)}
+.b-pri{background:rgba(26,39,68,0.1);color:var(--primary)}
+.b-muted{background:rgba(100,116,139,0.1);color:var(--muted)}
+.b-teal{background:rgba(13,148,136,0.1);color:#0D7A70}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--rad);border:none;font-size:12px;font-weight:600;transition:.15s;letter-spacing:0.04em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif}
+.btn-pri{background:var(--primary);color:#fff;border:1px solid var(--primary)}.btn-pri:hover{background:#243460}
+.btn-teal{background:var(--accent);color:#fff;border:1px solid var(--accent)}.btn-teal:hover{background:#7a5c12}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--brd)}.btn-ghost:hover{color:var(--text);border-color:#C8C3BB;background:#F5F2EB}
+.btn-red{background:rgba(192,57,43,0.08);color:var(--danger);border:1px solid rgba(192,57,43,0.2)}.btn-red:hover{background:rgba(192,57,43,0.15)}
+.btn-sm{padding:5px 10px;font-size:11px;border-radius:var(--rad)}
+.btn-grn{background:var(--success);color:#fff;border:1px solid var(--success)}.btn-grn:hover{background:#1a6e41}
+
+/* Modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,39,68,0.5);z-index:200;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(2px)}
+.overlay.open{display:flex}
+.modal{
+  background:var(--surf);
+  border:1px solid var(--brd);
+  border-radius:var(--rad);
+  width:100%;
+  max-width:540px;
+  max-height:90vh;
+  overflow-y:auto;
+  padding:28px;
+  box-shadow:0 4px 24px rgba(26,39,68,0.15);
+}
+.modal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--brd)}
+.modal-hd h3{font-size:18px;color:var(--text)}
+.close-btn{background:none;border:none;color:var(--muted);font-size:18px;line-height:1;padding:2px 6px;transition:color .15s}.close-btn:hover{color:var(--text)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.full{grid-column:1/-1}
+.form-group{display:flex;flex-direction:column}
+
+/* Page header */
+.pg-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:10px;padding-bottom:16px;border-bottom:2px solid var(--brd)}
+.pg-hd h2{font-size:26px;color:var(--text)}
+
+/* Alerts */
+.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--rad);margin-bottom:8px;font-size:13px;border-left:3px solid}
+.alert-red{background:rgba(192,57,43,0.06);border-color:var(--danger);color:#8B1C10}
+.alert-yel{background:rgba(146,102,10,0.06);border-color:var(--warning);color:#6B4A08}
+.alert-teal{background:rgba(26,126,75,0.06);border-color:var(--success);color:#145935}
+
+/* Two col layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* Cronograma */
+.crono{max-height:320px;overflow-y:auto}
+.crono-row{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--brd);font-size:13px}
+.crono-row.update{background:rgba(139,105,20,0.06)}
+.crono-row:last-child{border-bottom:none}
+
+/* Print */
+@media print{
+  #sidebar,#bot-nav,.no-print{display:none!important}
+  #main{margin:0;padding:0}
+  .print-area{display:block!important}
+  body{background:#fff;color:#000}
+  .card,.modal,.kpi{border:1px solid #ccc!important;background:#fff!important;box-shadow:none!important}
+}
+.print-area{display:none}
+
+/* Mobile */
+#bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surf);border-top:2px solid var(--brd);z-index:100;padding:6px 0 max(6px,env(safe-area-inset-bottom));box-shadow:0 -2px 8px rgba(0,0,0,0.06)}
+#bot-nav ul{display:flex;justify-content:space-around;list-style:none}
+#bot-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--muted);padding:4px 8px;text-transform:uppercase;letter-spacing:0.04em}
+#bot-nav a.active{color:var(--accent)}
+#bot-nav svg{width:20px;height:20px}
+
+@media(max-width:768px){
+  #sidebar{display:none}
+  #main{margin:0;padding:16px 14px 80px}
+  #bot-nav{display:block}
+  .two-col{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Detail panel */
+.detail-back{display:flex;align-items:center;gap:8px;color:var(--muted);cursor:pointer;font-size:13px;margin-bottom:16px;transition:color .15s;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.detail-back:hover{color:var(--accent)}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:16px 0}
+.info-item .lbl{font-size:10px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.06em;font-weight:600}
+.info-item .val{font-size:14px;font-weight:400;color:var(--text)}
+
+/* Tabs */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--brd);margin-bottom:20px}
+.tab{padding:9px 18px;font-size:11px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;background:none;border-top:none;border-left:none;border-right:none;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;transition:.15s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+
+/* Chips */
+.chip{display:inline-block;padding:3px 8px;border-radius:var(--rad);font-size:11px;background:var(--tbl-header);border:1px solid var(--brd);margin:2px}
+
+.sep{height:1px;background:var(--brd);margin:16px 0}
+.text-muted{color:var(--muted)}
+.text-sm{font-size:12px}
+.mt-1{margin-top:8px}.mt-2{margin-top:16px}
+.flex{display:flex}.gap-2{gap:8px}.items-center{align-items:center}.justify-between{justify-content:space-between}.flex-wrap{flex-wrap:wrap}
+.w-full{width:100%}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--tbl-header)}
+::-webkit-scrollbar-thumb{background:var(--brd);border-radius:2px}
+
+/* Notification badge */
+.notif-badge{background:#f43f5e;color:#fff;font-size:10px;border-radius:999px;padding:2px 6px;margin-left:4px;font-weight:700;}
+
+/* ── KPI v2 cards ─────────────────────────────────────────────────── */
+.kpi-card-v2{
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-radius:8px;
+  padding:18px 20px 14px;
+  box-shadow:var(--shadow-sm);
+  transition:border-color .2s, box-shadow .2s;
+  cursor:default;
+}
+.kpi-v2-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.kpi-v2-icon{width:18px;height:18px;color:var(--muted);flex-shrink:0}
+.kpi-v2-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
+.kpi-v2-value{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:400;line-height:1;margin-bottom:6px;color:var(--text)}
+.kpi-v2-trend{font-size:11px;margin-bottom:8px;font-weight:600;letter-spacing:0.02em}
+.kpi-v2-trend.up{color:var(--success)}
+.kpi-v2-trend.down{color:var(--danger)}
+.kpi-v2-trend.neutral{color:var(--muted)}
+.kpi-v2-trend span{font-weight:400;color:var(--muted)}
+.kpi-sparkline{display:block;width:80px!important;height:24px!important;margin-top:4px}
+
+/* ── Charts ───────────────────────────────────────────────────────── */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-card canvas{max-height:200px}
+@media(max-width:768px){
+  .charts-grid{grid-template-columns:1fr}
+  .chart-card canvas{max-height:160px}
+}
+
+/* ── Status badges with icons ─────────────────────────────────────── */
+.badge-v2{display:inline-flex;align-items:center;gap:4px;padding:2px 8px 2px 5px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;white-space:nowrap}
+.badge-v2 svg{width:11px;height:11px;flex-shrink:0}
+.bv-success{background:var(--success-light);color:var(--success)}
+.bv-danger{background:var(--danger-light);color:var(--danger)}
+.bv-warning{background:var(--warning-light);color:var(--warning)}
+.bv-muted{background:#F3F4F6;color:var(--muted)}
+.bv-navy{background:rgba(26,39,68,0.08);color:var(--navy-800)}
+.bv-orange{background:#FFF3E0;color:#E65100}
+
+/* ── Empty states ─────────────────────────────────────────────────── */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;color:var(--muted)}
+.empty-state svg{width:64px;height:64px;color:var(--brd);margin-bottom:16px;opacity:0.7}
+.empty-state h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--text);margin-bottom:6px}
+.empty-state p{font-size:13px;margin-bottom:16px;max-width:260px;line-height:1.5}
+
+/* ── Search modal (Ctrl+K) ────────────────────────────────────────── */
+#search-overlay{display:none;position:fixed;inset:0;background:rgba(15,26,46,0.5);z-index:500;align-items:flex-start;justify-content:center;padding-top:80px;backdrop-filter:blur(3px)}
+#search-overlay.open{display:flex}
+#search-box{background:var(--surf);border:1px solid var(--brd);border-radius:12px;width:100%;max-width:560px;box-shadow:var(--shadow-lg);overflow:hidden}
+#search-input{width:100%;border:none;outline:none;padding:14px 18px;font-size:16px;font-family:'Source Sans 3',sans-serif;background:transparent;color:var(--text);border-bottom:1px solid var(--brd)}
+#search-input::placeholder{color:var(--muted)}
+#search-results{max-height:360px;overflow-y:auto;padding:8px 0}
+.search-result{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;transition:background .1s}
+.search-result:hover,.search-result.active{background:var(--gold-100)}
+.search-result svg{width:14px;height:14px;color:var(--muted);flex-shrink:0}
+.search-result-main{font-size:13px;font-weight:500;color:var(--text)}
+.search-result-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.search-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}
+#search-hint{padding:8px 16px;border-top:1px solid var(--brd);display:flex;gap:16px;font-size:11px;color:var(--muted)}
+#search-hint kbd{background:var(--tbl-header);border:1px solid var(--brd);border-radius:3px;padding:1px 5px;font-family:var(--font-mono);font-size:10px}
+
+/* ── Fotos de propiedades ─────────────────────────────────────────── */
+.photo-thumb{width:40px;height:40px;border-radius:4px;object-fit:cover;border:1px solid var(--brd);flex-shrink:0}
+.photo-placeholder{width:40px;height:40px;border-radius:4px;background:var(--tbl-header);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.photo-slider{display:flex;gap:8px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:thin}
+.photo-slider img{height:160px;border-radius:8px;object-fit:cover;flex-shrink:0;cursor:pointer;transition:opacity .15s}
+.photo-slider img:hover{opacity:0.85}
+.photo-cover{width:100%;max-height:240px;object-fit:cover;border-radius:8px;margin-bottom:12px}
+
+/* ── Agenda ───────────────────────────────────────────────────────── */
+.agenda-week{display:grid;grid-template-columns:50px repeat(7,1fr);border:1px solid var(--brd);border-radius:8px;overflow:hidden;font-size:11px}
+.agenda-corner{background:var(--tbl-header);border-right:1px solid var(--brd);border-bottom:1px solid var(--brd)}
+.agenda-day-hd{background:var(--tbl-header);text-align:center;padding:8px 4px;border-right:1px solid var(--brd);border-bottom:1px solid var(--brd);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
+.agenda-day-hd.today{color:var(--gold-500);background:var(--gold-100)}
+.agenda-time{background:var(--tbl-header);border-right:1px solid var(--brd);border-bottom:1px solid var(--brd);padding:4px 6px;text-align:right;color:var(--muted);font-size:10px;font-family:var(--font-mono)}
+.agenda-slot{border-right:1px solid var(--brd);border-bottom:1px solid var(--brd);min-height:28px;position:relative;padding:2px}
+.agenda-slot:last-child{border-right:none}
+.agenda-evt{border-radius:3px;padding:2px 5px;font-size:10px;font-weight:600;cursor:pointer;margin-bottom:1px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.evt-visita{background:#DBEAFE;color:#1D4ED8}
+.evt-firma{background:var(--success-light);color:var(--success)}
+.evt-vencimiento{background:var(--danger-light);color:var(--danger)}
+.evt-mantenimiento{background:#FEF3C7;color:#B45309}
+
+/* ── Bell / Alertas dropdown ──────────────────────────────────────── */
+.bell-btn{position:relative;background:none;border:1px solid var(--brd);border-radius:6px;padding:6px 8px;cursor:pointer;display:flex;align-items:center;color:var(--muted);transition:color .15s,border-color .15s}
+.bell-btn:hover{color:var(--text);border-color:var(--gold-500)}
+.bell-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;background:#f43f5e;border-radius:50%;border:1.5px solid var(--surf)}
+.alerts-dropdown{position:absolute;top:calc(100% + 6px);right:0;width:320px;background:var(--surf);border:1px solid var(--brd);border-radius:10px;box-shadow:var(--shadow-lg);z-index:300;overflow:hidden}
+.alerts-dd-hd{padding:12px 16px;border-bottom:1px solid var(--brd);font-weight:600;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.alert-item{display:flex;gap:10px;align-items:flex-start;padding:10px 16px;border-bottom:1px solid var(--brd);cursor:pointer;transition:background .1s}
+.alert-item:hover{background:var(--gold-100)}
+.alert-item:last-child{border-bottom:none}
+.alert-item-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.alert-item-icon.red{background:var(--danger-light);color:var(--danger)}
+.alert-item-icon.yel{background:var(--warning-light);color:var(--warning)}
+.alert-item-icon.grn{background:var(--success-light);color:var(--success)}
+.alert-item-body{flex:1}
+.alert-item-msg{font-size:12px;color:var(--text);line-height:1.4}
+.alert-item-date{font-size:10px;color:var(--muted);margin-top:2px}
+.alert-item-goto{font-size:10px;font-weight:600;color:var(--gold-600);text-decoration:none;letter-spacing:0.04em;text-transform:uppercase}
+
+/* ── Multi-moneda ─────────────────────────────────────────────────── */
+.currency-toggle{display:flex;border:1px solid var(--brd);border-radius:4px;overflow:hidden}
+.currency-toggle button{padding:5px 10px;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--muted);font-family:'Source Sans 3',sans-serif}
+.currency-toggle button.active{background:var(--primary);color:#fff}
+
+/* ── Kanban pipeline ──────────────────────────────────────────────── */
+.kanban-board{display:grid;grid-template-columns:repeat(5,minmax(200px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px}
+@media(max-width:900px){.kanban-board{grid-template-columns:repeat(2,1fr)}}
+.kanban-col{background:var(--bg-subtle);border:1px solid var(--brd);border-radius:8px;min-height:400px}
+.kanban-col-hd{padding:10px 14px;border-bottom:1px solid var(--brd);display:flex;justify-content:space-between;align-items:center}
+.kanban-col-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted)}
+.kanban-col-count{background:var(--brd);border-radius:999px;padding:1px 7px;font-size:10px;font-weight:600;color:var(--muted)}
+.kanban-body{padding:8px;min-height:350px}
+.kanban-card{background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:10px 12px;margin-bottom:8px;cursor:grab;transition:box-shadow .15s,border-color .15s;user-select:none}
+.kanban-card:hover{box-shadow:var(--shadow-md);border-color:var(--gold-500)}
+.kanban-card.dragging{opacity:0.5;box-shadow:var(--shadow-lg)}
+.kanban-col.drag-over{background:var(--gold-100);border-color:var(--gold-500)}
+.lead-name{font-weight:600;font-size:13px;color:var(--text);margin-bottom:4px}
+.lead-prop{font-size:11px;color:var(--muted);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lead-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.lead-tag{font-size:9px;padding:1px 6px;border-radius:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.lead-tag.src-zonaprop{background:#E3F2FD;color:#1565C0}
+.lead-tag.src-argenprop{background:#E8F5E9;color:#2E7D32}
+.lead-tag.src-referido{background:#F3E5F5;color:#6A1B9A}
+.lead-tag.src-redes{background:#FFF3E0;color:#E65100}
+.lead-tag.src-directo{background:#ECEFF1;color:#37474F}
+.lead-avatar{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.lead-footer{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.lead-budget{font-size:11px;font-family:var(--font-mono);color:var(--muted)}
+.lead-date{font-size:10px;color:var(--muted)}
+
+/* ── Timeline ─────────────────────────────────────────────────────── */
+.timeline{padding:0}
+.tl-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--brd);position:relative}
+.tl-item:last-child{border-bottom:none}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-500);flex-shrink:0;margin-top:5px}
+.tl-body{flex:1}
+.tl-title{font-size:13px;font-weight:500;color:var(--text)}
+.tl-date{font-size:10px;color:var(--muted);margin-top:2px}
+.tl-note{font-size:12px;color:var(--muted);margin-top:3px;font-style:italic}
+
+/* ── Portal inquilino ─────────────────────────────────────────────── */
+.portal-view{max-width:600px;margin:0 auto;font-family:'Source Sans 3',sans-serif}
+.portal-header{background:var(--navy-800);color:#fff;padding:24px;border-radius:12px 12px 0 0;text-align:center}
+.portal-logo{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px}
+.portal-tenant{font-size:14px;opacity:0.8}
+.portal-body{background:var(--surf);border:1px solid var(--brd);border-radius:0 0 12px 12px;padding:24px}
+.portal-prop-card{border:1px solid var(--brd);border-radius:8px;padding:16px;margin-bottom:16px;background:var(--bg-subtle)}
+.portal-next-due{background:var(--warning-light);border:1px solid var(--warning);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+
+/* ── Gastos ───────────────────────────────────────────────────────── */
+.gastos-chart-wrap{height:180px;position:relative}
+</style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="topbar-left">
-      <a href="/" class="topbar-logo">Yusta<span>Labs</span></a>
-      <div class="topbar-sep"></div>
-      <span class="topbar-name">Aura Prop</span>
-      <span class="topbar-badge">Demo</span>
-    </div>
-    <div class="topbar-right">
-      <a href="/aura-prop" class="topbar-btn">← Volver</a>
-      <a href="https://wa.me/541132609254?text=Hola!%20Quiero%20más%20info%20sobre%20Aura Prop." target="_blank" class="topbar-btn primary">Quiero mi sistema →</a>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="logo">
+    <div class="logo-title">Aura Prop</div>
+    <div class="logo-subtitle">by Yusta Labs</div>
+  </div>
+  <nav id="desk-nav"></nav>
+  <div class="sidebar-footer">
+    <div style="margin-bottom:6px;font-size:10px;color:var(--sidebar-muted);letter-spacing:0.04em;text-transform:uppercase;">Desarrollado por</div>
+    <a href="https://yustalabs-web.vercel.app" target="_blank" class="powered">Yusta Labs ↗</a>
+  </div>
+</div>
+
+<!-- BOT NAV MOBILE -->
+<nav id="bot-nav"><ul id="mob-nav"></ul></nav>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="page-dashboard" class="page"></div>
+  <div id="page-propiedades" class="page"></div>
+  <div id="page-contratos" class="page"></div>
+  <div id="page-inquilinos" class="page"></div>
+  <div id="page-propietarios" class="page"></div>
+  <div id="page-reportes" class="page"></div>
+  <div id="page-agenda" class="page"></div>
+  <div id="page-oportunidades" class="page"></div>
+</div>
+<!-- Bell alerts dropdown container -->
+<div id="bell-container" style="position:fixed;top:16px;right:16px;z-index:150;display:none">
+  <button type="button" class="bell-btn" id="bell-btn" onclick="toggleAlertsDropdown()" aria-label="Alertas">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+    <span class="bell-dot" id="bell-dot" style="display:none"></span>
+  </button>
+  <div class="alerts-dropdown" id="alerts-dropdown" style="display:none"></div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-hd"><h3 id="modal-title">Modal</h3><button class="close-btn" onclick="closeModal()">&#10005;</button></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- PRINT AREA -->
+<div class="print-area" id="print-zone"></div>
+
+<!-- SEARCH OVERLAY (Ctrl+K) -->
+<div id="search-overlay" onclick="if(event.target===this)closeSearch()">
+  <div id="search-box">
+    <input id="search-input" type="text" placeholder="Buscar propiedades, inquilinos, contratos..." autocomplete="off" oninput="runSearch(this.value)" onkeydown="searchKeyNav(event)">
+    <div id="search-results"><div class="search-empty">Escribí para buscar...</div></div>
+    <div id="search-hint"><span><kbd>↑↓</kbd> navegar</span><span><kbd>Enter</kbd> ir</span><span><kbd>Esc</kbd> cerrar</span></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────
+const K = 'aprop-v1';
+const fmt = n => new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n);
+const fmtDate = d => d ? new Date(d+'T00:00:00').toLocaleDateString('es-AR') : '-';
+const today = () => new Date().toISOString().slice(0,10);
+const diffDays = (a,b) => Math.round((new Date(b)-new Date(a))/(864e5));
+const uid = () => Math.random().toString(36).slice(2,9);
+const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const addMonths = (d,m) => { let dt=new Date(d+'T00:00:00'); dt.setMonth(dt.getMonth()+m); return dt.toISOString().slice(0,10); };
+
+const SEED = {
+  props:[
+    {id:'p1',dir:'Av. Corrientes 1540 3°B',tipo:'Dpto',m2:52,precio:180000,estado:'Alquilada',propId:'o1',exp:15000,notas:''},
+    {id:'p2',dir:'Gurruchaga 880 PB',tipo:'Casa',m2:90,precio:320000,estado:'Alquilada',propId:'o1',exp:22000,notas:''},
+    {id:'p3',dir:'Av. Santa Fe 2210 7°A',tipo:'Dpto',m2:38,precio:145000,estado:'Alquilada',propId:'o2',exp:12000,notas:''},
+    {id:'p4',dir:'Palermo Soho - Thames 650',tipo:'Local',m2:65,precio:280000,estado:'Alquilada',propId:'o2',exp:0,notas:''},
+    {id:'p5',dir:'Belgrano - Juramento 2100 2°C',tipo:'Dpto',m2:60,precio:200000,estado:'Alquilada',propId:'o3',exp:18000,notas:''},
+    {id:'p6',dir:'Flores - Avellaneda 350 Cochera',tipo:'Cochera',m2:12,precio:45000,estado:'Alquilada',propId:'o3',exp:0,notas:''},
+    {id:'p7',dir:'Villa Crespo - Loyola 740 PH',tipo:'Dpto',m2:70,precio:230000,estado:'Disponible',propId:'o4',exp:20000,notas:'Recién pintado'},
+    {id:'p8',dir:'Caballito - Acoyte 220 1°A',tipo:'Dpto',m2:45,precio:160000,estado:'Refacción',propId:'o4',exp:0,notas:'Cambio de pisos'}
+  ],
+  owners:[
+    {id:'o1',nom:'Carlos Méndez',tel:'1155441234',mail:'carlos@mail.com',cbu:'0070999000000012345678',com:8},
+    {id:'o2',nom:'Laura Sánchez',tel:'1144332211',mail:'laura@mail.com',cbu:'0140999000000012345679',com:7},
+    {id:'o3',nom:'Roberto Vega',tel:'1166778899',mail:'roberto@mail.com',cbu:'0060999000000012345680',com:8},
+    {id:'o4',nom:'Ana Torres',tel:'1177665544',mail:'ana@mail.com',cbu:'0070999000000012345681',com:7}
+  ],
+  inqs:[
+    {id:'i1',nom:'Martín Flores',dni:'32145678',tel:'1198765432',mail:'martin@mail.com',garantia:'propietario garante'},
+    {id:'i2',nom:'Sofía Gómez',dni:'35987654',tel:'1187654321',mail:'sofia@mail.com',garantia:'seguro de caución'},
+    {id:'i3',nom:'Pablo Díaz',dni:'28765432',tel:'1176543210',mail:'pablo@mail.com',garantia:'recibo de sueldo'},
+    {id:'i4',nom:'Valentina Cruz',dni:'40123456',tel:'1165432109',mail:'valen@mail.com',garantia:'seguro de caución'},
+    {id:'i5',nom:'Lucas Herrera',dni:'33456789',tel:'1154321098',mail:'lucas@mail.com',garantia:'propietario garante'},
+    {id:'i6',nom:'Camila Reyes',dni:'38901234',tel:'1143210987',mail:'camila@mail.com',garantia:'recibo de sueldo'}
+  ],
+  contracts:[
+    {id:'c1',propId:'p1',inqId:'i1',inicio:'2023-03-01',dur:24,monto:120000,actMonto:180000,tipo:'ICL',freq:'trimestral',dep:240000,gar:'propietario garante',estado:'activo',updates:[{fecha:'2023-06-01',pct:25,nuevo:150000},{fecha:'2023-09-01',pct:20,nuevo:180000}]},
+    {id:'c2',propId:'p2',inqId:'i2',inicio:'2023-01-01',dur:36,monto:200000,actMonto:320000,tipo:'ICL',freq:'cuatrimestral',dep:400000,gar:'seguro de caución',estado:'activo',updates:[{fecha:'2023-05-01',pct:30,nuevo:260000},{fecha:'2023-09-01',pct:23,nuevo:320000}]},
+    {id:'c3',propId:'p3',inqId:'i3',inicio:'2023-06-01',dur:24,monto:100000,actMonto:145000,tipo:'IPC',freq:'semestral',dep:200000,gar:'recibo de sueldo',estado:'activo',updates:[{fecha:'2023-12-01',pct:45,nuevo:145000}]},
+    {id:'c4',propId:'p4',inqId:'i4',inicio:'2022-07-01',dur:36,monto:150000,actMonto:280000,tipo:'Libre%',freq:'trimestral',dep:300000,gar:'seguro de caución',estado:'activo',updates:[{fecha:'2022-10-01',pct:20,nuevo:180000},{fecha:'2023-01-01',pct:22,nuevo:219600},{fecha:'2023-04-01',pct:25,nuevo:274500},{fecha:'2023-07-01',pct:2,nuevo:280000}]},
+    {id:'c5',propId:'p5',inqId:'i5',inicio:'2023-09-01',dur:24,monto:160000,actMonto:200000,tipo:'ICL',freq:'trimestral',dep:320000,gar:'propietario garante',estado:'activo',updates:[{fecha:'2023-12-01',pct:25,nuevo:200000}]},
+    {id:'c6',propId:'p6',inqId:'i6',inicio:'2023-11-01',dur:24,monto:38000,actMonto:45000,tipo:'Libre%',freq:'semestral',dep:76000,gar:'recibo de sueldo',estado:'activo',updates:[{fecha:'2024-05-01',pct:18,nuevo:45000}]}
+  ],
+  cobros:[
+    {id:'cb1',inqId:'i1',contId:'c1',periodo:'2024-03',monto:180000,fecha:'2024-03-03',metodo:'transferencia',estado:'pagado'},
+    {id:'cb2',inqId:'i2',contId:'c2',periodo:'2024-03',monto:320000,fecha:'2024-03-05',metodo:'transferencia',estado:'pagado'},
+    {id:'cb3',inqId:'i3',contId:'c3',periodo:'2024-03',monto:145000,fecha:'2024-03-10',metodo:'efectivo',estado:'pagado'},
+    {id:'cb4',inqId:'i4',contId:'c4',periodo:'2024-03',monto:280000,fecha:'2024-03-02',metodo:'transferencia',estado:'pagado'},
+    {id:'cb5',inqId:'i5',contId:'c5',periodo:'2024-03',monto:200000,fecha:null,metodo:'',estado:'pendiente'},
+    {id:'cb6',inqId:'i6',contId:'c6',periodo:'2024-03',monto:45000,fecha:null,metodo:'',estado:'pendiente'},
+    {id:'cb7',inqId:'i3',contId:'c3',periodo:'2024-02',monto:145000,fecha:null,metodo:'',estado:'vencido'}
+  ],
+  liqds:[]
+};
+
+function loadDB(){
+  try{ const d=localStorage.getItem(K); return d?JSON.parse(d):null; }catch(e){return null;}
+}
+function saveDB(d){ localStorage.setItem(K,JSON.stringify(d)); }
+let DB = loadDB() || JSON.parse(JSON.stringify(SEED));
+// Migrate: ensure new fields exist
+if(!DB.eventos) DB.eventos=[];
+if(!DB.config) DB.config={cotizacionUSD:1200};
+if(!DB.leads) DB.leads=[];
+
+// ── NAV ──────────────────────────────────────────────────────────────
+const PAGES = [
+  {id:'dashboard',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',label:'Dashboard'},
+  {id:'propiedades',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',label:'Propiedades'},
+  {id:'agenda',     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',label:'Agenda'},
+  {id:'contratos',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',label:'Contratos'},
+  {id:'inquilinos', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',label:'Inquilinos'},
+  {id:'propietarios',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>',label:'Propietarios'},
+  {id:'reportes',   icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',label:'Reportes'},
+  {id:'oportunidades',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',label:'Pipeline'}
+];
+let curPage='dashboard';
+
+function buildNav(){
+  const dn=document.getElementById('desk-nav');
+  const mn=document.getElementById('mob-nav');
+  dn.innerHTML=PAGES.map(p=>`<a href="#" data-page="${p.id}" onclick="nav('${p.id}');return false">${p.icon}${p.label}</a>`).join('');
+  // Mobile: show first 5 + more
+  const mobPages=PAGES.slice(0,5);
+  mn.innerHTML=mobPages.map(p=>`<li><a href="#" data-page="${p.id}" onclick="nav('${p.id}');return false">${p.icon}<span>${p.label}</span></a></li>`).join('');
+  // Show bell on desktop
+  const bellC=document.getElementById('bell-container');
+  if(bellC) bellC.style.display='block';
+  setNavActive();
+  renderNotifBadge();
+  updateBell();
+}
+function setNavActive(){
+  document.querySelectorAll('[data-page]').forEach(a=>a.classList.toggle('active',a.dataset.page===curPage));
+}
+function nav(id){
+  curPage=id;
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));
+  setNavActive();
+  renders[id]();
+}
+
+// ── HELPERS ──────────────────────────────────────────────────────────
+function byId(id){ return document.getElementById(id); }
+function getProp(id){ return DB.props.find(p=>p.id===id)||{}; }
+function getOwner(id){ return DB.owners.find(o=>o.id===id)||{}; }
+function getInq(id){ return DB.inqs.find(i=>i.id===id)||{}; }
+function getContract(id){ return DB.contracts.find(c=>c.id===id)||null; }
+function propContracts(pid){ return DB.contracts.filter(c=>c.propId===pid&&c.estado==='activo'); }
+function inqContract(iid){ return DB.contracts.find(c=>c.inqId===iid&&c.estado==='activo')||null; }
+function contractEnd(c){ return addMonths(c.inicio,c.dur); }
+function daysToEnd(c){ return diffDays(today(),contractEnd(c)); }
+function statusBadge(type){
+  const cfg={
+    pagado:    {cls:'bv-success',icon:'<circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>',label:'Pagado'},
+    'al día':  {cls:'bv-success',icon:'<circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>',label:'Al día'},
+    activo:    {cls:'bv-success',icon:'<circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>',label:'Activo'},
+    pendiente: {cls:'bv-warning',icon:'<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/>',label:'Pendiente'},
+    vencido:   {cls:'bv-danger', icon:'<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',label:'Vencido'},
+    moroso:    {cls:'bv-danger', icon:'<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',label:'Moroso'},
+    rescindido:{cls:'bv-muted',  icon:'<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',label:'Rescindido'},
+    parcial:   {cls:'bv-navy',   icon:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/>',label:'Parcial'},
+    Alquilada: {cls:'bv-success',icon:'<circle cx="12" cy="12" r="4" fill="currentColor"/>',label:'Alquilada'},
+    Disponible:{cls:'bv-muted',  icon:'<circle cx="12" cy="12" r="4"/>',label:'Disponible'},
+    'Refacción':{cls:'bv-orange',icon:'<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>',label:'Refacción'},
+    'próximo':  {cls:'bv-orange',icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',label:'Próximo'},
+  };
+  const c=cfg[type]||{cls:'bv-muted',icon:'<circle cx="12" cy="12" r="4" fill="currentColor"/>',label:type};
+  return `<span class="badge-v2 ${c.cls}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${c.icon}</svg>${c.label}</span>`;
+}
+function stateBadge(e){ return statusBadge(e); }
+function cobroBadge(e){ return statusBadge(e); }
+
+// cronograma
+function buildCrono(c){
+  const rows=[];
+  const freqMap={trimestral:3,cuatrimestral:4,semestral:6};
+  const step=freqMap[c.freq]||3;
+  const end=contractEnd(c);
+  let cur=c.inicio; let monto=c.monto; let n=1;
+  while(cur<=end){
+    const isUpd = c.updates&&c.updates.find(u=>u.fecha===cur&&n>1);
+    if(isUpd) monto=isUpd.nuevo;
+    rows.push({n,fecha:cur,monto,update:!!isUpd&&n>1});
+    n++;
+    cur=addMonths(cur,1);
+    if(n>37) break;
+  }
+  return rows;
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────
+function openModal(title,html){
+  byId('modal-title').textContent=title;
+  byId('modal-body').innerHTML=html;
+  byId('overlay').classList.add('open');
+}
+function closeModal(e){
+  if(e&&e.target!==byId('overlay')) return;
+  byId('overlay').classList.remove('open');
+}
+function closeModalDirect(){ byId('overlay').classList.remove('open'); }
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────
+function renderDashboard(){
+  const el=byId('page-dashboard');
+  const alq=DB.props.filter(p=>p.estado==='Alquilada').length;
+  const dis=DB.props.filter(p=>p.estado==='Disponible').length;
+  const ref=DB.props.filter(p=>p.estado==='Refacción').length;
+  const mes='2024-03';
+  const cobsMes=DB.cobros.filter(c=>c.periodo===mes);
+  const pagado=cobsMes.filter(c=>c.estado==='pagado').reduce((s,c)=>s+c.monto,0);
+  const pend=cobsMes.filter(c=>c.estado!=='pagado').reduce((s,c)=>s+c.monto,0);
+  const vcn90=DB.contracts.filter(c=>c.estado==='activo'&&daysToEnd(c)<=90&&daysToEnd(c)>=0).length;
+  const venc=DB.cobros.filter(c=>c.estado==='vencido').length;
+  const mesLabels=['Oct','Nov','Dic','Ene','Feb','Mar'];
+  const cobrosHist=[925000,1050000,1180000,1320000,1480000,pagado];
+
+  const cList=cobsMes.map(cb=>{
+    const inq=getInq(cb.inqId);
+    const ct=getContract(cb.contId);
+    const prop=ct?getProp(ct.propId):{};
+    return `<tr>
+      <td><strong>${inq.nom||'-'}</strong></td>
+      <td class="text-muted text-sm">${prop.dir||'-'}</td>
+      <td class="num">${fmt(cb.monto)}</td>
+      <td>${cobroBadge(cb.estado)}</td>
+      <td>${cb.fecha?fmtDate(cb.fecha):'-'}</td>
+    </tr>`;
+  }).join('');
+
+  el.innerHTML=`
+  <div class="pg-hd">
+    <h2>Dashboard</h2>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="text-muted text-sm" style="font-size:13px;letter-spacing:0.04em;">Marzo 2024</span>
+      <button type="button" onclick="openSearch()" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--brd);border-radius:6px;background:var(--surf);color:var(--muted);font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar <kbd style="background:var(--tbl-header);border:1px solid var(--brd);border-radius:3px;padding:1px 5px;font-size:10px;font-family:var(--font-mono)">Ctrl+K</kbd>
+      </button>
     </div>
   </div>
-  <iframe src="https://aura-prop-demo.vercel.app" title="Aura Prop Demo" allowfullscreen></iframe>
+  <div id="alertas-panel" style="margin-bottom:16px"></div>
+  <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+    <button type="button" onclick="nav('contratos')" style="flex:1;min-width:160px;padding:13px 18px;font-size:12px;font-weight:600;background:var(--primary);color:#fff;border:none;border-radius:var(--rad);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif">Nuevo Contrato / Propiedad</button>
+    <button type="button" onclick="nav('reportes')" style="flex:1;min-width:160px;padding:13px 18px;font-size:12px;font-weight:600;background:var(--success);color:#fff;border:none;border-radius:var(--rad);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;font-family:'Source Sans 3',sans-serif">Ver Cobros del Mes</button>
+  </div>
+
+  <!-- KPI Cards v2 -->
+  <div class="kpi-grid" style="margin-bottom:24px">
+    <div class="kpi-card-v2">
+      <div class="kpi-v2-header">
+        <svg class="kpi-v2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="kpi-v2-label">Propiedades alquiladas</span>
+      </div>
+      <div class="kpi-v2-value" style="color:var(--success)">${alq}</div>
+      <div class="kpi-v2-trend up">● ${alq} activas <span>· ${dis} disponibles</span></div>
+      <canvas class="kpi-sparkline" id="spark-alq"></canvas>
+    </div>
+    <div class="kpi-card-v2">
+      <div class="kpi-v2-header">
+        <svg class="kpi-v2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <span class="kpi-v2-label">Cobrado este mes</span>
+      </div>
+      <div class="kpi-v2-value" style="color:var(--primary)">${fmt(pagado)}</div>
+      <div class="kpi-v2-trend up">↑ 12.4% <span>vs febrero</span></div>
+      <canvas class="kpi-sparkline" id="spark-cobros"></canvas>
+    </div>
+    <div class="kpi-card-v2">
+      <div class="kpi-v2-header">
+        <svg class="kpi-v2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="kpi-v2-label">Contratos por vencer</span>
+      </div>
+      <div class="kpi-v2-value" style="color:var(--warning)">${vcn90}</div>
+      <div class="kpi-v2-trend neutral">en próximos 90 días</div>
+      <canvas class="kpi-sparkline" id="spark-vcn"></canvas>
+    </div>
+    <div class="kpi-card-v2">
+      <div class="kpi-v2-header">
+        <svg class="kpi-v2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+        <span class="kpi-v2-label">Cuotas vencidas</span>
+      </div>
+      <div class="kpi-v2-value" style="color:var(--danger)">${venc}</div>
+      <div class="kpi-v2-trend ${venc>0?'down':'up'}">${venc>0?'↓ '+venc+' requieren atención':'✓ Todo al día'}</div>
+      <canvas class="kpi-sparkline" id="spark-venc"></canvas>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid" style="margin-bottom:24px">
+    <div class="card chart-card">
+      <div class="section-heading-accent">Cobros últimos 6 meses</div>
+      <canvas id="chart-cobros-meses"></canvas>
+    </div>
+    <div class="card chart-card">
+      <div class="section-heading-accent">Estado de propiedades</div>
+      <canvas id="chart-estado-props"></canvas>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="section-heading-accent">Alertas activas</div>
+      <div id="alertas-inner"></div>
+    </div>
+    <div class="card">
+      <div class="section-heading-accent">Cobros del mes</div>
+      ${cList?`<div class="tbl-wrap"><table><thead><tr><th>Inquilino</th><th>Propiedad</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead><tbody>${cList}</tbody></table></div>`
+      :`<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><h4>Sin cobros este mes</h4><p>Registrá los cobros del mes desde Inquilinos & Cobros</p></div>`}
+    </div>
+  </div>`;
+
+  // Alertas inline
+  let ah='';
+  DB.cobros.filter(c=>c.estado==='vencido').forEach(cb=>{
+    const inq=getInq(cb.inqId);
+    ah+=`<div class="alert alert-red"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>${inq.nom} — Cuota ${cb.periodo} vencida</div>`;
+  });
+  DB.contracts.filter(c=>c.estado==='activo'&&daysToEnd(c)<=90&&daysToEnd(c)>=0).forEach(c=>{
+    const p=getProp(c.propId);
+    ah+=`<div class="alert alert-yel"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>${p.dir} — Contrato vence en ${daysToEnd(c)} días</div>`;
+  });
+  DB.cobros.filter(c=>c.estado==='pendiente').forEach(cb=>{
+    const inq=getInq(cb.inqId);
+    ah+=`<div class="alert alert-teal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${inq.nom} — Cobro ${cb.periodo} pendiente (${fmt(cb.monto)})</div>`;
+  });
+  const ai=byId('alertas-inner');
+  if(ai) ai.innerHTML=ah||'<p class="text-muted text-sm" style="padding:8px 0">Sin alertas activas</p>';
+
+  // Init charts
+  setTimeout(()=>{
+    if(typeof Chart==='undefined') return;
+    const sparkCfg={responsive:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}},elements:{point:{radius:0},line:{tension:0.4,borderWidth:1.5}},animation:false};
+
+    const sc=byId('spark-cobros');
+    if(sc){sc.width=80;sc.height=24;new Chart(sc,{type:'line',data:{labels:mesLabels,datasets:[{data:cobrosHist,borderColor:'#B88C2E',backgroundColor:'rgba(184,140,46,0.08)',fill:true}]},options:sparkCfg});}
+    const sa=byId('spark-alq');
+    if(sa){sa.width=80;sa.height=24;new Chart(sa,{type:'line',data:{labels:mesLabels,datasets:[{data:[5,5,5,6,6,alq],borderColor:'#1E7E4B',backgroundColor:'rgba(30,126,75,0.08)',fill:true}]},options:sparkCfg});}
+    const sv=byId('spark-vcn');
+    if(sv){sv.width=80;sv.height=24;new Chart(sv,{type:'line',data:{labels:mesLabels,datasets:[{data:[1,2,3,2,1,vcn90],borderColor:'#D97706',backgroundColor:'rgba(217,119,6,0.08)',fill:true}]},options:sparkCfg});}
+    const svn=byId('spark-venc');
+    if(svn){svn.width=80;svn.height=24;new Chart(svn,{type:'line',data:{labels:mesLabels,datasets:[{data:[0,1,2,1,1,venc],borderColor:'#C0392B',backgroundColor:'rgba(192,57,43,0.08)',fill:true}]},options:sparkCfg});}
+
+    const cc=byId('chart-cobros-meses');
+    if(cc) new Chart(cc,{type:'line',data:{labels:mesLabels,datasets:[{label:'Cobros',data:cobrosHist,borderColor:'#8B6914',backgroundColor:'rgba(139,105,20,0.08)',fill:true,tension:0.4,pointBackgroundColor:'#8B6914',pointRadius:4,pointHoverRadius:6}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.parsed.y)}}},scales:{y:{ticks:{callback:v=>'$'+(v/1e6).toFixed(1)+'M'},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}});
+
+    const ce=byId('chart-estado-props');
+    if(ce) new Chart(ce,{type:'doughnut',data:{labels:['Alquilada','Disponible','Refacción'],datasets:[{data:[alq,dis,ref],backgroundColor:['#1E7E4B','#1A2744','#B88C2E'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2,cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11},boxWidth:10}}}}});
+  },60);
+
+  renderNotifBadge();
+}
+
+// ── PROPIEDADES ───────────────────────────────────────────────────────
+function renderPropiedades(detailId){
+  const el=byId('page-propiedades');
+  if(detailId){ renderPropDetail(el,detailId); return; }
+  const rows=DB.props.map(p=>{
+    const ow=getOwner(p.propId);
+    const thumb=p.photos&&p.photos[0]
+      ?`<img src="${p.photos[0]}" class="photo-thumb" alt="">`
+      :`<div class="photo-placeholder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--muted)"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>`;
+    return `<tr onclick="renderPropiedades('${p.id}')" style="cursor:pointer">
+      <td style="display:flex;align-items:center;gap:10px;height:40px">${thumb}<strong>${p.dir}</strong></td>
+      <td><span class="badge b-muted">${p.tipo}</span></td>
+      <td class="num">${p.m2} m²</td>
+      <td class="num">${fmt(p.precio)}</td>
+      <td>${ow.nom||'-'}</td>
+      <td>${stateBadge(p.estado)}</td>
+      <td class="no-print row-actions">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editProp('${p.id}')" aria-label="Editar">Editar</button>
+        <button type="button" class="btn btn-red btn-sm" onclick="event.stopPropagation();delProp('${p.id}')" aria-label="Eliminar">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+  el.innerHTML=`
+  <div class="pg-hd"><h2>Propiedades</h2><button type="button" class="btn btn-pri" onclick="newProp()">+ Nueva propiedad</button></div>
+  <div class="card">
+    ${rows?`<div class="tbl-wrap"><table>
+      <thead><tr><th>Dirección</th><th>Tipo</th><th>m²</th><th>Precio/mes</th><th>Propietario</th><th>Estado</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`
+    :`<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <h4>Sin propiedades cargadas</h4>
+      <p>Agregá tu primera propiedad para empezar a gestionar alquileres</p>
+      <button type="button" class="btn btn-pri" onclick="newProp()">+ Nueva propiedad</button>
+    </div>`}
+  </div>`;
+}
+
+function renderPropDetail(el,id){
+  const p=getProp(id);
+  const ow=getOwner(p.propId);
+  const ct=propContracts(id)[0];
+  const inq=ct?getInq(ct.inqId):null;
+  const cobrosH=DB.cobros.filter(cb=>ct&&cb.contId===ct.id).sort((a,b)=>b.periodo.localeCompare(a.periodo)).slice(0,5);
+
+  // Photos section
+  let photosHtml='';
+  if(p.photos&&p.photos.length){
+    if(p.photos.length===1){
+      photosHtml=`<img src="${p.photos[0]}" class="photo-cover" onclick="openPhotoModal('${id}',0)" alt="Foto propiedad">`;
+    } else {
+      photosHtml=`<div class="photo-slider">${p.photos.map((ph,i)=>`<img src="${ph}" onclick="openPhotoModal('${id}',${i})" alt="Foto ${i+1}">`).join('')}</div>`;
+    }
+  }
+
+  el.innerHTML=`
+  <div class="detail-back" onclick="renderPropiedades()">← Volver a Propiedades</div>
+  ${photosHtml}
+  <div class="flex justify-between flex-wrap gap-2" style="margin-bottom:20px">
+    <div><h2>${p.dir}</h2><div class="text-muted text-sm" style="margin-top:4px;">${p.tipo} · ${p.m2} m²</div></div>
+    <div class="flex gap-2" style="flex-wrap:wrap;">
+      ${stateBadge(p.estado)}
+      <button type="button" class="btn btn-ghost btn-sm" onclick="editProp('${id}')">Editar</button>
+      <button type="button" class="btn btn-teal btn-sm" onclick="modalLiquidacionProp('${id}')">Liquidación</button>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-item"><div class="lbl">Precio actual</div><div class="val">${fmt(p.precio)}/mes</div></div>
+    <div class="info-item"><div class="lbl">Expensas</div><div class="val">${fmt(p.exp)}</div></div>
+    <div class="info-item"><div class="lbl">Propietario</div><div class="val">${ow.nom||'-'}</div></div>
+    <div class="info-item"><div class="lbl">Comisión</div><div class="val">${ow.com||0}%</div></div>
+  </div>
+  ${p.notas?`<div class="text-muted text-sm" style="margin:8px 0;padding:10px 14px;background:var(--tbl-header);border-left:3px solid var(--brd);">Notas: ${p.notas}</div>`:''}
+  <div class="sep"></div>
+  ${ct?`<div class="card">
+    <div class="section-heading-accent">Contrato activo</div>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Inquilino</div><div class="val">${inq?inq.nom:'-'}</div></div>
+      <div class="info-item"><div class="lbl">Inicio</div><div class="val">${fmtDate(ct.inicio)}</div></div>
+      <div class="info-item"><div class="lbl">Vencimiento</div><div class="val">${fmtDate(contractEnd(ct))}</div></div>
+      <div class="info-item"><div class="lbl">Monto actual</div><div class="val">${fmt(ct.actMonto)}</div></div>
+      <div class="info-item"><div class="lbl">Actualización</div><div class="val">${ct.tipo} / ${ct.freq}</div></div>
+    </div>
+    <button class="btn btn-ghost btn-sm mt-1" onclick="nav('contratos')">Ver contrato completo</button>
+  </div>`:`<div class="card text-muted text-sm" style="padding:20px;text-align:center;background:var(--tbl-header)">Sin contrato activo — <button class="btn btn-teal btn-sm" onclick="nav('contratos')">Crear contrato</button></div>`}
+  ${cobrosH.length?`<div class="card mt-2"><div class="section-heading-accent">Últimos cobros</div><div class="tbl-wrap"><table>
+    <thead><tr><th>Período</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
+    <tbody>${cobrosH.map(cb=>`<tr><td>${cb.periodo}</td><td>${fmt(cb.monto)}</td><td>${cobroBadge(cb.estado)}</td><td>${cb.fecha?fmtDate(cb.fecha):'-'}</td></tr>`).join('')}</tbody>
+  </table></div></div>`:''}
+  <div class="card mt-2" id="mant-section-${id}">
+    <div class="flex justify-between items-center" style="margin-bottom:14px;">
+      <div class="section-heading-accent" style="margin-bottom:0;">🔧 Mantenimiento</div>
+      <button class="btn btn-ghost btn-sm" onclick="openMantModal('${id}')">+ Registrar</button>
+    </div>
+    ${renderMantList(id)}
+  </div>
+  <div class="card mt-2" id="gastos-section-${id}">
+    <div class="flex justify-between items-center" style="margin-bottom:14px;">
+      <div class="section-heading-accent" style="margin-bottom:0;">💸 Gastos de la propiedad</div>
+      <button class="btn btn-ghost btn-sm" onclick="openGastoModal('${id}')">+ Agregar gasto</button>
+    </div>
+    ${renderGastosList(id)}
+  </div>`;
+}
+
+function propForm(p={}){
+  const owOpts=DB.owners.map(o=>`<option value="${o.id}"${p.propId===o.id?' selected':''}>${o.nom}</option>`).join('');
+  const existingPhotos=(p.photos||[]).slice(0,4).map((ph,i)=>`<img src="${ph}" style="height:48px;width:60px;object-fit:cover;border-radius:4px;border:1px solid var(--brd)">`).join('');
+  return `<div class="form-grid">
+    <div class="form-group full"><label>Dirección</label><input id="f-dir" value="${p.dir||''}" required></div>
+    <div class="form-group"><label>Tipo</label><select id="f-tipo">${['Dpto','Casa','Local','Oficina','Cochera'].map(t=>`<option${p.tipo===t?' selected':''}>${t}</option>`).join('')}</select></div>
+    <div class="form-group"><label>m²</label><input id="f-m2" type="number" value="${p.m2||''}"></div>
+    <div class="form-group"><label>Precio/mes (ARS)</label><input id="f-precio" type="number" value="${p.precio||''}"></div>
+    <div class="form-group"><label>Expensas (ARS)</label><input id="f-exp" type="number" value="${p.exp||0}"></div>
+    <div class="form-group"><label>Propietario</label><select id="f-propId"><option value="">Sin asignar</option>${owOpts}</select></div>
+    <div class="form-group"><label>Estado</label><select id="f-estado">${['Disponible','Alquilada','Refacción'].map(s=>`<option${p.estado===s?' selected':''}>${s}</option>`).join('')}</select></div>
+    <div class="form-group full"><label>Notas</label><input id="f-notas" value="${p.notas||''}"></div>
+    <div class="form-group full">
+      <label>Fotos de la propiedad</label>
+      ${existingPhotos?`<div class="flex gap-2 flex-wrap" style="margin-bottom:8px">${existingPhotos}</div>`:''}
+      <input id="f-photos" type="file" multiple accept="image/*" onchange="previewPhotos(this,'${p.id||''}')" style="font-size:12px;padding:6px">
+      <div id="photo-preview-row" class="flex gap-2 flex-wrap" style="margin-top:6px"></div>
+    </div>
+  </div>
+  <div class="flex gap-2 mt-2">
+    <button type="button" class="btn btn-pri" onclick="saveProp('${p.id||''}')">Guardar</button>
+    <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+  </div>`;
+}
+function previewPhotos(input,propId){
+  const row=byId('photo-preview-row');
+  row.innerHTML='<span class="text-muted text-sm">Procesando...</span>';
+  const files=Array.from(input.files);
+  Promise.all(files.map(f=>new Promise(res=>{
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result);
+    r.readAsDataURL(f);
+  }))).then(dataURLs=>{
+    window._pendingPhotos=dataURLs;
+    row.innerHTML=dataURLs.map(d=>`<img src="${d}" style="height:48px;width:60px;object-fit:cover;border-radius:4px;border:1px solid var(--brd)">`).join('');
+  });
+}
+function newProp(){ openModal('Nueva propiedad',propForm()); }
+function editProp(id){ openModal('Editar propiedad',propForm(getProp(id))); }
+function saveProp(id){
+  const d={dir:byId('f-dir').value,tipo:byId('f-tipo').value,m2:+byId('f-m2').value,precio:+byId('f-precio').value,exp:+byId('f-exp').value||0,propId:byId('f-propId').value,estado:byId('f-estado').value,notas:byId('f-notas').value};
+  if(!d.dir) return alert('Ingresá la dirección');
+  if(window._pendingPhotos&&window._pendingPhotos.length){
+    if(id){
+      const existing=getProp(id);
+      d.photos=[...(existing.photos||[]),...window._pendingPhotos].slice(0,10);
+    } else {
+      d.photos=window._pendingPhotos.slice(0,10);
+    }
+    window._pendingPhotos=null;
+  }
+  if(id){ Object.assign(getProp(id),d); }
+  else { DB.props.push({...d,id:'p'+uid()}); }
+  saveDB(DB); closeModalDirect(); renderPropiedades();
+}
+function delProp(id){
+  const contratos = DB.contracts.filter(c=>c.propId===id&&c.estado==='activo');
+  if(contratos.length>0){ alert(`Esta propiedad tiene ${contratos.length} contrato(s) activo(s). Rescindí los contratos primero.`); return; }
+  if(!confirm('¿Eliminar propiedad?')) return;
+  DB.props=DB.props.filter(p=>p.id!==id); saveDB(DB); renderPropiedades();
+}
+
+// ── CONTRATOS ─────────────────────────────────────────────────────────
+function renderContratos(detailId){
+  const el=byId('page-contratos');
+  if(detailId){ renderContDetail(el,detailId); return; }
+  const rows=DB.contracts.map(c=>{
+    const p=getProp(c.propId); const inq=getInq(c.inqId);
+    const fin=contractEnd(c); const dias=daysToEnd(c);
+    let warn='';
+    if(dias<=90&&dias>=0) warn=`<span class="badge b-yel" style="margin-left:4px">${dias}d</span>`;
+    if(dias<0) warn=`<span class="badge b-red" style="margin-left:4px">Vencido</span>`;
+    const monedaTag=c.moneda==='USD'?`<span class="badge-v2 bv-navy" style="margin-left:4px;font-size:9px">USD</span>`:'';
+    return `<tr onclick="renderContratos('${c.id}')" style="cursor:pointer">
+      <td><div>${p.dir||'-'}</div><div class="text-muted text-sm">${inq.nom||'-'}</div></td>
+      <td>${fmtDate(c.inicio)}</td><td>${fmtDate(fin)}${warn}</td>
+      <td class="num">${c.moneda==='USD'?'USD '+c.actMonto.toLocaleString('es-AR'):fmt(c.actMonto)}${monedaTag}</td>
+      <td><span class="badge b-pri">${c.tipo}</span> <span class="text-muted text-sm">${c.freq}</span></td>
+      <td>${stateBadge(c.estado)}</td>
+      <td class="no-print row-actions">
+        <button type="button" class="btn btn-teal btn-sm" onclick="event.stopPropagation();modalUpdate('${c.id}')">Actualizar</button>
+      </td>
+    </tr>`;
+  }).join('');
+  el.innerHTML=`
+  <div class="pg-hd"><h2>Contratos</h2><button class="btn btn-pri" onclick="newContrato()">+ Nuevo contrato</button></div>
+  <div class="card"><div class="tbl-wrap"><table>
+    <thead><tr><th>Propiedad / Inquilino</th><th>Inicio</th><th>Vencimiento</th><th>Monto actual</th><th>Actualización</th><th>Estado</th><th></th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div></div>`;
+}
+
+function renderContDetail(el,id){
+  const c=getContract(id); if(!c){renderContratos();return;}
+  const p=getProp(c.propId); const inq=getInq(c.inqId);
+  const crono=buildCrono(c);
+  const cronoRows=crono.map(r=>`<div class="crono-row${r.update?' update':''}">
+    <span>${r.n}. ${fmtDate(r.fecha)}</span>
+    <span>${fmt(r.monto)}</span>
+    ${r.update?`<span class="badge b-pri" style="font-size:10px">Act.</span>`:'<span></span>'}
+  </div>`).join('');
+  const updHist=c.updates.map(u=>`<tr><td>${fmtDate(u.fecha)}</td><td>+${u.pct}%</td><td>${fmt(u.nuevo)}</td></tr>`).join('');
+  el.innerHTML=`
+  <div class="detail-back" onclick="renderContratos()">← Volver a Contratos</div>
+  <div class="flex justify-between flex-wrap gap-2" style="margin-bottom:20px">
+    <div><h2>${p.dir}</h2><div class="text-muted text-sm" style="margin-top:4px;">Inquilino: ${inq.nom}</div></div>
+    <div class="flex gap-2" style="flex-wrap:wrap;">
+      ${stateBadge(c.estado)}
+      <button class="btn btn-teal btn-sm" onclick="modalUpdate('${id}')">Aplicar actualización</button>
+      <button class="btn btn-ghost btn-sm" onclick="imprimirContrato('${id}')">📄 Imprimir Contrato</button>
+      <button class="btn btn-red btn-sm" onclick="delContrato('${id}')">Rescindir</button>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-item"><div class="lbl">Inicio</div><div class="val">${fmtDate(c.inicio)}</div></div>
+    <div class="info-item"><div class="lbl">Vencimiento</div><div class="val">${fmtDate(contractEnd(c))}</div></div>
+    <div class="info-item"><div class="lbl">Duración</div><div class="val">${c.dur} meses</div></div>
+    <div class="info-item"><div class="lbl">Monto inicial</div><div class="val">${fmt(c.monto)}</div></div>
+    <div class="info-item"><div class="lbl">Monto actual</div><div class="val" style="color:var(--success)">${fmt(c.actMonto)}</div></div>
+    <div class="info-item"><div class="lbl">Alquiler vigente hoy</div><div class="val" style="color:var(--accent);font-weight:600">${fmt(calcAlquilerActual(c))}${calcAlquilerActual(c)!==c.actMonto?` <span class="badge b-yel" style="font-size:10px" title="Difiere del monto registrado — actualizá el contrato">⚠ revisar</span>`:''}</div></div>
+    <div class="info-item"><div class="lbl">Depósito</div><div class="val">${fmt(c.dep)}</div></div>
+    <div class="info-item"><div class="lbl">Tipo actualiz.</div><div class="val">${c.tipo}</div></div>
+    <div class="info-item"><div class="lbl">Frecuencia</div><div class="val">${c.freq}</div></div>
+    <div class="info-item"><div class="lbl">Garantía</div><div class="val">${c.gar}</div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><div class="section-heading-accent">Cronograma de cuotas</div><div class="crono">${cronoRows}</div></div>
+    <div>
+      <div class="card" style="margin-bottom:16px"><div class="section-heading-accent">Historial de actualizaciones</div>
+        ${updHist?`<div class="tbl-wrap"><table><thead><tr><th>Fecha</th><th>%</th><th>Nuevo monto</th></tr></thead><tbody>${updHist}</tbody></table></div>`:`<p class="text-muted text-sm">Sin actualizaciones</p>`}
+      </div>
+    </div>
+  </div>`;
+}
+
+function contratoForm(c={}){
+  const propOpts=DB.props.map(p=>`<option value="${p.id}"${c.propId===p.id?' selected':''}>${p.dir}</option>`).join('');
+  const inqOpts=DB.inqs.map(i=>`<option value="${i.id}"${c.inqId===i.id?' selected':''}>${i.nom}</option>`).join('');
+  const moneda=c.moneda||'ARS';
+  return `<div class="form-grid">
+    <div class="form-group full"><label>Propiedad</label><select id="f-propId">${propOpts}</select></div>
+    <div class="form-group full"><label>Inquilino</label><select id="f-inqId">${inqOpts}</select></div>
+    <div class="form-group"><label>Fecha inicio</label><input id="f-inicio" type="date" value="${c.inicio||today()}"></div>
+    <div class="form-group"><label>Duración</label><select id="f-dur"><option value="24"${c.dur===24?' selected':''}>24 meses</option><option value="36"${c.dur===36?' selected':''}>36 meses</option></select></div>
+    <div class="form-group">
+      <label>Monto inicial</label>
+      <div style="display:flex;gap:6px;align-items:center">
+        <input id="f-monto" type="number" value="${c.monto||''}" style="flex:1">
+        <div class="currency-toggle">
+          <button type="button" id="btn-ars" class="${moneda==='ARS'?'active':''}" onclick="setCurrency('ARS')">ARS</button>
+          <button type="button" id="btn-usd" class="${moneda==='USD'?'active':''}" onclick="setCurrency('USD')">USD</button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"><label>Depósito</label><input id="f-dep" type="number" value="${c.dep||''}"></div>
+    <div class="form-group"><label>Tipo actualización</label><select id="f-tipo"><option${c.tipo==='ICL'?' selected':''}>ICL</option><option${c.tipo==='IPC'?' selected':''}>IPC</option><option${c.tipo==='Libre%'?' selected':''}>Libre%</option></select></div>
+    <div class="form-group"><label>Frecuencia</label><select id="f-freq"><option${c.freq==='trimestral'?' selected':''}>trimestral</option><option${c.freq==='cuatrimestral'?' selected':''}>cuatrimestral</option><option${c.freq==='semestral'?' selected':''}>semestral</option></select></div>
+    <div class="form-group full"><label>Garantía</label><select id="f-gar"><option${c.gar==='propietario garante'?' selected':''}>propietario garante</option><option${c.gar==='seguro de caución'?' selected':''}>seguro de caución</option><option${c.gar==='recibo de sueldo'?' selected':''}>recibo de sueldo</option></select></div>
+  </div>
+  <input type="hidden" id="f-moneda" value="${moneda}">
+  <div class="flex gap-2 mt-2">
+    <button type="button" class="btn btn-pri" onclick="saveContrato('${c.id||''}')">Guardar</button>
+    <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+  </div>`;
+}
+function setCurrency(cur){
+  byId('f-moneda').value=cur;
+  const btnArs=byId('btn-ars'); const btnUsd=byId('btn-usd');
+  if(btnArs){btnArs.classList.toggle('active',cur==='ARS');btnUsd.classList.toggle('active',cur==='USD');}
+}
+function newContrato(){ openModal('Nuevo contrato',contratoForm()); }
+function saveContrato(id){
+  const monto=+byId('f-monto').value;
+  const monedaEl=byId('f-moneda');
+  const moneda=monedaEl?monedaEl.value:'ARS';
+  const d={propId:byId('f-propId').value,inqId:byId('f-inqId').value,inicio:byId('f-inicio').value,dur:+byId('f-dur').value,monto,actMonto:monto,dep:+byId('f-dep').value,tipo:byId('f-tipo').value,freq:byId('f-freq').value,gar:byId('f-gar').value,estado:'activo',updates:[],moneda};
+  if(!d.monto) return alert('Ingresá el monto');
+  if(id){ const c=getContract(id); Object.assign(c,{...d,updates:c.updates}); }
+  else { DB.contracts.push({...d,id:'c'+uid()}); }
+  saveDB(DB); closeModalDirect(); renderContratos();
+}
+function delContrato(id){
+  const cobrosDelContrato = DB.cobros.filter(c=>c.contId===id);
+  if(cobrosDelContrato.length > 0){
+    alert(`Este contrato tiene ${cobrosDelContrato.length} pago(s) registrado(s). No se puede eliminar.`);
+    return;
+  }
+  if(!confirm('¿Rescindir contrato?')) return;
+  const c=getContract(id); if(c) c.estado='rescindido';
+  saveDB(DB); renderContratos();
+}
+function modalUpdate(id){
+  const c=getContract(id);
+  openModal('Aplicar actualización',`
+    <p style="margin-bottom:14px;font-size:13px;color:var(--muted)">Contrato: ${getProp(c.propId).dir}<br>Monto actual: <strong style="color:var(--text)">${fmt(c.actMonto)}</strong></p>
+    <div class="form-group"><label>Fecha de aplicación</label><input id="f-fecha-upd" type="date" value="${today()}"></div>
+    <div class="form-group mt-1"><label>Porcentaje de aumento (%)</label><input id="f-pct-upd" type="number" placeholder="Ej: 25"></div>
+    <div id="upd-preview" style="margin:14px 0;padding:14px;background:var(--tbl-header);border-left:3px solid var(--success);display:none">
+      <div class="text-muted text-sm" style="margin-bottom:4px;">Nuevo monto</div>
+      <div id="upd-nuevo" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--success)"></div>
+    </div>
+    <div class="flex gap-2 mt-1">
+      <button class="btn btn-ghost" onclick="previewUpd('${id}')">Calcular</button>
+      <button class="btn btn-pri" onclick="applyUpd('${id}')">Aplicar</button>
+      <button class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+function previewUpd(id){
+  const c=getContract(id); const pct=+byId('f-pct-upd').value;
+  if(!pct) return;
+  const nuevo=Math.round(c.actMonto*(1+pct/100));
+  byId('upd-nuevo').textContent=fmt(nuevo);
+  byId('upd-preview').style.display='block';
+}
+function applyUpd(id){
+  const c=getContract(id); const pct=+byId('f-pct-upd').value; const fecha=byId('f-fecha-upd').value;
+  if(!pct) return alert('Ingresá el porcentaje');
+  const nuevo=Math.round(c.actMonto*(1+pct/100));
+  c.actMonto=nuevo;
+  c.updates.push({fecha,pct,nuevo});
+  const p=getProp(c.propId); if(p) p.precio=nuevo;
+  saveDB(DB); closeModalDirect(); renderContratos();
+}
+
+// ── INQUILINOS & COBROS ───────────────────────────────────────────────
+function renderInquilinos(tab='inq',selInqId){
+  const el=byId('page-inquilinos');
+  const t1=tab==='inq'?' active':''; const t2=tab==='cobros'?' active':'';
+  const t1p=tab==='inq'?' active':''; const t2p=tab==='cobros'?' active':'';
+  let content='';
+  if(tab==='inq'){
+    if(selInqId){ content=renderInqDetail(selInqId); }
+    else {
+      const rows=DB.inqs.map(i=>{
+        const ct=inqContract(i.id);
+        const venc=DB.cobros.filter(cb=>cb.inqId===i.id&&cb.estado==='vencido').length>0;
+        const pend=DB.cobros.filter(cb=>cb.inqId===i.id&&cb.estado==='pendiente').length>0;
+        const est=venc?'moroso':(pend?'pendiente':'al día');
+        const estB=venc?'b-red':(pend?'b-yel':'b-grn');
+        return `<tr onclick="renderInquilinos('inq','${i.id}')" style="cursor:pointer">
+          <td><strong>${i.nom}</strong></td><td>${i.dni}</td><td>${i.tel}</td>
+          <td>${ct?getProp(ct.propId).dir||'-':'-'}</td>
+          <td><span class="badge ${estB}">${est}</span></td>
+          <td class="no-print">
+            <a class="btn btn-teal btn-sm" href="https://wa.me/54${i.tel.replace(/\D/g,'').replace(/^54/,'')}?text=${encodeURIComponent('Hola '+i.nom+', te recordamos que tenés un pago pendiente.')}" target="_blank">WhatsApp</a>
+            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editInq('${i.id}')">Editar</button>
+            <button class="btn btn-red btn-sm" onclick="event.stopPropagation();delInq('${i.id}')">✕</button>
+          </td>
+        </tr>`;
+      }).join('');
+      content=`<div class="card"><div class="tbl-wrap"><table>
+        <thead><tr><th>Nombre</th><th>DNI</th><th>Teléfono</th><th>Propiedad</th><th>Estado</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div></div>`;
+    }
+  } else {
+    const periodos=[...new Set(DB.cobros.map(cb=>cb.periodo))].sort().reverse();
+    const selPer=periodos[0]||'2024-03';
+    const cobros=DB.cobros.sort((a,b)=>b.periodo.localeCompare(a.periodo));
+    const rows=cobros.map(cb=>{
+      const inq=getInq(cb.inqId); const ct=getContract(cb.contId);
+      const overdue=isCobroOverdue(cb);
+      const overdueTag=overdue?`<span class="badge b-red" style="margin-left:4px" title="Vencido — la fecha de cobro ya pasó">⚠ VENCIDO</span>`:'';
+      const rowStyle=overdue?'background:rgba(192,57,43,0.04);':'';
+      return `<tr style="${rowStyle}">
+        <td>${inq.nom||'-'}</td><td>${cb.periodo}</td>
+        <td>${fmt(cb.monto)}</td>
+        <td>${cobroBadge(cb.estado)}${overdueTag}</td>
+        <td>${cb.fecha?fmtDate(cb.fecha):'-'}</td>
+        <td>${cb.metodo||'-'}</td>
+        <td class="no-print">
+          ${cb.estado!=='pagado'?`<button class="btn btn-grn btn-sm" onclick="registrarPago('${cb.id}')">Cobrar</button>`:''}
+          <button class="btn btn-ghost btn-sm" onclick="printRecibo('${cb.id}')">Recibo</button>
+          <button class="btn btn-red btn-sm" onclick="delCobro('${cb.id}')">✕</button>
+        </td>
+      </tr>`;
+    }).join('');
+    content=`<div class="flex gap-2 mt-1 mb-2 flex-wrap">
+      <button class="btn btn-pri" onclick="newCobro()">+ Registrar cobro</button>
+      <button class="btn btn-ghost" onclick="reporteMensual()">📊 Reporte Mensual</button>
+    </div>
+    <div class="card"><div class="tbl-wrap"><table>
+      <thead><tr><th>Inquilino</th><th>Período</th><th>Monto</th><th>Estado</th><th>Fecha</th><th>Método</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div></div>`;
+  }
+  el.innerHTML=`
+  <div class="pg-hd">
+    <h2>Inquilinos & Cobros</h2>
+    ${tab==='inq'&&!selInqId?`<button class="btn btn-pri" onclick="newInq()">+ Nuevo inquilino</button>`:''}
+  </div>
+  <div class="tabs">
+    <button class="tab${t1p}" onclick="renderInquilinos('inq')">Inquilinos</button>
+    <button class="tab${t2p}" onclick="renderInquilinos('cobros')">Cobros</button>
+  </div>
+  ${content}`;
+}
+
+function renderInqDetail(id){
+  const i=getInq(id); const ct=inqContract(id);
+  const cobros=DB.cobros.filter(cb=>cb.inqId===id).sort((a,b)=>b.periodo.localeCompare(a.periodo));
+  const cRows=cobros.map(cb=>{
+    const overdue=isCobroOverdue(cb);
+    const overdueTag=overdue?`<span class="badge b-red" style="margin-left:4px">⚠ VENCIDO</span>`:'';
+    return `<tr${overdue?' style="background:rgba(192,57,43,0.04)"':''}>
+      <td>${cb.periodo}</td><td>${fmt(cb.monto)}</td>
+      <td>${cobroBadge(cb.estado)}${overdueTag}</td>
+      <td>${cb.fecha?fmtDate(cb.fecha):'-'}</td>
+      <td>${cb.metodo||'-'}</td>
+    </tr>`;
+  }).join('');
+  return `<div class="detail-back" onclick="renderInquilinos('inq')">← Volver a Inquilinos</div>
+  <div class="flex justify-between flex-wrap gap-2" style="margin-bottom:20px">
+    <div><h2>${i.nom}</h2><div class="text-muted text-sm" style="margin-top:4px;">DNI ${i.dni} · ${i.tel}</div></div>
+    <div class="flex gap-2">
+      <a class="btn btn-teal btn-sm" href="https://wa.me/54${i.tel.replace(/\D/g,'').replace(/^54/,'')}?text=${encodeURIComponent('Hola '+i.nom+', recordatorio de pago.')}" target="_blank">WhatsApp</a>
+      <button class="btn btn-ghost btn-sm" onclick="copiarLinkPortal('${id}')">Copiar link portal</button>
+      <button class="btn btn-ghost btn-sm" onclick="abrirPortalInquilino('${id}')">Ver portal</button>
+      <button class="btn btn-ghost btn-sm" onclick="editInq('${id}')">Editar</button>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-item"><div class="lbl">Email</div><div class="val">${i.mail||'-'}</div></div>
+    <div class="info-item"><div class="lbl">Garantía</div><div class="val">${i.garantia}</div></div>
+    ${ct?`<div class="info-item"><div class="lbl">Propiedad</div><div class="val">${getProp(ct.propId).dir||'-'}</div></div>
+    <div class="info-item"><div class="lbl">Monto registrado</div><div class="val">${fmt(ct.actMonto)}</div></div>
+    <div class="info-item"><div class="lbl">Alquiler vigente hoy</div><div class="val" style="color:var(--accent);font-weight:600">${fmt(calcAlquilerActual(ct))}</div></div>`:''}
+  </div>
+  ${cobros.length?`<div class="card mt-2"><div class="section-heading-accent">Historial de pagos</div><div class="tbl-wrap"><table>
+    <thead><tr><th>Período</th><th>Monto</th><th>Estado</th><th>Fecha</th><th>Método</th></tr></thead>
+    <tbody>${cRows}</tbody>
+  </table></div></div>`:'<div class="card mt-2 text-muted text-sm" style="padding:16px;background:var(--tbl-header)">Sin historial de cobros</div>'}`;
+}
+
+function inqForm(i={}){
+  return `<div class="form-grid">
+    <div class="form-group full"><label>Nombre completo</label><input id="f-nom" value="${i.nom||''}"></div>
+    <div class="form-group"><label>DNI</label><input id="f-dni" value="${i.dni||''}"></div>
+    <div class="form-group"><label>Teléfono</label><input id="f-tel" value="${i.tel||''}"></div>
+    <div class="form-group full"><label>Email</label><input id="f-mail" type="email" value="${i.mail||''}"></div>
+    <div class="form-group full"><label>Tipo de garantía</label><select id="f-gar"><option${i.garantia==='propietario garante'?' selected':''}>propietario garante</option><option${i.garantia==='seguro de caución'?' selected':''}>seguro de caución</option><option${i.garantia==='recibo de sueldo'?' selected':''}>recibo de sueldo</option></select></div>
+  </div>
+  <div class="flex gap-2 mt-2">
+    <button class="btn btn-pri" onclick="saveInq('${i.id||''}')">Guardar</button>
+    <button class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+  </div>`;
+}
+function newInq(){ openModal('Nuevo inquilino',inqForm()); }
+function editInq(id){ openModal('Editar inquilino',inqForm(getInq(id))); }
+function saveInq(id){
+  const d={nom:byId('f-nom').value,dni:byId('f-dni').value,tel:byId('f-tel').value,mail:byId('f-mail').value,garantia:byId('f-gar').value};
+  if(!d.nom) return alert('Ingresá el nombre');
+  if(id){ Object.assign(getInq(id),d); }
+  else { DB.inqs.push({...d,id:'i'+uid()}); }
+  saveDB(DB); closeModalDirect(); renderInquilinos('inq');
+}
+function delInq(id){
+  const ct=inqContract(id);
+  if(ct){ const fin=contractEnd(ct); alert(`Este inquilino tiene contrato activo hasta ${fmtDate(fin)}. Rescindí el contrato primero.`); return; }
+  if(!confirm('¿Eliminar inquilino?')) return;
+  DB.inqs=DB.inqs.filter(i=>i.id!==id); saveDB(DB); renderInquilinos('inq');
+}
+
+function cobroForm(cb={}){
+  const inqOpts=DB.inqs.map(i=>`<option value="${i.id}"${cb.inqId===i.id?' selected':''}>${i.nom}</option>`).join('');
+  const contOpts=DB.contracts.filter(c=>c.estado==='activo').map(c=>`<option value="${c.id}"${cb.contId===c.id?' selected':''}>${getProp(c.propId).dir}</option>`).join('');
+  return `<div class="form-grid">
+    <div class="form-group full"><label>Inquilino</label><select id="f-inqId">${inqOpts}</select></div>
+    <div class="form-group full"><label>Contrato / Propiedad</label><select id="f-contId">${contOpts}</select></div>
+    <div class="form-group"><label>Período (YYYY-MM)</label><input id="f-periodo" value="${cb.periodo||'2024-03'}" placeholder="2024-03"></div>
+    <div class="form-group"><label>Monto (ARS)</label><input id="f-monto" type="number" value="${cb.monto||''}"></div>
+    <div class="form-group"><label>Fecha de pago</label><input id="f-fecha" type="date" value="${cb.fecha||today()}"></div>
+    <div class="form-group"><label>Método</label><select id="f-metodo"><option${cb.metodo==='transferencia'?' selected':''}>transferencia</option><option${cb.metodo==='efectivo'?' selected':''}>efectivo</option><option${cb.metodo==='cheque'?' selected':''}>cheque</option></select></div>
+    <div class="form-group"><label>Estado</label><select id="f-estado"><option${cb.estado==='pagado'?' selected':''}>pagado</option><option${cb.estado==='pendiente'?' selected':''}>pendiente</option><option${cb.estado==='parcial'?' selected':''}>parcial</option><option${cb.estado==='vencido'?' selected':''}>vencido</option></select></div>
+  </div>
+  <div class="flex gap-2 mt-2">
+    <button class="btn btn-pri" onclick="saveCobro('${cb.id||''}')">Guardar</button>
+    <button class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+  </div>`;
+}
+function newCobro(){ openModal('Registrar cobro',cobroForm()); }
+function saveCobro(id){
+  const d={inqId:byId('f-inqId').value,contId:byId('f-contId').value,periodo:byId('f-periodo').value,monto:+byId('f-monto').value,fecha:byId('f-fecha').value,metodo:byId('f-metodo').value,estado:byId('f-estado').value};
+  if(!d.monto) return alert('Ingresá el monto');
+  if(id){ const cb=DB.cobros.find(c=>c.id===id); Object.assign(cb,d); }
+  else { DB.cobros.push({...d,id:'cb'+uid()}); }
+  saveDB(DB); closeModalDirect(); renderInquilinos('cobros');
+}
+function delCobro(id){
+  const cb=DB.cobros.find(c=>c.id===id);
+  if(cb && cb.estado==='pagado'){
+    if(!confirm(`Este cobro ya fue marcado como pagado (${fmt(cb.monto)}). ¿Eliminar igual?`)) return;
+  } else {
+    if(!confirm('¿Eliminar cobro?')) return;
+  }
+  DB.cobros=DB.cobros.filter(c=>c.id!==id); saveDB(DB); renderInquilinos('cobros');
+}
+function registrarPago(id){
+  const cb=DB.cobros.find(c=>c.id===id); if(!cb) return;
+  openModal('Registrar pago',`
+    <p style="margin-bottom:14px;font-size:13px;color:var(--muted)">Inquilino: <strong style="color:var(--text)">${getInq(cb.inqId).nom}</strong><br>Monto: <strong style="color:var(--text)">${fmt(cb.monto)}</strong></p>
+    <div class="form-grid">
+      <div class="form-group"><label>Fecha</label><input id="f-fecha" type="date" value="${today()}"></div>
+      <div class="form-group"><label>Método</label><select id="f-metodo"><option>transferencia</option><option>efectivo</option><option>cheque</option></select></div>
+      <div class="form-group"><label>Monto cobrado (ARS)</label><input id="f-monto" type="number" value="${cb.monto}"></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button class="btn btn-pri" onclick="confirmPago('${id}')">Confirmar pago</button>
+      <button class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+function confirmPago(id){
+  const cb=DB.cobros.find(c=>c.id===id);
+  const montoCob=+byId('f-monto').value;
+  cb.fecha=byId('f-fecha').value; cb.metodo=byId('f-metodo').value;
+  cb.estado=montoCob<cb.monto?'parcial':'pagado';
+  cb.monto=montoCob;
+  saveDB(DB); closeModalDirect(); renderInquilinos('cobros');
+}
+function printRecibo(id){
+  const cb=DB.cobros.find(c=>c.id===id); if(!cb) return;
+  const inq=getInq(cb.inqId); const ct=getContract(cb.contId);
+  const prop=ct?getProp(ct.propId):{};
+  const z=byId('print-zone');
+  z.innerHTML=`<div style="padding:40px;font-family:'Source Sans 3',sans-serif;color:#000;background:#fff">
+    <div style="display:flex;justify-content:space-between;margin-bottom:24px">
+      <div><h1 style="font-family:'Playfair Display',serif;font-size:24px;margin:0;font-weight:400">Aura Prop</h1><p style="color:#666;margin:0;font-size:12px;letter-spacing:0.04em;text-transform:uppercase">Administración de Alquileres</p></div>
+      <div style="text-align:right"><h2 style="margin:0;font-family:'Playfair Display',serif;font-weight:400">RECIBO DE PAGO</h2><p style="color:#666">${fmtDate(cb.fecha||today())}</p></div>
+    </div>
+    <hr style="margin:0 0 20px;border-color:#E2DDD6">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div><strong>Inquilino:</strong><br>${inq.nom}<br>DNI: ${inq.dni}</div>
+      <div><strong>Propiedad:</strong><br>${prop.dir||'-'}</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:20px">
+      <tr style="background:#F0EDE6"><th style="text-align:left;padding:8px;border:1px solid #E2DDD6">Concepto</th><th style="text-align:right;padding:8px;border:1px solid #E2DDD6">Monto</th></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Alquiler período ${cb.periodo}</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">${fmt(cb.monto)}</td></tr>
+    </table>
+    <div style="text-align:right;font-size:18px;font-weight:600">Total: ${fmt(cb.monto)}</div>
+    <div style="margin-top:8px;color:#666;font-size:13px">Método de pago: ${cb.metodo||'-'}</div>
+    <hr style="margin:30px 0 20px;border-color:#E2DDD6">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:center">
+      <div><div style="border-top:1px solid #000;padding-top:8px;margin-top:40px">Firma inquilino</div></div>
+      <div><div style="border-top:1px solid #000;padding-top:8px;margin-top:40px">Firma administración</div></div>
+    </div>
+  </div>`;
+  window.print();
+}
+
+// ── PROPIETARIOS & LIQUIDACIÓN ────────────────────────────────────────
+function renderPropietarios(tab='owners',selId){
+  const el=byId('page-propietarios');
+  const t1=tab==='owners'?' active':''; const t2=tab==='liqs'?' active':'';
+  let content='';
+  if(tab==='owners'){
+    if(selId){ content=renderOwnerDetail(selId); }
+    else {
+      const rows=DB.owners.map(o=>{
+        const props=DB.props.filter(p=>p.propId===o.id);
+        const alq=props.filter(p=>p.estado==='Alquilada').length;
+        return `<tr onclick="renderPropietarios('owners','${o.id}')" style="cursor:pointer">
+          <td><strong>${o.nom}</strong></td><td>${o.tel}</td><td>${o.mail}</td>
+          <td>${props.length} (${alq} alquiladas)</td>
+          <td>${o.com}%</td>
+          <td class="no-print">
+            <button class="btn btn-teal btn-sm" onclick="event.stopPropagation();modalLiquidacion('${o.id}')">Liquidar</button>
+            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editOwner('${o.id}')">Editar</button>
+            <button class="btn btn-red btn-sm" onclick="event.stopPropagation();delOwner('${o.id}')">✕</button>
+          </td>
+        </tr>`;
+      }).join('');
+      content=`<div class="card"><div class="tbl-wrap"><table>
+        <thead><tr><th>Nombre</th><th>Teléfono</th><th>Email</th><th>Propiedades</th><th>Comisión</th><th></th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div></div>`;
+    }
+  } else {
+    const rows=DB.liqds.map(l=>{
+      const o=getOwner(l.ownId);
+      return `<tr>
+        <td>${o.nom}</td><td>${l.periodo}</td><td>${fmt(l.bruto)}</td>
+        <td>${fmt(l.com)}</td><td>${fmt(l.exp)}</td><td>${fmt(l.neto)}</td>
+        <td><button class="btn btn-ghost btn-sm" onclick="printLiq('${l.id}')">Imprimir</button></td>
+      </tr>`;
+    }).join('');
+    content=`<div class="card"><div class="tbl-wrap"><table>
+      <thead><tr><th>Propietario</th><th>Período</th><th>Bruto</th><th>Comisión</th><th>Expensas/Rep</th><th>Neto</th><th></th></tr></thead>
+      <tbody>${rows||'<tr><td colspan="7" class="text-muted" style="text-align:center;padding:20px">Sin liquidaciones</td></tr>'}</tbody>
+    </table></div></div>`;
+  }
+  el.innerHTML=`
+  <div class="pg-hd">
+    <h2>Propietarios & Liquidaciones</h2>
+    ${tab==='owners'&&!selId?`<button class="btn btn-pri" onclick="newOwner()">+ Nuevo propietario</button>`:''}
+  </div>
+  <div class="tabs">
+    <button class="tab${t1}" onclick="renderPropietarios('owners')">Propietarios</button>
+    <button class="tab${t2}" onclick="renderPropietarios('liqs')">Liquidaciones</button>
+  </div>
+  ${content}`;
+}
+
+function renderOwnerDetail(id){
+  const o=getOwner(id);
+  const props=DB.props.filter(p=>p.propId===id);
+  const propRows=props.map(p=>{
+    const ct=propContracts(p.id)[0];
+    const inq=ct?getInq(ct.inqId):null;
+    return `<tr><td>${p.dir}</td><td>${p.tipo}</td><td>${stateBadge(p.estado)}</td><td>${ct?fmt(ct.actMonto):'-'}</td><td>${inq?inq.nom:'-'}</td></tr>`;
+  }).join('');
+  return `<div class="detail-back" onclick="renderPropietarios('owners')">← Volver a Propietarios</div>
+  <div class="flex justify-between flex-wrap gap-2" style="margin-bottom:20px">
+    <div><h2>${o.nom}</h2><div class="text-muted text-sm" style="margin-top:4px;">${o.tel} · ${o.mail}</div></div>
+    <div class="flex gap-2">
+      <button class="btn btn-teal" onclick="modalLiquidacion('${id}')">Generar liquidación</button>
+      <button class="btn btn-ghost btn-sm" onclick="editOwner('${id}')">Editar</button>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-item"><div class="lbl">CBU</div><div class="val" style="font-size:12px">${o.cbu||'-'}</div></div>
+    <div class="info-item"><div class="lbl">Comisión</div><div class="val">${o.com}%</div></div>
+  </div>
+  <div class="card mt-2"><div class="section-heading-accent">Propiedades</div><div class="tbl-wrap"><table>
+    <thead><tr><th>Dirección</th><th>Tipo</th><th>Estado</th><th>Alquiler</th><th>Inquilino</th></tr></thead>
+    <tbody>${propRows||'<tr><td colspan="5" class="text-muted" style="text-align:center">Sin propiedades</td></tr>'}</tbody>
+  </table></div></div>`;
+}
+
+function ownerForm(o={}){
+  return `<div class="form-grid">
+    <div class="form-group full"><label>Nombre completo</label><input id="f-nom" value="${o.nom||''}"></div>
+    <div class="form-group"><label>Teléfono</label><input id="f-tel" value="${o.tel||''}"></div>
+    <div class="form-group"><label>Email</label><input id="f-mail" value="${o.mail||''}"></div>
+    <div class="form-group full"><label>CBU</label><input id="f-cbu" value="${o.cbu||''}"></div>
+    <div class="form-group"><label>Comisión (%)</label><input id="f-com" type="number" value="${o.com||8}" min="0" max="30"></div>
+  </div>
+  <div class="flex gap-2 mt-2">
+    <button class="btn btn-pri" onclick="saveOwner('${o.id||''}')">Guardar</button>
+    <button class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+  </div>`;
+}
+function newOwner(){ openModal('Nuevo propietario',ownerForm()); }
+function editOwner(id){ openModal('Editar propietario',ownerForm(getOwner(id))); }
+function saveOwner(id){
+  const d={nom:byId('f-nom').value,tel:byId('f-tel').value,mail:byId('f-mail').value,cbu:byId('f-cbu').value,com:+byId('f-com').value||8};
+  if(!d.nom) return alert('Ingresá el nombre');
+  if(id){ Object.assign(getOwner(id),d); }
+  else { DB.owners.push({...d,id:'o'+uid()}); }
+  saveDB(DB); closeModalDirect(); renderPropietarios('owners');
+}
+function delOwner(id){
+  if(!confirm('¿Eliminar propietario?')) return;
+  DB.owners=DB.owners.filter(o=>o.id!==id); saveDB(DB); renderPropietarios('owners');
+}
+
+function modalLiquidacion(ownId){
+  const o=getOwner(ownId);
+  const props=DB.props.filter(p=>p.propId===ownId&&p.estado==='Alquilada');
+  if(!props.length) return alert('Este propietario no tiene propiedades alquiladas');
+  const periodo='2024-03';
+  let bruto=0, expTotal=0;
+  const lineas=props.map(p=>{
+    const ct=propContracts(p.id)[0];
+    const cobrado=DB.cobros.filter(cb=>ct&&cb.contId===ct.id&&cb.periodo===periodo&&cb.estado==='pagado').reduce((s,cb)=>s+cb.monto,0);
+    bruto+=cobrado; expTotal+=p.exp||0;
+    return `<tr><td>${p.dir}</td><td>${ct?fmt(ct.actMonto):'-'}</td><td>${fmt(cobrado)}</td><td>${fmt(p.exp)}</td></tr>`;
+  }).join('');
+  const com=Math.round(bruto*(o.com/100));
+  const neto=bruto-com-expTotal;
+  openModal(`Liquidación — ${o.nom}`,`
+    <div style="margin-bottom:14px;font-size:13px;color:var(--muted)">Período: <strong style="color:var(--text)">${periodo}</strong></div>
+    <div class="tbl-wrap" style="margin-bottom:16px"><table>
+      <thead><tr><th>Propiedad</th><th>Alquiler</th><th>Cobrado</th><th>Expensas</th></tr></thead>
+      <tbody>${lineas}</tbody>
+    </table></div>
+    <div style="background:var(--tbl-header);border:1px solid var(--brd);border-radius:var(--rad);padding:14px">
+      <div class="flex justify-between" style="padding:6px 0;border-bottom:1px solid var(--brd)"><span style="color:var(--muted);font-size:13px">Cobrado bruto</span><strong>${fmt(bruto)}</strong></div>
+      <div class="flex justify-between" style="padding:6px 0;border-bottom:1px solid var(--brd)"><span style="color:var(--muted);font-size:13px">Comisión (${o.com}%)</span><span style="color:var(--danger)">− ${fmt(com)}</span></div>
+      <div class="flex justify-between" style="padding:6px 0;border-bottom:1px solid var(--brd)"><span style="color:var(--muted);font-size:13px">Expensas</span><span style="color:var(--danger)">− ${fmt(expTotal)}</span></div>
+      <div class="flex justify-between" style="padding:10px 0"><strong style="font-family:'Playfair Display',serif">Neto a transferir</strong><strong style="font-family:'Playfair Display',serif;font-size:18px;color:var(--success)">${fmt(neto)}</strong></div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin:10px 0">CBU: ${o.cbu}</div>
+    <div class="flex gap-2 mt-1">
+      <button class="btn btn-pri" onclick="saveLiq('${ownId}','${periodo}',${bruto},${com},${expTotal},${neto})">Guardar liquidación</button>
+      <button class="btn btn-ghost btn-sm" onclick="printLiqInline('${ownId}','${periodo}',${bruto},${com},${expTotal},${neto})">Imprimir</button>
+      <button class="btn btn-ghost" onclick="closeModalDirect()">Cerrar</button>
+    </div>`);
+}
+function saveLiq(ownId,periodo,bruto,com,exp,neto){
+  DB.liqds.push({id:'l'+uid(),ownId,periodo,bruto,com,exp,neto,fecha:today()});
+  saveDB(DB); closeModalDirect(); renderPropietarios('liqs');
+}
+function printLiq(id){
+  const l=DB.liqds.find(x=>x.id===id); if(!l) return;
+  printLiqInline(l.ownId,l.periodo,l.bruto,l.com,l.exp,l.neto);
+}
+function printLiqInline(ownId,periodo,bruto,com,exp,neto){
+  const o=getOwner(ownId);
+  const z=byId('print-zone');
+  z.innerHTML=`<div style="padding:40px;font-family:'Source Sans 3',sans-serif;color:#000">
+    <div style="display:flex;justify-content:space-between;margin-bottom:24px">
+      <div><h1 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400">Aura Prop</h1><p style="color:#666;font-size:12px;text-transform:uppercase;letter-spacing:0.04em">Liquidación mensual</p></div>
+      <div style="text-align:right"><h2 style="font-family:'Playfair Display',serif;font-weight:400">LIQUIDACIÓN</h2><p>${periodo} · ${fmtDate(today())}</p></div>
+    </div><hr style="margin:0 0 20px;border-color:#E2DDD6">
+    <div><strong>Propietario:</strong> ${o.nom}<br><strong>CBU:</strong> ${o.cbu}</div>
+    <table style="width:100%;border-collapse:collapse;margin:20px 0">
+      <tr style="background:#F0EDE6"><th style="text-align:left;padding:8px;border:1px solid #E2DDD6">Concepto</th><th style="text-align:right;padding:8px;border:1px solid #E2DDD6">Monto</th></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Alquileres cobrados</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">${fmt(bruto)}</td></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Comisión administración (${o.com}%)</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">− ${fmt(com)}</td></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Expensas / otros</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">− ${fmt(exp)}</td></tr>
+      <tr style="font-weight:bold"><td style="padding:8px;border:1px solid #E2DDD6">NETO A TRANSFERIR</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">${fmt(neto)}</td></tr>
+    </table>
+    <hr style="margin:20px 0;border-color:#E2DDD6">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:center">
+      <div><div style="border-top:1px solid #000;padding-top:8px;margin-top:40px">Firma propietario</div></div>
+      <div><div style="border-top:1px solid #000;padding-top:8px;margin-top:40px">Firma administración</div></div>
+    </div>
+  </div>`;
+  window.print();
+}
+
+// ── HELPERS COBROS ────────────────────────────────────────────────────
+// Determina si un cobro pendiente está vencido según frecuencia del contrato
+// La fecha de vencimiento se calcula como: mismo día del inicio del contrato en el mes del período
+function isCobroOverdue(cb){
+  if(cb.estado==='pagado') return false;
+  const ct=getContract(cb.contId);
+  if(!ct||!cb.periodo) return false;
+  // Calcular fecha de vencimiento: día del inicio del contrato en el mes del período
+  const diaInicio=new Date(ct.inicio+'T00:00:00').getDate();
+  const [y,m]=cb.periodo.split('-');
+  const maxDay=new Date(+y,+m,0).getDate(); // último día del mes
+  const dia=Math.min(diaInicio,maxDay);
+  const fechaVenc=`${y}-${m}-${String(dia).padStart(2,'0')}`;
+  return today()>fechaVenc;
+}
+
+// Calcula el alquiler actual basado en monto inicial + actualizaciones aplicadas hasta hoy
+function calcAlquilerActual(c){
+  if(!c.updates||!c.updates.length) return c.monto;
+  const todayStr=today();
+  // Aplicar actualizaciones cuya fecha ya pasó, en orden cronológico
+  const aplicadas=c.updates.filter(u=>u.fecha<=todayStr).sort((a,b)=>a.fecha.localeCompare(b.fecha));
+  if(!aplicadas.length) return c.monto;
+  return aplicadas[aplicadas.length-1].nuevo;
+}
+
+// ── REPORTES ──────────────────────────────────────────────────────────
+let reportesMes = today().slice(0,7);
+
+function renderReportes(){
+  const el=byId('page-reportes');
+  const mes=reportesMes;
+  const mesLabel=new Date(mes+'-01').toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+  const cobsMes=DB.cobros.filter(c=>c.periodo===mes);
+  const ingresado=cobsMes.filter(c=>c.estado==='pagado').reduce((s,c)=>s+c.monto,0);
+  const pendiente=cobsMes.filter(c=>c.estado!=='pagado').reduce((s,c)=>s+c.monto,0);
+  let comTotal=0;
+  DB.owners.forEach(o=>{
+    const props=DB.props.filter(p=>p.propId===o.id&&p.estado==='Alquilada');
+    props.forEach(p=>{
+      const ct=propContracts(p.id)[0];
+      const cob=cobsMes.filter(cb=>ct&&cb.contId===ct.id&&cb.estado==='pagado').reduce((s,cb)=>s+cb.monto,0);
+      comTotal+=Math.round(cob*(o.com/100));
+    });
+  });
+  const ctNuevos=DB.contracts.filter(c=>c.inicio&&c.inicio.startsWith(mes.slice(0,4))).length;
+  const ctVenc=DB.contracts.filter(c=>c.estado==='activo'&&daysToEnd(c)<0).length;
+  const breakdown=DB.contracts.filter(c=>c.estado==='activo').map(c=>{
+    const p=getProp(c.propId); const inq=getInq(c.inqId);
+    const cob=cobsMes.filter(cb=>cb.contId===c.id&&cb.estado==='pagado').reduce((s,cb)=>s+cb.monto,0);
+    const pend=cobsMes.filter(cb=>cb.contId===c.id&&cb.estado!=='pagado').reduce((s,cb)=>s+cb.monto,0);
+    return `<tr><td>${p.dir||'-'}</td><td>${inq.nom||'-'}</td><td class="num">${fmt(c.actMonto)}</td><td class="num" style="color:var(--success)">${cob?fmt(cob):'—'}</td><td class="num" style="color:var(--warning)">${pend?fmt(pend):'—'}</td></tr>`;
+  }).join('');
+
+  const todosCobros=[...DB.cobros].sort((a,b)=>{
+    const fa=a.fecha||a.periodo+'-01'; const fb=b.fecha||b.periodo+'-01';
+    return fb.localeCompare(fa);
+  });
+  const libroRows=todosCobros.map(cb=>{
+    const inq=getInq(cb.inqId); const ct=getContract(cb.contId); const prop=ct?getProp(ct.propId):{};
+    const isOverdue=cb.estado==='pendiente'&&isCobroOverdue(cb);
+    const overdueTag=isOverdue?`<span class="badge-v2 bv-danger" style="margin-left:4px;font-size:9px">VENCIDO</span>`:'';
+    return `<tr><td>${cb.fecha?fmtDate(cb.fecha):'-'}</td><td><strong>${inq.nom||'-'}</strong></td><td class="text-muted text-sm">${prop.dir||'-'}</td><td class="num">${fmt(cb.monto)}</td><td>${cb.metodo||'-'}</td><td>${cb.periodo||'-'}</td><td>${cobroBadge(cb.estado)}${overdueTag}</td></tr>`;
+  }).join('');
+
+  // Chart data
+  const mesesAnio=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const ingresosPorMes=[850000,920000,1170000,0,0,0,0,0,0,925000,1050000,1180000];
+  const tiposCount={};
+  DB.props.forEach(p=>{tiposCount[p.tipo]=(tiposCount[p.tipo]||0)+1;});
+  const top5=DB.contracts.filter(c=>c.estado==='activo').map(c=>({dir:getProp(c.propId).dir||'-',monto:c.actMonto})).sort((a,b)=>b.monto-a.monto).slice(0,5);
+
+  el.innerHTML=`
+  <div class="pg-hd">
+    <h2>Reportes & Caja</h2>
+    <div class="flex gap-2 items-center flex-wrap">
+      <input type="month" value="${mes}" onchange="reportesMes=this.value;renderReportes()" style="padding:6px 10px;border:1px solid var(--brd);border-radius:var(--rad);font-size:12px;background:var(--surf);color:var(--text)">
+      <span class="text-muted text-sm" style="font-size:13px;">${mesLabel}</span>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="reporteMensual()">Exportar Excel</button>
+    </div>
+  </div>
+  <div class="kpi-grid" style="margin-bottom:24px">
+    <div class="kpi"><div class="kpi-label">Ingresos cobrados</div><div class="kpi-val" style="color:var(--success)">${fmt(ingresado)}</div><div class="kpi-sub">alquileres pagados</div></div>
+    <div class="kpi"><div class="kpi-label">Comisiones generadas</div><div class="kpi-val" style="color:var(--primary)">${fmt(comTotal)}</div><div class="kpi-sub">ingresos inmobiliaria</div></div>
+    <div class="kpi"><div class="kpi-label">Cobros pendientes</div><div class="kpi-val" style="color:var(--warning)">${fmt(pendiente)}</div><div class="kpi-sub">por cobrar</div></div>
+    <div class="kpi"><div class="kpi-label">Contratos ${mes.slice(0,4)}</div><div class="kpi-val" style="color:var(--accent)">${ctNuevos}</div><div class="kpi-sub">${ctVenc} vencidos</div></div>
+  </div>
+
+  <!-- Charts row 1 -->
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="card chart-card">
+      <div class="section-heading-accent">Ingresos por mes — ${mes.slice(0,4)}</div>
+      <canvas id="chart-ingresos-mes"></canvas>
+    </div>
+    <div class="card chart-card">
+      <div class="section-heading-accent">Distribución por tipo</div>
+      <canvas id="chart-tipos-prop"></canvas>
+    </div>
+  </div>
+  <!-- Charts row 2 -->
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="card chart-card">
+      <div class="section-heading-accent">Top 5 propiedades más rentables</div>
+      <canvas id="chart-top5"></canvas>
+    </div>
+    <div class="card">
+      <div class="section-heading-accent">Estado cobros — ${mesLabel}</div>
+      ${['pagado','pendiente','vencido','parcial'].map(e=>{
+        const tot=DB.cobros.filter(c=>c.estado===e).reduce((s,c)=>s+c.monto,0);
+        const cnt=DB.cobros.filter(c=>c.estado===e).length;
+        return cnt?`<div class="flex justify-between items-center" style="padding:8px 0;border-bottom:1px solid var(--brd)">${cobroBadge(e)}<strong class="num" style="margin-left:auto">${fmt(tot)}</strong></div>`:''
+      }).join('')}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-heading-accent">Detalle por propiedad — ${mesLabel}</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Propiedad</th><th>Inquilino</th><th>Alquiler actual</th><th>Cobrado</th><th>Pendiente</th></tr></thead>
+      <tbody>${breakdown||'<tr><td colspan="5" class="text-muted" style="text-align:center;padding:20px">Sin contratos activos</td></tr>'}</tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <div class="section-heading-accent">Libro Mayor — Todos los cobros</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Fecha pago</th><th>Inquilino</th><th>Propiedad</th><th>Monto</th><th>Método</th><th>Período</th><th>Estado</th></tr></thead>
+      <tbody>${libroRows||'<tr><td colspan="7" class="text-muted" style="text-align:center;padding:20px">Sin cobros registrados</td></tr>'}</tbody>
+    </table></div>
+  </div>`;
+
+  setTimeout(()=>{
+    if(typeof Chart==='undefined') return;
+    const c1=byId('chart-ingresos-mes');
+    if(c1) new Chart(c1,{type:'bar',data:{labels:mesesAnio,datasets:[{data:ingresosPorMes,backgroundColor:ingresosPorMes.map(v=>v>0?'rgba(139,105,20,0.75)':'rgba(139,105,20,0.15)'),borderColor:'#8B6914',borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y>0?' '+fmt(ctx.parsed.y):' Sin datos'}}},scales:{y:{ticks:{callback:v=>v>0?'$'+(v/1e6).toFixed(1)+'M':''},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}});
+
+    const c2=byId('chart-tipos-prop');
+    if(c2) new Chart(c2,{type:'doughnut',data:{labels:Object.keys(tiposCount),datasets:[{data:Object.values(tiposCount),backgroundColor:['#1A2744','#8B6914','#1E7E4B','#D97706','#6B7280'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.3,cutout:'55%',plugins:{legend:{position:'bottom',labels:{padding:8,font:{size:10},boxWidth:8}}}}});
+
+    const c3=byId('chart-top5');
+    if(c3) new Chart(c3,{type:'bar',data:{labels:top5.map(r=>r.dir.length>28?r.dir.slice(0,25)+'…':r.dir),datasets:[{data:top5.map(r=>r.monto),backgroundColor:'rgba(30,126,75,0.75)',borderColor:'#1E7E4B',borderWidth:1,borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.parsed.x)}}},scales:{x:{ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(0,0,0,0.04)'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+  },60);
+}
+
+// ── NOTIFICACIONES ────────────────────────────────────────────────────
+function getNotificaciones(){
+  const notifs=[];
+  // Contratos próximos a vencer (≤30 días) o vencidos
+  DB.contracts.filter(c=>c.estado==='activo').forEach(c=>{
+    const days=daysToEnd(c);
+    const propName=getProp(c.propId).dir||c.propId;
+    if(days<0){
+      notifs.push({msg:`🔴 Contrato ${propName} VENCIDO`,tipo:'vencido'});
+    } else if(days<=30){
+      notifs.push({msg:`📋 Contrato ${propName} vence en ${days} días`,tipo:'proximo'});
+    }
+  });
+  // Cobros pendientes por contrato activo
+  DB.contracts.filter(c=>c.estado==='activo').forEach(c=>{
+    const propName=getProp(c.propId).dir||c.propId;
+    const pendCount=(c.cobros||[]).filter(cb=>cb.estado==='pendiente').length;
+    if(pendCount>0){
+      notifs.push({msg:`💰 ${propName}: ${pendCount} cobros pendientes`,tipo:'cobro'});
+    }
+  });
+  return notifs;
+}
+
+function renderNotifBadge(){
+  const notifs=getNotificaciones();
+  // Update badge on "contratos" nav link
+  document.querySelectorAll('[data-page="contratos"]').forEach(a=>{
+    const old=a.querySelector('.notif-badge');
+    if(old) old.remove();
+    if(notifs.length>0){
+      const span=document.createElement('span');
+      span.className='notif-badge';
+      span.textContent=notifs.length;
+      a.appendChild(span);
+    }
+  });
+  // Render alert panel in dashboard
+  const panel=document.getElementById('alertas-panel');
+  if(!panel) return;
+  if(!notifs.length){ panel.innerHTML=''; return; }
+  const typeClass={vencido:'alert-red',proximo:'alert-yel',cobro:'alert-teal'};
+  panel.innerHTML=notifs.map(n=>`<div class="alert ${typeClass[n.tipo]||'alert-yel'}">${n.msg}</div>`).join('');
+}
+
+// ── REPORTE MENSUAL (EXCEL) ───────────────────────────────────────────
+function reporteMensual(){
+  const mes=prompt('Mes a exportar (YYYY-MM):',today().slice(0,7));
+  if(!mes) return;
+  const rows=[];
+  DB.contracts.forEach(c=>{
+    const propName=getProp(c.propId).dir||c.propId;
+    const inqName=getInq(c.inqId).nom||c.inqId;
+    (c.cobros||[]).forEach(cb=>{
+      if(cb.mes===mes || (cb.fecha&&cb.fecha.startsWith(mes))){
+        rows.push({Propiedad:propName,Inquilino:inqName,'Mes Cobro':cb.mes||mes,Monto:cb.monto,Estado:cb.estado,Fecha:cb.fecha||''});
+      }
+    });
+  });
+  // Also check DB.cobros (flat array)
+  DB.cobros.forEach(cb=>{
+    if(cb.periodo===mes || (cb.fecha&&cb.fecha.startsWith(mes))){
+      const ct=getContract(cb.contId);
+      const propName=ct?getProp(ct.propId).dir||ct.propId:'-';
+      const inqName=getInq(cb.inqId).nom||cb.inqId;
+      // avoid duplicates from contract.cobros
+      const already=rows.find(r=>r.Propiedad===propName&&r['Mes Cobro']===(cb.periodo||mes)&&r.Monto===cb.monto);
+      if(!already){
+        rows.push({Propiedad:propName,Inquilino:inqName,'Mes Cobro':cb.periodo||mes,Monto:cb.monto,Estado:cb.estado,Fecha:cb.fecha||''});
+      }
+    }
+  });
+
+  const totalCobrado=rows.filter(r=>r.Estado==='pagado').reduce((s,r)=>s+r.Monto,0);
+  const totalPendiente=rows.filter(r=>r.Estado!=='pagado').reduce((s,r)=>s+r.Monto,0);
+  const ctActivos=DB.contracts.filter(c=>c.estado==='activo').length;
+  const nProps=DB.props.length;
+
+  const wb=XLSX.utils.book_new();
+  const ws1=XLSX.utils.json_to_sheet(rows.length?rows:[{Propiedad:'Sin datos',Inquilino:'',  'Mes Cobro':mes,Monto:0,Estado:'',Fecha:''}]);
+  XLSX.utils.book_append_sheet(wb,ws1,'Cobros del Mes');
+
+  const resumen=[
+    {'Indicador':'Total cobrado (pagados)','Valor':totalCobrado},
+    {'Indicador':'Total pendiente','Valor':totalPendiente},
+    {'Indicador':'N° contratos activos','Valor':ctActivos},
+    {'Indicador':'N° propiedades','Valor':nProps}
+  ];
+  const ws2=XLSX.utils.json_to_sheet(resumen);
+  XLSX.utils.book_append_sheet(wb,ws2,'Resumen');
+
+  XLSX.writeFile(wb,`reporte-inmobiliaria-${mes}.xlsx`);
+}
+
+// ── IMPRIMIR CONTRATO PDF ─────────────────────────────────────────────
+function imprimirContrato(id){
+  const c=getContract(id); if(!c) return;
+  const p=getProp(c.propId); const inq=getInq(c.inqId); const ow=getOwner(p.propId);
+  const z=byId('print-zone');
+  z.innerHTML=`<div style="padding:48px 56px;font-family:'Source Sans 3',sans-serif;color:#000;background:#fff;max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:36px;border-bottom:2px solid #1A2744;padding-bottom:20px;">
+      <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8B6914;margin-bottom:6px;">Administración de Propiedades</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:#1A2744;margin:0 0 4px;">CONTRATO DE LOCACIÓN</h1>
+      <div style="font-size:12px;color:#64748B;">Generado el ${fmtDate(today())}</div>
+    </div>
+    <div style="margin-bottom:24px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:14px;color:#1A2744;border-bottom:1px solid #E2DDD6;padding-bottom:6px;margin-bottom:12px;">INMUEBLE</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+        <div><strong>Dirección:</strong><br>${p.dir}</div>
+        <div><strong>Tipo:</strong> ${p.tipo} · ${p.m2} m²</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:14px;color:#1A2744;border-bottom:1px solid #E2DDD6;padding-bottom:6px;margin-bottom:12px;">PROPIETARIO / LOCADOR</h3>
+        <div style="font-size:13px;line-height:1.8;">
+          <div><strong>Nombre:</strong> ${ow.nom||'-'}</div>
+          <div><strong>Teléfono:</strong> ${ow.tel||'-'}</div>
+          <div><strong>Email:</strong> ${ow.mail||'-'}</div>
+          <div><strong>CBU:</strong> ${ow.cbu||'-'}</div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:14px;color:#1A2744;border-bottom:1px solid #E2DDD6;padding-bottom:6px;margin-bottom:12px;">INQUILINO / LOCATARIO</h3>
+        <div style="font-size:13px;line-height:1.8;">
+          <div><strong>Nombre:</strong> ${inq.nom||'-'}</div>
+          <div><strong>DNI:</strong> ${inq.dni||'-'}</div>
+          <div><strong>Teléfono:</strong> ${inq.tel||'-'}</div>
+          <div><strong>Email:</strong> ${inq.mail||'-'}</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:24px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:14px;color:#1A2744;border-bottom:1px solid #E2DDD6;padding-bottom:6px;margin-bottom:12px;">CONDICIONES DE LA LOCACIÓN</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="background:#F0EDE6;"><th style="text-align:left;padding:8px 12px;border:1px solid #E2DDD6;">Concepto</th><th style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">Detalle</th></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Monto mensual inicial</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${fmt(c.monto)}</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Monto mensual actual</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${fmt(c.actMonto)}</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Depósito de garantía</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${fmt(c.dep)}</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Fecha de inicio</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${fmtDate(c.inicio)}</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Fecha de vencimiento</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${fmtDate(contractEnd(c))}</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Duración</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${c.dur} meses</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Tipo de actualización</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${c.tipo} — ${c.freq}</td></tr>
+        <tr><td style="padding:8px 12px;border:1px solid #E2DDD6;">Garantía</td><td style="text-align:right;padding:8px 12px;border:1px solid #E2DDD6;">${c.gar}</td></tr>
+      </table>
+    </div>
+    <div style="margin-bottom:40px;font-size:12px;color:#64748B;line-height:1.6;border:1px solid #E2DDD6;padding:14px;background:#FDFCFA;">
+      <strong style="color:#1A2744;">Condiciones generales:</strong> El locatario se compromete a abonar el canon locativo dentro de los primeros 5 días hábiles de cada mes. El incumplimiento generará intereses punitorios. El locatario no podrá subalquilar ni ceder el contrato sin consentimiento escrito del locador. Al finalizar el contrato, el inmueble deberá ser devuelto en las mismas condiciones en que fue recibido.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:60px;">
+      <div style="text-align:center;">
+        <div style="border-top:1px solid #1A2744;padding-top:8px;margin-top:60px;font-size:12px;">
+          <strong>${ow.nom||'Propietario'}</strong><br>Propietario / Locador<br>DNI: _______________
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div style="border-top:1px solid #1A2744;padding-top:8px;margin-top:60px;font-size:12px;">
+          <strong>${inq.nom||'Inquilino'}</strong><br>Inquilino / Locatario<br>DNI: ${inq.dni||'_______________'}
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:30px;">
+      <div style="border-top:1px solid #1A2744;padding-top:8px;margin-top:60px;font-size:12px;display:inline-block;min-width:250px;">
+        Administración — Aura Prop<br>Fecha: _______________
+      </div>
+    </div>
+  </div>`;
+  window.print();
+}
+
+// ── MANTENIMIENTO ─────────────────────────────────────────────────────
+function renderMantList(propId){
+  const p=getProp(propId);
+  const mant=p.mantenimiento||[];
+  if(!mant.length) return '<p class="text-muted text-sm" style="padding:8px 0;">Sin registros de mantenimiento.</p>';
+  const totalCosto=mant.reduce((s,m)=>s+m.costo,0);
+  const estadoColor={pendiente:'b-yel','en proceso':'b-pri',completado:'b-grn'};
+  const rows=mant.slice().reverse().map(m=>`<tr>
+    <td>${fmtDate(m.fecha)}</td>
+    <td>${m.desc}</td>
+    <td class="text-muted text-sm">${m.proveedor||'-'}</td>
+    <td>${fmt(m.costo)}</td>
+    <td><span class="badge ${estadoColor[m.estado]||'b-muted'}">${m.estado}</span></td>
+    <td><button class="btn btn-red btn-sm" onclick="delMant('${propId}','${m.id}')">✕</button></td>
+  </tr>`).join('');
+  return `<div class="tbl-wrap"><table>
+    <thead><tr><th>Fecha</th><th>Descripción</th><th>Proveedor</th><th>Costo</th><th>Estado</th><th></th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr><td colspan="3" style="padding:8px 14px;font-weight:600;font-size:12px;color:var(--muted);">Total costos</td><td style="padding:8px 14px;font-weight:600;color:var(--danger);">${fmt(totalCosto)}</td><td colspan="2"></td></tr></tfoot>
+  </table></div>`;
+}
+
+function openMantModal(propId){
+  openModal('Registrar Mantenimiento',`
+    <div class="form-grid">
+      <div class="form-group"><label>Fecha</label><input id="f-mant-fecha" type="date" value="${today()}"></div>
+      <div class="form-group"><label>Estado</label><select id="f-mant-estado"><option>pendiente</option><option>en proceso</option><option>completado</option></select></div>
+      <div class="form-group full"><label>Descripción del trabajo</label><input id="f-mant-desc" placeholder="Ej: Reparación cañería"></div>
+      <div class="form-group"><label>Proveedor / Empresa</label><input id="f-mant-prov" placeholder="Ej: Plomero Martínez"></div>
+      <div class="form-group"><label>Costo (ARS)</label><input id="f-mant-costo" type="number" placeholder="0"></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button class="btn btn-pri" onclick="saveMant('${propId}')">Guardar</button>
+      <button class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+
+function saveMant(propId){
+  const desc=byId('f-mant-desc').value.trim();
+  if(!desc) return alert('Ingresá una descripción');
+  const p=getProp(propId);
+  if(!p.mantenimiento) p.mantenimiento=[];
+  p.mantenimiento.push({
+    id:'m'+uid(),
+    fecha:byId('f-mant-fecha').value,
+    desc,
+    proveedor:byId('f-mant-prov').value.trim(),
+    costo:+byId('f-mant-costo').value||0,
+    estado:byId('f-mant-estado').value
+  });
+  saveDB(DB);
+  closeModalDirect();
+  renderPropiedades(propId);
+}
+
+function delMant(propId,mantId){
+  if(!confirm('¿Eliminar registro?')) return;
+  const p=getProp(propId);
+  p.mantenimiento=(p.mantenimiento||[]).filter(m=>m.id!==mantId);
+  saveDB(DB);
+  renderPropiedades(propId);
+}
+
+// ── LIQUIDACIÓN POR PROPIEDAD ─────────────────────────────────────────
+function modalLiquidacionProp(propId){
+  const p=getProp(propId);
+  const ow=getOwner(p.propId);
+  const ct=propContracts(propId)[0];
+  const periodo=today().slice(0,7);
+  const cobrado=DB.cobros.filter(cb=>ct&&cb.contId===ct.id&&cb.estado==='pagado')
+    .reduce((s,cb)=>s+cb.monto,0);
+  const mant=p.mantenimiento||[];
+  const mantCosto=mant.reduce((s,m)=>s+m.costo,0);
+  const comPct=ow.com||10;
+  const comMonto=Math.round(cobrado*(comPct/100));
+  const neto=cobrado-comMonto-mantCosto;
+  openModal(`Liquidación — ${p.dir}`,`
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Propietario: <strong style="color:var(--text)">${ow.nom||'-'}</strong> · Comisión: ${comPct}%</div>
+    <div style="background:var(--tbl-header);border:1px solid var(--brd);border-radius:var(--rad);padding:14px;margin-bottom:16px;">
+      <div class="flex justify-between" style="padding:6px 0;border-bottom:1px solid var(--brd)"><span style="color:var(--muted);font-size:13px">Alquileres cobrados</span><strong>${fmt(cobrado)}</strong></div>
+      <div class="flex justify-between" style="padding:6px 0;border-bottom:1px solid var(--brd)"><span style="color:var(--muted);font-size:13px">Comisión (${comPct}%)</span><span style="color:var(--danger)">− ${fmt(comMonto)}</span></div>
+      <div class="flex justify-between" style="padding:6px 0;border-bottom:1px solid var(--brd)">
+        <span style="color:var(--muted);font-size:13px">Mantenimiento (${mant.length} registro${mant.length!==1?'s':''})</span>
+        <span style="color:var(--danger)">− ${fmt(mantCosto)}</span>
+      </div>
+      <div class="flex justify-between" style="padding:10px 0"><strong style="font-family:'Playfair Display',serif">Neto a transferir</strong><strong style="font-family:'Playfair Display',serif;font-size:18px;color:var(--success)">${fmt(neto)}</strong></div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">CBU: ${ow.cbu||'-'}</div>
+    <div class="flex gap-2 mt-1">
+      <button class="btn btn-ghost btn-sm" onclick="printLiqProp('${propId}',${cobrado},${comMonto},${mantCosto},${neto})">Imprimir</button>
+      <button class="btn btn-ghost" onclick="closeModalDirect()">Cerrar</button>
+    </div>`);
+}
+
+function printLiqProp(propId,cobrado,com,mant,neto){
+  const p=getProp(propId); const ow=getOwner(p.propId);
+  const comPct=ow.com||10;
+  const z=byId('print-zone');
+  z.innerHTML=`<div style="padding:40px;font-family:'Source Sans 3',sans-serif;color:#000">
+    <div style="display:flex;justify-content:space-between;margin-bottom:24px">
+      <div><h1 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400">Aura Prop</h1><p style="color:#666;font-size:12px;text-transform:uppercase;letter-spacing:0.04em">Liquidación de propietario</p></div>
+      <div style="text-align:right"><h2 style="font-family:'Playfair Display',serif;font-weight:400">LIQUIDACIÓN</h2><p>${today().slice(0,7)} · ${fmtDate(today())}</p></div>
+    </div><hr style="margin:0 0 20px;border-color:#E2DDD6">
+    <div><strong>Propietario:</strong> ${ow.nom}<br><strong>Propiedad:</strong> ${p.dir}<br><strong>CBU:</strong> ${ow.cbu||'-'}</div>
+    <table style="width:100%;border-collapse:collapse;margin:20px 0">
+      <tr style="background:#F0EDE6"><th style="text-align:left;padding:8px;border:1px solid #E2DDD6">Concepto</th><th style="text-align:right;padding:8px;border:1px solid #E2DDD6">Monto</th></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Alquileres cobrados</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">${fmt(cobrado)}</td></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Comisión administración (${comPct}%)</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">− ${fmt(com)}</td></tr>
+      <tr><td style="padding:8px;border:1px solid #E2DDD6">Gastos de mantenimiento</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">− ${fmt(mant)}</td></tr>
+      <tr style="font-weight:bold"><td style="padding:8px;border:1px solid #E2DDD6">NETO A TRANSFERIR</td><td style="text-align:right;padding:8px;border:1px solid #E2DDD6">${fmt(neto)}</td></tr>
+    </table>
+    <hr style="margin:20px 0;border-color:#E2DDD6">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:center">
+      <div><div style="border-top:1px solid #000;padding-top:8px;margin-top:40px">Firma propietario</div></div>
+      <div><div style="border-top:1px solid #000;padding-top:8px;margin-top:40px">Firma administración</div></div>
+    </div>
+  </div>`;
+  window.print();
+}
+
+// ── LIGHTBOX FOTOS ───────────────────────────────────────────────────
+function openPhotoModal(propId,idx){
+  const p=getProp(propId);
+  const photos=p.photos||[];
+  if(!photos.length) return;
+  let cur=idx;
+  function showPhoto(){
+    byId('modal-title').textContent=`${p.dir} — Foto ${cur+1} de ${photos.length}`;
+    byId('modal-body').innerHTML=`
+      <img src="${photos[cur]}" style="width:100%;border-radius:8px;max-height:70vh;object-fit:contain">
+      ${photos.length>1?`<div class="flex justify-between mt-2">
+        <button type="button" class="btn btn-ghost" onclick="(function(){${cur>0?`cur=${cur-1};`:''}showPhoto&&showPhoto()})()">← Anterior</button>
+        <button type="button" class="btn btn-ghost" onclick="(function(){${cur<photos.length-1?`cur=${cur+1};`:''}showPhoto&&showPhoto()})()">Siguiente →</button>
+      </div>`:''}`
+  }
+  openModal(p.dir,`<img src="${photos[cur]}" style="width:100%;border-radius:8px;max-height:65vh;object-fit:contain">
+    ${photos.length>1?`<div class="flex justify-between mt-2"><button type="button" class="btn btn-ghost btn-sm" onclick="photoNav('${propId}',${idx},-1)">← Anterior</button><button type="button" class="btn btn-ghost btn-sm" onclick="photoNav('${propId}',${idx},1)">Siguiente →</button></div>`:''}`);
+}
+function photoNav(propId,baseIdx,dir){
+  const p=getProp(propId);
+  const photos=p.photos||[];
+  const newIdx=Math.max(0,Math.min(photos.length-1,baseIdx+dir));
+  byId('modal-title').textContent=`${p.dir} — Foto ${newIdx+1} de ${photos.length}`;
+  byId('modal-body').innerHTML=`<img src="${photos[newIdx]}" style="width:100%;border-radius:8px;max-height:65vh;object-fit:contain">
+    <div class="flex justify-between mt-2">
+      <button type="button" class="btn btn-ghost btn-sm" onclick="photoNav('${propId}',${newIdx},-1)">← Anterior</button>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="photoNav('${propId}',${newIdx},1)">Siguiente →</button>
+    </div>`;
+}
+
+// ── MÓDULO AGENDA ─────────────────────────────────────────────────────
+if(!DB.eventos) DB.eventos=[];
+
+const AGENDA_TIPOS=[
+  {id:'visita',label:'Visita',cls:'evt-visita'},
+  {id:'firma',label:'Firma',cls:'evt-firma'},
+  {id:'vencimiento',label:'Vencimiento',cls:'evt-vencimiento'},
+  {id:'mantenimiento',label:'Mantenimiento',cls:'evt-mantenimiento'}
+];
+
+function renderAgenda(){
+  const el=byId('page-agenda');
+  // Get current week
+  const now=new Date();
+  const dow=now.getDay()===0?6:now.getDay()-1; // Mon=0
+  const weekStart=new Date(now); weekStart.setDate(now.getDate()-dow); weekStart.setHours(0,0,0,0);
+  const days=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  const hours=[];
+  for(let h=8;h<=20;h++) hours.push(h);
+
+  // Auto-generate contract expiry events
+  const autoEvts=[];
+  DB.contracts.filter(c=>c.estado==='activo').forEach(c=>{
+    const fin=contractEnd(c);
+    const d30=new Date(fin+'T00:00:00'); d30.setDate(d30.getDate()-30);
+    autoEvts.push({id:'auto-fin-'+c.id,tipo:'vencimiento',titulo:`Vence: ${getProp(c.propId).dir||''}`,fecha:fin,hora:'09:00',propId:c.propId,auto:true});
+    autoEvts.push({id:'auto-alerta-'+c.id,tipo:'vencimiento',titulo:`Alerta 30d: ${getProp(c.propId).dir||''}`,fecha:d30.toISOString().slice(0,10),hora:'09:00',propId:c.propId,auto:true});
+  });
+  const allEvts=[...DB.eventos,...autoEvts];
+
+  // Build week grid
+  const dayDates=days.map((_,i)=>{const d=new Date(weekStart);d.setDate(d.getDate()+i);return d;});
+  const todayStr=today();
+
+  const headerCells=dayDates.map((d,i)=>{
+    const ds=d.toISOString().slice(0,10);
+    const isToday=ds===todayStr;
+    return `<div class="agenda-day-hd${isToday?' today':''}">${days[i]}<br><span style="font-size:13px;font-weight:400">${d.getDate()}</span></div>`;
+  }).join('');
+
+  const rows=hours.map(h=>{
+    const cells=dayDates.map(d=>{
+      const ds=d.toISOString().slice(0,10);
+      const slotEvts=allEvts.filter(e=>e.fecha===ds&&parseInt(e.hora)===h);
+      return `<div class="agenda-slot">${slotEvts.map(e=>{
+        const tc=AGENDA_TIPOS.find(t=>t.id===e.tipo)||AGENDA_TIPOS[0];
+        return `<div class="agenda-evt ${tc.cls}" title="${e.titulo}${e.propId?' | '+getProp(e.propId).dir:''}">${e.titulo}</div>`;
+      }).join('')}</div>`;
+    }).join('');
+    return `<div class="agenda-time">${h}:00</div>${cells}`;
+  }).join('');
+
+  const weekLabel=`${dayDates[0].getDate()}/${dayDates[0].getMonth()+1} – ${dayDates[6].getDate()}/${dayDates[6].getMonth()+1}`;
+
+  el.innerHTML=`
+  <div class="pg-hd">
+    <h2>Agenda</h2>
+    <div class="flex gap-2 items-center">
+      <span class="text-muted text-sm">${weekLabel}</span>
+      <button type="button" class="btn btn-pri btn-sm" onclick="newEvento()">+ Nuevo evento</button>
+    </div>
+  </div>
+  <div style="overflow-x:auto">
+    <div class="agenda-week" style="min-width:700px">
+      <div class="agenda-corner"></div>
+      ${headerCells}
+      ${rows}
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-heading-accent">Próximos eventos</div>
+    ${allEvts.filter(e=>e.fecha>=todayStr).sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(0,8).map(e=>{
+      const tc=AGENDA_TIPOS.find(t=>t.id===e.tipo)||AGENDA_TIPOS[0];
+      return `<div class="flex items-center gap-2" style="padding:8px 0;border-bottom:1px solid var(--brd)">
+        <span class="agenda-evt ${tc.cls}" style="min-width:80px;text-align:center">${tc.label}</span>
+        <div><div style="font-size:13px;font-weight:500">${e.titulo}</div><div class="text-muted text-sm">${fmtDate(e.fecha)} ${e.hora?'· '+e.hora:''}</div></div>
+        ${!e.auto?`<button type="button" class="btn btn-red btn-sm" style="margin-left:auto" onclick="delEvento('${e.id}')">✕</button>`:'<span style="margin-left:auto;font-size:10px;color:var(--muted)">auto</span>'}
+      </div>`;
+    }).join('')||'<p class="text-muted text-sm" style="padding:8px 0">Sin eventos próximos</p>'}
+  </div>`;
+}
+
+function newEvento(){
+  const propOpts=DB.props.map(p=>`<option value="${p.id}">${p.dir}</option>`).join('');
+  const inqOpts=DB.inqs.map(i=>`<option value="${i.id}">${i.nom}</option>`).join('');
+  openModal('Nuevo evento',`
+    <div class="form-grid">
+      <div class="form-group"><label>Tipo</label><select id="f-evt-tipo">${AGENDA_TIPOS.map(t=>`<option value="${t.id}">${t.label}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Fecha</label><input id="f-evt-fecha" type="date" value="${today()}"></div>
+      <div class="form-group"><label>Hora</label><input id="f-evt-hora" type="time" value="10:00"></div>
+      <div class="form-group"><label>Duración (min)</label><input id="f-evt-dur" type="number" value="60" min="15"></div>
+      <div class="form-group full"><label>Título / Descripción</label><input id="f-evt-titulo" placeholder="Ej: Visita de Martín Flores"></div>
+      <div class="form-group"><label>Propiedad (opcional)</label><select id="f-evt-prop"><option value="">Sin asignar</option>${propOpts}</select></div>
+      <div class="form-group"><label>Inquilino/Cliente</label><select id="f-evt-inq"><option value="">Sin asignar</option>${inqOpts}</select></div>
+      <div class="form-group full"><label>Notas</label><input id="f-evt-notas" placeholder="Notas adicionales"></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button type="button" class="btn btn-pri" onclick="saveEvento()">Guardar</button>
+      <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+
+function saveEvento(){
+  const titulo=byId('f-evt-titulo').value.trim();
+  if(!titulo) return alert('Ingresá un título');
+  DB.eventos.push({
+    id:'ev'+uid(),
+    tipo:byId('f-evt-tipo').value,
+    titulo,
+    fecha:byId('f-evt-fecha').value,
+    hora:byId('f-evt-hora').value,
+    dur:+byId('f-evt-dur').value||60,
+    propId:byId('f-evt-prop').value,
+    inqId:byId('f-evt-inq').value,
+    notas:byId('f-evt-notas').value
+  });
+  saveDB(DB); closeModalDirect(); renderAgenda();
+}
+
+function delEvento(id){
+  DB.eventos=DB.eventos.filter(e=>e.id!==id);
+  saveDB(DB); renderAgenda();
+}
+
+// ── CENTRO DE ALERTAS (BELL) ──────────────────────────────────────────
+function generarAlertas(){
+  const alerts=[];
+  const t=today();
+  DB.contracts.filter(c=>c.estado==='activo').forEach(c=>{
+    const days=daysToEnd(c); const p=getProp(c.propId);
+    if(days<0) alerts.push({tipo:'vencido',msg:`Contrato vencido: ${p.dir}`,fecha:contractEnd(c),action:()=>nav('contratos')});
+    else if(days<=30) alerts.push({tipo:'proximo',msg:`Contrato vence en ${days} días: ${p.dir}`,fecha:contractEnd(c),action:()=>nav('contratos')});
+    else if(days<=90) alerts.push({tipo:'aviso',msg:`Contrato vence en ${days} días: ${p.dir}`,fecha:contractEnd(c),action:()=>nav('contratos')});
+  });
+  DB.cobros.filter(c=>c.estado==='vencido').forEach(cb=>{
+    const inq=getInq(cb.inqId);
+    alerts.push({tipo:'cobro',msg:`Cobro vencido: ${inq.nom} — ${cb.periodo}`,fecha:cb.periodo+'-01',action:()=>nav('inquilinos')});
+  });
+  DB.cobros.filter(c=>c.estado==='pendiente').forEach(cb=>{
+    const inq=getInq(cb.inqId);
+    alerts.push({tipo:'pendiente',msg:`Cobro pendiente: ${inq.nom} — ${fmt(cb.monto)}`,fecha:cb.periodo+'-01',action:()=>nav('inquilinos')});
+  });
+  DB.eventos.filter(e=>e.fecha>=t&&e.fecha<=addMonths(t,0).replace(/\d{2}$/,String(new Date(t.slice(0,7)+'-'+t.slice(8,10)).getDate()+3).padStart(2,'0'))).forEach(e=>{
+    alerts.push({tipo:'evento',msg:`Evento próximo: ${e.titulo}`,fecha:e.fecha,action:()=>nav('agenda')});
+  });
+  return alerts.slice(0,10);
+}
+
+function updateBell(){
+  const alerts=generarAlertas();
+  const dot=byId('bell-dot');
+  if(dot) dot.style.display=alerts.length?'block':'none';
+}
+
+let bellOpen=false;
+function toggleAlertsDropdown(){
+  bellOpen=!bellOpen;
+  const dd=byId('alerts-dropdown');
+  if(!dd) return;
+  if(bellOpen){
+    const alerts=generarAlertas();
+    const typeIcon={
+      vencido:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+      proximo:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+      cobro:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>`,
+      pendiente:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>`,
+      evento:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
+    };
+    const typeClr={vencido:'red',proximo:'yel',cobro:'red',pendiente:'yel',aviso:'grn',evento:'grn'};
+    dd.innerHTML=`<div class="alerts-dd-hd"><span>Alertas <span style="background:var(--danger);color:#fff;border-radius:999px;padding:1px 7px;font-size:10px">${alerts.length}</span></span><button type="button" onclick="toggleAlertsDropdown()" style="background:none;border:none;cursor:pointer;color:var(--muted)">✕</button></div>
+    ${alerts.length?alerts.map((a,i)=>`<div class="alert-item" onclick="bellGoTo(${i})">
+      <div class="alert-item-icon ${typeClr[a.tipo]||'yel'}">${typeIcon[a.tipo]||typeIcon.aviso}</div>
+      <div class="alert-item-body"><div class="alert-item-msg">${a.msg}</div><div class="alert-item-date">${fmtDate(a.fecha)}</div></div>
+      <span class="alert-item-goto">Ir →</span>
+    </div>`).join(''):'<div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Sin alertas activas</div>'}`;
+    dd.style.display='block';
+    window._bellAlerts=alerts;
+    setTimeout(()=>document.addEventListener('click',closeBellOutside,{once:true}),50);
+  } else {
+    dd.style.display='none';
+  }
+}
+function bellGoTo(idx){
+  const a=window._bellAlerts&&window._bellAlerts[idx];
+  if(a&&a.action){toggleAlertsDropdown();a.action();}
+}
+function closeBellOutside(e){
+  const container=byId('bell-container');
+  if(container&&!container.contains(e.target)){bellOpen=false;const dd=byId('alerts-dropdown');if(dd)dd.style.display='none';}
+}
+
+// ── MULTI-MONEDA ──────────────────────────────────────────────────────
+if(!DB.config) DB.config={cotizacionUSD:1200};
+
+function fmtMonto(monto,moneda){
+  if(moneda==='USD') return `USD ${new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(monto)}`;
+  return fmt(monto);
+}
+
+// ── MÓDULO OPORTUNIDADES (PIPELINE KANBAN) ────────────────────────────
+const ETAPAS=[
+  {id:'nuevo',label:'Nuevo lead'},
+  {id:'contactado',label:'Contactado'},
+  {id:'visita',label:'Visita agendada'},
+  {id:'propuesta',label:'Propuesta'},
+  {id:'ganado',label:'Ganado/Perdido'}
+];
+const FUENTES=['Zonaprop','Argenprop','referido','redes','directo'];
+
+function renderOportunidades(){
+  const el=byId('page-oportunidades');
+  const cols=ETAPAS.map(etapa=>{
+    const cards=(DB.leads||[]).filter(l=>l.etapa===etapa.id);
+    const cardHtml=cards.map(l=>buildLeadCard(l)).join('');
+    return `<div class="kanban-col" data-etapa="${etapa.id}"
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      ondrop="dropLead(event,'${etapa.id}')">
+      <div class="kanban-col-hd">
+        <span class="kanban-col-title">${etapa.label}</span>
+        <span class="kanban-col-count">${cards.length}</span>
+      </div>
+      <div class="kanban-body">${cardHtml||'<p style="text-align:center;padding:20px;color:var(--muted);font-size:12px">Sin leads</p>'}</div>
+    </div>`;
+  }).join('');
+  el.innerHTML=`
+  <div class="pg-hd"><h2>Pipeline de Oportunidades</h2><button type="button" class="btn btn-pri" onclick="newLead()">+ Nuevo lead</button></div>
+  <div class="kanban-board">${cols}</div>`;
+}
+
+function buildLeadCard(l){
+  const initials=(l.nom||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  const propName=l.propId?getProp(l.propId).dir||'':'Sin propiedad';
+  const srcCls='src-'+(l.fuente||'directo').toLowerCase().replace(/\s/g,'-');
+  return `<div class="kanban-card" draggable="true"
+    ondragstart="dragLead(event,'${l.id}')"
+    ondragend="this.classList.remove('dragging')"
+    onclick="verLead('${l.id}')">
+    <div class="flex items-center gap-2" style="margin-bottom:6px">
+      <div class="lead-avatar">${initials}</div>
+      <div style="flex:1;min-width:0">
+        <div class="lead-name">${l.nom||'-'}</div>
+        <div class="lead-prop">${propName}</div>
+      </div>
+    </div>
+    <div class="lead-tags">
+      <span class="lead-tag ${srcCls}">${l.fuente||'directo'}</span>
+      ${l.presupuesto?`<span class="lead-budget">${fmt(+l.presupuesto)}</span>`:''}
+    </div>
+    <div class="lead-footer">
+      <span class="lead-date">${fmtDate(l.updated||l.created||today())}</span>
+      <span class="text-muted text-sm">${l.tel||''}</span>
+    </div>
+  </div>`;
+}
+
+let draggedLeadId=null;
+function dragLead(e,id){
+  draggedLeadId=id;
+  e.target.classList.add('dragging');
+}
+function dropLead(e,etapa){
+  e.preventDefault();
+  document.querySelectorAll('.kanban-col').forEach(c=>c.classList.remove('drag-over'));
+  if(!draggedLeadId) return;
+  const lead=(DB.leads||[]).find(l=>l.id===draggedLeadId);
+  if(lead){lead.etapa=etapa;lead.updated=today();}
+  saveDB(DB); draggedLeadId=null; renderOportunidades();
+}
+
+function newLead(){
+  const propOpts=`<option value="">Sin asignar</option>`+DB.props.map(p=>`<option value="${p.id}">${p.dir}</option>`).join('');
+  openModal('Nuevo Lead',`
+    <div class="form-grid">
+      <div class="form-group full"><label>Nombre</label><input id="f-lead-nom" placeholder="Nombre completo"></div>
+      <div class="form-group"><label>Teléfono</label><input id="f-lead-tel" placeholder="11 1234-5678"></div>
+      <div class="form-group"><label>Email</label><input id="f-lead-mail" type="email" placeholder="email@ejemplo.com"></div>
+      <div class="form-group"><label>Propiedad de interés</label><select id="f-lead-prop">${propOpts}</select></div>
+      <div class="form-group"><label>Presupuesto (ARS)</label><input id="f-lead-presup" type="number" placeholder="0"></div>
+      <div class="form-group"><label>Fuente</label><select id="f-lead-fuente">${FUENTES.map(f=>`<option>${f}</option>`).join('')}</select></div>
+      <div class="form-group full"><label>Notas</label><textarea id="f-lead-notas" rows="2" style="resize:vertical"></textarea></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button type="button" class="btn btn-pri" onclick="saveLead()">Guardar</button>
+      <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+
+function saveLead(id){
+  const nom=byId('f-lead-nom').value.trim();
+  if(!nom) return alert('Ingresá el nombre');
+  const d={nom,tel:byId('f-lead-tel').value,mail:byId('f-lead-mail').value,propId:byId('f-lead-prop').value,presupuesto:byId('f-lead-presup').value,fuente:byId('f-lead-fuente').value,notas:byId('f-lead-notas').value,etapa:id?((DB.leads||[]).find(l=>l.id===id)||{}).etapa||'nuevo':'nuevo',updated:today()};
+  if(!DB.leads) DB.leads=[];
+  if(id){ Object.assign(DB.leads.find(l=>l.id===id)||{},d); }
+  else { DB.leads.push({...d,id:'ld'+uid(),created:today()}); }
+  saveDB(DB); closeModalDirect(); renderOportunidades();
+}
+
+function verLead(id){
+  const l=(DB.leads||[]).find(x=>x.id===id); if(!l) return;
+  const p=l.propId?getProp(l.propId):{};
+  const inqOpts=`<option value="">Sin asignar</option>`+DB.inqs.map(i=>`<option value="${i.id}">${i.nom}</option>`).join('');
+  const timeline=(l.actividad||[]).map(a=>`<div class="tl-item"><div class="tl-dot"></div><div class="tl-body"><div class="tl-title">${a.tipo}: ${a.desc}</div><div class="tl-date">${fmtDate(a.fecha)}</div>${a.nota?`<div class="tl-note">${a.nota}</div>`:''}</div></div>`).join('');
+  openModal(`Lead: ${l.nom}`,`
+    <div class="info-grid" style="margin-bottom:14px">
+      <div class="info-item"><div class="lbl">Teléfono</div><div class="val">${l.tel||'-'}</div></div>
+      <div class="info-item"><div class="lbl">Email</div><div class="val">${l.mail||'-'}</div></div>
+      <div class="info-item"><div class="lbl">Propiedad</div><div class="val">${p.dir||'Sin asignar'}</div></div>
+      <div class="info-item"><div class="lbl">Fuente</div><div class="val">${l.fuente||'-'}</div></div>
+      <div class="info-item"><div class="lbl">Presupuesto</div><div class="val">${l.presupuesto?fmt(+l.presupuesto):'-'}</div></div>
+      <div class="info-item"><div class="lbl">Etapa</div><div class="val">${ETAPAS.find(e=>e.id===l.etapa)?.label||'-'}</div></div>
+    </div>
+    ${l.notas?`<div style="padding:10px;background:var(--bg-subtle);border-radius:6px;font-size:12px;color:var(--muted);margin-bottom:14px;border-left:3px solid var(--gold-600)">${l.notas}</div>`:''}
+    <div class="section-heading-accent">Timeline de actividad</div>
+    <div class="timeline" style="margin-bottom:12px">${timeline||'<p class="text-muted text-sm" style="padding:8px 0">Sin actividad registrada</p>'}</div>
+    <div class="flex gap-2 flex-wrap">
+      <button type="button" class="btn btn-ghost btn-sm" onclick="addActividad('${id}')">+ Agregar interacción</button>
+      <button type="button" class="btn btn-grn btn-sm" onclick="convertirInquilino('${id}')">→ Convertir en inquilino</button>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="closeModalDirect();editLeadModal('${id}')">Editar lead</button>
+      <button type="button" class="btn btn-red btn-sm" onclick="delLead('${id}')">Eliminar</button>
+    </div>`);
+}
+
+function addActividad(leadId){
+  const tipos=['llamada','email','visita','propuesta','otro'];
+  closeModalDirect();
+  setTimeout(()=>openModal('Agregar interacción',`
+    <div class="form-grid">
+      <div class="form-group"><label>Tipo</label><select id="f-act-tipo">${tipos.map(t=>`<option>${t}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Fecha</label><input id="f-act-fecha" type="date" value="${today()}"></div>
+      <div class="form-group full"><label>Descripción</label><input id="f-act-desc" placeholder="¿Qué pasó?"></div>
+      <div class="form-group full"><label>Nota</label><input id="f-act-nota" placeholder="Detalle adicional (opcional)"></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button type="button" class="btn btn-pri" onclick="saveActividad('${leadId}')">Guardar</button>
+      <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`),50);
+}
+
+function saveActividad(leadId){
+  const lead=(DB.leads||[]).find(l=>l.id===leadId); if(!lead) return;
+  if(!lead.actividad) lead.actividad=[];
+  lead.actividad.push({tipo:byId('f-act-tipo').value,desc:byId('f-act-desc').value,nota:byId('f-act-nota').value,fecha:byId('f-act-fecha').value});
+  lead.updated=today();
+  saveDB(DB); closeModalDirect(); setTimeout(()=>verLead(leadId),50);
+}
+
+function convertirInquilino(leadId){
+  const l=(DB.leads||[]).find(x=>x.id===leadId); if(!l) return;
+  if(!confirm(`¿Convertir a ${l.nom} en inquilino?`)) return;
+  DB.inqs.push({id:'i'+uid(),nom:l.nom,dni:'',tel:l.tel||'',mail:l.mail||'',garantia:'propietario garante'});
+  l.etapa='ganado'; l.updated=today();
+  saveDB(DB); closeModalDirect(); nav('inquilinos');
+}
+
+function editLeadModal(id){
+  const l=(DB.leads||[]).find(x=>x.id===id); if(!l) return;
+  const propOpts=`<option value="">Sin asignar</option>`+DB.props.map(p=>`<option value="${p.id}"${l.propId===p.id?' selected':''}>${p.dir}</option>`).join('');
+  openModal('Editar Lead',`
+    <div class="form-grid">
+      <div class="form-group full"><label>Nombre</label><input id="f-lead-nom" value="${l.nom||''}"></div>
+      <div class="form-group"><label>Teléfono</label><input id="f-lead-tel" value="${l.tel||''}"></div>
+      <div class="form-group"><label>Email</label><input id="f-lead-mail" value="${l.mail||''}"></div>
+      <div class="form-group"><label>Propiedad</label><select id="f-lead-prop">${propOpts}</select></div>
+      <div class="form-group"><label>Presupuesto</label><input id="f-lead-presup" type="number" value="${l.presupuesto||''}"></div>
+      <div class="form-group"><label>Fuente</label><select id="f-lead-fuente">${FUENTES.map(f=>`<option${l.fuente===f?' selected':''}>${f}</option>`).join('')}</select></div>
+      <div class="form-group full"><label>Notas</label><textarea id="f-lead-notas" rows="2">${l.notas||''}</textarea></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button type="button" class="btn btn-pri" onclick="saveLead('${id}')">Guardar</button>
+      <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+
+function delLead(id){
+  if(!confirm('¿Eliminar lead?')) return;
+  DB.leads=(DB.leads||[]).filter(l=>l.id!==id);
+  saveDB(DB); closeModalDirect(); renderOportunidades();
+}
+
+// ── PORTAL DE INQUILINO (solo lectura) ────────────────────────────────
+function renderPortalInquilino(inqId){
+  const i=getInq(inqId); if(!i.id) return;
+  const ct=inqContract(inqId);
+  const prop=ct?getProp(ct.propId):{};
+  const cobros=DB.cobros.filter(cb=>cb.inqId===inqId).sort((a,b)=>b.periodo.localeCompare(a.periodo)).slice(0,12);
+  const proxVenc=ct?contractEnd(ct):null;
+  const dias=proxVenc?diffDays(today(),proxVenc):null;
+
+  const cobroRows=cobros.map(cb=>`<tr>
+    <td>${cb.periodo}</td>
+    <td class="num">${fmt(cb.monto)}</td>
+    <td>${cobroBadge(cb.estado)}</td>
+    <td>${cb.fecha?fmtDate(cb.fecha):'-'}</td>
+  </tr>`).join('');
+
+  const el=byId('modal-body');
+  byId('modal-title').textContent='Portal del inquilino';
+  el.innerHTML=`<div class="portal-view">
+    <div class="portal-header">
+      <div class="portal-logo">Aura Prop</div>
+      <div class="portal-tenant">Hola, ${i.nom}</div>
+    </div>
+    <div class="portal-body">
+      ${ct?`<div class="portal-prop-card">
+        <div class="lbl">Tu propiedad</div>
+        <div style="font-size:15px;font-weight:600;margin-top:4px">${prop.dir||'-'}</div>
+        <div class="text-muted text-sm" style="margin-top:2px">${prop.tipo||''} · Contrato hasta ${fmtDate(proxVenc)}</div>
+      </div>`:''}
+      ${dias!==null&&dias>=0&&dias<=30?`<div class="portal-next-due">
+        <div><div style="font-size:12px;font-weight:600;color:var(--warning)">⚠ Contrato vence pronto</div><div class="text-muted text-sm">en ${dias} días — ${fmtDate(proxVenc)}</div></div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--warning)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>`:''}
+      <div class="section-heading-accent">Historial de pagos</div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Período</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
+        <tbody>${cobroRows||'<tr><td colspan="4" class="text-muted" style="text-align:center;padding:16px">Sin pagos registrados</td></tr>'}</tbody>
+      </table></div>
+      <div style="margin-top:16px;text-align:center">
+        <a href="https://wa.me/541132609254?text=${encodeURIComponent('Hola Aura Prop, soy '+i.nom)}" target="_blank" class="btn btn-grn">WhatsApp al administrador</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+function abrirPortalInquilino(inqId){
+  byId('overlay').classList.add('open');
+  renderPortalInquilino(inqId);
+}
+
+function copiarLinkPortal(inqId){
+  const url=`${location.origin}${location.pathname}?portal=${inqId}`;
+  navigator.clipboard.writeText(url).then(()=>alert('Link copiado: '+url)).catch(()=>prompt('Copiá este link:',url));
+}
+
+// Render portal si viene por URL param
+(function checkPortalParam(){
+  const params=new URLSearchParams(location.search);
+  const portalId=params.get('portal');
+  if(portalId) setTimeout(()=>abrirPortalInquilino(portalId),200);
+})();
+
+// ── GASTOS POR PROPIEDAD ──────────────────────────────────────────────
+const GASTOS_CATS=['ABL','Expensas','Reparación','Arreglo','Otro'];
+
+function renderGastosList(propId){
+  const p=getProp(propId);
+  const gastos=p.gastos||[];
+  if(!gastos.length) return `<div class="empty-state" style="padding:24px">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--brd);margin-bottom:8px"><path d="M9 14h6M9 10h6M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>
+    <p class="text-muted text-sm">Sin gastos registrados</p>
+  </div>`;
+  const total=gastos.reduce((s,g)=>s+g.monto,0);
+  const rows=gastos.slice().reverse().map(g=>`<tr>
+    <td>${fmtDate(g.fecha)}</td>
+    <td><span class="badge b-muted">${g.cat}</span></td>
+    <td class="num">${fmt(g.monto)}</td>
+    <td class="text-muted text-sm">${g.prov||'-'}</td>
+    <td>${g.desc||'-'}</td>
+    <td class="row-actions"><button type="button" class="btn btn-red btn-sm" onclick="delGasto('${propId}','${g.id}')">✕</button></td>
+  </tr>`).join('');
+  return `<div class="tbl-wrap"><table>
+    <thead><tr><th>Fecha</th><th>Categoría</th><th>Monto</th><th>Proveedor</th><th>Descripción</th><th></th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr><td colspan="2" style="padding:8px 12px;font-weight:600;font-size:12px;color:var(--muted)">Total</td><td class="num" style="padding:8px 12px;font-weight:600;color:var(--danger)">${fmt(total)}</td><td colspan="3"></td></tr></tfoot>
+  </table></div>`;
+}
+
+function openGastoModal(propId){
+  openModal('Registrar Gasto',`
+    <div class="form-grid">
+      <div class="form-group"><label>Fecha</label><input id="f-gasto-fecha" type="date" value="${today()}"></div>
+      <div class="form-group"><label>Categoría</label><select id="f-gasto-cat">${GASTOS_CATS.map(c=>`<option>${c}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Monto (ARS)</label><input id="f-gasto-monto" type="number" placeholder="0"></div>
+      <div class="form-group"><label>Proveedor</label><input id="f-gasto-prov" placeholder="Ej: Plomero García"></div>
+      <div class="form-group full"><label>Descripción</label><input id="f-gasto-desc" placeholder="Ej: Reparación cañería cocina"></div>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <button type="button" class="btn btn-pri" onclick="saveGasto('${propId}')">Guardar</button>
+      <button type="button" class="btn btn-ghost" onclick="closeModalDirect()">Cancelar</button>
+    </div>`);
+}
+
+function saveGasto(propId){
+  const monto=+byId('f-gasto-monto').value;
+  if(!monto) return alert('Ingresá el monto');
+  const p=getProp(propId);
+  if(!p.gastos) p.gastos=[];
+  p.gastos.push({id:'g'+uid(),fecha:byId('f-gasto-fecha').value,cat:byId('f-gasto-cat').value,monto,prov:byId('f-gasto-prov').value,desc:byId('f-gasto-desc').value});
+  saveDB(DB); closeModalDirect(); renderPropiedades(propId);
+}
+
+function delGasto(propId,gastoId){
+  if(!confirm('¿Eliminar gasto?')) return;
+  const p=getProp(propId);
+  p.gastos=(p.gastos||[]).filter(g=>g.id!==gastoId);
+  saveDB(DB); renderPropiedades(propId);
+}
+
+// ── BÚSQUEDA GLOBAL (Ctrl+K) ──────────────────────────────────────────
+let searchIdx=-1;
+function openSearch(){
+  byId('search-overlay').classList.add('open');
+  byId('search-input').value='';
+  byId('search-results').innerHTML='<div class="search-empty">Escribí para buscar...</div>';
+  searchIdx=-1;
+  setTimeout(()=>byId('search-input').focus(),50);
+}
+function closeSearch(){
+  byId('search-overlay').classList.remove('open');
+}
+function runSearch(q){
+  const r=byId('search-results');
+  q=q.trim().toLowerCase();
+  if(!q){r.innerHTML='<div class="search-empty">Escribí para buscar...</div>';searchIdx=-1;return;}
+  const results=[];
+  DB.props.forEach(p=>{
+    if(p.dir.toLowerCase().includes(q)||p.tipo.toLowerCase().includes(q))
+      results.push({icon:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',main:p.dir,sub:`Propiedad · ${p.tipo} · ${statusBadge(p.estado).replace(/<[^>]+>/g,'')}`,action:()=>{closeSearch();nav('propiedades');setTimeout(()=>renderPropiedades(p.id),50);}});
+  });
+  DB.inqs.forEach(i=>{
+    if(i.nom.toLowerCase().includes(q)||i.dni.includes(q)||i.tel.includes(q))
+      results.push({icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>',main:i.nom,sub:`Inquilino · DNI ${i.dni}`,action:()=>{closeSearch();nav('inquilinos');setTimeout(()=>renderInquilinos('inq',i.id),50);}});
+  });
+  DB.owners.forEach(o=>{
+    if(o.nom.toLowerCase().includes(q)||o.tel.includes(q))
+      results.push({icon:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>',main:o.nom,sub:`Propietario · ${o.tel}`,action:()=>{closeSearch();nav('propietarios');setTimeout(()=>renderPropietarios('owners',o.id),50);}});
+  });
+  DB.contracts.forEach(c=>{
+    const p=getProp(c.propId); const i=getInq(c.inqId);
+    if(p.dir&&p.dir.toLowerCase().includes(q)||i.nom&&i.nom.toLowerCase().includes(q))
+      results.push({icon:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>',main:`Contrato: ${p.dir||'-'}`,sub:`Inquilino: ${i.nom||'-'} · ${c.estado}`,action:()=>{closeSearch();nav('contratos');setTimeout(()=>renderContratos(c.id),50);}});
+  });
+  searchIdx=-1;
+  if(!results.length){r.innerHTML='<div class="search-empty">Sin resultados para "'+q+'"</div>';return;}
+  r.innerHTML=results.slice(0,8).map((res,i)=>`
+    <div class="search-result" data-idx="${i}" onclick="searchGo(${i})">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${res.icon}</svg>
+      <div><div class="search-result-main">${res.main}</div><div class="search-result-sub">${res.sub}</div></div>
+    </div>`).join('');
+  r._results=results;
+}
+function searchGo(idx){
+  const r=byId('search-results');
+  if(r._results&&r._results[idx]) r._results[idx].action();
+}
+function searchKeyNav(e){
+  const r=byId('search-results');
+  const items=r.querySelectorAll('.search-result');
+  if(e.key==='Escape'){closeSearch();return;}
+  if(e.key==='ArrowDown'){e.preventDefault();searchIdx=Math.min(searchIdx+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();searchIdx=Math.max(searchIdx-1,0);}
+  else if(e.key==='Enter'){e.preventDefault();if(searchIdx>=0)searchGo(searchIdx);return;}
+  else return;
+  items.forEach((el,i)=>el.classList.toggle('active',i===searchIdx));
+  if(items[searchIdx]) items[searchIdx].scrollIntoView({block:'nearest'});
+}
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}
+  if(e.key==='Escape'&&byId('search-overlay').classList.contains('open')) closeSearch();
+});
+
+// ── RENDER MAP ─────────────────────────────────────────────────────────
+const renders = {
+  dashboard: renderDashboard,
+  propiedades: renderPropiedades,
+  agenda: renderAgenda,
+  contratos: renderContratos,
+  inquilinos: renderInquilinos,
+  propietarios: renderPropietarios,
+  reportes: renderReportes,
+  oportunidades: renderOportunidades
+};
+
+// ── INIT ──────────────────────────────────────────────────────────────
+buildNav();
+nav('dashboard');
+</script>
 </body>
 </html>
