@@ -125,6 +125,144 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .price-card.featured{border-color:var(--blue);background:linear-gradient(145deg,#0d1220,#111926)}
 .price-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
 .price-card.addon{padding:24px 28px;border-style:dashed}
+/* ── LITE WIDE ── */
+.pricing-lite-wide {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue-light);
+  border-radius: 16px;
+  padding: 32px 40px;
+  margin-bottom: 36px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.lite-left .price-badge {
+  display: inline-block;
+  background: rgba(212,170,122,0.15);
+  color: var(--blue-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.lite-title {
+  font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.lite-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 520px;
+}
+.lite-features {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+}
+.lite-features li {
+  font-size: 13px;
+  color: var(--text);
+  opacity: 0.85;
+}
+.lite-right {
+  text-align: right;
+  padding-left: 32px;
+  border-left: 1px solid var(--border);
+}
+.lite-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--blue-light);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.lite-price {
+  font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.lite-price .currency {
+  font-size: 24px;
+  vertical-align: top;
+  margin-top: 14px;
+  display: inline-block;
+  color: var(--muted);
+}
+.lite-cuotas {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.lite-cuotas strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.btn-lite-cta {
+  display: inline-block;
+  padding: 12px 28px;
+  background: transparent;
+  border: 1.5px solid var(--blue-light);
+  color: var(--blue-light);
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.btn-lite-cta:hover {
+  background: var(--blue-light);
+  color: var(--bg);
+}
+.pricing-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 8px 0 28px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.pricing-divider::before,
+.pricing-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+@media (max-width: 768px) {
+  .pricing-lite-wide {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+  .lite-right {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    text-align: left;
+  }
+  .lite-features { grid-template-columns: 1fr; }
+  .lite-price { font-size: 56px; }
+}
 .price-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,91,219,.12);border:1px solid rgba(59,91,219,.25);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px}
 .price-badge.addon-badge{background:rgba(6,214,160,.08);border-color:rgba(6,214,160,.2);color:var(--cyan)}
 .price-name{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
@@ -200,6 +338,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <a href="#modulos" class="nav-link">El sistema</a>
     <a href="#features" class="nav-link">Qu&eacute; incluye</a>
     <a href="#pricing" class="nav-link">Precios</a>
+    <a href="#agentes" class="nav-link">Agentes</a>
     <a href="#whyus" class="nav-link">Por qu&eacute; Aura</a>
     <a href="/aura-prop/demo" target="_blank" class="nav-cta">Ver demo &rarr;</a>
   </div>
@@ -210,6 +349,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <a href="#modulos" onclick="closeMobile()">El sistema</a>
   <a href="#features" onclick="closeMobile()">Qu&eacute; incluye</a>
   <a href="#pricing" onclick="closeMobile()">Precios</a>
+  <a href="#agentes" onclick="closeMobile()">Agentes</a>
   <a href="#whyus" onclick="closeMobile()">Por qu&eacute; Aura</a>
   <a href="/aura-prop/demo" target="_blank" onclick="closeMobile()" style="color:var(--cyan)">&#127970; Ver demo</a>
 </div>
@@ -501,7 +641,31 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <h2 class="section-title">Pago &uacute;nico.<br>Tuyo para siempre.</h2>
       <p class="section-desc">Sin contratos en d&oacute;lares, sin licencias imposibles. Precios pensados para inmobiliarias argentinas reales.</p>
     </div>
-    <div class="pricing-grid fade fade-delay-1">
+    <div class="pricing-lite-wide fade fade-delay-1">
+      <div class="lite-left">
+        <span class="price-badge">Versi&oacute;n Lite</span>
+        <div class="lite-title">Arranc&aacute; con lo esencial</div>
+        <p class="lite-desc">Ideal para negocios que quieren digitalizar cat&aacute;logo, ventas y caja sin inversi&oacute;n grande. Mismo sistema, versi&oacute;n reducida. Upgradeable a Full cuando quieras.</p>
+        <ul class="lite-features">
+          <li>&#10003; Cat&aacute;logo / fichas b&aacute;sicas</li>
+          <li>&#10003; Ventas y caja</li>
+          <li>&#10003; Reportes esenciales</li>
+          <li>&#10003; Soporte por WhatsApp</li>
+        </ul>
+      </div>
+      <div class="lite-right">
+        <div class="lite-eyebrow">DESDE</div>
+        <div class="lite-price"><span class="currency">USD </span>350</div>
+        <div class="lite-cuotas">Pago &uacute;nico &middot; O <strong>6 cuotas de USD 70/mes</strong></div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20la%20versi%C3%B3n%20Lite%20de%20Aura%20Prop." target="_blank" class="btn-secondary btn-lite-cta">Quiero la Lite &#8594;</a>
+      </div>
+    </div>
+
+    <div class="pricing-divider">
+      <span>O si quer&eacute;s el sistema completo</span>
+    </div>
+
+    <div class="pricing-grid fade fade-delay-2">
       <div class="price-card">
         <div class="price-badge">Pago &uacute;nico</div>
         <div class="price-name">Aplicaci&oacute;n</div>

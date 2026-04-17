@@ -146,6 +146,24 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .price-listed{font-size:11px;color:var(--muted);text-decoration:line-through;letter-spacing:.02em;margin-bottom:2px}
 .price-cuotas-note{font-size:12px;color:var(--muted2);margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
 .price-cuotas-note strong{color:var(--text);font-weight:600}
+/* ── LITE WIDE ── */
+.pricing-lite-wide{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--blue-light);border-radius:16px;padding:32px 40px;margin-bottom:36px;display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center}
+.lite-left .price-badge{display:inline-block;background:rgba(245,158,11,0.15);color:var(--blue-light);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.lite-title{font-family:'Barlow Condensed','Bebas Neue',sans-serif;font-size:34px;font-weight:700;color:var(--text);line-height:1;margin-bottom:10px}
+.lite-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;max-width:520px}
+.lite-features{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+.lite-features li{font-size:13px;color:var(--text);opacity:0.85}
+.lite-right{text-align:right;padding-left:32px;border-left:1px solid var(--border)}
+.lite-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue-light);text-transform:uppercase;margin-bottom:6px}
+.lite-price{font-family:'Barlow Condensed','Bebas Neue',sans-serif;font-size:72px;font-weight:900;color:var(--text);line-height:1;margin-bottom:8px}
+.lite-price .currency{font-size:24px;vertical-align:top;margin-top:14px;display:inline-block;color:var(--muted)}
+.lite-cuotas{font-size:12px;color:var(--muted);margin-bottom:18px}
+.lite-cuotas strong{color:var(--text);font-weight:700}
+.btn-lite-cta{display:inline-block;padding:12px 28px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-weight:700;border-radius:8px;text-decoration:none;font-size:14px;transition:all 0.2s}
+.btn-lite-cta:hover{background:var(--blue-light);color:var(--bg)}
+.pricing-divider{display:flex;align-items:center;gap:14px;margin:8px 0 28px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:2px}
+.pricing-divider::before,.pricing-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+@media(max-width:768px){.pricing-lite-wide{grid-template-columns:1fr;gap:24px;padding:24px}.lite-right{padding-left:0;border-left:none;border-top:1px solid var(--border);padding-top:20px;text-align:left}.lite-features{grid-template-columns:1fr}.lite-price{font-size:56px}}
 #whyus{background:var(--bg)}
 .comp-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
 .comp-table{width:100%;border-collapse:collapse}
@@ -200,6 +218,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <a href="#modulos" class="nav-link">El sistema</a>
     <a href="#features" class="nav-link">Qué incluye</a>
     <a href="#pricing" class="nav-link">Precios</a>
+    <a href="#agentes" class="nav-link">Agentes</a>
     <a href="#whyus" class="nav-link">Por qué Aura</a>
     <a href="/aura-food/demo" target="_blank" class="nav-cta">Ver demo →</a>
   </div>
@@ -210,6 +229,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <a href="#modulos" onclick="closeMobile()">El sistema</a>
   <a href="#features" onclick="closeMobile()">Qué incluye</a>
   <a href="#pricing" onclick="closeMobile()">Precios</a>
+  <a href="#agentes" onclick="closeMobile()">Agentes</a>
   <a href="#whyus" onclick="closeMobile()">Por qué Aura</a>
   <a href="/aura-food/demo" target="_blank" onclick="closeMobile()" style="color:var(--cyan)">🍽️ Ver demo</a>
 </div>
@@ -515,15 +535,39 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
         </div>
       </div>
     </div>
-    <div class="pricing-grid fade fade-delay-1" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="pricing-lite-wide fade fade-delay-1">
+      <div class="lite-left">
+        <span class="price-badge">Versión Lite</span>
+        <div class="lite-title">Arrancá con lo esencial</div>
+        <p class="lite-desc">Ideal para negocios que quieren digitalizar catálogo, ventas y caja sin inversión grande. Mismo sistema, versión reducida. Upgradeable a Full cuando quieras.</p>
+        <ul class="lite-features">
+          <li>✓ Catálogo / fichas básicas</li>
+          <li>✓ Ventas y caja</li>
+          <li>✓ Reportes esenciales</li>
+          <li>✓ Soporte por WhatsApp</li>
+        </ul>
+      </div>
+      <div class="lite-right">
+        <div class="lite-eyebrow">DESDE</div>
+        <div class="lite-price"><span class="currency">USD </span>200</div>
+        <div class="lite-cuotas">Pago único · O <strong>6 cuotas de USD 40/mes</strong></div>
+        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20la%20versión%20Lite%20de%20Aura%20Food." target="_blank" class="btn-secondary btn-lite-cta">Quiero la Lite →</a>
+      </div>
+    </div>
+
+    <div class="pricing-divider">
+      <span>O si querés el sistema completo</span>
+    </div>
+
+    <div class="pricing-grid fade fade-delay-2" style="grid-template-columns:1fr 1fr 1fr;">
       <div class="price-card">
         <div class="price-badge">Pago único</div>
         <div class="price-name">Aplicación</div>
         <div class="price-desc">Tu sistema listo para usar. Sos dueño de Aura Food para siempre.</div>
-        <div class="price-listed">USD 348 con financiamiento</div>
-        <div class="price-amount"><span class="currency">USD </span>290</div>
+        <div class="price-listed">USD 420 con financiamiento</div>
+        <div class="price-amount"><span class="currency">USD </span>350</div>
         <div class="price-tag">✓ Pagando al contado — ahorrás USD 58</div>
-        <div class="price-cuotas-note">O <strong>6 cuotas de USD 58/mes</strong></div>
+        <div class="price-cuotas-note">O <strong>6 cuotas de USD 70/mes</strong></div>
         <hr class="price-divider">
         <div class="price-features">
           <div class="price-feature">Sistema completo para tu restaurante</div>
@@ -765,7 +809,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <table class="comp-table">
         <thead><tr><th>Servicio</th><th>Freelancer</th><th>Agencia Pequeña</th><th>Agencia Grande</th><th class="highlight">Aura Food</th></tr></thead>
         <tbody>
-          <tr><td class="service">Sistema de gestión a medida</td><td>$1.200.000+</td><td>$6.000.000+</td><td>$15.000.000+</td><td class="highlight">USD 290 – USD 450 <span class="comp-chip chip-green">90% menos</span></td></tr>
+          <tr><td class="service">Sistema de gestión a medida</td><td>$1.200.000+</td><td>$6.000.000+</td><td>$15.000.000+</td><td class="highlight">USD 350 – USD 450 <span class="comp-chip chip-green">90% menos</span></td></tr>
           <tr><td class="service">Mantenimiento mensual</td><td>$80.000/mes</td><td>$150.000+/mes</td><td>$400.000+/mes</td><td class="highlight">$0/mes <span class="comp-chip chip-green">Gratis</span></td></tr>
           <tr><td class="service">Tiempo de entrega</td><td>2-4 meses</td><td>3-6 meses</td><td>6-12 meses</td><td class="highlight">5-15 días <span class="comp-chip chip-blue">Rápido</span></td></tr>
           <tr><td class="service">Soporte técnico</td><td>Variable</td><td>Ticketing</td><td>Contrato</td><td class="highlight">WhatsApp directo <span class="comp-chip chip-green">Inmediato</span></td></tr>
