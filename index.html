@@ -7,10 +7,20 @@
   <meta name="description" content="Yusta Labs construye sistemas de gestión a medida para cada rubro. Software real, resultados reales. Hecho en Argentina." />
   <meta property="og:title" content="Yusta Labs — Software que transforma negocios" />
   <meta property="og:description" content="Sistemas de gestión personalizados para gimnasios, restaurantes, talleres, inmobiliarias y más. Demo gratis." />
+
+  <!-- Google Analytics 4 — yustalabs.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-60G0MKXJRW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-60G0MKXJRW', { anonymize_ip: true });
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 112'%3E%3Crect width='100' height='112' fill='%2307070A'/%3E%3Cpolygon points='0,0 15,0 45,70 40,70' fill='%23F0F0F0'/%3E%3Cpolygon points='17,0 26,0 48,70 45,70' fill='%23BBBBBB'/%3E%3Cpolygon points='28,0 39,0 51,70 48,70' fill='%23888888'/%3E%3Cpolygon points='61,0 72,0 52,70 49,70' fill='%23888888'/%3E%3Cpolygon points='74,0 83,0 55,70 52,70' fill='%23BBBBBB'/%3E%3Cpolygon points='85,0 100,0 60,70 55,70' fill='%23F0F0F0'/%3E%3Crect x='40' y='72' width='7' height='40' fill='%23F0F0F0'/%3E%3Crect x='48' y='72' width='5' height='40' fill='%23BBBBBB'/%3E%3Crect x='54' y='72' width='7' height='40' fill='%23F0F0F0'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 115'%3E%3Crect width='100' height='115' fill='%2307070A'/%3E%3Cpolygon points='10,4 26,4 50,60 44,60' fill='%23F2F2F2'/%3E%3Cpolygon points='30,4 36,4 53,60 49,60' fill='%23F0B429'/%3E%3Cpolygon points='64,4 70,4 51,60 47,60' fill='%23F2F2F2'/%3E%3Cpolygon points='74,4 90,4 56,60 50,60' fill='%23F2F2F2'/%3E%3Cpath d='M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z' fill='%23F2F2F2'/%3E%3Ccircle cx='60' cy='107' r='1.8' fill='%23F0B429'/%3E%3C/svg%3E" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -105,6 +115,55 @@
     }
 
     /* ─── BUTTONS ─── */
+    /* WhatsApp FAB (floating action button, bottom-right) */
+    .wa-fab {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 900;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(37,211,102,0.35), 0 2px 6px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: waPulse 2.4s ease-in-out infinite;
+    }
+    .wa-fab:hover {
+      transform: scale(1.08);
+      box-shadow: 0 14px 40px rgba(37,211,102,0.5);
+    }
+    .wa-fab svg { width: 30px; height: 30px; }
+    .wa-fab-tip {
+      position: absolute;
+      right: 72px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #07070A;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .wa-fab:hover .wa-fab-tip { opacity: 1; }
+    @keyframes waPulse {
+      0%,100% { box-shadow: 0 10px 30px rgba(37,211,102,0.35), 0 2px 6px rgba(0,0,0,0.3), 0 0 0 0 rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 10px 30px rgba(37,211,102,0.35), 0 2px 6px rgba(0,0,0,0.3), 0 0 0 16px rgba(37,211,102,0); }
+    }
+    @media (max-width: 480px) {
+      .wa-fab { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+      .wa-fab svg { width: 26px; height: 26px; }
+      .wa-fab-tip { display: none; }
+    }
+
     .btn-gold {
       display: inline-flex;
       align-items: center;
@@ -419,16 +478,134 @@
       letter-spacing: 0.5px;
     }
 
-    /* Floating dashboard mockup */
+    /* Floating dashboard mockup (right) */
     .hero-visual {
       position: absolute;
-      right: -40px;
+      right: 24px;
       top: 50%;
       transform: translateY(-50%);
-      width: 480px;
-      z-index: 1;
+      width: clamp(300px, 30vw, 420px);
+      z-index: 3;
       animation: floatVisual 0.9s 0.5s ease both, levitate 6s 1.4s ease-in-out infinite;
       opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Floating notifications stack (left) */
+    .hero-visual-left {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(230px, 20vw, 280px);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: floatVisualL 0.9s 0.7s ease both, levitateL 7s 1.6s ease-in-out infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+    @keyframes floatVisualL {
+      from { opacity: 0; transform: translateY(calc(-50% + 30px)); }
+      to   { opacity: 1; transform: translateY(-50%); }
+    }
+    @keyframes levitateL {
+      0%,100% { transform: translateY(-50%); }
+      50%     { transform: translateY(calc(-50% - 10px)); }
+    }
+
+    .hv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 14px 13px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px);
+    }
+    .hv-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .hv-icon {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .hv-icon.green {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.25);
+      color: #10b981;
+    }
+    .hv-icon.amber {
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.25);
+      color: #f59e0b;
+    }
+    .hv-icon.blue {
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: #3b82f6;
+    }
+    .hv-label {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .hv-time {
+      margin-left: auto;
+      font-size: 10px;
+      color: var(--dim);
+      font-weight: 500;
+    }
+    .hv-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .hv-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .hv-sub .hv-amt {
+      color: var(--gold);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .hv-bar {
+      margin-top: 10px;
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .hv-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b, #F0B429);
+      border-radius: 999px;
+    }
+    .hv-pulse {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 4px rgba(16,185,129,0.15);
+      animation: hvPulse 1.6s ease-in-out infinite;
+      margin-left: auto;
+    }
+    @keyframes hvPulse {
+      0%,100% { box-shadow: 0 0 0 4px rgba(16,185,129,0.15); }
+      50%     { box-shadow: 0 0 0 8px rgba(16,185,129,0.0); }
     }
     @keyframes floatVisual {
       from { opacity: 0; transform: translateY(calc(-50% + 30px)); }
@@ -445,6 +622,26 @@
       border-radius: 14px;
       overflow: hidden;
       box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+    }
+    .mock-live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(16,185,129,0.08);
+      border-bottom: 1px solid rgba(16,185,129,0.15);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #10b981;
+    }
+    .mock-live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 4px rgba(16,185,129,0.2);
+      animation: hvPulse 1.6s ease-in-out infinite;
     }
     .mock-titlebar { display: none; }
     .mock-body { padding: 16px; }
@@ -1186,11 +1383,18 @@
       gap: 48px;
       margin-bottom: 48px;
     }
+    .footer-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .footer-brand-logo svg { width: auto; height: 44px; flex-shrink: 0; }
     .footer-brand-name {
       font-weight: 800;
-      font-size: 18px;
+      font-size: 19px;
       color: var(--text);
-      margin-bottom: 12px;
+      letter-spacing: 0.02em;
     }
     .footer-brand-name span { color: var(--gold); }
     .footer-brand-desc {
@@ -1237,8 +1441,14 @@
     /* ════════════════════════════
        RESPONSIVE
     ════════════════════════════ */
-    @media (max-width: 1100px) {
+    /* Hide floating mockups on smaller screens so they don't overlap the hero text */
+    @media (max-width: 1180px) {
+      .hero-visual-left { display: none; }
+    }
+    @media (max-width: 1000px) {
       .hero-visual { display: none; }
+    }
+    @media (max-width: 1100px) {
       .rubros-grid { grid-template-columns: repeat(3,1fr); }
       .metricas-grid { grid-template-columns: repeat(2,1fr); }
       .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -1247,29 +1457,51 @@
     @media (max-width: 768px) {
       .nav-links, .nav-links + .btn-gold { display: none; }
       .hamburger { display: flex; }
-      section { padding: 80px 0; }
+      section { padding: 72px 0; }
+      #hero { padding: 120px 0 60px; min-height: auto; }
+      .hero-title { font-size: clamp(2.2rem, 9vw, 4rem); line-height: 1.05; }
+      .hero-sub { font-size: 14.5px; line-height: 1.6; }
+      .hero-ctas { width: 100%; }
+      .hero-ctas .btn-gold, .hero-ctas .btn-outline { width: 100%; justify-content: center; padding: 14px 20px; font-size: 14px; }
+      .hero-stats { gap: 20px; flex-wrap: wrap; }
+      .hero-stat-val { font-size: 28px; }
       .problema-grid { grid-template-columns: 1fr; gap: 40px; }
       .before-after { grid-template-columns: 1fr; }
-      .rubros-grid { grid-template-columns: repeat(2,1fr); }
+      .rubros-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+      .rubro-card { padding: 18px 14px; }
+      .rubro-icon { font-size: 28px; }
+      .rubro-name { font-size: 14px; }
       .proceso-steps { grid-template-columns: 1fr; }
       .proceso-steps::before { display: none; }
       .step { padding: 0 16px 40px; text-align: left; }
       .step-num { margin: 0 0 20px 0; }
       .metricas-grid { grid-template-columns: 1fr 1fr; }
       .dif-grid { grid-template-columns: 1fr; }
-      .demos-grid { grid-template-columns: 1fr; }
+      .demos-grid { grid-template-columns: 1fr; gap: 16px; }
+      .demo-card { padding: 20px; }
       .footer-inner { grid-template-columns: 1fr; gap: 32px; }
       .vs-header, .vs-row { grid-template-columns: 2fr 1fr 1fr; font-size: 12px; }
-      .hero-stats { gap: 28px; }
-      .rubros-grid { grid-template-columns: repeat(2,1fr); }
+      .apps-pricing-cards { gap: 12px; }
+      .apc { padding: 18px; }
+      /* Ensure tappable targets ≥44px high on all buttons */
+      .btn-gold, .btn-outline { min-height: 44px; }
     }
 
     @media (max-width: 480px) {
-      .rubros-grid { grid-template-columns: 1fr 1fr; }
+      .container { padding: 0 16px; }
+      .rubros-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .rubro-card { padding: 14px 10px; }
       .metricas-grid { grid-template-columns: 1fr 1fr; }
       .hero-ctas { flex-direction: column; }
-      .cta-buttons { flex-direction: column; align-items: center; }
-      .trust-badges { flex-direction: column; align-items: center; gap: 16px; }
+      .cta-buttons { flex-direction: column; align-items: stretch; }
+      .cta-buttons .btn-gold, .cta-buttons .btn-outline { width: 100%; justify-content: center; }
+      .trust-badges { flex-direction: column; align-items: center; gap: 12px; }
+      .hero-badge { font-size: 10px; padding: 6px 12px; }
+      .section-eyebrow { font-size: 10px; }
+      h2 { font-size: clamp(1.8rem, 7vw, 2.6rem) !important; line-height: 1.1; }
+      .apps-pricing-cards { grid-template-columns: 1fr; }
+      /* Iframe demos en mobile: altura fija razonable */
+      .demo-iframe-wrap iframe, iframe { max-height: 560px; }
     }
 
     /* ════════════════════════════
@@ -2305,11 +2537,12 @@
       margin-top: 2px;
       margin-bottom: 12px;
     }
-    .apc-listed {
-      font-size: 11px;
-      color: var(--dim);
-      text-decoration: line-through;
-      letter-spacing: 0.02em;
+    .apc-from {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       margin-bottom: 2px;
     }
     .apc-cash {
@@ -2318,7 +2551,7 @@
       color: var(--gold);
       letter-spacing: 0.04em;
       line-height: 1;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
     .apc-cur {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -2329,28 +2562,43 @@
       margin-top: 5px;
       display: inline-block;
     }
-    .apc-save {
+    .apc-tier {
       font-size: 10px;
       font-weight: 700;
       color: #6ee7b7;
       background: rgba(110,231,183,0.07);
-      border: 1px solid rgba(110,231,183,0.12);
+      border: 1px solid rgba(110,231,183,0.16);
       border-radius: 5px;
-      padding: 2px 7px;
+      padding: 2px 8px;
       display: inline-block;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .apc-full {
+      font-size: 11px;
+      color: var(--muted);
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .apc-full-label { font-weight: 600; }
+    .apc-full-price {
+      color: var(--text);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
     }
     .apc-cuotas {
       font-size: 11px;
-      color: var(--muted);
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
-      margin-top: auto;
+      color: var(--dim);
+      margin-top: 6px;
     }
     .apc-cuotas strong {
-      color: var(--text);
+      color: var(--muted);
       font-weight: 600;
     }
 
@@ -2708,20 +2956,14 @@
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <!-- Y mark: 3 franjas por brazo + tallo, adaptado a fondo oscuro -->
-      <svg viewBox="0 0 100 112" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Brazo izquierdo: outer blanco, middle gris, inner gris oscuro -->
-        <polygon points="0,0 15,0 45,70 40,70"   fill="#F0F0F0"/>
-        <polygon points="17,0 26,0 48,70 45,70"  fill="#BBBBBB"/>
-        <polygon points="28,0 39,0 51,70 48,70"  fill="#888888"/>
-        <!-- Brazo derecho: espejo -->
-        <polygon points="61,0 72,0 52,70 49,70"  fill="#888888"/>
-        <polygon points="74,0 83,0 55,70 52,70"  fill="#BBBBBB"/>
-        <polygon points="85,0 100,0 60,70 55,70" fill="#F0F0F0"/>
-        <!-- Tallo: 3 franjas verticales -->
-        <rect x="40" y="72" width="7"  height="40" fill="#F0F0F0"/>
-        <rect x="48" y="72" width="5"  height="40" fill="#BBBBBB"/>
-        <rect x="54" y="72" width="7"  height="40" fill="#F0F0F0"/>
+      <!-- Yusta Labs · Y monogram · white + gold accent + dot (final v3) -->
+      <svg viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,4 26,4 50,60 44,60" fill="#F2F2F2"/>
+        <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+        <polygon points="64,4 70,4 51,60 47,60" fill="#F2F2F2"/>
+        <polygon points="74,4 90,4 56,60 50,60" fill="#F2F2F2"/>
+        <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#F2F2F2"/>
+        <circle cx="60" cy="107" r="1.8" fill="#F0B429"/>
       </svg>
       <span class="nav-logo-name">Yusta<span> Labs</span></span>
     </a>
@@ -2782,10 +3024,32 @@
         Construimos <strong>sistemas de gestión a medida</strong> para cada rubro.
         Desde gimnasios hasta talleres mecánicos — software que resuelve tus problemas reales, sin complicaciones.
       </p>
+      <p class="hero-sub-line" style="margin-top:10px;font-size:13.5px;color:var(--muted);letter-spacing:0.01em;">
+        <span style="color:var(--gold);font-weight:700;">11 rubros</span> · desde USD 200, tuyo para siempre · entrega en 2 semanas
+      </p>
 
       <div class="hero-ctas">
         <a href="#demos" class="btn-gold">Ver demos en vivo →</a>
-        <a href="#contacto" class="btn-outline">Hablar con un humano</a>
+        <a href="#precios" class="btn-outline">Ver precios</a>
+      </div>
+
+      <!-- Social proof strip -->
+      <div class="hero-trust" style="display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-flex;">
+            <span style="color:#F0B429;">★</span><span style="color:#F0B429;">★</span><span style="color:#F0B429;">★</span><span style="color:#F0B429;">★</span><span style="color:#F0B429;">★</span>
+          </span>
+          <span><strong style="color:var(--text);">5.0</strong> · Clientes reales</span>
+        </div>
+        <span style="color:var(--border);">·</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,0.15);display:inline-block;"></span>
+          <span><strong style="color:var(--text);">10 demos</strong> funcionando en vivo</span>
+        </div>
+        <span style="color:var(--border);">·</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span>🇦🇷</span><span>Hecho en Argentina</span>
+        </div>
       </div>
 
       <div class="hero-stats">
@@ -2809,9 +3073,56 @@
     </div>
   </div>
 
+  <!-- Floating notifications stack (left side) -->
+  <div class="hero-visual-left">
+    <!-- Card 1: Venta registrada -->
+    <div class="hv-card">
+      <div class="hv-card-head">
+        <div class="hv-icon green">✓</div>
+        <div>
+          <div class="hv-label">Nueva venta</div>
+        </div>
+        <div class="hv-time">hace 2 min</div>
+      </div>
+      <div class="hv-title">García, M.</div>
+      <div class="hv-sub">Pago en efectivo · <span class="hv-amt">$12.500</span></div>
+    </div>
+
+    <!-- Card 2: Stock bajo -->
+    <div class="hv-card">
+      <div class="hv-card-head">
+        <div class="hv-icon amber">⚠</div>
+        <div>
+          <div class="hv-label">Stock bajo</div>
+        </div>
+        <div class="hv-time">hoy</div>
+      </div>
+      <div class="hv-title">Yerba Playadito 1kg</div>
+      <div class="hv-sub">Quedan <span class="hv-amt">5 unidades</span> · Mín: 20</div>
+      <div class="hv-bar"><span style="width:22%"></span></div>
+    </div>
+
+    <!-- Card 3: Cliente activo -->
+    <div class="hv-card">
+      <div class="hv-card-head">
+        <div class="hv-icon blue">●</div>
+        <div>
+          <div class="hv-label">Cuenta corriente</div>
+        </div>
+        <div class="hv-pulse"></div>
+      </div>
+      <div class="hv-title">Distribuidora López</div>
+      <div class="hv-sub">Abonó <span class="hv-amt">$5.000</span> por transferencia</div>
+    </div>
+  </div>
+
   <!-- Floating mock dashboard -->
   <div class="hero-visual">
     <div class="mock-window">
+      <div class="mock-live-badge">
+        <span class="mock-live-dot"></span>
+        <span>En vivo · Aura OS</span>
+      </div>
       <div class="mock-body">
         <div class="mock-kpis">
           <div class="mock-kpi">
@@ -3387,6 +3698,83 @@
 </section>
 
 <!-- ═══════════ PRECIOS ═══════════ -->
+<!-- ═══════════ COMPARATIVA ═══════════ -->
+<section id="comparativa" style="padding:100px 0;background:linear-gradient(180deg, transparent 0%, rgba(240,180,41,0.02) 50%, transparent 100%);">
+  <div class="container">
+    <span class="section-eyebrow reveal">Por qué Aura</span>
+    <h2 class="reveal reveal-delay-1" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:0.02em;line-height:1;margin-top:14px;">
+      Lo que tenés hoy vs. <span style="color:var(--gold);">lo que merecés</span>
+    </h2>
+    <p class="muted reveal reveal-delay-2" style="margin-top:14px;font-size:14px;max-width:600px;line-height:1.7;">
+      Sistemas genéricos cobran por usuario, por mes, para siempre. Aura se hace una vez, es tuyo, y se adapta a tu rubro.
+    </p>
+
+    <div class="comp-table-wrap reveal reveal-delay-2" style="margin-top:42px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);">
+      <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;background:rgba(240,180,41,0.06);border-bottom:1px solid var(--border);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);">
+        <div style="padding:18px 20px;"></div>
+        <div style="padding:18px 20px;text-align:center;color:var(--gold);">Aura · Yusta Labs</div>
+        <div style="padding:18px 20px;text-align:center;">Contabilium / Tango</div>
+        <div style="padding:18px 20px;text-align:center;">Excel / Cuaderno</div>
+      </div>
+      <div class="comp-rows" style="font-size:13.5px;">
+        <!-- Cada fila -->
+        <div class="comp-row" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;color:var(--text);font-weight:600;">Adaptado a tu rubro</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+          <div style="padding:16px 20px;text-align:center;color:var(--dim);">Genérico</div>
+          <div style="padding:16px 20px;text-align:center;color:var(--dim);">—</div>
+        </div>
+        <div class="comp-row" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;color:var(--text);font-weight:600;">Pago único — es tuyo</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+          <div style="padding:16px 20px;text-align:center;color:#ef4444;">Suscripción</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+        </div>
+        <div class="comp-row" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;color:var(--text);font-weight:600;">Sin límite de usuarios</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+          <div style="padding:16px 20px;text-align:center;color:#ef4444;">Por usuario</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+        </div>
+        <div class="comp-row" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;color:var(--text);font-weight:600;">Soporte humano en español</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+          <div style="padding:16px 20px;text-align:center;color:var(--dim);">Tickets</div>
+          <div style="padding:16px 20px;text-align:center;color:var(--dim);">—</div>
+        </div>
+        <div class="comp-row" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;color:var(--text);font-weight:600;">Tus datos en tu hosting</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+          <div style="padding:16px 20px;text-align:center;color:#ef4444;">En su nube</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+        </div>
+        <div class="comp-row" style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;">
+          <div style="padding:16px 20px;color:var(--text);font-weight:600;">Modificaciones a medida</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+          <div style="padding:16px 20px;text-align:center;color:#ef4444;">No</div>
+          <div style="padding:16px 20px;text-align:center;color:#10b981;font-size:18px;">✓</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="muted reveal" style="margin-top:18px;font-size:12px;text-align:center;">
+      Comparativa en base a planes públicos de cada proveedor a abril 2026.
+    </p>
+  </div>
+</section>
+
+<!-- Mobile responsive override for comp-table -->
+<style>
+  @media (max-width: 768px) {
+    .comp-table-wrap > div:first-child > div:nth-child(3),
+    .comp-row > div:nth-child(3) { display: none; }
+    .comp-table-wrap > div:first-child,
+    .comp-row { grid-template-columns: 1.4fr 1fr 1fr !important; }
+    .comp-table-wrap > div:first-child > div { font-size: 10px !important; padding: 12px 8px !important; }
+    .comp-row > div { padding: 12px 10px !important; font-size: 12px !important; }
+  }
+</style>
+
 <section id="precios">
   <div class="container">
     <span class="section-eyebrow reveal">Inversión</span>
@@ -3395,97 +3783,126 @@
       Sin suscripciones eternas. El sistema es 100% tuyo desde el día uno. Pagás al contado y <strong style="color:var(--text)">ahorrás hasta un 17%</strong>, o financialo en <strong style="color:var(--text)">6 cuotas sin interés</strong>. Incluye 12 meses de hosting, capacitación y soporte.
     </p>
 
-    <!-- PRICING CARDS -->
+    <!-- PRICING CARDS — Lite (entry) + Full (top) per producto -->
     <div class="apps-pricing-cards reveal">
+
       <div class="apc">
         <span class="apc-name">Aura Commerce</span>
         <span class="apc-rubro">Kioscos y almacenes</span>
-        <div class="apc-listed">USD 480 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>400</div>
-        <div class="apc-save">Ahorrás USD 80 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>250</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 400</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 80/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Tools</span>
         <span class="apc-rubro">Ferreterías</span>
-        <div class="apc-listed">USD 420 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>350</div>
-        <div class="apc-save">Ahorrás USD 70 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>200</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 350</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 70/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Wear</span>
         <span class="apc-rubro">Indumentaria</span>
-        <div class="apc-listed">USD 420 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>350</div>
-        <div class="apc-save">Ahorrás USD 70 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>200</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 350</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 70/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Salon</span>
         <span class="apc-rubro">Peluquerías y estéticas</span>
-        <div class="apc-listed">USD 540 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>450</div>
-        <div class="apc-save">Ahorrás USD 90 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>300</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 450</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 90/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Auto</span>
         <span class="apc-rubro">Talleres mecánicos</span>
-        <div class="apc-listed">USD 480 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>400</div>
-        <div class="apc-save">Ahorrás USD 80 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>250</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 400</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 80/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Vet</span>
         <span class="apc-rubro">Veterinarias</span>
-        <div class="apc-listed">USD 420 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>350</div>
-        <div class="apc-save">Ahorrás USD 70 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>200</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 350</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 70/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Fit</span>
         <span class="apc-rubro">Gimnasios y fitness</span>
-        <div class="apc-listed">USD 960 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>800</div>
-        <div class="apc-save">Ahorrás USD 160 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>400</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 800</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 160/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Food</span>
         <span class="apc-rubro">Restaurantes y delivery</span>
-        <div class="apc-listed">USD 420 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>350</div>
-        <div class="apc-save">Ahorrás USD 70 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>200</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 350</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 70/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Prop</span>
         <span class="apc-rubro">Inmobiliarias</span>
-        <div class="apc-listed">USD 840 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>700</div>
-        <div class="apc-save">Ahorrás USD 140 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>350</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 700</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 140/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Logistic</span>
         <span class="apc-rubro">Mensajería y logística</span>
-        <div class="apc-listed">USD 840 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>700</div>
-        <div class="apc-save">Ahorrás USD 140 al contado</div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>350</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 700</span></div>
         <div class="apc-cuotas">O <strong>6 cuotas de USD 140/mes</strong></div>
       </div>
+
       <div class="apc">
         <span class="apc-name">Aura Finance</span>
         <span class="apc-rubro">Financieras y préstamos</span>
-        <div class="apc-listed">USD 1.440 con financiamiento</div>
-        <div class="apc-cash"><span class="apc-cur">USD </span>1.200</div>
-        <div class="apc-save">Ahorrás USD 240 al contado</div>
-        <div class="apc-cuotas">O <strong>6 cuotas de USD 240/mes</strong></div>
+        <div class="apc-from">Desde</div>
+        <div class="apc-cash"><span class="apc-cur">USD </span>450</div>
+        <div class="apc-tier">Versión Lite</div>
+        <div class="apc-full"><span class="apc-full-label">Versión completa</span><span class="apc-full-price">USD 900</span></div>
+        <div class="apc-cuotas">O <strong>6 cuotas de USD 180/mes</strong></div>
       </div>
+
     </div>
+
+    <p class="muted reveal" style="margin-top:18px;font-size:12.5px;line-height:1.7;max-width:780px;">
+      <strong style="color:var(--text);">Versión Lite:</strong> features esenciales, ideal para arrancar (catálogo, ventas, caja básica).
+      <strong style="color:var(--text);">Versión Completa:</strong> todos los módulos del demo + reportes + integraciones + soporte extendido.
+      Ambas son perpetuas — pagás una vez, son tuyas para siempre.
+    </p>
 
     <!-- INCLUDES + CALLOUT -->
     <div class="includes-block reveal">
@@ -3528,7 +3945,7 @@
       <div class="custom-card">
         <div class="custom-tier">Nivel 1</div>
         <div class="custom-name">Custom Simple</div>
-        <div class="custom-price"><span>USD </span>1.500</div>
+        <div class="custom-price"><span>USD </span>1.000</div>
         <div class="custom-entrega">⏱ Entrega: 2-3 semanas</div>
         <p class="custom-desc">3 a 5 pantallas, lógica de negocio básica, punto de venta + control de stock. Ideal para negocios con flujos simples que necesitan digitalizar operaciones clave.</p>
         <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20un%20desarrollo%20Custom%20Simple%20para%20mi%20negocio." target="_blank" class="btn-outline" style="width:100%;justify-content:center;">Contanos qué necesitás →</a>
@@ -3537,7 +3954,7 @@
       <div class="custom-card featured-c">
         <div class="custom-tier">Nivel 2 · Más elegido</div>
         <div class="custom-name">Custom Medio</div>
-        <div class="custom-price"><span>USD </span>3.000</div>
+        <div class="custom-price"><span>USD </span>2.000</div>
         <div class="custom-entrega">⏱ Entrega: 3-5 semanas</div>
         <p class="custom-desc">5 a 10 pantallas, múltiples roles de usuario, integraciones externas (WhatsApp, pagos, reportes). Para negocios con procesos más complejos o varios empleados.</p>
         <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20un%20desarrollo%20Custom%20Medio%20para%20mi%20negocio." target="_blank" class="btn-gold" style="width:100%;justify-content:center;">Contanos qué necesitás →</a>
@@ -3546,7 +3963,7 @@
       <div class="custom-card">
         <div class="custom-tier">Nivel 3</div>
         <div class="custom-name">Custom Avanzado</div>
-        <div class="custom-price"><span>USD </span>5.000<span style="font-size:1rem;vertical-align:middle;margin-top:0">+</span></div>
+        <div class="custom-price"><span>USD </span>3.000<span style="font-size:1rem;vertical-align:middle;margin-top:0">+</span></div>
         <div class="custom-entrega">⏱ Entrega: 5-8 semanas</div>
         <p class="custom-desc">Multi-módulo, APIs propias, plataforma completa. Para proyectos ambiciosos que necesitan escalar: franquicias, plataformas multi-usuario, integraciones complejas.</p>
         <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20un%20desarrollo%20Custom%20Avanzado%20para%20mi%20negocio." target="_blank" class="btn-outline" style="width:100%;justify-content:center;">Contanos qué necesitás →</a>
@@ -3960,7 +4377,17 @@
   <div class="container">
     <div class="footer-inner">
       <div>
-        <div class="footer-brand-name">Yusta<span> Labs</span></div>
+        <div class="footer-brand-logo">
+          <svg viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Yusta Labs">
+            <polygon points="10,4 26,4 50,60 44,60" fill="#F2F2F2"/>
+            <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+            <polygon points="64,4 70,4 51,60 47,60" fill="#F2F2F2"/>
+            <polygon points="74,4 90,4 56,60 50,60" fill="#F2F2F2"/>
+            <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#F2F2F2"/>
+            <circle cx="60" cy="107" r="1.8" fill="#F0B429"/>
+          </svg>
+          <div class="footer-brand-name">Yusta<span> Labs</span></div>
+        </div>
         <p class="footer-brand-desc">
           Construimos sistemas de gestión a medida para negocios reales. Software que resuelve problemas concretos, sin vueltas.
         </p>
@@ -4163,16 +4590,21 @@
   /* ─── NAVBAR ACTIVE SECTION HIGHLIGHT ─── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-  const sectionIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(a => {
-          a.style.color = a.getAttribute('href') === '#' + e.target.id ? 'var(--gold)' : '';
-        });
-      }
+  const navIds = new Set(Array.from(navLinks).map(a => a.getAttribute('href').slice(1)));
+
+  function updateActiveNav() {
+    const scrollY = window.scrollY + 120;
+    let currentId = '';
+    sections.forEach(s => {
+      if (navIds.has(s.id) && s.offsetTop <= scrollY) currentId = s.id;
     });
-  }, { threshold: 0.35 });
-  sections.forEach(s => sectionIO.observe(s));
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + currentId ? 'var(--gold)' : '';
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
 
   /* ─── FORMULARIO AGENTES → WHATSAPP ─── */
   function enviarFormAgentes(e) {
@@ -4200,5 +4632,10 @@
   }
 
 </script>
+<!-- WhatsApp FAB — always visible -->
+<a href="https://wa.me/541132609254?text=Hola!%20Vi%20Yusta%20Labs%20y%20me%20interesa%20una%20demo%20para%20mi%20negocio." target="_blank" class="wa-fab" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-fab-tip">Hablemos en 30 seg</span>
+</a>
 </body>
 </html>
