@@ -77,6 +77,16 @@
   /* Search highlight */
   .highlight{background:rgba(6,214,160,.25);border-radius:2px}
   .hidden-search{display:none}
+  /* Agents */
+  .agent-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px}
+  .agent-head{display:flex;align-items:center;gap:12px}
+  .agent-ico{font-size:26px;min-width:40px;height:40px;border-radius:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);display:flex;align-items:center;justify-content:center}
+  .agent-name{font-size:14px;font-weight:700;color:#fff}
+  .agent-tag{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--accent);margin-top:2px}
+  .agent-desc{font-size:12px;color:var(--muted);line-height:1.6}
+  .agent-flow{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .agent-step{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--muted);padding:6px 10px;background:rgba(255,255,255,.02);border-left:2px solid var(--accent);border-radius:4px}
+  .agent-step b{color:#fff;font-weight:600;min-width:60px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
 
   #auth-gate {
     position: fixed; inset: 0; z-index: 9999;
@@ -145,6 +155,7 @@
   <a href="#overview" class="sidebar-link"><span class="icon">🧠</span> Overview</a>
   <a href="#cross-ref" class="sidebar-link"><span class="icon">🔀</span> Cross-reference</a>
   <a href="#shared" class="sidebar-link"><span class="icon">⚙️</span> Lógica compartida</a>
+  <a href="#agentes" class="sidebar-link"><span class="icon">🤖</span> Agentes IA</a>
   <div class="sidebar-section">Apps</div>
   <a href="#salon" class="sidebar-link"><span class="icon">💈</span> Aura Salon</a>
   <a href="#fit" class="sidebar-link"><span class="icon">🏋️</span> Aura Fit</a>
@@ -250,8 +261,144 @@
 </div>
   </section>
 
+  <!-- AGENTES IA -->
+  <section class="section" id="agentes" data-searchable>
+    <div class="section-header">
+      <span class="section-icon">🤖</span>
+      <div>
+        <div class="section-title">Agentes IA</div>
+        <div class="section-desc">Framework de agentes autónomos compartido por todas las apps Aura</div>
+      </div>
+      <span class="section-badge">FRAMEWORK</span>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <h3>Patrón de 3 fases</h3>
+      <p style="margin-top:8px">Cada agente Aura se construye sobre el mismo ciclo: <code>Detecta</code> un trigger (evento, fecha, umbral) → <code>Analiza</code> cruzando data del negocio (Firestore, historial, reglas) → <code>Actúa</code> ejecutando una acción automática (WhatsApp, email, notificación, alta de registro). Los 6 arquetipos se adaptan al rubro de cada app, pero la arquitectura y el runtime son compartidos.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="agent-card">
+        <div class="agent-head">
+          <div class="agent-ico">💬</div>
+          <div>
+            <div class="agent-name">El Recepcionista / Vendedor Virtual</div>
+            <div class="agent-tag">Agente de atención</div>
+          </div>
+        </div>
+        <div class="agent-desc">Atención 24/7 por WhatsApp. Responde consultas, toma reservas, envía catálogo, califica leads y deriva a humano cuando corresponde.</div>
+        <div class="agent-flow">
+          <div class="agent-step"><b>Detecta</b><span>Mensaje entrante de WhatsApp o formulario web sin respuesta humana</span></div>
+          <div class="agent-step"><b>Analiza</b><span>Intención del cliente + disponibilidad (agenda/stock) + historial previo</span></div>
+          <div class="agent-step"><b>Actúa</b><span>Responde, agenda turno, envía link de pago o escala a dueño</span></div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-head">
+          <div class="agent-ico">💸</div>
+          <div>
+            <div class="agent-name">El Cobrador</div>
+            <div class="agent-tag">Agente de cobranzas</div>
+          </div>
+        </div>
+        <div class="agent-desc">Persigue pagos y cuotas vencidas sin intervención humana, escalando tono y canal según días de atraso.</div>
+        <div class="agent-flow">
+          <div class="agent-step"><b>Detecta</b><span>Cuota, factura o plan próximo a vencer / ya vencido</span></div>
+          <div class="agent-step"><b>Analiza</b><span>Monto, días de atraso, historial de pago, método preferido del cliente</span></div>
+          <div class="agent-step"><b>Actúa</b><span>Envía WhatsApp con link de pago, recordatorio escalado y alerta al dueño</span></div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-head">
+          <div class="agent-ico">📦</div>
+          <div>
+            <div class="agent-name">El Almacenero / Stock Manager</div>
+            <div class="agent-tag">Agente de inventario</div>
+          </div>
+        </div>
+        <div class="agent-desc">Monitorea inventario en tiempo real, anticipa quiebres y genera órdenes de reposición sugeridas al proveedor.</div>
+        <div class="agent-flow">
+          <div class="agent-step"><b>Detecta</b><span>Producto debajo de umbral mínimo o velocidad de venta anómala</span></div>
+          <div class="agent-step"><b>Analiza</b><span>Stock actual + ventas últimos 30 días + lead time del proveedor</span></div>
+          <div class="agent-step"><b>Actúa</b><span>Genera orden de compra sugerida y notifica al encargado por WhatsApp</span></div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-head">
+          <div class="agent-ico">📊</div>
+          <div>
+            <div class="agent-name">El Analista</div>
+            <div class="agent-tag">Agente de reportes</div>
+          </div>
+        </div>
+        <div class="agent-desc">Resume el negocio en lenguaje natural. Entrega reportes ejecutivos diarios/semanales con insights accionables.</div>
+        <div class="agent-flow">
+          <div class="agent-step"><b>Detecta</b><span>Corte de día/semana/mes o pedido manual del dueño</span></div>
+          <div class="agent-step"><b>Analiza</b><span>KPIs (ventas, ticket promedio, cancelaciones, márgenes) vs. período anterior</span></div>
+          <div class="agent-step"><b>Actúa</b><span>Envía resumen por WhatsApp/email con 3 insights y acción recomendada</span></div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-head">
+          <div class="agent-ico">📣</div>
+          <div>
+            <div class="agent-name">El Promotor / Community</div>
+            <div class="agent-tag">Agente de marketing</div>
+          </div>
+        </div>
+        <div class="agent-desc">Lanza campañas y recordatorios segmentados. Genera copy, arma lista y dispara en batch por WhatsApp.</div>
+        <div class="agent-flow">
+          <div class="agent-step"><b>Detecta</b><span>Fecha clave (cumple, temporada, feriado) o caída en métrica (ocupación, ventas)</span></div>
+          <div class="agent-step"><b>Analiza</b><span>Segmento objetivo + oferta disponible + historial de respuesta previa</span></div>
+          <div class="agent-step"><b>Actúa</b><span>Genera mensaje personalizado y envía batch WhatsApp con tracking</span></div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-head">
+          <div class="agent-ico">❤️</div>
+          <div>
+            <div class="agent-name">El Fidelizador</div>
+            <div class="agent-tag">Agente de retención</div>
+          </div>
+        </div>
+        <div class="agent-desc">Detecta clientes inactivos antes de perderlos y dispara acciones de reenganche con incentivo personalizado.</div>
+        <div class="agent-flow">
+          <div class="agent-step"><b>Detecta</b><span>Cliente sin interacción/compra en X días según rubro</span></div>
+          <div class="agent-step"><b>Analiza</b><span>LTV, frecuencia previa, productos/servicios favoritos del cliente</span></div>
+          <div class="agent-step"><b>Actúa</b><span>Envía WhatsApp con beneficio puntual (descuento, regalo, turno prioritario)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cross reference agentes -->
+    <div class="card" style="margin-top:20px">
+      <h3>Qué agente vive en cada app</h3>
+      <div style="overflow-x:auto;margin-top:12px">
+        <table class="cross-table">
+          <thead><tr>
+            <th>Agente</th>
+            <th title="Aura Salon">💈</th><th title="Aura Fit">🏋️</th><th title="Aura Finance">💰</th><th title="Aura Tools">🔧</th><th title="Aura Vet">🐾</th><th title="Aura Auto">🚗</th><th title="Aura Logistic">🚚</th><th title="Aura Food">🍕</th><th title="Aura Wear">👗</th><th title="Aura Prop">🏠</th><th title="Aura Commerce">🛒</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>💬 Recepcionista / Vendedor</td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>💸 Cobrador</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>📦 Almacenero / Stock</td><td class=""></td><td class=""></td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class="yes">✓</td></tr>
+            <tr><td>📊 Analista</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>📣 Promotor / Community</td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class=""></td><td class="yes">✓</td><td class=""></td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>❤️ Fidelizador</td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class=""></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- APPS -->
-  
+
   <section class="section" id="salon" data-searchable>
     <div class="section-header">
       <span class="section-icon">💈</span>
@@ -1247,6 +1394,12 @@
           <span style="color:#06d6a0;font-weight:600;margin-right:6px">→</span>Stock se descuenta en tiempo real al confirmar venta
         </div><div class="rule-item" style="border-left-color:#06d6a0">
           <span style="color:#06d6a0;font-weight:600;margin-right:6px">→</span>Panel Admin separado en yusta-labs-panel-admin con roles y gestión de sucursales
+        </div><div class="rule-item" style="border-left-color:#06d6a0">
+          <span style="color:#06d6a0;font-weight:600;margin-right:6px">→</span>Auth: Firebase Google OAuth (único proveedor habilitado)
+        </div><div class="rule-item" style="border-left-color:#06d6a0">
+          <span style="color:#06d6a0;font-weight:600;margin-right:6px">→</span>PWA instalable (manifest + service worker) — funciona offline para lectura
+        </div><div class="rule-item" style="border-left-color:#06d6a0">
+          <span style="color:#06d6a0;font-weight:600;margin-right:6px">→</span>Agentes IA integrados — ver sección <a href="#agentes" style="color:#06d6a0">#agentes</a>
         </div>
       </div>
     </div>
