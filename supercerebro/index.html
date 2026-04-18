@@ -1304,14 +1304,21 @@ function doSearch(q) {
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-const firebaseConfig = {
-  "apiKey": "AIzaSyASOscTXblDvOL1E_AGe3JMx8eK6RYVbe4",
-  "authDomain": "aura-commerce-93e34.firebaseapp.com",
-  "projectId": "aura-commerce-93e34",
-  "storageBucket": "aura-commerce-93e34.firebasestorage.app",
-  "messagingSenderId": "573180517854",
-  "appId": "1:573180517854:web:44e7cc97232282da5fd14f"
-};
+// Config de Firebase cargada desde serverless function (/api/firebase-config).
+// Las env vars se configuran en Vercel → Project → Settings → Environment Variables.
+// Esta API Key DEBE estar restringida por HTTP referrer en Google Cloud Console
+// (APIs & Services → Credentials → HTTP referrers: yustalabs.com, *.yustalabs.com, localhost).
+const firebaseConfig = await fetch('/api/firebase-config')
+  .then(r => {
+    if (!r.ok) throw new Error('Config endpoint returned ' + r.status);
+    return r.json();
+  })
+  .catch(err => {
+    document.getElementById('auth-error').textContent = 'Error de configuración. Contactar admin.';
+    console.error('Firebase config load failed:', err);
+    throw err;
+  });
+
 const ALLOWED_EMAIL = 'nicozero1999@gmail.com';
 
 const app = initializeApp(firebaseConfig);
