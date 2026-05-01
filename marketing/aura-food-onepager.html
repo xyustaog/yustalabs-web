@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Aura Food - Yusta Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    background: #FAFAF7;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    color: #0F0F14;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 12mm 14mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ======= HEADER ======= */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6mm;
+    border-bottom: 1px solid #F0B429;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: #0F0F14;
+    line-height: 1;
+  }
+  .brand-sub {
+    font-size: 8.5px;
+    letter-spacing: 2.5px;
+    color: #5A5A66;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .chip {
+    background: #F0B429;
+    color: #0F0F14;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 0 #D99614;
+  }
+
+  /* ======= HERO ======= */
+  .hero {
+    padding: 9mm 0 7mm;
+    border-bottom: 1px solid #E8E5DD;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #D99614;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 78px;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    color: #0F0F14;
+    margin-bottom: 6px;
+  }
+  .hero-title .accent { color: #F0B429; }
+  .hero-subtitle {
+    font-size: 17px;
+    font-weight: 600;
+    color: #0F0F14;
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+  .hero-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #5A5A66;
+    max-width: 165mm;
+  }
+
+  /* ======= BENEFITS ======= */
+  .benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 6mm 0;
+  }
+  .benefit {
+    background: #FFFFFF;
+    border: 1px solid #E8E5DD;
+    border-radius: 10px;
+    padding: 12px 13px;
+    position: relative;
+  }
+  .benefit::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 12px; bottom: 12px;
+    width: 3px;
+    background: #F0B429;
+    border-radius: 2px;
+  }
+  .benefit-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .benefit-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0F0F14;
+    margin-bottom: 5px;
+    letter-spacing: -0.1px;
+  }
+  .benefit-text {
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: #5A5A66;
+  }
+
+  /* ======= INCLUDES ======= */
+  .includes {
+    padding: 5mm 0 4mm;
+    border-top: 1px solid #E8E5DD;
+    border-bottom: 1px solid #E8E5DD;
+  }
+  .includes-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2.5px;
+    color: #0F0F14;
+    margin-bottom: 8px;
+  }
+  .includes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+  }
+  .include-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: #0F0F14;
+    padding: 3px 0;
+  }
+  .tick {
+    width: 16px; height: 16px;
+    background: #F0B429;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F0F14;
+    font-size: 10px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* ======= PRICE BLOCK ======= */
+  .price-block {
+    background: #FFF8E5;
+    border: 1.5px solid #F0B429;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 5mm;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+  }
+  .price-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(245,197,73,0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .price-info { flex: 1; position: relative; }
+  .price-label {
+    font-size: 9.5px;
+    letter-spacing: 3px;
+    color: #D99614;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: -4px;
+  }
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 62px;
+    line-height: 1;
+    color: #0F0F14;
+    letter-spacing: 1px;
+  }
+  .price-amount .currency { font-size: 28px; vertical-align: top; margin-right: 4px; color: #D99614; }
+  .price-terms {
+    font-size: 10.5px;
+    color: #0F0F14;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .price-demo {
+    font-size: 10px;
+    color: #5A5A66;
+    margin-top: 6px;
+    line-height: 1.45;
+  }
+  .price-demo b { color: #0F0F14; }
+  .qr-wrap {
+    width: 90px;
+    height: 90px;
+    background: #FFFFFF;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #E8E5DD;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .qr-caption {
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7.5px;
+    color: #5A5A66;
+    letter-spacing: 0.5px;
+  }
+
+  /* ======= FOOTER ======= */
+  .footer {
+    margin-top: auto;
+    padding-top: 5mm;
+    border-top: 1px solid #F0B429;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #5A5A66;
+  }
+  .footer-center {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    color: #0F0F14;
+    letter-spacing: 2px;
+  }
+  .footer-item { display: inline-flex; align-items: center; gap: 5px; }
+  .footer-left { display: flex; flex-direction: column; gap: 2px; }
+  .footer-right { text-align: right; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* Decorative gold corner accent */
+  .corner-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70mm;
+    height: 70mm;
+    background: radial-gradient(circle at 100% 0%, rgba(240,180,41,0.08), transparent 70%);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="corner-accent"></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <svg viewBox="0 0 100 115" width="38" height="44" fill="none">
+        <polygon points="10,4 26,4 50,60 44,60" fill="#0F0F14"/>
+        <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+        <polygon points="64,4 70,4 51,60 47,60" fill="#0F0F14"/>
+        <polygon points="74,4 90,4 56,60 50,60" fill="#0F0F14"/>
+        <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#0F0F14"/>
+        <circle cx="60" cy="107" r="1.8" fill="#F0B429"/>
+      </svg>
+      <div>
+        <div class="brand-name">YUSTA LABS</div>
+        <div class="brand-sub">Software Boutique</div>
+      </div>
+    </div>
+    <div class="chip">Aura &middot; Food</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Gestion para gastronomia</div>
+    <h1 class="hero-title">AURA <span class="accent">FOOD</span></h1>
+    <div class="hero-subtitle">El sistema completo para tu restaurante, bar o delivery.</div>
+    <p class="hero-desc">Mesas, comandas, cocina (KDS), inventario, caja y reportes &mdash; todo en una sola pantalla. Pensado para como trabaja tu negocio en Argentina, sin mensualidades que te asfixien ni curvas de aprendizaje eternas.</p>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="benefits">
+    <div class="benefit">
+      <span class="benefit-icon">&#127869;</span>
+      <div class="benefit-title">Mesas y comandas en vivo</div>
+      <div class="benefit-text">Toma pedidos desde el celular del mozo. La cocina los ve al instante.</div>
+    </div>
+    <div class="benefit">
+      <span class="benefit-icon">&#128200;</span>
+      <div class="benefit-title">Reportes que te ayudan</div>
+      <div class="benefit-text">Ticket promedio, plato mas vendido, hora pico. Decidis mejor.</div>
+    </div>
+    <div class="benefit">
+      <span class="benefit-icon">&#128176;</span>
+      <div class="benefit-title">Caja sin perder un peso</div>
+      <div class="benefit-text">Cierre diario automatico. Efectivo, transferencia, MP &mdash; todo registrado.</div>
+    </div>
+  </div>
+
+  <!-- INCLUDES -->
+  <div class="includes">
+    <div class="includes-title">Lo que incluye</div>
+    <div class="includes-grid">
+      <div class="include-item"><span class="tick">&#10003;</span> Carta digital con categorias</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Multiples formas de pago</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Sistema KDS para cocina</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Comandas para llevar / delivery</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Gestion de stock e insumos</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Reportes y estadisticas</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Reservas y mesas</div>
+      <div class="include-item"><span class="tick">&#10003;</span> Cierre de caja diario</div>
+    </div>
+  </div>
+
+  <!-- PRICE + CTA -->
+  <div class="price-block">
+    <div class="price-info">
+      <div class="price-label">Desde</div>
+      <div class="price-amount"><span class="currency">USD</span>350</div>
+      <div class="price-terms">Pago unico &middot; Es tuyo para siempre &middot; Entrega en 2 semanas</div>
+      <div class="price-demo">Proba la demo en vivo, sin registro: <b>yustalabs.com/aura-food</b></div>
+    </div>
+    <div class="qr-wrap">
+      <svg viewBox="0 0 21 21" width="80" height="80" shape-rendering="crispEdges">
+        <rect width="21" height="21" fill="#FFFFFF"/>
+        <!-- Top-left finder -->
+        <rect x="0" y="0" width="7" height="7" fill="#0F0F14"/>
+        <rect x="1" y="1" width="5" height="5" fill="#FFFFFF"/>
+        <rect x="2" y="2" width="3" height="3" fill="#0F0F14"/>
+        <!-- Top-right finder -->
+        <rect x="14" y="0" width="7" height="7" fill="#0F0F14"/>
+        <rect x="15" y="1" width="5" height="5" fill="#FFFFFF"/>
+        <rect x="16" y="2" width="3" height="3" fill="#0F0F14"/>
+        <!-- Bottom-left finder -->
+        <rect x="0" y="14" width="7" height="7" fill="#0F0F14"/>
+        <rect x="1" y="15" width="5" height="5" fill="#FFFFFF"/>
+        <rect x="2" y="16" width="3" height="3" fill="#0F0F14"/>
+        <!-- Data modules (placeholder pattern) -->
+        <rect x="8" y="0" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="0" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="0" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="0" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="1" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="1" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="2" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="2" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="2" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="3" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="3" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="3" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="4" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="4" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="4" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="5" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="5" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="6" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="6" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="6" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="0" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="2" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="3" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="5" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="7" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="15" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="17" y="8" width="1" height="1" fill="#0F0F14"/>
+        <rect x="19" y="8" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="1" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="4" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="6" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="14" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="16" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="18" y="9" width="1" height="1" fill="#0F0F14"/>
+        <rect x="20" y="9" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="0" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="3" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="5" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="7" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="15" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="17" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="19" y="10" width="1" height="1" fill="#0F0F14"/>
+        <rect x="20" y="10" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="2" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="4" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="6" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="14" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="16" y="11" width="1" height="1" fill="#0F0F14"/>
+        <rect x="18" y="11" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="1" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="3" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="5" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="15" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="17" y="12" width="1" height="1" fill="#0F0F14"/>
+        <rect x="19" y="12" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="0" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="2" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="6" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="14" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="16" y="13" width="1" height="1" fill="#0F0F14"/>
+        <rect x="20" y="13" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="8" y="14" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="14" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="14" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="14" width="1" height="1" fill="#0F0F14"/>
+        <rect x="9" y="15" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="15" width="1" height="1" fill="#0F0F14"/>
+        <rect x="8" y="16" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="16" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="16" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="9" y="17" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="17" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="17" width="1" height="1" fill="#0F0F14"/>
+        <rect x="14" y="17" width="1" height="1" fill="#0F0F14"/>
+        <rect x="16" y="17" width="1" height="1" fill="#0F0F14"/>
+        <rect x="18" y="17" width="1" height="1" fill="#0F0F14"/>
+        <rect x="20" y="17" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="8" y="18" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="18" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="18" width="1" height="1" fill="#0F0F14"/>
+        <rect x="15" y="18" width="1" height="1" fill="#0F0F14"/>
+        <rect x="17" y="18" width="1" height="1" fill="#0F0F14"/>
+        <rect x="19" y="18" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="9" y="19" width="1" height="1" fill="#0F0F14"/>
+        <rect x="11" y="19" width="1" height="1" fill="#0F0F14"/>
+        <rect x="12" y="19" width="1" height="1" fill="#0F0F14"/>
+        <rect x="14" y="19" width="1" height="1" fill="#0F0F14"/>
+        <rect x="16" y="19" width="1" height="1" fill="#0F0F14"/>
+        <rect x="18" y="19" width="1" height="1" fill="#0F0F14"/>
+
+        <rect x="8" y="20" width="1" height="1" fill="#0F0F14"/>
+        <rect x="10" y="20" width="1" height="1" fill="#0F0F14"/>
+        <rect x="13" y="20" width="1" height="1" fill="#0F0F14"/>
+        <rect x="15" y="20" width="1" height="1" fill="#0F0F14"/>
+        <rect x="17" y="20" width="1" height="1" fill="#0F0F14"/>
+        <rect x="19" y="20" width="1" height="1" fill="#0F0F14"/>
+        <rect x="20" y="20" width="1" height="1" fill="#0F0F14"/>
+      </svg>
+      <div class="qr-caption">Escanea la demo</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class="footer-item">&#128241; +54 11 3260 9254</div>
+      <div class="footer-item">&#128172; wa.me/541124693394</div>
+    </div>
+    <div class="footer-center">yustalabs.com</div>
+    <div class="footer-right">
+      Hecho en Argentina<br>
+      <span style="color:#F0B429;">&#9650;</span> 2026
+    </div>
+  </div>
+</div>
+</body>
+</html>

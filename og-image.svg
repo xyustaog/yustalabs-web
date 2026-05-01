@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070A"/>
+      <stop offset="100%" stop-color="#0E0E14"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0B429"/>
+      <stop offset="100%" stop-color="#E6A817"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F0B429" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#F0B429" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .font-bebas { font-family: 'Bebas Neue', Impact, sans-serif; }
+      .font-sans { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#goldGlow)" opacity="0.6"/>
+
+  <!-- Watermark Y (large, very subtle, right side) -->
+  <g transform="translate(880, 120) scale(4.2)" opacity="0.06">
+    <polygon points="10,4 26,4 50,60 44,60" fill="#F2F2F5"/>
+    <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+    <polygon points="64,4 70,4 51,60 47,60" fill="#F2F2F5"/>
+    <polygon points="74,4 90,4 56,60 50,60" fill="#F2F2F5"/>
+    <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#F2F2F5"/>
+    <circle cx="60" cy="107" r="2.2" fill="#F0B429"/>
+  </g>
+
+  <!-- Header: logo Y + Yusta Labs -->
+  <g transform="translate(64, 56)">
+    <!-- Y mark -->
+    <g transform="scale(0.42)">
+      <polygon points="10,4 26,4 50,60 44,60" fill="#F2F2F5"/>
+      <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+      <polygon points="64,4 70,4 51,60 47,60" fill="#F2F2F5"/>
+      <polygon points="74,4 90,4 56,60 50,60" fill="#F2F2F5"/>
+      <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#F2F2F5"/>
+      <circle cx="60" cy="107" r="2.2" fill="#F0B429"/>
+    </g>
+    <text x="58" y="34" class="font-bebas" font-size="22" font-weight="700" letter-spacing="5" fill="#F2F2F5">YUSTA</text>
+    <text x="144" y="34" class="font-bebas" font-size="22" font-weight="700" letter-spacing="5" fill="#F0B429">LABS</text>
+  </g>
+
+  <!-- Top-right tag -->
+  <g transform="translate(1136, 90)" text-anchor="end">
+    <text x="0" y="0" class="font-bebas" font-size="16" font-weight="600" letter-spacing="4" fill="#8A8A94">AURA OS</text>
+  </g>
+
+  <!-- Chip: AURA OS -->
+  <g transform="translate(64, 180)">
+    <rect x="0" y="0" width="150" height="36" rx="18" fill="none" stroke="#F0B429" stroke-width="1.2" opacity="0.6"/>
+    <circle cx="18" cy="18" r="4" fill="#F0B429"/>
+    <text x="32" y="24" class="font-bebas" font-size="14" font-weight="700" letter-spacing="3" fill="#F0B429">AURA OS</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="64" y="300" class="font-sans" font-size="72" font-weight="800" fill="#F2F2F5" letter-spacing="-2">Un sistema para</text>
+  <text x="64" y="378" class="font-sans" font-size="72" font-weight="800" fill="url(#goldGrad)" letter-spacing="-2">cada rubro.</text>
+
+  <!-- Gold underline -->
+  <rect x="64" y="400" width="64" height="4" fill="#F0B429" rx="2"/>
+
+  <!-- Bullets -->
+  <g class="font-sans" transform="translate(64, 450)">
+    <!-- bullet 1 -->
+    <g>
+      <text x="0" y="0" font-size="22" font-weight="600" fill="#F0B429">→</text>
+      <text x="30" y="0" font-size="22" font-weight="700" fill="#F2F2F5">Todos los rubros cubiertos</text>
+    </g>
+    <!-- bullet 2 -->
+    <g transform="translate(0, 42)">
+      <text x="0" y="0" font-size="22" font-weight="600" fill="#F0B429">→</text>
+      <text x="30" y="0" font-size="22" font-weight="700" fill="#F2F2F5">Agentes IA incorporados</text>
+      <text x="332" y="0" font-size="20" font-weight="500" fill="#8A8A94">(opcional)</text>
+    </g>
+    <!-- bullet 3 -->
+    <g transform="translate(0, 84)">
+      <text x="0" y="0" font-size="22" font-weight="600" fill="#F0B429">→</text>
+      <text x="30" y="0" font-size="22" font-weight="700" fill="#F2F2F5">Panel de cliente incluido</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="64" y="590" class="font-sans" font-size="18" font-weight="700" fill="#F0B429">yustalabs.com</text>
+  <text x="1136" y="590" class="font-bebas" font-size="14" font-weight="600" letter-spacing="4" fill="#6A6A74" text-anchor="end">BUENOS AIRES · ARGENTINA</text>
+</svg>

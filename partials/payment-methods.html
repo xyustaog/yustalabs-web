@@ -1,0 +1,26 @@
+<!-- Partial: Payment methods + FX notice · incluir antes del footer en cada landing -->
+<section style="padding:40px clamp(20px,5vw,60px);border-top:1px solid var(--border);">
+  <div style="max-width:780px;margin:0 auto;padding:22px 26px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:14px;">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold,#F0B429);">💱 Conversión a pesos</span>
+      <span id="fx-rate-widget" style="font-size:13px;color:var(--muted,#8888aa);">Cargando tipo de cambio…</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted,#8888aa);line-height:1.65;margin:0 0 14px;">
+      Los precios en <strong style="color:var(--text,#fff);">USD son referenciales</strong>. Se paga en pesos argentinos al tipo de cambio del día (MEP/blue a convenir).
+      <strong style="color:var(--text,#fff);">Al contado es el precio real.</strong> En 6 cuotas se aplica un 20% de recargo financiero.
+      <strong style="color:var(--text,#fff);">Hasta 5 usuarios incluidos</strong> en todos los planes. <strong style="color:var(--text,#fff);">Usuarios 6 a 10:</strong> USD 15 pago único c/u. <strong style="color:var(--text,#fff);">Más de 10 usuarios:</strong> USD 8/mes por usuario (incluye soporte y monitoreo).
+    </p>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--muted,#8888aa);font-weight:600;">Aceptamos:</span>
+      <span class="pay-chip">💳 Tarjeta</span>
+      <img src="https://http2.mlstatic.com/storage/logos-api-admin/ca1a8800-1e21-11ec-9e02-7f4bb1e4c1cf-m.svg" alt="MercadoPago" style="height:22px;vertical-align:middle;background:#fff;padding:3px 6px;border-radius:4px;"/>
+      <span class="pay-chip">🏦 Transferencia</span>
+      <span class="pay-chip">💵 Efectivo</span>
+      <span class="pay-chip">🪙 USDT/USDC</span>
+      <span class="pay-chip">₿ Bitcoin</span>
+    </div>
+  </div>
+  <style>
+    .pay-chip { display:inline-flex; align-items:center; gap:4px; font-size:12px; padding:5px 11px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:999px; color:var(--text,#fff); }
+  </style>
+</section>

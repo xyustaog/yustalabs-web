@@ -1,2 +1,11 @@
 .vercel
 .claude/
+
+# Secretos — NUNCA commitear
+.env
+.env.*
+!.env.example
+*.key
+*-credentials.json
+serviceAccount*.json
+firebase-adminsdk*.json

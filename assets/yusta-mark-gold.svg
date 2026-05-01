@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="64" viewBox="0 0 96 64" fill="none" shape-rendering="geometricPrecision">
+  <title>Yusta Labs — Isotype (mono gold)</title>
+  <path d="M6.75 9.25 H15.75 M6.75 9.25 V18.25" stroke="#F0B429" stroke-width="1.5" fill="none" stroke-linecap="square"></path>
+  <path d="M89.25 9.25 H80.25 M89.25 9.25 V18.25" stroke="#F0B429" stroke-width="1.5" fill="none" stroke-linecap="square"></path>
+  <path d="M6.75 54.75 H15.75 M6.75 54.75 V45.75" stroke="#F0B429" stroke-width="1.5" fill="none" stroke-linecap="square"></path>
+  <path d="M89.25 54.75 H80.25 M89.25 54.75 V45.75" stroke="#F0B429" stroke-width="1.5" fill="none" stroke-linecap="square"></path>
+  <path d="M22 16 L29.2 16 L36 30.5 L42.8 16 L50 16 L39 33 L39 48 L33 48 L33 33 Z" fill="#F0B429"></path>
+  <path d="M56 16 H62 V42 H73 L74 48 H56 Z" fill="#F0B429"></path>
+</svg>

@@ -1457,22 +1457,22 @@ function doSearch(q) {
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-// Config de Firebase cargada desde serverless function (/api/firebase-config).
-// Las env vars se configuran en Vercel → Project → Settings → Environment Variables.
-// Esta API Key DEBE estar restringida por HTTP referrer en Google Cloud Console
-// (APIs & Services → Credentials → HTTP referrers: yustalabs.com, *.yustalabs.com, localhost).
-const firebaseConfig = await fetch('/api/firebase-config')
-  .then(r => {
-    if (!r.ok) throw new Error('Config endpoint returned ' + r.status);
-    return r.json();
-  })
-  .catch(err => {
-    document.getElementById('auth-error').textContent = 'Error de configuración. Contactar admin.';
-    console.error('Firebase config load failed:', err);
-    throw err;
-  });
+// Config de Firebase hardcodeada (las web API keys son públicas por diseño).
+// La seguridad está en:
+//   1. HTTP referrers restringidos en Google Cloud Console → APIs & Services → Credentials
+//   2. Authorized domains en Firebase Auth → Sign-in method
+//   3. Email gate: solo WhatsApp: +54 11 2469-3394 (email empresarial próximamente) puede entrar (ver ALLOWED_EMAIL abajo)
+//   4. Firestore rules (no se usa Firestore en supercerebro, pero igual protegido)
+const firebaseConfig = {
+  apiKey: 'AIzaSyCtpv45L73IX7wlNORIFT3f1juaYPqrJK0',
+  authDomain: 'aura-commerce-93e34.firebaseapp.com',
+  projectId: 'aura-commerce-93e34',
+  storageBucket: 'aura-commerce-93e34.firebasestorage.app',
+  messagingSenderId: '573180517854',
+  appId: '1:573180517854:web:44e7cc97232282da5fd14f',
+};
 
-const ALLOWED_EMAIL = 'nicozero1999@gmail.com';
+const ALLOWED_EMAIL = 'WhatsApp: +54 11 2469-3394 (email empresarial próximamente)';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

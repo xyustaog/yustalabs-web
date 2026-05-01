@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Propuesta Comercial · Yusta Labs · Veterinaria Patitas Felices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: #E8E5DD;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    color: #0F0F14;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 18mm;
+    background: #FAFAF7;
+    margin: 12px auto;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media print {
+    html, body { background: #FAFAF7; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+    .page:last-of-type { page-break-after: auto; }
+  }
+
+  @page { size: A4 portrait; margin: 0; }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E8E5DD;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.2px;
+    color: #0F0F14;
+  }
+  .brand-tag {
+    font-size: 9px;
+    color: #5A5A66;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .prop-id {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: #0F0F14;
+  }
+  .header-right .prop-date {
+    font-size: 9px;
+    color: #5A5A66;
+    margin-top: 2px;
+    letter-spacing: 0.4px;
+  }
+
+  /* ===== PARA CARD ===== */
+  .para-card {
+    margin-top: 14px;
+    border: 1px solid #E8E5DD;
+    border-left: 3px solid #F0B429;
+    background: #FFFFFF;
+    padding: 10px 14px;
+    border-radius: 2px;
+    display: inline-block;
+    min-width: 52%;
+  }
+  .para-label {
+    font-size: 8.5px;
+    letter-spacing: 1.4px;
+    color: #5A5A66;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .para-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.6px;
+    color: #0F0F14;
+    line-height: 1;
+  }
+  .para-person {
+    font-size: 10px;
+    color: #0F0F14;
+    font-weight: 600;
+    margin-top: 4px;
+    letter-spacing: 0.2px;
+  }
+  .para-addr {
+    font-size: 9.5px;
+    color: #5A5A66;
+    margin-top: 2px;
+    line-height: 1.35;
+  }
+
+  /* ===== SECCIONES ===== */
+  .section {
+    margin-top: 14px;
+  }
+  .eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    color: #F0B429;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+    color: #0F0F14;
+    line-height: 1.08;
+    margin-bottom: 8px;
+  }
+  .section-body {
+    font-size: 10px;
+    color: #0F0F14;
+    line-height: 1.55;
+  }
+  .section-body p {
+    margin-bottom: 5px;
+    color: #5A5A66;
+  }
+
+  /* ===== PAIN POINTS ===== */
+  .pain-list {
+    list-style: none;
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+  }
+  .pain-list li {
+    font-size: 9.5px;
+    color: #0F0F14;
+    line-height: 1.4;
+    padding-left: 22px;
+    position: relative;
+  }
+  .pain-list li .ico {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 13px;
+  }
+  .pain-list li strong { color: #0F0F14; font-weight: 700; }
+  .pain-list li span { color: #5A5A66; display: block; font-size: 9px; margin-top: 1px; }
+
+  /* ===== TABLA SOLUCION ===== */
+  .sol-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+    font-size: 9.5px;
+  }
+  .sol-table thead {
+    background: #0F0F14;
+    color: #FAFAF7;
+  }
+  .sol-table th {
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 8.5px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .sol-table tbody tr {
+    border-bottom: 1px solid #E8E5DD;
+  }
+  .sol-table tbody tr:last-child { border-bottom: none; }
+  .sol-table td {
+    padding: 7px 10px;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .sol-table td:first-child {
+    font-weight: 700;
+    color: #0F0F14;
+    width: 34%;
+  }
+  .sol-table td:last-child {
+    color: #5A5A66;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #E8E5DD;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5px;
+    color: #5A5A66;
+    letter-spacing: 0.4px;
+  }
+  .footer .pg {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #0F0F14;
+  }
+
+  /* ======================================== */
+  /* =========== PAGINA 2 ================== */
+  /* ======================================== */
+
+  .header-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E8E5DD;
+  }
+  .header-mini .left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9.5px;
+    color: #5A5A66;
+    letter-spacing: 0.3px;
+  }
+  .header-mini .left strong { color: #0F0F14; font-weight: 700; }
+
+  /* ===== PRICE CARD ===== */
+  .price-card {
+    margin-top: 10px;
+    border: 2px solid #F0B429;
+    background: #FFF8E5;
+    border-radius: 4px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .price-left .product-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #0F0F14;
+  }
+  .price-left .price-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: 1px;
+    color: #0F0F14;
+    margin-top: 2px;
+  }
+  .price-left .price-sub {
+    font-size: 9px;
+    color: #5A5A66;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+  }
+  .price-right {
+    text-align: right;
+    border-left: 1px solid rgba(240, 180, 41, 0.4);
+    padding-left: 16px;
+    min-width: 40%;
+  }
+  .price-right .cuotas {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0F0F14;
+  }
+  .price-right .cuotas span { color: #5A5A66; font-weight: 500; }
+  .price-right .arg {
+    font-size: 10px;
+    color: #5A5A66;
+    margin-top: 4px;
+  }
+  .price-right .arg strong { color: #0F0F14; font-weight: 700; }
+
+  /* ===== INCLUYE ===== */
+  .incluye {
+    margin-top: 10px;
+  }
+  .incluye-title {
+    font-size: 8.5px;
+    letter-spacing: 1.4px;
+    color: #0F0F14;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .incluye ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 14px;
+  }
+  .incluye li {
+    font-size: 9.5px;
+    color: #0F0F14;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .incluye li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #10b981;
+    font-weight: 700;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    margin-top: 16px;
+    padding: 0 8px;
+  }
+  .timeline-line {
+    position: absolute;
+    top: 14px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: #F0B429;
+  }
+  .timeline-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+  .t-step {
+    text-align: center;
+    width: 24%;
+    position: relative;
+  }
+  .t-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #F0B429;
+    color: #0F0F14;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    border: 3px solid #FAFAF7;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 2px #F0B429;
+  }
+  .t-day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #0F0F14;
+    margin-bottom: 3px;
+  }
+  .t-desc {
+    font-size: 9px;
+    color: #5A5A66;
+    line-height: 1.35;
+  }
+
+  /* ===== PROXIMOS PASOS ===== */
+  .steps-list {
+    list-style: none;
+    margin-top: 6px;
+    counter-reset: step-counter;
+    display: flex;
+    gap: 10px;
+  }
+  .steps-list li {
+    flex: 1;
+    counter-increment: step-counter;
+    background: #FFFFFF;
+    border: 1px solid #E8E5DD;
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 9.5px;
+    color: #0F0F14;
+    line-height: 1.45;
+    position: relative;
+  }
+  .steps-list li::before {
+    content: counter(step-counter);
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #F0B429;
+    color: #0F0F14;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-bottom: 6px;
+  }
+
+  /* ===== CTA ===== */
+  .cta-wrap {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cta-btn {
+    background: #F0B429;
+    color: #0F0F14;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 26px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cta-btn .check {
+    font-size: 14px;
+    color: #0F0F14;
+  }
+  .cta-meta {
+    font-size: 9.5px;
+    color: #5A5A66;
+    line-height: 1.4;
+  }
+  .cta-meta strong { color: #0F0F14; font-weight: 700; }
+
+  /* ===== FOOTER PAGINA 2 ===== */
+  .footer-2 {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 2px solid #F0B429;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 0.4fr;
+    gap: 14px;
+    align-items: center;
+    font-size: 8.5px;
+    color: #5A5A66;
+    line-height: 1.4;
+  }
+  .footer-2 .fleft strong {
+    display: block;
+    color: #0F0F14;
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 1px;
+  }
+  .footer-2 .fcenter {
+    text-align: center;
+    font-size: 7.5px;
+    color: #5A5A66;
+    line-height: 1.35;
+  }
+  .footer-2 .fright {
+    text-align: right;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #0F0F14;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================= -->
+<!-- =========== PAGINA 1 ========================= -->
+<!-- ============================================= -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <svg viewBox="0 0 100 115" width="34" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,4 26,4 50,60 44,60" fill="#0F0F14"/>
+        <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+        <polygon points="64,4 70,4 51,60 47,60" fill="#0F0F14"/>
+        <polygon points="74,4 90,4 56,60 50,60" fill="#0F0F14"/>
+        <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#0F0F14"/>
+        <circle cx="60" cy="107" r="1.8" fill="#F0B429"/>
+      </svg>
+      <div class="brand-text">
+        <div class="brand-name">Yusta Labs</div>
+        <div class="brand-tag">Software a medida</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="prop-id">PROPUESTA COMERCIAL · Nº 001</div>
+      <div class="prop-date">16 / 04 / 2026</div>
+    </div>
+  </div>
+
+  <!-- PARA -->
+  <div class="para-card">
+    <div class="para-label">Para</div>
+    <div class="para-name">Veterinaria Patitas Felices</div>
+    <div class="para-person">Dr. Juan Pérez — Director</div>
+    <div class="para-addr">Av. Santa Fe 3450, Palermo, CABA · +54 11 4567-8900</div>
+  </div>
+
+  <!-- SECCION 1 - DIAGNOSTICO -->
+  <div class="section">
+    <div class="eyebrow">01 · Qué detectamos</div>
+    <div class="section-title">Una clínica que funciona, pero pierde plata por sistema</div>
+    <div class="section-body">
+      <p>Después de la reunión con el equipo de Patitas Felices, el panorama es claro: la operación diaria funciona a base de esfuerzo, memoria y WhatsApp. El problema no es la atención — es la infraestructura que la sostiene.</p>
+      <p>Hoy se administran <strong style="color:#0F0F14">más de 400 pacientes</strong> entre planillas de Excel, agendas de papel y chats dispersos. Cada consulta empieza buscando un dato que podría estar a un click. Cada turno depende de que alguien se acuerde de llamar.</p>
+      <p>Con un sistema diseñado específicamente para el flujo de una veterinaria, se puede recuperar ese tiempo, frenar la pérdida de turnos y convertir el historial clínico en un activo real del negocio.</p>
+
+      <ul class="pain-list">
+        <li>
+          <span class="ico">🩺</span>
+          <strong>400+ pacientes en Excel</strong>
+          <span>Sin historial clínico digital. Cada consulta tarda 5 min extra buscando datos.</span>
+        </li>
+        <li>
+          <span class="ico">⏰</span>
+          <strong>8-10 hs semanales administrativas</strong>
+          <span>Turnos, vacunas, recordatorios manuales. Tiempo del equipo, no de los pacientes.</span>
+        </li>
+        <li>
+          <span class="ico">📋</span>
+          <strong>12-15% de turnos perdidos</strong>
+          <span>No confirmados u olvidados. Cliente se frustra, vos perdés la hora.</span>
+        </li>
+        <li>
+          <span class="ico">💸</span>
+          <strong>~$180.000 ARS/mes en pérdidas</strong>
+          <span>Estimado conservador de turnos caídos + tiempo administrativo no productivo.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECCION 2 - SOLUCION -->
+  <div class="section">
+    <div class="eyebrow">02 · Lo que proponemos</div>
+    <div class="section-title">Aura Vet, instalado y configurado para Patitas Felices</div>
+    <div class="section-body">
+      <p style="margin-bottom:8px;">Un sistema propio, corriendo en el dominio de la clínica, que unifica pacientes, turnos, caja, vacunas e inventario en una sola plataforma. Pensado para que el equipo lo use desde el primer día, sin curva técnica.</p>
+
+      <table class="sol-table">
+        <thead>
+          <tr>
+            <th>Módulo</th>
+            <th>Beneficio concreto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pacientes y dueños</td>
+            <td>Ficha completa con foto, historial clínico, vacunas y contacto del tutor.</td>
+          </tr>
+          <tr>
+            <td>Turnos online</td>
+            <td>Recordatorios automáticos por WhatsApp 24h antes. Cero llamadas manuales.</td>
+          </tr>
+          <tr>
+            <td>Caja diaria</td>
+            <td>Cierre con efectivo, transferencia, tarjeta y Mercado Pago — sin Excel.</td>
+          </tr>
+          <tr>
+            <td>Vacunas y recordatorios</td>
+            <td>Avisos automáticos al dueño cuando vence cada aplicación.</td>
+          </tr>
+          <tr>
+            <td>Inventario farmacia</td>
+            <td>Stock crítico, alertas de vencimiento y control de ingresos.</td>
+          </tr>
+          <tr>
+            <td>Reportes</td>
+            <td>Pacientes activos, ingresos del mes, vacunas pendientes — en un dashboard.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>yustalabs.com</span>
+    <span class="pg">01 / 02</span>
+  </div>
+
+</div>
+
+<!-- PAGE BREAK -->
+<div style="page-break-after: always;"></div>
+
+<!-- ============================================= -->
+<!-- =========== PAGINA 2 ========================= -->
+<!-- ============================================= -->
+<div class="page">
+
+  <!-- HEADER MINI -->
+  <div class="header-mini">
+    <div class="left">
+      <svg viewBox="0 0 100 115" width="22" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,4 26,4 50,60 44,60" fill="#0F0F14"/>
+        <polygon points="30,4 36,4 53,60 49,60" fill="#F0B429"/>
+        <polygon points="64,4 70,4 51,60 47,60" fill="#0F0F14"/>
+        <polygon points="74,4 90,4 56,60 50,60" fill="#0F0F14"/>
+        <path d="M 43 60 L 57 60 L 57 98 L 51 108 L 43 108 Z" fill="#0F0F14"/>
+        <circle cx="60" cy="107" r="1.8" fill="#F0B429"/>
+      </svg>
+      <span>PROPUESTA · <strong>Veterinaria Patitas Felices</strong> · Nº 001</span>
+    </div>
+    <div class="header-right">
+      <div class="prop-date">16 / 04 / 2026</div>
+    </div>
+  </div>
+
+  <!-- SECCION 3 - INVERSION -->
+  <div class="section">
+    <div class="eyebrow">03 · Inversión</div>
+    <div class="section-title">Una sola decisión, un solo pago</div>
+
+    <div class="price-card">
+      <div class="price-left">
+        <div class="product-name">AURA VET — Sistema completo</div>
+        <div class="price-main">USD 350</div>
+        <div class="price-sub">pago único · IVA no incluido</div>
+      </div>
+      <div class="price-right">
+        <div class="cuotas">O <strong style="color:#0F0F14">6 cuotas de USD 70</strong> <span>/ mes</span></div>
+        <div class="cuotas" style="font-weight:500; font-size:10px; color:#5A5A66; margin-top:2px;">sin interés</div>
+        <div class="arg">Equivalente en pesos: <strong>≈ $560.000 ARS</strong> al cambio del día</div>
+      </div>
+    </div>
+
+    <div class="incluye">
+      <div class="incluye-title">Incluye</div>
+      <ul>
+        <li>Licencia perpetua (es tuyo para siempre)</li>
+        <li>Hosting incluido por 12 meses</li>
+        <li>Deploy en dominio propio (vet-patitasfelices.com.ar)</li>
+        <li>Capacitación por videollamada (60 min, equipo completo)</li>
+        <li>Carga inicial de hasta 200 pacientes / dueños</li>
+        <li>Soporte WhatsApp prioritario por 30 días post-deploy</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECCION 4 - TIMELINE -->
+  <div class="section">
+    <div class="eyebrow">04 · Cuándo está listo</div>
+    <div class="section-title">De la firma al sistema en producción: 14 días</div>
+
+    <div class="timeline">
+      <div class="timeline-line"></div>
+      <div class="timeline-steps">
+        <div class="t-step">
+          <div class="t-circle">1</div>
+          <div class="t-day">Día 0</div>
+          <div class="t-desc">Firma + 50% adelanto</div>
+        </div>
+        <div class="t-step">
+          <div class="t-circle">2</div>
+          <div class="t-day">Día 3</div>
+          <div class="t-desc">Setup técnico + customización menor</div>
+        </div>
+        <div class="t-step">
+          <div class="t-circle">3</div>
+          <div class="t-day">Día 7</div>
+          <div class="t-desc">Capacitación equipo + carga datos</div>
+        </div>
+        <div class="t-step">
+          <div class="t-circle">4</div>
+          <div class="t-day">Día 14</div>
+          <div class="t-desc">En producción + 50% restante</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCION 5 - PROXIMOS PASOS -->
+  <div class="section">
+    <div class="eyebrow">05 · Para avanzar</div>
+    <div class="section-title">Tres pasos y arrancamos</div>
+
+    <ol class="steps-list">
+      <li>Confirmás esta propuesta por WhatsApp respondiendo <strong>“Adelante”</strong>.</li>
+      <li>Te paso link de pago (50% adelanto, transferencia o Mercado Pago).</li>
+      <li>Arrancamos al día siguiente con el setup técnico.</li>
+    </ol>
+
+    <div class="cta-wrap">
+      <a href="https://wa.me/541124693394" class="cta-btn">
+        <span class="check">✓</span> Confirmar propuesta
+      </a>
+      <div class="cta-meta">
+        Enviá un WhatsApp a<br>
+        <strong>wa.me/541124693394</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER PAGINA 2 -->
+  <div class="footer-2">
+    <div class="fleft">
+      <strong>Nicolás Yusta</strong>
+      Director Yusta Labs · +54 11 3260-9254
+    </div>
+    <div class="fcenter">
+      Propuesta válida por 30 días desde la fecha de emisión.<br>
+      Precios sujetos al tipo de cambio del día del pago. No incluye IVA.
+    </div>
+    <div class="fright">02 / 02</div>
+  </div>
+
+</div>
+
+</body>
+</html>

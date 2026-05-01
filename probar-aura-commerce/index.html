@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probar Aura Commerce — Acceso a la demo funcional | Yusta Labs</title>
+<meta name="description" content="Pedí acceso a la demo funcional de Aura Commerce. Sistema POS multi-tenant funcionando al 100%, conectado a Firebase. Aprobamos tu acceso en minutos.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta property="og:type" content="website"><meta property="og:url" content="https://yustalabs.com/probar-aura-commerce"><meta property="og:title" content="Probar Aura Commerce"><meta property="og:image" content="https://yustalabs.com/og-image.png"><meta property="og:locale" content="es_AR">
+<link rel="stylesheet" href="/assets/theme.css?v=20260429b">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-60G0MKXJRW"></script>
+<script src="/assets/tracking.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-60G0MKXJRW');</script>
+<style>
+  .gate-wrap{padding-top:clamp(80px,10vw,120px);padding-bottom:clamp(40px,6vw,80px);}
+  .gate-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:36px;margin-top:36px;align-items:flex-start;}
+  @media(max-width:880px){.gate-grid{grid-template-columns:1fr;gap:28px;}}
+
+  /* ── Form ─────────────────────────────────────────── */
+  .gate-form{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.005));border:1px solid var(--border);border-radius:18px;padding:clamp(24px,3vw,32px);}
+  .gate-section-h{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(240,180,41,0.16);}
+  .gate-section-h .step{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;background:rgba(240,180,41,0.15);color:var(--gold);font-family:var(--font-display);font-size:13px;font-weight:700;line-height:1;}
+  .gate-section + .gate-section{margin-top:24px;}
+
+  .gate-form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:600px){.gate-form .row{grid-template-columns:1fr;}}
+  .gate-form label{display:block;font-size:11.5px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+  .gate-form label .opt{font-size:11px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500;margin-left:4px;}
+  .gate-form input,.gate-form select,.gate-form textarea{box-sizing:border-box;width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:11px;padding:14px 16px;color:var(--text);font-family:inherit;font-size:15px;line-height:1.4;transition:border-color var(--t),background var(--t),box-shadow var(--t);text-transform:none;}
+  .gate-form input:hover,.gate-form select:hover,.gate-form textarea:hover{border-color:rgba(255,255,255,0.20);}
+  .gate-form input:focus,.gate-form select:focus,.gate-form textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.05);box-shadow:0 0 0 3px rgba(240,180,41,0.18);}
+  .gate-form input::placeholder,.gate-form textarea::placeholder{color:rgba(255,255,255,0.30);font-weight:400;}
+  .gate-form textarea{resize:vertical;min-height:110px;line-height:1.55;}
+  .gate-form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23B4B4C0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;cursor:pointer;}
+  .gate-form-field{margin-bottom:14px;}
+
+  /* ── Service multi-select cards ────────────────────────────────────
+     CRITICAL: title/desc/price son <span> en HTML — sin display:block
+     se concatenan inline y se ven horribles. Forzamos columna. */
+  .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+  @media(max-width:520px){.svc-grid{grid-template-columns:1fr;}}
+  .svc-card{position:relative;display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border:1.5px solid rgba(255,255,255,0.10);border-radius:14px;background:rgba(255,255,255,0.025);cursor:pointer;transition:border-color var(--t),background var(--t),transform var(--t);min-height:120px;}
+  .svc-card:hover{border-color:rgba(240,180,41,0.40);background:rgba(240,180,41,0.04);transform:translateY(-1px);}
+  .svc-card input{position:absolute;opacity:0;pointer-events:none;}
+  .svc-card .svc-check{flex-shrink:0;width:22px;height:22px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.20);background:transparent;display:flex;align-items:center;justify-content:center;color:transparent;transition:all var(--t);margin-top:1px;}
+  .svc-card .svc-check svg{width:13px;height:13px;}
+  .svc-card .svc-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
+  .svc-card .svc-title{display:block;font-size:14.5px;font-weight:700;color:var(--text);line-height:1.3;letter-spacing:-0.005em;text-transform:none;}
+  .svc-card .svc-desc{display:block;font-size:12px;color:#9CA3AF;line-height:1.45;text-transform:none;font-weight:400;}
+  .svc-card .svc-price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:14px;color:var(--gold);font-weight:700;letter-spacing:0;margin-top:6px;text-transform:none;}
+  .svc-card .svc-price small{font-size:11px;color:#9CA3AF;font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0;text-transform:none;}
+  .svc-card.checked{border-color:var(--gold);background:linear-gradient(180deg,rgba(240,180,41,0.08),rgba(240,180,41,0.02));box-shadow:0 8px 24px rgba(240,180,41,0.08);}
+  .svc-card.checked .svc-check{border-color:var(--gold);background:var(--gold);color:#0A0B0F;}
+
+  /* ── Estimate banner ──────────────────────────────── */
+  .gate-estimate{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-top:14px;border-radius:12px;background:linear-gradient(135deg,rgba(34,197,94,0.06),rgba(34,197,94,0.01));border:1px solid rgba(34,197,94,0.22);transition:opacity var(--t),transform var(--t);}
+  .gate-estimate.empty{opacity:0.5;}
+  .gate-estimate-ic{flex-shrink:0;width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,0.12);display:flex;align-items:center;justify-content:center;color:#22C55E;}
+  .gate-estimate-body{flex:1;min-width:0;}
+  .gate-estimate-l{font-size:10.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#22C55E;}
+  .gate-estimate-v{font-family:var(--font-display);font-size:22px;color:var(--text);font-weight:600;letter-spacing:0.005em;line-height:1;margin-top:3px;}
+  .gate-estimate-v small{font-size:11.5px;color:var(--muted);font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0;margin-left:6px;}
+  .gate-estimate-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+  /* ── Submit + status ──────────────────────────────── */
+  .gate-submit-row{margin-top:6px;}
+  .gate-submit{width:100%;justify-content:center;gap:8px;}
+  .gate-submit svg{width:16px;height:16px;}
+  .gate-fineprint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5;}
+
+  .gate-status{display:none;margin-top:14px;padding:18px 20px;border-radius:14px;font-size:14px;line-height:1.55;}
+  .gate-status.error{display:block;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.30);color:#EF4444;}
+
+  /* ── Success state (replaces the form) ────────────── */
+  .gate-unlocked{display:none;padding:28px clamp(24px,3vw,32px);background:linear-gradient(180deg,rgba(34,197,94,0.06),rgba(34,197,94,0.01));border:1px solid rgba(34,197,94,0.30);border-radius:18px;text-align:center;}
+  .gate-unlocked.visible{display:block;}
+  .gate-unlocked .uic{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.12);border:2px solid rgba(34,197,94,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#22C55E;}
+  .gate-unlocked h3{font-family:var(--font-display);font-size:24px;text-transform:uppercase;color:var(--text);font-weight:400;letter-spacing:0.005em;margin:0 0 10px;line-height:1.1;}
+  .gate-unlocked p{font-size:14px;color:#CBD5E1;margin:0 0 18px;line-height:1.55;}
+  .gate-unlocked p strong{color:var(--text);font-weight:700;}
+  .gate-unlocked .uflow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0;text-align:left;}
+  @media(max-width:520px){.gate-unlocked .uflow{grid-template-columns:1fr;}}
+  .gate-unlocked .ustep{padding:12px;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;}
+  .gate-unlocked .ustep-n{font-family:var(--font-display);font-size:18px;color:var(--gold);font-weight:600;line-height:1;}
+  .gate-unlocked .ustep-t{font-size:12.5px;font-weight:700;color:var(--text);margin-top:6px;line-height:1.3;}
+  .gate-unlocked .ustep-d{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+  .gate-unlocked .ucta{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;background:var(--gold);color:#0A0B0F;border-radius:12px;font-weight:800;font-size:15px;text-decoration:none;transition:transform var(--t),box-shadow var(--t),background var(--t);box-shadow:0 8px 24px rgba(240,180,41,0.25);}
+  .gate-unlocked .ucta:hover{transform:translateY(-1px);background:#FFD166;box-shadow:0 12px 32px rgba(240,180,41,0.35);}
+
+  /* ── Right panel ──────────────────────────────────── */
+  .gate-info{display:flex;flex-direction:column;gap:14px;position:sticky;top:90px;}
+  @media(max-width:880px){.gate-info{position:static;}}
+  .gate-info-card{background:linear-gradient(180deg,rgba(240,180,41,0.05),rgba(240,180,41,0.005));border:1px solid rgba(240,180,41,0.25);border-radius:16px;padding:22px;}
+  .gate-info-card h3{font-family:var(--font-display);font-size:20px;text-transform:uppercase;letter-spacing:0.005em;font-weight:400;margin:0 0 14px;color:var(--text);}
+  .gate-info-card ol{list-style:none;padding:0;margin:0;counter-reset:step;}
+  .gate-info-card ol li{padding:11px 0;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid rgba(240,180,41,0.12);counter-increment:step;}
+  .gate-info-card ol li:last-child{border-bottom:none;padding-bottom:0;}
+  .gate-info-card ol li::before{content:counter(step);flex-shrink:0;width:26px;height:26px;border-radius:8px;background:rgba(240,180,41,0.15);color:var(--gold);font-family:var(--font-display);font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .gate-info-card ol li strong{display:block;color:var(--text);font-size:13.5px;font-weight:700;margin-bottom:2px;line-height:1.3;}
+  .gate-info-card ol li small{display:block;color:var(--muted);font-size:12px;line-height:1.5;}
+
+  .gate-trust{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:14px;padding:16px 18px;font-size:12.5px;color:var(--muted);line-height:1.6;}
+  .gate-trust-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;}
+  .gate-trust-item:not(:last-child){border-bottom:1px dashed rgba(255,255,255,0.06);}
+  .gate-trust-item svg{flex-shrink:0;color:var(--gold);margin-top:2px;}
+  .gate-trust-item strong{color:var(--text);font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav" data-nav>
+  <a href="/" class="nav-brand"><img src="/assets/yusta-mark.svg?v=4" alt="" width="32" height="36"/><span class="nav-brand-text">Yusta <span style="color:var(--gold);">Labs</span></span></a>
+  <div class="nav-items">
+    <a href="/showroom" class="nav-item">Demos</a>
+    <a href="/proceso" class="nav-item">Proceso</a>
+    <a href="/casos" class="nav-item">Casos</a>
+    <a href="/agentes" class="nav-item">Agentes IA</a>
+    <a href="/precios" class="nav-item">Precios</a>
+    <a href="/servicios" class="nav-item">Servicios</a>
+    <a href="/nosotros" class="nav-item">Nosotros</a>
+    <a href="/faq" class="nav-item">FAQ</a>
+  </div>
+  <a href="https://panel.yustalabs.com" target="_blank" rel="noopener" class="nav-login" style="margin-right:6px;">Ingresar</a>
+  <a href="/contacto" class="nav-cta">Hablemos <span>→</span></a>
+  <button class="nav-toggle" aria-label="Abrir menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</nav>
+
+<section class="gate-wrap">
+  <div class="wrap-narrow">
+    <div class="section-eyebrow reveal" style="display:inline-flex;align-items:center;gap:8px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      Acceso restringido · Demo 100% funcional
+    </div>
+    <h1 class="section-title reveal">Probá Aura Commerce<br/>en vivo, con tus datos.</h1>
+    <p class="section-desc reveal">No es un mockup. Es el <strong style="color:var(--text);">sistema POS multi-tenant funcional al 100%</strong>, conectado a Firebase, corriendo en producción. Te aprobamos en minutos por WhatsApp y entrás como visitante (solo lectura). <strong style="color:var(--text);">Login con tu cuenta de Google</strong> — la misma que ya usás todos los días.</p>
+
+    <div class="gate-grid">
+      <!-- ────────── FORMULARIO ────────── -->
+      <div>
+        <form class="gate-form reveal" id="gate-form" onsubmit="enviarSolicitud(event)" novalidate>
+          <!-- Sección 1: contacto -->
+          <div class="gate-section">
+            <div class="gate-section-h"><span class="step">1</span> Tus datos de contacto</div>
+            <div class="row">
+              <div class="gate-form-field">
+                <label for="g-nombre">Tu nombre</label>
+                <input id="g-nombre" name="nombre" type="text" placeholder="Ej: Martín García" required autocomplete="name" />
+              </div>
+              <div class="gate-form-field">
+                <label for="g-negocio">Nombre del negocio</label>
+                <input id="g-negocio" name="negocio" type="text" placeholder="Ej: Almacén Don Carlos" required autocomplete="organization" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="gate-form-field">
+                <label for="g-tel">WhatsApp <span class="opt">(con código de área)</span></label>
+                <input id="g-tel" name="telefono" type="tel" placeholder="+54 9 11 ..." required autocomplete="tel" />
+              </div>
+              <div class="gate-form-field">
+                <label for="g-rubro">Rubro</label>
+                <select id="g-rubro" name="rubro" required>
+                  <option value="">Elegí un rubro...</option>
+                  <option value="Almacén / Kiosco">Almacén / Kiosco</option>
+                  <option value="Comercio retail">Comercio retail</option>
+                  <option value="Indumentaria / Moda">Indumentaria / Moda</option>
+                  <option value="Ferretería / Corralón">Ferretería / Corralón</option>
+                  <option value="Gastronomía">Gastronomía</option>
+                  <option value="Peluquería / Estética">Peluquería / Estética</option>
+                  <option value="Veterinaria">Veterinaria</option>
+                  <option value="Logística / Cadetería">Logística / Cadetería</option>
+                  <option value="Servicios profesionales">Servicios profesionales</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="gate-form-field">
+              <label for="g-email">Email <span class="opt">(usalo para entrar a la demo con Google)</span></label>
+              <input id="g-email" name="email" type="email" placeholder="tu@gmail.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <!-- Sección 2: servicios -->
+          <div class="gate-section">
+            <div class="gate-section-h"><span class="step">2</span> ¿Qué necesitás? <span style="color:var(--muted);font-weight:600;letter-spacing:0;text-transform:none;font-size:11px;margin-left:4px;">(elegí uno o más)</span></div>
+            <div class="svc-grid" id="svc-grid">
+              <label class="svc-card" data-svc="app" data-price="350">
+                <input type="checkbox" name="services" value="app" />
+                <span class="svc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="5 12 10 17 19 7"/></svg></span>
+                <span class="svc-body">
+                  <span class="svc-title">App de gestión Aura</span>
+                  <span class="svc-desc">POS, stock, cuentas corrientes, caja, multi-usuario</span>
+                  <span class="svc-price">USD 350<small>pago único</small></span>
+                </span>
+              </label>
+              <label class="svc-card" data-svc="agentes" data-price="150">
+                <input type="checkbox" name="services" value="agentes" />
+                <span class="svc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="5 12 10 17 19 7"/></svg></span>
+                <span class="svc-body">
+                  <span class="svc-title">Agentes IA</span>
+                  <span class="svc-desc">Atención automática + análisis predictivo + sugerencias</span>
+                  <span class="svc-price">USD 150<small>+ app</small></span>
+                </span>
+              </label>
+              <label class="svc-card" data-svc="web" data-price="199">
+                <input type="checkbox" name="services" value="web" />
+                <span class="svc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="5 12 10 17 19 7"/></svg></span>
+                <span class="svc-body">
+                  <span class="svc-title">Página web profesional</span>
+                  <span class="svc-desc">Landing o sitio corporativo, hosting + dominio incluidos</span>
+                  <span class="svc-price">desde USD 199<small>pago único</small></span>
+                </span>
+              </label>
+              <label class="svc-card" data-svc="custom" data-price="0">
+                <input type="checkbox" name="services" value="custom" />
+                <span class="svc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="5 12 10 17 19 7"/></svg></span>
+                <span class="svc-body">
+                  <span class="svc-title">Proyecto a medida</span>
+                  <span class="svc-desc">Algo específico que no entra en lo de arriba — lo cotizamos</span>
+                  <span class="svc-price">a cotizar<small>48 hs</small></span>
+                </span>
+              </label>
+            </div>
+
+            <div class="gate-estimate empty" id="gate-estimate">
+              <div class="gate-estimate-ic">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div class="gate-estimate-body">
+                <div class="gate-estimate-l">Estimado de tu combo</div>
+                <div class="gate-estimate-v" id="gate-estimate-v">Elegí al menos un servicio<small>arriba</small></div>
+                <div class="gate-estimate-sub" id="gate-estimate-sub">Pago único · entrega 2 a 3 semanas · garantía 30 días.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección 3: situación -->
+          <div class="gate-section">
+            <div class="gate-section-h"><span class="step">3</span> Contanos qué necesitás resolver</div>
+            <div class="gate-form-field">
+              <label for="g-mensaje">Tu situación actual</label>
+              <textarea id="g-mensaje" name="mensaje" required placeholder="Ej: 'Tengo un kiosco con ~600 productos. Hoy uso Excel y planillas en papel — pierdo plata por stock mal contado y no sé qué cobré cada día. Quiero ver si Aura me sirve antes de pedir el mío.'"></textarea>
+            </div>
+          </div>
+
+          <div class="gate-submit-row">
+            <button type="submit" id="gate-submit" class="btn btn-gold btn-lg gate-submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              Pedir acceso a la demo →
+            </button>
+            <p class="gate-fineprint">Te respondemos en minutos. Acceso gratis · sin compromiso.</p>
+          </div>
+
+          <div id="gate-error" class="gate-status" role="alert" aria-live="polite">
+            <strong>⚠ No se pudo enviar.</strong> Probá <a href="https://wa.me/541124693394?text=Hola!%20Quiero%20acceso%20a%20la%20demo%20de%20Aura%20Commerce." target="_blank" rel="noopener" style="color:#EF4444;font-weight:700;text-decoration:underline;">contactarnos por WhatsApp directo</a>.
+          </div>
+        </form>
+
+        <!-- ────────── SUCCESS / UNLOCKED STATE ────────── -->
+        <div class="gate-unlocked reveal" id="gate-unlocked">
+          <div class="uic">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 12 10 17 19 7"/></svg>
+          </div>
+          <h3 id="unlocked-name">¡Listo, te aprobamos en minutos!</h3>
+          <p>Recibimos tu solicitud y nos llegó la notificación a WhatsApp. <strong>Mientras tanto, ya podés entrar a la demo</strong> — vas a aterrizar en sala de espera hasta que te activemos como visitante.</p>
+
+          <div class="uflow">
+            <div class="ustep">
+              <div class="ustep-n">1</div>
+              <div class="ustep-t">Hacé clic abajo</div>
+              <div class="ustep-d">Te lleva a Aura Commerce</div>
+            </div>
+            <div class="ustep">
+              <div class="ustep-n">2</div>
+              <div class="ustep-t">Login con Google</div>
+              <div class="ustep-d">Usá el email del form</div>
+            </div>
+            <div class="ustep">
+              <div class="ustep-n">3</div>
+              <div class="ustep-t">Te activamos en minutos</div>
+              <div class="ustep-d">Mirá WhatsApp · te avisamos</div>
+            </div>
+          </div>
+
+          <a href="/aura-commerce/demo" id="unlocked-cta" class="ucta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+            Acceder a la demo de Aura Commerce
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <p style="font-size:11.5px;color:var(--muted);margin-top:14px;">¿Algún problema? <a href="https://wa.me/541124693394?text=Hola!%20Tengo%20un%20problema%20accediendo%20a%20la%20demo%20de%20Aura%20Commerce." target="_blank" rel="noopener" style="color:var(--gold);font-weight:700;text-decoration:none;">Avisanos por WhatsApp →</a></p>
+        </div>
+      </div>
+
+      <!-- ────────── PANEL DERECHO ────────── -->
+      <aside class="gate-info reveal">
+        <div class="gate-info-card">
+          <h3>Cómo funciona</h3>
+          <ol>
+            <li>
+              <div>
+                <strong>Completás el formulario</strong>
+                <small>Nos llega aviso instantáneo a WhatsApp con tus datos y servicios elegidos.</small>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Se libera el botón de acceso</strong>
+                <small>Apenas mandás el form, te aparece el botón para entrar a la demo.</small>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Login con Google</strong>
+                <small>El mismo email que usaste arriba. Es la cuenta que usás todos los días.</small>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Te aprobamos como visitante</strong>
+                <small>Quedás en sala de espera hasta que activamos tu acceso (minutos en horario hábil).</small>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Navegás todo · solo lectura</strong>
+                <small>Ventas, inventario, cuentas, caja, agentes IA. Mirás cómo opera el sistema real.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="gate-trust">
+          <div class="gate-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span><strong>Tus datos privados.</strong> Solo se usan para autorizar el acceso. No se publican online ni se comparten con terceros.</span>
+          </div>
+          <div class="gate-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span><strong>Aprobación rápida:</strong> minutos en horario hábil (Lun-Vie 9-19 AR). Fuera de horario, primera cosa de la mañana.</span>
+          </div>
+          <div class="gate-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span><strong>Sin costo.</strong> El acceso a la demo siempre es gratis y sin compromiso.</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a href="/" style="display:inline-flex;align-items:center;gap:10px;color:var(--text);"><img src="/assets/yusta-mark.svg?v=4" alt="" width="32" height="36"/><span style="font-size:17px;font-weight:700;letter-spacing:-0.01em;">Yusta <span style="font-weight:400;color:var(--gold);">Labs</span></span></a>
+      <p class="footer-desc">Sistemas de gestión a medida para cualquier rubro. Pago único. Desde Argentina.</p>
+      <div class="footer-contact">
+        <a href="mailto:ny@yustalabs.com" class="footer-contact-row" aria-label="Email ny@yustalabs.com"><span class="footer-contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg></span><span>ny@yustalabs.com</span></a>
+        <a href="https://wa.me/541124693394" target="_blank" rel="noopener noreferrer" class="footer-contact-row" aria-label="WhatsApp +54 11 2469 3394"><span class="footer-contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><span>+54 11 2469 3394</span></a>
+      </div>
+      <div class="footer-social">
+        <a href="https://instagram.com/yustalabs" target="_blank" rel="noopener noreferrer" aria-label="Instagram @yustalabs" class="footer-soc"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://x.com/yustalabs" target="_blank" rel="noopener noreferrer" aria-label="X @yustalabs" class="footer-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <span class="footer-soc-handle">@yustalabs</span>
+      </div>
+    </div>
+    <div class="footer-col"><div class="footer-col-title">Productos</div><a href="/aura-salon">Aura Salon</a><a href="/aura-fit">Aura Fit</a><a href="/aura-commerce">Aura Commerce</a><a href="/aura-food">Aura Food</a><a href="/showroom">Ver demos →</a></div>
+    <div class="footer-col"><div class="footer-col-title">Empresa</div><a href="/nosotros">Sobre Yusta</a><a href="/proceso">Cómo trabajamos</a><a href="/servicios">Servicios</a><a href="/custom">Desarrollo a medida</a></div>
+    <div class="footer-col"><div class="footer-col-title">Soporte</div><a href="/contacto">Contacto</a><a href="mailto:ny@yustalabs.com">Email directo</a><a href="https://wa.me/541124693394" target="_blank" rel="noreferrer">WhatsApp</a><a href="/faq">FAQ</a><a href="/precios">Precios</a></div>
+    <div class="footer-col"><div class="footer-col-title">Legal</div><a href="/garantia">Garantía</a><a href="/terminos">Términos y condiciones</a><a href="/privacidad">Política de privacidad</a></div>
+  </div>
+  <div class="footer-bottom"><span>© <span data-year>2026</span> Yusta Labs · Hecho en Argentina</span><span>no un excel.</span></div>
+</footer>
+
+
+<script src="/assets/main.js" defer></script>
+<script>
+/* ─── Multi-select de servicios + estimado en vivo ─────────────────────── */
+(function() {
+  const cards = document.querySelectorAll('.svc-card');
+  const out = document.getElementById('gate-estimate');
+  const outV = document.getElementById('gate-estimate-v');
+  const outSub = document.getElementById('gate-estimate-sub');
+  const ARS_RATE = 1420; /* aprox; sólo visual */
+
+  function recompute() {
+    let total = 0;
+    let custom = false;
+    let count = 0;
+    const labels = [];
+    cards.forEach(c => {
+      const cb = c.querySelector('input[type=checkbox]');
+      if (cb && cb.checked) {
+        c.classList.add('checked');
+        count++;
+        const svc = c.dataset.svc;
+        const price = parseInt(c.dataset.price, 10) || 0;
+        if (svc === 'custom') { custom = true; }
+        else { total += price; }
+        labels.push(c.querySelector('.svc-title').textContent.trim());
+      } else {
+        c.classList.remove('checked');
+      }
+    });
+    if (count === 0) {
+      out.classList.add('empty');
+      outV.innerHTML = 'Elegí al menos un servicio<small>arriba</small>';
+      outSub.textContent = 'Pago único · entrega 2 a 3 semanas · garantía 30 días.';
+      return;
+    }
+    out.classList.remove('empty');
+    if (custom && total === 0) {
+      outV.innerHTML = 'A cotizar<small>48 hs</small>';
+      outSub.textContent = 'Tu proyecto requiere análisis. Lo cotizamos en 48 horas hábiles.';
+    } else if (custom) {
+      outV.innerHTML = 'USD ' + total.toLocaleString('en-US') + '<small>+ custom a cotizar</small>';
+      outSub.innerHTML = '≈ ARS ' + (total * ARS_RATE).toLocaleString('es-AR') + ' por la base · custom se cotiza aparte.';
+    } else {
+      const ars = (total * ARS_RATE).toLocaleString('es-AR');
+      outV.innerHTML = 'USD ' + total.toLocaleString('en-US') + '<small>≈ ARS ' + ars + '</small>';
+      outSub.textContent = labels.length > 1 ? 'Combo de ' + labels.length + ' servicios · pago único · garantía 30 días.' : labels[0] + ' · pago único · garantía 30 días.';
+    }
+  }
+  cards.forEach(c => {
+    c.addEventListener('change', recompute);
+  });
+  recompute();
+})();
+
+/* ─── Submit handler ───────────────────────────────────────────────────── */
+async function enviarSolicitud(e) {
+  e.preventDefault();
+  const btn = document.getElementById('gate-submit');
+  const errorBox = document.getElementById('gate-error');
+  errorBox.style.display = 'none';
+
+  const services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(i => i.value);
+  if (services.length === 0) {
+    errorBox.innerHTML = '<strong>⚠ Falta elegir un servicio.</strong> Marcá al menos uno en el paso 2.';
+    errorBox.style.display = 'block';
+    document.getElementById('svc-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  /* Compute total estimate */
+  const PRICES = { app: 350, agentes: 150, web: 199, custom: 0 };
+  const total = services.reduce((s, k) => s + (PRICES[k] || 0), 0);
+  const hasCustom = services.includes('custom');
+
+  const data = {
+    nombre: document.getElementById('g-nombre').value.trim(),
+    negocio: document.getElementById('g-negocio').value.trim(),
+    telefono: document.getElementById('g-tel').value.trim(),
+    rubro: document.getElementById('g-rubro').value.trim(),
+    email: document.getElementById('g-email').value.trim(),
+    mensaje: document.getElementById('g-mensaje').value.trim(),
+    services: services,
+    totalEstimateUsd: total,
+    needsCustomQuote: hasCustom,
+  };
+
+  /* Validación mínima */
+  if (!data.nombre || !data.negocio || !data.telefono || !data.email || !data.rubro || !data.mensaje) {
+    errorBox.innerHTML = '<strong>⚠ Faltan campos obligatorios.</strong> Revisá nombre, negocio, WhatsApp, email, rubro y la descripción de tu situación.';
+    errorBox.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10" stroke-dasharray="40 20"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></circle></svg> Enviando solicitud...';
+
+  /* 1. Persist a Firestore — colección `leads` con tag de demo gate */
+  if (window.yl && window.yl.saveLead) {
+    try {
+      await window.yl.saveLead({
+        ...data,
+        source: 'demo-aura-commerce-gate',
+      });
+    } catch (err) {
+      console.warn('lead save failed', err);
+    }
+  }
+
+  /* 2. WA notification a Nico con todo el contexto */
+  const svcLabels = {
+    app: 'App de gestión Aura (USD 350)',
+    agentes: 'Agentes IA (USD 150)',
+    web: 'Página web (desde USD 199)',
+    custom: 'Proyecto a medida (a cotizar)',
+  };
+  const totalLine = hasCustom
+    ? (total > 0 ? `Estimado: USD ${total} + custom a cotizar` : 'A cotizar (proyecto a medida)')
+    : `Estimado: USD ${total}`;
+  const wa_msg = `🔓 NUEVA SOLICITUD · Demo Aura Commerce\n\n` +
+    `Nombre: ${data.nombre}\n` +
+    `Negocio: ${data.negocio}\n` +
+    `Rubro: ${data.rubro}\n` +
+    `WhatsApp: ${data.telefono}\n` +
+    `Email: ${data.email}\n\n` +
+    `Servicios:\n${services.map(s => '  • ' + (svcLabels[s] || s)).join('\n')}\n` +
+    `${totalLine}\n\n` +
+    `Situación:\n${data.mensaje}\n\n` +
+    `🔗 Aprobar acceso desde:\nhttps://panel.yustalabs.com/leads\n` +
+    `(O directo en Aura Commerce: aura-commerce-flax.vercel.app/admin/usuarios)\n\n` +
+    `(Solicitud enviada desde yustalabs.com/probar-aura-commerce)`;
+  window.open('https://wa.me/541124693394?text=' + encodeURIComponent(wa_msg), '_blank');
+
+  /* 3. Set the unlock flag (24hr TTL chequeado en /aura-commerce/demo) */
+  try {
+    localStorage.setItem('yl_aura_demo_unlocked', String(Date.now()));
+    localStorage.setItem('yl_aura_demo_email', data.email);
+  } catch (_) {}
+
+  /* 4. Swap form → unlocked state */
+  const form = document.getElementById('gate-form');
+  const unlocked = document.getElementById('gate-unlocked');
+  const firstName = data.nombre.split(' ')[0];
+  document.getElementById('unlocked-name').textContent = `¡Listo${firstName ? ', ' + firstName : ''}! Te aprobamos en minutos.`;
+  form.style.display = 'none';
+  unlocked.classList.add('visible');
+  unlocked.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* Si volviste y ya estás unlocked en el último día, ofrecé directo acceso */
+(function() {
+  try {
+    const raw = localStorage.getItem('yl_aura_demo_unlocked');
+    if (!raw) return;
+    const ts = parseInt(raw, 10);
+    if (isNaN(ts) || (Date.now() - ts) >= 24 * 60 * 60 * 1000) return;
+    const form = document.getElementById('gate-form');
+    const unlocked = document.getElementById('gate-unlocked');
+    document.getElementById('unlocked-name').textContent = 'Tu acceso ya está habilitado';
+    form.style.display = 'none';
+    unlocked.classList.add('visible');
+  } catch (_) {}
+})();
+</script>
+<script defer src="/assets/wa-fab.js"></script></body>
+</html>

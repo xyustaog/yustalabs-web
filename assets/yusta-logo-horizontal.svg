@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 700" width="2400" height="700">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&amp;display=swap');
+      .wordmark {
+        font-family: 'Space Grotesk', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 130px;
+        letter-spacing: 14px;
+        fill: #0A0A0D;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2400" height="700" fill="#FAFAF7"/>
+
+  <!-- Y monogram — left side, centered vertically -->
+  <g transform="translate(260, 165) scale(3.5)">
+    <line x1="4" y1="4" x2="30" y2="34" stroke="#0A0A0D" stroke-width="10" stroke-linecap="round"/>
+    <line x1="56" y1="4" x2="30" y2="34" stroke="#F0B429" stroke-width="10" stroke-linecap="round"/>
+    <line x1="30" y1="34" x2="30" y2="62" stroke="#0A0A0D" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="44" cy="62" r="5" fill="#F0B429"/>
+  </g>
+
+  <!-- Wordmark — right of symbol, vertically centered -->
+  <text x="700" y="350" text-anchor="start" dominant-baseline="central" class="wordmark">YUSTA LABS</text>
+</svg>

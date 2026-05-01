@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aura Food — Sistema de gestión para restaurantes | Yusta Labs</title>
 <meta name="description" content="Mesas, comandas y stock en un solo lugar. El sistema que tu restaurante necesitaba. Sin papeles, sin planillas. Pago único.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yustalabs.com/aura-food">
+<meta property="og:title" content="Aura Food — Sistema de gestión para restaurantes">
+<meta property="og:description" content="Mesas, comandas y stock en un solo lugar. Sin papeles, sin planillas.">
+<meta property="og:image" content="https://yustalabs.com/og-image.png">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -16,18 +23,18 @@
   --text:#f5f0e8;--muted:#7a6850;--muted2:#bfa882;--white:#ffffff;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:300;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:'Barlow',sans-serif}
+button{cursor:pointer;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(20px,5vw,60px);height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,16,0.7);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s}
 .nav.scrolled{border-color:var(--border)}
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-brand-yl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted2)}
+.nav-brand-gold{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:400;letter-spacing:-0.01em;color:#F0B429}.nav-brand-yl{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:var(--text,#F0F0FF)}
 .nav-brand-sep{color:var(--border2);margin:0 4px}
-.nav-brand-ac{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+.nav-brand-ac{font-family:'Bebas Neue',Impact,sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
 .nav-links{display:flex;gap:2px;align-items:center}
 .nav-link{padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;color:var(--muted);transition:.2s;border:none;background:none;letter-spacing:.3px}
 .nav-link:hover{color:var(--text);background:rgba(255,255,255,0.04)}
@@ -37,7 +44,7 @@ button{cursor:pointer;font-family:'Barlow',sans-serif}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:1px;transition:.3s}
 .mobile-menu{position:fixed;inset:0;z-index:999;background:rgba(8,8,16,0.97);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .3s}
 .mobile-menu.open{opacity:1;pointer-events:all}
-.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);padding:10px 24px;border-radius:10px;transition:.2s}
+.mobile-menu a{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);padding:10px 24px;border-radius:10px;transition:.2s}
 .mobile-menu a:hover{color:var(--cyan);background:var(--cyan-dim)}
 #hero{min-height:100vh;display:flex;align-items:center;padding:100px clamp(20px,5vw,60px) 80px;position:relative;overflow:hidden}
 .hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");background-size:200px;opacity:.4;pointer-events:none}
@@ -45,12 +52,12 @@ button{cursor:pointer;font-family:'Barlow',sans-serif}
 .hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(217,119,6,.12) 0%,transparent 65%);pointer-events:none}
 .hero-glow2{position:absolute;bottom:0;right:-10%;width:500px;height:400px;background:radial-gradient(ellipse,rgba(252,211,77,.06) 0%,transparent 65%);pointer-events:none}
 .hero-content{position:relative;max-width:780px}
-.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:100px;padding:7px 18px;margin-bottom:32px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:100px;padding:7px 18px;margin-bottom:32px;font-family:'Bebas Neue',Impact,sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-.hero h1{font-family:'Playfair Display',serif !important;font-size:clamp(52px,8vw,96px);font-weight:900;line-height:.92;letter-spacing:-1.5px;font-style:italic;color:var(--white);margin-bottom:8px}
-.hero h1 .accent{color:var(--cyan)}
-.hero h1 .dim{color:var(--muted2)}
+#hero h1{font-family:'Bebas Neue',Impact,sans-serif !important;font-size:clamp(52px,8vw,96px);font-weight:900;line-height:.92;letter-spacing:-1.5px;font-style:italic;color:var(--white);margin-bottom:8px}
+#hero h1 .accent{color:var(--cyan)}
+#hero h1 .dim{color:var(--muted2)}
 .hero-sub{font-size:clamp(16px,2vw,19px);color:var(--muted2);max-width:540px;line-height:1.65;margin:24px 0 40px;font-weight:400}
 .hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
 .hero-pill{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.02)}
@@ -62,14 +69,14 @@ button{cursor:pointer;font-family:'Barlow',sans-serif}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:rgba(255,255,255,.04);color:var(--text);font-size:15px;font-weight:600;border:1px solid var(--border2);transition:.2s}
 .btn-secondary:hover{background:rgba(255,255,255,.07);border-color:rgba(59,91,219,.5);transform:translateY(-2px)}
 .hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
-.hero-stat .num{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--white);line-height:1}
+.hero-stat .num{font-family:'Bebas Neue',Impact,sans-serif;font-size:36px;font-weight:800;color:var(--white);line-height:1}
 .hero-stat .num span{color:var(--cyan)}
 .hero-stat .label{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3px}
 section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .wrap{max-width:1100px;margin:0 auto}
-.section-label{display:inline-flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-family:'Bebas Neue',Impact,sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
 .section-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
-.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.5px;color:var(--white);margin-bottom:14px}
+.section-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.5px;color:var(--white);margin-bottom:14px}
 .section-desc{font-size:16px;color:var(--muted2);max-width:540px;line-height:1.7;margin-bottom:48px}
 .fade{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .fade.visible{opacity:1;transform:translateY(0)}
@@ -95,11 +102,11 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .demo-header{display:flex;align-items:center;gap:8px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
 .demo-dot{width:10px;height:10px;border-radius:50%}
 .demo-dot-r{background:#ff5f57}.demo-dot-y{background:#febc2e}.demo-dot-g{background:#28c840}
-.demo-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-left:auto}
+.demo-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-left:auto}
 .demo-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .demo-kpi{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:12px}
 .demo-kpi-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.demo-kpi-value{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--white)}
+.demo-kpi-value{font-family:'Bebas Neue',Impact,sans-serif;font-size:24px;font-weight:800;color:var(--white)}
 .demo-kpi-value.cyan{color:var(--cyan)}
 .demo-kpi-value.blue{color:var(--blue-light)}
 .demo-kpi-value.warn{color:#fab005}
@@ -110,12 +117,52 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .badge-green{background:rgba(6,214,160,.12);color:var(--cyan)}
 .badge-yellow{background:rgba(250,176,5,.12);color:#fab005}
 .badge-red{background:rgba(239,68,68,.12);color:#ef4444}
+/* Aura Food V2: floor plan + menu cards */
+.food-live-pill{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25);padding:3px 9px;border-radius:100px}
+.food-live-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+.food-floor{position:relative;background:linear-gradient(135deg,#1c1208 0%,#0f0a04 100%);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:14px;overflow:hidden}
+.food-floor::before{content:'';position:absolute;inset:0;background-image:
+  radial-gradient(circle at 30% 20%,rgba(252,211,77,.05) 0%,transparent 30%),
+  radial-gradient(circle at 75% 70%,rgba(252,211,77,.04) 0%,transparent 30%);
+  pointer-events:none}
+.food-floor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative}
+.food-table{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:1px solid var(--border);background:rgba(255,255,255,.025);transition:.2s;position:relative;cursor:pointer}
+.food-table:hover{transform:translateY(-1px);border-color:var(--cyan)}
+.food-table.free{background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.2)}
+.food-table.busy{background:rgba(252,211,77,.06);border-color:rgba(252,211,77,.35)}
+.food-table.wait{background:rgba(239,68,68,.05);border-color:rgba(239,68,68,.3)}
+.food-table.book{background:rgba(96,165,250,.05);border-color:rgba(96,165,250,.3)}
+.food-table-num{font-family:'Bebas Neue',Impact,sans-serif;font-size:18px;font-weight:800;color:var(--white);line-height:1}
+.food-table-pax{font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;font-weight:700}
+.food-table-time{font-size:9px;letter-spacing:.5px;font-weight:700;font-family:'Bebas Neue',Impact,sans-serif}
+.food-table.free .food-table-time{color:#22c55e}
+.food-table.busy .food-table-time{color:#FCD34D}
+.food-table.wait .food-table-time{color:#ef4444;animation:pulse 1.4s infinite}
+.food-table.book .food-table-time{color:#60A5FA}
+.food-table-tic{position:absolute;top:4px;right:4px;font-size:9px}
+.food-floor-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:9.5px;color:var(--muted);font-weight:600;letter-spacing:.5px}
+.food-floor-legend span{display:inline-flex;align-items:center;gap:5px}
+.food-floor-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;font-style:normal}
+.food-menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.food-dish{display:flex;gap:10px;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:10px;padding:8px;transition:.2s}
+.food-dish:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.food-dish-img{width:52px;height:52px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:linear-gradient(135deg,#3a2410,#1f1408);border:1px solid var(--border2);position:relative;overflow:hidden}
+.food-dish-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(252,211,77,.18),transparent 70%)}
+.food-dish-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.food-dish-name{font-size:11.5px;font-weight:700;color:var(--white);line-height:1.15}
+.food-dish-cat{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.food-dish-price{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
+.food-dish-price strong{font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;letter-spacing:.5px;color:var(--cyan);font-weight:800}
+.food-dish-tag{font-size:8.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:1px 5px;border-radius:3px}
+.food-dish-tag.hot{background:rgba(239,68,68,.15);color:#ef4444}
+.food-dish-tag.top{background:rgba(252,211,77,.15);color:#FCD34D}
+.food-dish-tag.new{background:rgba(34,197,94,.15);color:#22c55e}
 #features{background:var(--bg)}
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
 .feature-card{background:var(--bg);padding:32px;transition:.2s}
 .feature-card:hover{background:var(--surface)}
 .feature-icon{width:44px;height:44px;border-radius:10px;background:var(--cyan-dim);border:1px solid rgba(6,214,160,.2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
-.feature-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
+.feature-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
 .feature-desc{font-size:13px;color:var(--muted);line-height:1.6}
 .feature-highlight{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
 #pricing{background:var(--surface);border-top:1px solid var(--border)}
@@ -127,9 +174,9 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .price-card.addon{padding:24px 28px;border-style:dashed}
 .price-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,91,219,.12);border:1px solid rgba(59,91,219,.25);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px}
 .price-badge.addon-badge{background:rgba(6,214,160,.08);border-color:rgba(6,214,160,.2);color:var(--cyan)}
-.price-name{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
+.price-name{font-family:'Bebas Neue',Impact,sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
 .price-desc{font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.5}
-.price-amount{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:900;color:var(--white);line-height:1;margin:16px 0 4px}
+.price-amount{font-family:'Bebas Neue',Impact,sans-serif;font-size:56px;font-weight:900;color:var(--white);line-height:1;margin:16px 0 4px}
 .price-amount.addon-amount{font-size:42px}
 .price-amount .currency{font-size:24px;vertical-align:top;margin-top:10px;display:inline-block;color:var(--muted2)}
 .price-amount .suffix{font-size:20px;color:var(--muted)}
@@ -172,20 +219,20 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .comp-table td{padding:13px 18px;font-size:14px;border-bottom:1px solid rgba(59,91,219,.06);color:var(--muted2)}
 .comp-table tr:last-child td{border-bottom:none}
 .comp-table td.service{color:var(--text);font-weight:500}
-.comp-table td.highlight{color:var(--cyan);font-weight:700;background:rgba(6,214,160,.04);font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.5px}
+.comp-table td.highlight{color:var(--cyan);font-weight:700;background:rgba(6,214,160,.04);font-family:'Bebas Neue',Impact,sans-serif;font-size:15px;letter-spacing:.5px}
 .comp-table tr:hover td{background:rgba(255,255,255,.02)}
 .comp-chip{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .chip-green{background:rgba(6,214,160,.12);color:var(--cyan)}
 .chip-blue{background:rgba(59,91,219,.12);color:var(--blue-light)}
 .why-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
 .why-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px}
-.why-card-num{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:900;color:var(--blue-light);line-height:1}
-.why-card-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white)}
+.why-card-num{font-family:'Bebas Neue',Impact,sans-serif;font-size:42px;font-weight:900;color:var(--blue-light);line-height:1}
+.why-card-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white)}
 .why-card-desc{font-size:13px;color:var(--muted);line-height:1.6}
 #cta{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px);position:relative;overflow:hidden}
 .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,91,219,.12) 0%,transparent 65%);pointer-events:none}
-.cta-label{display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
-.cta-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,68px);font-weight:900;color:var(--white);line-height:1;margin-bottom:16px}
+.cta-label{display:inline-flex;align-items:center;gap:8px;font-family:'Bebas Neue',Impact,sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.cta-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(40px,6vw,68px);font-weight:900;color:var(--white);line-height:1;margin-bottom:16px}
 .cta-sub{font-size:17px;color:var(--muted2);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .btn-whatsapp{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:10px;background:#25D366;color:#fff;font-size:16px;font-weight:700;border:none;transition:.2s;letter-spacing:.3px}
@@ -193,7 +240,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .btn-whatsapp svg{width:22px;height:22px}
 footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clamp(20px,5vw,60px)}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.footer-brand{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+.footer-brand{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em}.footer-brand .rubro-accent{font-family:'Bebas Neue',Impact,sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
 .footer-brand span{color:var(--cyan)}
 .footer-links{display:flex;gap:24px}
 .footer-link{font-size:13px;color:var(--muted);transition:.2s}
@@ -205,12 +252,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
 @media(max-width:900px){.nav-links{display:none}.nav-burger{display:flex}.tab-panel.active{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr 1fr}.pricing-grid,.pricing-addons{grid-template-columns:1fr}.why-cards{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.tabs{flex-direction:column}.tab{min-width:auto}.features-grid{grid-template-columns:1fr}.why-cards{grid-template-columns:1fr}.hero-stats{gap:24px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-60G0MKXJRW"></script>
+<script src="/assets/tracking.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-60G0MKXJRW');</script>
 </head>
 <body>
 
 <nav class="nav" id="nav">
   <div class="nav-brand">
-    <a href="https://yustalabs.com"><span class="nav-brand-yl">Yusta Labs</span></a>
+    <a href="https://yustalabs.com" style="display:inline-flex;align-items:center;gap:8px;"><img src="/assets/yusta-mark.svg?v=4" alt="" width="28" height="32" style="display:block;"/><span class="nav-brand-yl">Yusta</span> <span class="nav-brand-gold">Labs</span></a>
     <span class="nav-brand-sep">/</span>
     <span class="nav-brand-ac">Aura Food</span>
   </div>
@@ -244,7 +294,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <div class="hero-content">
     <div class="hero-badge">Sistema para restaurantes</div>
     <h1>El sistema que<br><span class="accent">tu restaurante</span><br><span class="dim">necesitaba.</span></h1>
-    <p class="hero-sub">Mesas, comandas y stock en un solo lugar. Cerrá el día sabiendo exactamente cuánto ganaste. <strong style="color:var(--text)">Pago único. Tuyo para siempre.</strong></p>
+    <p class="hero-sub">Mesas, comandas y stock en un solo lugar. Cerrá el día sabiendo exactamente cuánto ganaste. <strong style="color:var(--text)">Pago único + 12 meses incluidos.</strong></p>
     <div class="hero-pills">
       <span class="hero-pill">🍕 Pizzerías</span>
       <span class="hero-pill">🥩 Parrillas</span>
@@ -255,7 +305,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     </div>
     <div class="hero-ctас">
       <a href="/aura-food/demo" target="_blank" class="btn-demo">Ver demo en vivo →</a>
-      <a href="https://wa.me/541132609254?text=Hola!%20Quiero%20ver%20una%20demo%20de%20Aura%20Food%20para%20mi%20restaurante." target="_blank" class="btn-secondary">
+      <a href="https://wa.me/541124693394?text=Hola!%20Quiero%20ver%20una%20demo%20de%20Aura%20Food%20para%20mi%20restaurante." target="_blank" class="btn-secondary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Hablar con nosotros
       </a>
@@ -296,7 +346,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <div style="background:var(--card);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
       <div style="flex:1;min-width:240px;">
         <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">La solución</div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.7rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px;">Aura Food organiza tu cocina. De punta a punta.</h3>
+        <h3 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.7rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px;">Aura Food organiza tu cocina. De punta a punta.</h3>
         <p style="font-size:14px;color:var(--muted2);line-height:1.6;">Pedidos centralizados, menú digital y análisis de ventas. Para restaurantes y dark kitchens argentinas que quieren escalar.</p>
       </div>
       <a href="/aura-food/demo" target="_blank" class="btn-demo" style="flex-shrink:0;">Ver cómo funciona →</a>
@@ -332,17 +382,35 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
         <a href="/aura-food/demo" target="_blank" class="btn-demo">Ver demo de mesas →</a>
       </div>
       <div class="panel-demo">
-        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Food — Mesas</span></div>
-        <div class="demo-kpi-grid">
-          <div class="demo-kpi"><div class="demo-kpi-label">Mesas ocupadas</div><div class="demo-kpi-value cyan">8/14</div></div>
-          <div class="demo-kpi"><div class="demo-kpi-label">Pedidos activos</div><div class="demo-kpi-value warn">12</div></div>
-          <div class="demo-kpi"><div class="demo-kpi-label">Ticket promedio</div><div class="demo-kpi-value blue">$4.800</div></div>
-          <div class="demo-kpi"><div class="demo-kpi-label">Ventas hoy</div><div class="demo-kpi-value">$38.400</div></div>
+        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Food &mdash; Sal&oacute;n</span><span class="food-live-pill">8/14 ocupadas</span></div>
+        <div class="food-floor">
+          <div class="food-floor-grid">
+            <div class="food-table busy"><span class="food-table-tic">&#127869;&#65039;</span><span class="food-table-num">01</span><span class="food-table-pax">4 pax</span><span class="food-table-time">42m</span></div>
+            <div class="food-table busy"><span class="food-table-tic">&#127869;&#65039;</span><span class="food-table-num">02</span><span class="food-table-pax">2 pax</span><span class="food-table-time">28m</span></div>
+            <div class="food-table free"><span class="food-table-num">03</span><span class="food-table-pax">2 pax</span><span class="food-table-time">libre</span></div>
+            <div class="food-table book"><span class="food-table-tic">&#128467;&#65039;</span><span class="food-table-num">04</span><span class="food-table-pax">6 pax</span><span class="food-table-time">21:00</span></div>
+            <div class="food-table wait"><span class="food-table-tic">&#128176;</span><span class="food-table-num">05</span><span class="food-table-pax">3 pax</span><span class="food-table-time">cuenta</span></div>
+            <div class="food-table busy"><span class="food-table-num">06</span><span class="food-table-pax">2 pax</span><span class="food-table-time">12m</span></div>
+            <div class="food-table free"><span class="food-table-num">07</span><span class="food-table-pax">4 pax</span><span class="food-table-time">libre</span></div>
+            <div class="food-table busy"><span class="food-table-num">08</span><span class="food-table-pax">5 pax</span><span class="food-table-time">55m</span></div>
+            <div class="food-table busy"><span class="food-table-num">09</span><span class="food-table-pax">2 pax</span><span class="food-table-time">8m</span></div>
+            <div class="food-table free"><span class="food-table-num">10</span><span class="food-table-pax">2 pax</span><span class="food-table-time">libre</span></div>
+            <div class="food-table busy"><span class="food-table-tic">&#127828;</span><span class="food-table-num">11</span><span class="food-table-pax">4 pax</span><span class="food-table-time">37m</span></div>
+            <div class="food-table free"><span class="food-table-num">12</span><span class="food-table-pax">6 pax</span><span class="food-table-time">libre</span></div>
+          </div>
+          <div class="food-floor-legend">
+            <span><i style="background:#22c55e"></i>Libre</span>
+            <span><i style="background:#FCD34D"></i>Ocupada</span>
+            <span><i style="background:#ef4444"></i>Cuenta</span>
+            <span><i style="background:#60A5FA"></i>Reservada</span>
+          </div>
         </div>
-        <div class="demo-row"><span>Mesa 3</span><span class="demo-badge badge-yellow">Esperando postre</span></div>
-        <div class="demo-row"><span>Mesa 7</span><span class="demo-badge badge-yellow">Pidiendo cuenta</span></div>
-        <div class="demo-row"><span>Mesa 1</span><span class="demo-badge badge-green">Libre</span></div>
-        <div class="demo-row"><span>Mesa 5</span><span class="demo-badge badge-green">Recién sentados</span></div>
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi"><div class="demo-kpi-label">Pedidos act.</div><div class="demo-kpi-value warn">12</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Ticket prom.</div><div class="demo-kpi-value blue">$4.800</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Ventas hoy</div><div class="demo-kpi-value cyan">$38.4k</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Rotaci&oacute;n</div><div class="demo-kpi-value">2.4x</div></div>
+        </div>
       </div>
     </div>
 
@@ -358,17 +426,39 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
         <a href="/aura-food/demo" target="_blank" class="btn-demo">Ver demo de menú →</a>
       </div>
       <div class="panel-demo">
-        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Food — Menú</span></div>
+        <div class="demo-header"><span class="demo-dot demo-dot-r"></span><span class="demo-dot demo-dot-y"></span><span class="demo-dot demo-dot-g"></span><span class="demo-title">Aura Food &mdash; Carta</span><span class="food-live-pill">38 platos</span></div>
         <div class="demo-kpi-grid">
-          <div class="demo-kpi"><div class="demo-kpi-label">Platos activos</div><div class="demo-kpi-value cyan">38</div></div>
-          <div class="demo-kpi"><div class="demo-kpi-label">Más vendido</div><div class="demo-kpi-value">Milanesa</div></div>
-          <div class="demo-kpi"><div class="demo-kpi-label">Precio promedio</div><div class="demo-kpi-value blue">$3.200</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Activos</div><div class="demo-kpi-value cyan">38</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Top vendido</div><div class="demo-kpi-value">Mila</div></div>
+          <div class="demo-kpi"><div class="demo-kpi-label">Precio prom.</div><div class="demo-kpi-value blue">$3.200</div></div>
           <div class="demo-kpi"><div class="demo-kpi-label">Sin stock</div><div class="demo-kpi-value red">2</div></div>
         </div>
-        <div class="demo-row"><span>Milanesa napolitana</span><span class="demo-badge badge-green">$4.200</span></div>
-        <div class="demo-row"><span>Bife de chorizo</span><span class="demo-badge badge-green">$5.800</span></div>
-        <div class="demo-row"><span>Ensalada César</span><span class="demo-badge badge-green">$2.900</span></div>
-        <div class="demo-row"><span>Flan casero</span><span class="demo-badge badge-green">$1.800</span></div>
+        <div class="food-menu-grid">
+          <div class="food-dish">
+            <div class="food-dish-img">&#129368;</div>
+            <div class="food-dish-info"><span class="food-dish-cat">Principal</span><span class="food-dish-name">Milanesa napolitana</span><div class="food-dish-price"><strong>$4.200</strong><span class="food-dish-tag top">Top</span></div></div>
+          </div>
+          <div class="food-dish">
+            <div class="food-dish-img">&#129385;</div>
+            <div class="food-dish-info"><span class="food-dish-cat">Parrilla</span><span class="food-dish-name">Bife de chorizo</span><div class="food-dish-price"><strong>$5.800</strong><span class="food-dish-tag hot">Hot</span></div></div>
+          </div>
+          <div class="food-dish">
+            <div class="food-dish-img">&#129382;</div>
+            <div class="food-dish-info"><span class="food-dish-cat">Entrada</span><span class="food-dish-name">Ensalada C&eacute;sar</span><div class="food-dish-price"><strong>$2.900</strong><span class="food-dish-tag new">New</span></div></div>
+          </div>
+          <div class="food-dish">
+            <div class="food-dish-img">&#127854;</div>
+            <div class="food-dish-info"><span class="food-dish-cat">Postre</span><span class="food-dish-name">Flan casero c/dulce</span><div class="food-dish-price"><strong>$1.800</strong><span class="food-dish-tag top">Top</span></div></div>
+          </div>
+          <div class="food-dish">
+            <div class="food-dish-img">&#127829;</div>
+            <div class="food-dish-info"><span class="food-dish-cat">Pizzas</span><span class="food-dish-name">Pizza muzzarella</span><div class="food-dish-price"><strong>$3.500</strong><span class="food-dish-tag">&minus;</span></div></div>
+          </div>
+          <div class="food-dish">
+            <div class="food-dish-img">&#127863;</div>
+            <div class="food-dish-info"><span class="food-dish-cat">Bebida</span><span class="food-dish-name">Cerveza tirada 500</span><div class="food-dish-price"><strong>$1.400</strong><span class="food-dish-tag top">Top</span></div></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -456,7 +546,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;">
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:24px;letter-spacing:.5px;">Ingresá los datos de tu negocio</h3>
+        <h3 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:24px;letter-spacing:.5px;">Ingresá los datos de tu negocio</h3>
         <div style="display:flex;flex-direction:column;gap:22px;">
           <div>
             <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">Pedidos promedio por día</label>
@@ -478,20 +568,20 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:14px;padding:24px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(239,68,68,0.8);margin-bottom:8px;">Perdés por mes</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:#ef4444;line-height:1;" id="roi-perdida">$0</div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;font-weight:900;color:#ef4444;line-height:1;" id="roi-perdida">$0</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px;">en pedidos perdidos, mal tomados o sin seguimiento</div>
         </div>
         <div style="background:rgba(var(--blue-rgb,59,91,219),0.06);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:14px;padding:24px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:8px;">Aura te cuesta (pago único)</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);line-height:1;">USD 450</div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);line-height:1;">USD 350</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px;">se recupera en <span id="roi-meses" style="color:var(--white);font-weight:700;">menos de 1 mes</span></div>
         </div>
         <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:14px;padding:24px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Ganás extra por mes</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;" id="roi-ganancia">$0</div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;" id="roi-ganancia">$0</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px;">con operaciones recuperadas y gestión eficiente</div>
         </div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Calculé%20mi%20ROI%20y%20me%20interesa%20Aura%20Food." target="_blank" class="btn-primary" style="text-align:center;justify-content:center;">Quiero recuperar esa plata →</a>
+        <a href="https://wa.me/541124693394?text=Hola!%20Calculé%20mi%20ROI%20y%20me%20interesa%20Aura%20Food." target="_blank" class="btn-primary" style="text-align:center;justify-content:center;">Quiero recuperar esa plata →</a>
       </div>
     </div>
   </div>
@@ -501,8 +591,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
 <section id="testimonio" style="padding:64px clamp(20px,5vw,60px);background:var(--bg);border-top:1px solid var(--border);">
   <div class="wrap">
     <div style="max-width:680px;margin:0 auto;text-align:center;">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:4rem;color:var(--blue);line-height:1;margin-bottom:20px;opacity:.6;">❝</div>
-      <blockquote style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.35;margin-bottom:28px;">"Antes atendía pedidos por tres canales a la vez y me equivocaba. Ahora el Recepcionista de Aura centraliza todo en WhatsApp y la cocina recibe la comanda sola. Bajé los errores a cero y subí el volumen un 50%."</blockquote>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:4rem;color:var(--blue);line-height:1;margin-bottom:20px;opacity:.6;">❝</div>
+      <blockquote style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.35;margin-bottom:28px;">"Antes atendía pedidos por tres canales a la vez y me equivocaba. Ahora el Recepcionista de Aura centraliza todo en WhatsApp y la cocina recibe la comanda sola. Bajé los errores a cero y subí el volumen un 50%."</blockquote>
       <div style="display:flex;align-items:center;justify-content:center;gap:14px;">
         <div style="width:44px;height:44px;border-radius:50%;background:rgba(var(--blue-rgb,59,91,219),0.15);border:2px solid rgba(var(--blue-rgb,59,91,219),0.35);display:flex;align-items:center;justify-content:center;font-size:18px;">🍽️</div>
         <div style="text-align:left;">
@@ -518,45 +608,17 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <div class="wrap">
     <div class="fade">
       <div class="section-label">Precios</div>
-      <h2 class="section-title">Pago único.<br>Tuyo para siempre.</h2>
+      <h2 class="section-title">Pago único.<br>El software es tuyo.</h2>
       <p class="section-desc">Sin contratos en dólares, sin licencias imposibles. Precios pensados para restaurantes argentinos reales.</p>
     </div>
-    <div class="reveal reveal-delay-1" style="margin-bottom:20px;">
-      <div style="background:var(--card);border:1px dashed var(--border2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:260px;">
-          <div style="font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">✨ Plan Starter</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:6px;">Aura Food Lite · Para empezar</div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.65;">Comandas, POS y cierre de caja. Ideal para food trucks, kioscos de comida o locales chicos. <strong style="color:var(--muted2);">Sin delivery · Sin reportes avanzados · 1 usuario · Soporte por email</strong>. Upgradeás cuando quieras.</p>
-        </div>
-        <div style="text-align:center;flex-shrink:0;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:900;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1rem;color:var(--muted2);">USD </span>179</div>
-          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Pago único · Setup DIY</div>
-          <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20Aura%20Food%20Lite." target="_blank" class="btn-secondary" style="white-space:nowrap;font-size:13px;padding:10px 22px;">Arrancar chiquito →</a>
-        </div>
+<!-- Banner educativo agentes opcionales -->
+    <div class="agents-notice fade fade-delay-1" style="max-width:900px;margin:0 auto 40px;background:linear-gradient(135deg,rgba(240,180,41,0.08),rgba(240,180,41,0.03));border:1px solid rgba(240,180,41,0.25);border-radius:14px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;">
+      <div style="flex-shrink:0;width:36px;height:36px;border-radius:10px;background:rgba(240,180,41,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;">💡</div>
+      <div style="flex:1">
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;letter-spacing:2.5px;color:#F0B429;font-weight:700;margin-bottom:4px;">IMPORTANTE ANTES DE ELEGIR TU PLAN</div>
+        <p style="font-size:14px;color:var(--text,#F2F2F5);line-height:1.55;margin:0 0 6px 0;"><strong>Aura es tu sistema de gestión. Los agentes IA son módulos opcionales que podés sumar cuando quieras.</strong></p>
+        <p style="font-size:13px;color:var(--muted,#8A8A94);line-height:1.55;margin:0;">Podés empezar con solo la aplicación y, cuando veas el valor, agregar agentes por separado (USD 300 c/u de setup, una sola vez) o en 3 agentes por USD 800 de setup. El Plan Premium agrega servicios one-time (migración de data + capacitación) al Combo.</p>
       </div>
-    </div>
-    <div class="pricing-lite-wide fade fade-delay-1">
-      <div class="lite-left">
-        <span class="price-badge">Versión Lite</span>
-        <div class="lite-title">Arrancá con lo esencial</div>
-        <p class="lite-desc">Ideal para negocios que quieren digitalizar catálogo, ventas y caja sin inversión grande. Mismo sistema, versión reducida. Upgradeable a Full cuando quieras.</p>
-        <ul class="lite-features">
-          <li>✓ Catálogo / fichas básicas</li>
-          <li>✓ Ventas y caja</li>
-          <li>✓ Reportes esenciales</li>
-          <li>✓ Soporte por WhatsApp</li>
-        </ul>
-      </div>
-      <div class="lite-right">
-        <div class="lite-eyebrow">DESDE</div>
-        <div class="lite-price"><span class="currency">USD </span>200</div>
-        <div class="lite-cuotas">Pago único · O <strong>6 cuotas de USD 40/mes</strong></div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20la%20versión%20Lite%20de%20Aura%20Food." target="_blank" class="btn-secondary btn-lite-cta">Quiero la Lite →</a>
-      </div>
-    </div>
-
-    <div class="pricing-divider">
-      <span>O si querés el sistema completo</span>
     </div>
 
     <div class="pricing-grid fade fade-delay-2" style="grid-template-columns:1fr 1fr 1fr;">
@@ -566,7 +628,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
         <div class="price-desc">Tu sistema listo para usar. Sos dueño de Aura Food para siempre.</div>
         <div class="price-listed">USD 420 con financiamiento</div>
         <div class="price-amount"><span class="currency">USD </span>350</div>
-        <div class="price-tag">✓ Pagando al contado — ahorrás USD 58</div>
+        <div class="price-tag">✓ Pagando al contado — ahorrás USD 70</div>
         <div class="price-cuotas-note">O <strong>6 cuotas de USD 70/mes</strong></div>
         <hr class="price-divider">
         <div class="price-features">
@@ -574,21 +636,21 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
           <div class="price-feature">Control de mesas y comandas</div>
           <div class="price-feature">Menú digital y stock de ingredientes</div>
           <div class="price-feature">Dashboard + reportes + exportación Excel</div>
-          <div class="price-feature">Usuarios ilimitados</div>
+          <div class="price-feature">Hasta 5 usuarios incluidos <span style="color:var(--muted);font-weight:400;font-size:0.85em;">(extras desde USD 15)</span></div>
           <div class="price-feature">Soporte por WhatsApp</div>
           <div class="price-feature muted">Migración de base de datos</div>
         </div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20Aura%20Food%20para%20mi%20restaurante." target="_blank" class="btn-secondary btn-full">Quiero mi sistema →</a>
+        <a href="https://wa.me/541124693394?text=Hola!%20Me%20interesa%20Aura%20Food%20para%20mi%20restaurante." target="_blank" class="btn-secondary btn-full">Quiero mi sistema →</a>
       </div>
       <div class="price-card" style="border:2px solid var(--blue);background:linear-gradient(145deg,rgba(217,119,6,0.08),transparent);position:relative;">
         <div style="position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:0 0 0 12px;">Combo All-in</div>
         <div class="price-badge" style="background:rgba(217,119,6,0.15);border-color:rgba(217,119,6,0.35);color:var(--blue-light);">App + 3 Agentes</div>
         <div class="price-name">Combo All-in</div>
         <div class="price-desc">Sistema completo + Recepcionista, Almacenero y Community funcionando desde el día 1.</div>
-        <div class="price-listed">USD 1.090 por separado</div>
+        <div class="price-listed">USD 1.068 por separado</div>
         <div class="price-amount"><span class="currency">USD </span>890</div>
-        <div class="price-tag">✓ Ahorrás USD 200</div>
-        <div class="price-cuotas-note">+ <strong>USD 69/mes mantenimiento</strong></div>
+        <div class="price-tag">✓ Ahorrás USD 178</div>
+        <div class="price-cuotas-note">+ <strong>USD 100/mes plan agentes</strong></div>
         <hr class="price-divider">
         <div class="price-features">
           <div class="price-feature">Aura Food completo</div>
@@ -598,7 +660,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
           <div class="price-feature">Prioridad en soporte</div>
           <div class="price-feature">Capacitación incluida</div>
         </div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Combo%20All-in%20de%20Aura%20Food." target="_blank" class="btn-primary btn-full">Quiero el combo →</a>
+        <a href="https://wa.me/541124693394?text=Hola!%20Me%20interesa%20el%20Combo%20All-in%20de%20Aura%20Food." target="_blank" class="btn-primary btn-full">Quiero el combo →</a>
       </div>
       <div class="price-card featured">
         <div class="price-badge">Más completo</div>
@@ -617,7 +679,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
           <div class="price-feature">Capacitación del equipo</div>
           <div class="price-feature">Soporte prioritario</div>
         </div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Plan%20Premium%20de%20Aura%20Food." target="_blank" class="btn-primary btn-full">Quiero el Premium →</a>
+        <a href="https://wa.me/541124693394?text=Hola!%20Me%20interesa%20el%20Plan%20Premium%20de%20Aura%20Food." target="_blank" class="btn-primary btn-full">Quiero el Premium →</a>
       </div>
     </div>
     <div class="pricing-addons fade fade-delay-2">
@@ -632,7 +694,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
           <div class="price-feature">Mejoras de diseño o flujo</div>
           <div class="price-feature">Entrega rápida</div>
         </div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20el%20Pack%20Mejoras%20para%20Aura%20Food." target="_blank" class="btn-secondary btn-full">Consultar →</a>
+        <a href="https://wa.me/541124693394?text=Hola!%20Me%20interesa%20el%20Pack%20Mejoras%20para%20Aura%20Food." target="_blank" class="btn-secondary btn-full">Consultar →</a>
       </div>
       <div class="price-card addon">
         <div class="price-badge addon-badge">Servicio adicional</div>
@@ -645,10 +707,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
           <div class="price-feature">Verificación y limpieza de datos</div>
           <div class="price-feature">Sin pérdida de información</div>
         </div>
-        <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20la%20Migraci%C3%B3n%20para%20Aura%20Food." target="_blank" class="btn-secondary btn-full">Consultar →</a>
+        <a href="https://wa.me/541124693394?text=Hola!%20Me%20interesa%20la%20Migraci%C3%B3n%20para%20Aura%20Food." target="_blank" class="btn-secondary btn-full">Consultar →</a>
       </div>
     </div>
-    <div class="price-note fade fade-delay-2">✦ Pago único · Sin mensualidades ni licencias · Precios en USD · IVA no incluido · <strong>Demo gratuita sin compromiso</strong> · Financiación disponible en 6 cuotas</div>
+    <div class="price-note fade fade-delay-2">✦ Pago único · 12 meses todo incluido · Mant. año 2+ opcional · Precios en USD · IVA no incluido · <strong>Demo gratuita sin compromiso</strong> · Financiación disponible en 6 cuotas</div>
   </div>
 </section>
 
@@ -669,42 +731,42 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de atención</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Maître Virtual</div>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Maître Virtual</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Reservas, consultas de menú, horarios y eventos especiales. El agente atiende por WhatsApp todo el día, incluso cuando estás en pleno servicio y no podés contestar.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: pedidos que se mezclan entre WhatsApp, Instagram y llamadas</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">💳</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de cobros</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Cobrador</div>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Cobrador</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Eventos o catering con saldo pendiente. El agente hace el seguimiento educado, confirma fechas de pago y registra cada acuerdo para que quede todo claro.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: cuentas corrientes de clientes frecuentes sin cobrar</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">🧅</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de stock</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Almacenero</div>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Almacenero</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Ingredientes críticos, bebidas y productos del bar. El agente te avisa cuando hay que reponer antes de que falle un servicio o pierdas una venta.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: quedarte sin muzzarella en plena noche del sábado</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de datos</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Analista</div>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Analista</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Qué platos se venden más, a qué hora está lleno el local, cuánto facturás por servicio vs. semanas anteriores. Datos reales, no suposiciones.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: no saber qué plato te deja más margen real</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">📱</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de contenido</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Community</div>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Community</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Menú del día para Instagram, especiales de fin de semana, eventos temáticos y promociones. El agente redacta con tu estilo y vos solo publicás.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: no tener tiempo para postear el menú del día</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">💌</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de retención</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Fidelizador</div>
+      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Fidelizador</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Mesas frecuentes que no reservaron en 3 semanas. El agente les escribe: "Tenemos un menú especial este sábado, ¿reservamos tu lugar?" — sin parecer genérico.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: clientes que probaron una vez y no volvieron</div>
     </div>
@@ -712,43 +774,55 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <!-- Pricing box agentes -->
   <div style="margin-bottom:32px;">
     <div style="text-align:center;margin-bottom:24px;">
-      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:8px;">Comprás el agente una vez.<br><span style="color:var(--cyan)">Lo mantenemos funcionando siempre.</span></h3>
+      <h3 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:8px;">Comprás el agente una vez.<br><span style="color:var(--cyan)">Lo mantenemos funcionando siempre.</span></h3>
       <p style="font-size:13px;color:var(--muted);max-width:500px;margin:0 auto;">Las APIs de WhatsApp e IA van a <strong style="color:var(--text)">tu nombre</strong> — vos tenés el control, nosotros no tocamos eso.</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;">
         <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Por agente</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>300</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>250</div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Setup completo</div>
-        <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ USD 29/mes mantenimiento</div>
-        <div style="font-size:12px;color:var(--muted);">O en <strong style="color:var(--text)">6 cuotas de USD 50</strong> sin interés</div>
+        <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ desde USD 35/mes plan</div>
       </div>
       <div style="background:var(--card);border:2px solid rgba(var(--blue-rgb,59,91,219),0.4);border-radius:14px;padding:28px;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:0 0 0 10px;">Más elegido</div>
         <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:10px;">Combo 3 agentes</div>
-        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:2.8rem;color:var(--blue-light);line-height:1;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>800</div>
-          <div style="font-size:12px;color:var(--muted);text-decoration:line-through;">900</div>
-        </div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Ahorrás USD 100</div>
-        <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ USD 69/mes mantenimiento</div>
-        <div style="font-size:12px;color:var(--muted);">O en <strong style="color:var(--text)">6 cuotas de USD 133</strong> sin interés</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.8rem;color:var(--blue-light);line-height:1;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>750</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Plan Esencial · 3 agentes</div>
+        <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ desde USD 100/mes plan</div>
       </div>
-    </div>
-    <div style="background:rgba(252,211,77,0.06);border:1px dashed rgba(252,211,77,0.3);border-radius:12px;padding:14px 20px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-      <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:3px;">💡 Plan anual</div>
-        <div style="font-size:13px;color:var(--muted2);line-height:1.5;">Pagás <strong style="color:var(--white);">10 meses y usás 12</strong>. Equivale a USD 24/mes o USD 58/mes (combo).</div>
-      </div>
-      <div style="font-size:11px;color:var(--muted);flex-shrink:0;">Ahorrás USD 58/año (individual) · USD 138 (combo)</div>
     </div>
     <div style="text-align:center;margin-top:20px;">
-      <div style="font-size:12px;color:var(--muted2);max-width:640px;margin:0 auto 16px;line-height:1.5;">Mantenimiento cubre hosting, monitoreo y soporte. Las APIs de WhatsApp e IA van a tu nombre.</div>
-      <a href="https://wa.me/541132609254?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:9px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;">Quiero mis agentes →</a>
+      <div style="font-size:12px;color:var(--muted2);max-width:640px;margin:0 auto 16px;line-height:1.5;">El plan mensual cubre mantenimiento 24/7, uso de APIs (WhatsApp Business + inteligencia artificial) y soporte continuo.</div>
+      <a href="https://wa.me/541124693394?text=Hola!%20Me%20interesa%20sumar%20agentes%20IA%20a%20mi%20negocio." target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:9px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;">Quiero mis agentes →</a>
     </div>
   </div>
 </div>
 </section>
+
+
+
+<!-- CASOS_SECTION -->
+<div id="yusta-casos-container" style="padding:0 clamp(16px,4vw,40px);"></div>
+<script>
+  window.addEventListener('load', function(){
+    if(window.AuraCasos) window.AuraCasos.mount('#yusta-casos-container', 'food');
+  });
+</script>
+<!-- END_CASOS_SECTION -->
+
+<!-- LEAD_FORM_SECTION -->
+<section style="padding:60px 0;background:linear-gradient(180deg,transparent,rgba(240,180,41,0.03));border-top:1px solid rgba(255,255,255,0.05);">
+  <div style="max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,40px);">
+    <div id="yusta-lead-form-container"></div>
+  </div>
+</section>
+<script>
+  window.addEventListener('load', function(){
+    if(window.AuraLead) window.AuraLead.mount('#yusta-lead-form-container', { rubro: 'food' });
+  });
+</script>
+<!-- END_LEAD_FORM_SECTION -->
 
 <!-- FLUJO VISUAL -->
 <section id="flujo" style="padding:80px clamp(20px,5vw,60px);background:var(--surface);border-top:1px solid var(--border);">
@@ -762,36 +836,36 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <div style="position:absolute;top:36px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,var(--border),var(--blue),var(--cyan),var(--border));z-index:0;"></div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:#075E54;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;box-shadow:0 0 20px rgba(7,94,84,0.3);">💬</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">1 — Cliente pide</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">1 — Cliente pide</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Hola, quiero una pizza muzarella y dos medialunas para llevar</div>
       </div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--blue-rgb,59,91,219),0.15);border:1px solid rgba(var(--blue-rgb,59,91,219),0.3);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">🤖</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">2 — Agente responde</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">2 — Agente responde</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Confirma disponibilidad, toma el pedido y da el tiempo estimado</div>
       </div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--cyan-rgb,6,214,160),0.08);border:1px solid rgba(var(--cyan-rgb,6,214,160),0.2);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">🍕</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">3 — Pedido en cocina</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">3 — Pedido en cocina</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Comanda enviada automáticamente, sin papel ni confusión</div>
       </div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--blue-rgb,59,91,219),0.08);border:1px solid rgba(var(--blue-rgb,59,91,219),0.15);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">📊</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">4 — Vos sabés todo</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">4 — Vos sabés todo</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Panel actualizado. Resumen diario a las 9am en tu WhatsApp</div>
       </div>
     </div>
     <div style="margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">24/7</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">24/7</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Opera sin parar, sin vacaciones</div>
       </div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">&lt;30s</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">&lt;30s</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Tiempo promedio de respuesta</div>
       </div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">0 errores</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">0 errores</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Sin olvidos, sin duplicados</div>
       </div>
     </div>
@@ -833,7 +907,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <p class="cta-sub">Entrá a la demo en vivo o hablá con nosotros. Te mostramos el sistema adaptado a tu restaurante en 15 minutos.</p>
     <div class="cta-btns">
       <a href="/aura-food/demo" target="_blank" class="btn-demo" style="padding:16px 36px;font-size:16px">Ver demo en vivo →</a>
-      <a href="https://wa.me/541132609254?text=Hola!%20Quiero%20ver%20una%20demo%20de%20Aura%20Food%20para%20mi%20restaurante." target="_blank" class="btn-whatsapp">
+      <a href="https://wa.me/541124693394?text=Hola!%20Quiero%20ver%20una%20demo%20de%20Aura%20Food%20para%20mi%20restaurante." target="_blank" class="btn-whatsapp">
         <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Consultar por WhatsApp
       </a>
@@ -841,21 +915,61 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   </div>
 </section>
 
+
+<!-- AUTO-INJECTED · Conversión a pesos + métodos de pago -->
+<section style="padding:40px clamp(20px,5vw,60px);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;padding:22px 26px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:14px;">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold,#F0B429);">💱 Conversión a pesos</span>
+      <span id="fx-rate-widget" style="font-size:13px;color:var(--muted,#8888aa);">Cargando tipo de cambio…</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted,#8888aa);line-height:1.65;margin:0 0 14px;">
+      Los precios en <strong style="color:var(--text,#fff);">USD son referenciales</strong>. Se paga en pesos argentinos al tipo de cambio del día (MEP/blue a convenir).
+      <strong style="color:var(--text,#fff);">Al contado es el precio real.</strong> En 6 cuotas se aplica un 20% de recargo financiero.
+      <strong style="color:var(--text,#fff);">Hasta 5 usuarios incluidos</strong> en todos los planes. <strong style="color:var(--text,#fff);">Usuarios 6 a 10:</strong> USD 15 pago único c/u. <strong style="color:var(--text,#fff);">Más de 10 usuarios:</strong> USD 8/mes por usuario (incluye soporte y monitoreo).
+    </p>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--muted,#8888aa);font-weight:600;">Aceptamos:</span>
+      <span class="pay-chip pay-chip-cards">
+        <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat/visa.svg" alt="Visa" height="20"/>
+        <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat/mastercard.svg" alt="Mastercard" height="20"/>
+      </span>
+      <a href="https://www.mercadopago.com.ar" target="_blank" rel="noreferrer" class="pay-chip pay-chip-mp" style="background:#009EE3;border-color:#009EE3;text-decoration:none;color:#fff;padding:6px 12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M11.115 16.479a.93.927 0 0 1-.939-.886c-.002-.042-.006-.155-.103-.155-.04 0-.074.023-.113.059-.112.103-.254.206-.46.206a.816.814 0 0 1-.305-.066c-.535-.214-.542-.578-.521-.725.006-.038.007-.08-.02-.11l-.032-.03h-.034c-.027 0-.055.012-.093.039a.788.786 0 0 1-.454.16.7.699 0 0 1-.253-.05c-.708-.27-.65-.928-.617-1.126.005-.041-.005-.072-.03-.092l-.05-.04-.047.043a.728.726 0 0 1-.505.203.73.728 0 0 1-.732-.725c0-.4.328-.722.732-.722.364 0 .675.27.721.63l.026.195.11-.165c.01-.018.307-.46.852-.46.102 0 .21.016.316.05.434.13.508.52.519.68.008.094.075.1.09.1.037 0 .064-.024.083-.045a.746.744 0 0 1 .54-.225c.128 0 .263.03.402.09.69.293.379 1.158.374 1.167-.058.144-.061.207-.005.244l.027.013h.02c.03 0 .07-.014.134-.035.093-.032.235-.08.367-.08a.944.942 0 0 1 .94.93.936.934 0 0 1-.94.928zm7.302-4.171c-1.138-.98-3.768-3.24-4.481-3.77-.406-.302-.685-.462-.928-.533a1.559 1.554 0 0 0-.456-.07c-.182 0-.376.032-.58.095-.46.145-.918.505-1.362.854l-.023.018c-.414.324-.84.66-1.164.73a1.986 1.98 0 0 1-.43.049c-.362 0-.687-.104-.81-.258-.02-.025-.007-.066.04-.125l.008-.008 1-1.067c.783-.774 1.525-1.506 3.23-1.545h.085c1.062 0 2.12.469 2.24.524a7.03 7.03 0 0 0 3.056.724c1.076 0 2.188-.263 3.354-.795a9.135 9.11 0 0 0-.405-.317c-1.025.44-2.003.66-2.946.66-.962 0-1.925-.229-2.858-.68-.05-.022-1.22-.567-2.44-.57-.032 0-.065 0-.096.002-1.434.033-2.24.536-2.782.976-.528.013-.982.138-1.388.25-.361.1-.673.186-.979.185-.125 0-.35-.01-.37-.012-.35-.01-2.115-.437-3.518-.962-.143.1-.28.203-.415.31 1.466.593 3.25 1.053 3.812 1.089.157.01.323.027.491.027.372 0 .744-.103 1.104-.203.213-.059.446-.123.692-.17l-.196.194-1.017 1.087c-.08.08-.254.294-.14.557a.705.703 0 0 0 .268.292c.243.162.677.27 1.08.271.152 0 .297-.015.43-.044.427-.095.874-.448 1.349-.82.377-.296.913-.672 1.323-.782a1.494 1.49 0 0 1 .37-.05.611.61 0 0 1 .095.005c.27.034.533.125 1.003.472.835.62 4.531 3.815 4.566 3.846.002.002.238.203.22.537-.007.186-.11.352-.294.466a.902.9 0 0 1-.484.15.804.802 0 0 1-.428-.124c-.014-.01-1.28-1.157-1.746-1.543-.074-.06-.146-.115-.22-.115a.122.122 0 0 0-.096.045c-.073.09.01.212.105.294l1.48 1.47c.002 0 .184.17.204.395.012.244-.106.447-.35.606a.957.955 0 0 1-.526.171.766.764 0 0 1-.42-.127l-.214-.206a21.035 20.978 0 0 0-1.08-1.009c-.072-.058-.148-.112-.221-.112a.127.127 0 0 0-.094.038c-.033.037-.056.103.028.212a.698.696 0 0 0 .075.083l1.078 1.198c.01.01.222.26.024.511l-.038.048a1.18 1.178 0 0 1-.1.096c-.184.15-.43.164-.527.164a.8.798 0 0 1-.147-.012c-.106-.018-.178-.048-.212-.089l-.013-.013c-.06-.06-.602-.609-1.054-.98-.059-.05-.133-.11-.21-.11a.128.128 0 0 0-.096.042c-.09.096.044.24.1.293l.92 1.003a.204.204 0 0 1-.033.062c-.033.044-.144.155-.479.196a.91.907 0 0 1-.122.007c-.345 0-.712-.164-.902-.264a1.343 1.34 0 0 0 .13-.576 1.368 1.365 0 0 0-1.42-1.357c.024-.342-.025-.99-.697-1.274a1.455 1.452 0 0 0-.575-.125c-.146 0-.287.025-.42.075a1.153 1.15 0 0 0-.671-.564 1.52 1.515 0 0 0-.494-.085c-.28 0-.537.08-.767.242a1.168 1.165 0 0 0-.903-.43 1.173 1.17 0 0 0-.82.335c-.287-.217-1.425-.93-4.467-1.613a17.39 17.344 0 0 1-.692-.189 4.822 4.82 0 0 0-.077.494l.67.157c3.108.682 4.136 1.391 4.309 1.525a1.145 1.142 0 0 0-.09.442 1.16 1.158 0 0 0 1.378 1.132c.096.467.406.821.879 1.003a1.165 1.162 0 0 0 .415.08c.09 0 .179-.012.266-.034.086.22.282.493.722.668a1.233 1.23 0 0 0 .457.094c.122 0 .241-.022.355-.063a1.373 1.37 0 0 0 1.269.841c.37.002.726-.147.985-.41.221.121.688.341 1.163.341.06 0 .118-.002.175-.01.47-.059.689-.24.789-.382a.571.57 0 0 0 .048-.078c.11.032.234.058.373.058.255 0 .501-.086.75-.265.244-.174.418-.424.444-.637v-.01c.083.017.167.026.251.026.265 0 .527-.082.773-.242.48-.31.562-.715.554-.98a1.28 1.279 0 0 0 .978-.194 1.04 1.04 0 0 0 .502-.808 1.088 1.085 0 0 0-.16-.653c.804-.342 2.636-1.003 4.795-1.483a4.734 4.721 0 0 0-.067-.492 27.742 27.667 0 0 0-5.049 1.62zm5.123-.763c0 4.027-5.166 7.293-11.537 7.293-6.372 0-11.538-3.266-11.538-7.293 0-4.028 5.165-7.293 11.539-7.293 6.371 0 11.537 3.265 11.537 7.293zm.46.004c0-4.272-5.374-7.755-12-7.755S.002 7.277.002 11.55L0 12.004c0 4.533 4.695 8.203 11.999 8.203 7.347 0 12-3.67 12-8.204z"/></svg><span style="color:#fff;font-weight:700;">Mercado Pago</span></a>
+      <span class="pay-chip">🏦 Transferencia</span>
+      <span class="pay-chip">💵 Efectivo</span>
+      <span class="pay-chip">
+        <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@master/svg/color/usdt.svg" alt="USDT" width="18" height="18"/>
+        USDT
+      </span>
+      <span class="pay-chip">
+        <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@master/svg/color/usdc.svg" alt="USDC" width="18" height="18"/>
+        USDC
+      </span>
+      <span class="pay-chip">
+        <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@master/svg/color/btc.svg" alt="Bitcoin" width="18" height="18"/>
+        Bitcoin
+      </span>
+    </div>
+  </div>
+  <style>.pay-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:999px;color:var(--text,#fff);line-height:1;}.pay-chip img{display:block;}.pay-chip-cards{padding:4px 10px;gap:6px;}.pay-chip-mp:hover{filter:brightness(1.1);}</style>
+</section>
+<!-- /AUTO-INJECTED -->
+
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">Yusta Labs / <span>Aura Food</span></div>
+    <div class="footer-brand">Yusta <span style="color:#F0B429">Labs</span> / <span>Aura Food</span></div>
     <div class="footer-links">
       <a href="https://yustalabs.com" class="footer-link">yustalabs.com</a>
       <a href="/aura-fit" class="footer-link">Aura Fit</a>
       <a href="/aura-auto" class="footer-link">Aura Auto</a>
       <a href="/aura-commerce" class="footer-link">Aura Commerce</a>
-      <a href="https://wa.me/541132609254" target="_blank" class="footer-link">WhatsApp</a>
+      <a href="mailto:ny@yustalabs.com" class="footer-link">Email</a><a href="https://wa.me/541124693394" target="_blank" class="footer-link">WhatsApp</a><a href="https://instagram.com/yustalabs" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a><a href="https://x.com/yustalabs" target="_blank" rel="noopener noreferrer" class="footer-link">X</a>
     </div>
     <div class="footer-copy">© Yusta Labs 2026 — Hecho en Argentina 🇦🇷</div>
   </div>
 </footer>
 
-<a href="https://wa.me/541132609254?text=Hola!%20Quiero%20info%20sobre%20Aura%20Food." target="_blank" class="float-wa" aria-label="WhatsApp">
+<a href="https://wa.me/541124693394?text=Hola!%20Quiero%20info%20sobre%20Aura%20Food." target="_blank" class="float-wa" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -892,5 +1006,359 @@ const fades=document.querySelectorAll('.fade')
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.12})
 fades.forEach(f=>observer.observe(f))
 </script>
-</body>
+  <script src="/partials/fx-converter.js" defer></script>
+
+<!-- YUSTA_CASOS_V1 -->
+<!-- ========================================================
+  YUSTA LABS — Casos de uso por rubro (33 historias)
+  Componente inline. Se monta con:
+  window.AuraCasos.mount('#selector', 'rubro-id')
+============================================================ -->
+<style>
+  .ycasos{padding:60px 0;border-top:1px solid rgba(255,255,255,0.05);}
+  .ycasos-head{text-align:center;max-width:700px;margin:0 auto 40px;}
+  .ycasos-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#F0B429;margin-bottom:8px;}
+  .ycasos-title{font-family:'Bebas Neue','Barlow Condensed',Impact,sans-serif;font-size:clamp(26px,3vw,38px);font-weight:400;letter-spacing:0.02em;text-transform:uppercase;line-height:1.1;margin:0 0 10px;}
+  .ycasos-sub{font-size:14.5px;color:#9E9EA8;line-height:1.6;}
+  .ycasos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
+  .ycaso{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:.2s;}
+  .ycaso:hover{border-color:rgba(240,180,41,0.3);transform:translateY(-2px);}
+  .ycaso-persona{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+  .ycaso-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#F0B429,#D49810);color:#07070A;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;flex-shrink:0;}
+  .ycaso-info{flex:1;min-width:0;}
+  .ycaso-nombre{font-weight:700;font-size:14px;color:#F2F2F5;}
+  .ycaso-negocio{font-size:12px;color:#9E9EA8;}
+  .ycaso-label{display:inline-block;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:999px;width:fit-content;}
+  .ycaso-label.problema{background:rgba(248,113,113,0.12);color:#F87171;}
+  .ycaso-label.solucion{background:rgba(34,197,94,0.12);color:#22C55E;}
+  .ycaso-texto{font-size:13px;line-height:1.6;color:#C8C8D0;}
+  .ycaso-texto strong{color:#F2F2F5;}
+  .ycaso-metric{background:rgba(240,180,41,0.06);border:1px dashed rgba(240,180,41,0.25);border-radius:10px;padding:10px 12px;margin-top:auto;}
+  .ycaso-metric-label{font-size:10px;color:#F0B429;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px;}
+  .ycaso-metric-value{font-size:13.5px;color:#F2F2F5;font-weight:600;line-height:1.4;}
+</style>
+
+<script>
+(function(){
+  const CASOS = {
+    salon: [
+      {avatar:'MC', nombre:'María C.', negocio:'Peluquería en Flores · 2 estilistas', problema:'Con la agenda de papel se cruzaban turnos y los clientes se enojaban cuando llegaban y no había lugar.', solucion:'Aura Salon + La Recepcionista IA agendando por WhatsApp 24/7.', metric:'Cero cruces en 3 meses. 42 turnos extra captados fuera de horario.'},
+      {avatar:'LF', nombre:'Lucía F.', negocio:'Salón de belleza boutique · Palermo', problema:'Pasaba horas cada domingo calculando comisiones de los estilistas. Errores, discusiones, plata mal repartida.', solucion:'Liquidación automática en Aura Salon. Marca servicio → calcula comisión real.', metric:'3 horas/semana recuperadas. Cero discusiones por liquidación.'},
+      {avatar:'RP', nombre:'Romina P.', negocio:'Estética integral · Villa Urquiza', problema:'Tenía 200 clientes pero solo reconocía a las "de siempre". Las que desaparecían, las perdía.', solucion:'Aura + El Fidelizador IA detecta clientas inactivas y las invita con promos personalizadas.', metric:'18% de clientas reactivadas en el 1er mes. +$340.000 facturado.'}
+    ],
+    fit: [
+      {avatar:'DM', nombre:'Diego M.', negocio:'Gimnasio · Caballito · 350 socios', problema:'El 30% de los socios pagaba tarde o se olvidaba. Perseguir cuotas vencidas era un trabajo de tiempo completo.', solucion:'El Cobrador IA manda recordatorios escalonados por WhatsApp con link de pago.', metric:'Cobranza al día en 2 meses. Recupero $1.2M/mes antes perdidos.'},
+      {avatar:'SB', nombre:'Sofía B.', negocio:'Box de CrossFit · Núñez · 120 socios', problema:'Las clases se llenaban por WhatsApp al profe. Quilombo, cupos mal contados, gente que se aparecía sin turno.', solucion:'Aura Fit + app del socio con reservas. Lista de espera auto-promoviendo.', metric:'Cero overbooking. +15 socios nuevos por mejor experiencia.'},
+      {avatar:'NG', nombre:'Nicolás G.', negocio:'Estudio de pilates · Recoleta', problema:'No sabía qué socios venían regularmente vs los que solo pagaban. Churn invisible del 20%.', solucion:'El Motivador IA detecta socios sin check-in +30d y les escribe.', metric:'Retención subió de 78% a 92% en 4 meses.'}
+    ],
+    food: [
+      {avatar:'MR', nombre:'Martín R.', negocio:'Bar de tapas · San Telmo · 60 cubiertos', problema:'Las mesas se reservaban por WhatsApp, se perdía el hilo, quedaban reservas fantasma.', solucion:'El Maître IA confirma reservas automáticamente + libera mesas sin show.', metric:'90% de ocupación sostenida. +$180.000/semana vs antes.'},
+      {avatar:'CR', nombre:'Carla R.', negocio:'Restaurante familiar · Palermo', problema:'El stock de muzzarella se terminaba cada viernes sin aviso. Perdían ventas los fines de semana.', solucion:'El Almacenero IA monitorea consumo y avisa 3 días antes del quiebre.', metric:'Cero quiebres en 4 meses. +12% facturación fin de semana.'},
+      {avatar:'JL', nombre:'Juan L.', negocio:'Cafetería de especialidad · Villa Crespo', problema:'No sabía qué platos daban más margen. Vendía barato lo que le costaba más.', solucion:'El Analista IA calcula rentabilidad por plato con costos reales.', metric:'Rediseñó la carta. +28% margen bruto.'}
+    ],
+    vet: [
+      {avatar:'SP', nombre:'Sandra P.', negocio:'Vet del Bosque · 1 doctor', problema:'Se olvidaba de avisar a los dueños cuando vencía la antirrábica. Perdía turnos y los animales quedaban desprotegidos.', solucion:'El Fidelizador IA manda recordatorio 15 días antes con link para agendar.', metric:'97% de renovaciones anuales. +60 turnos extra al año.'},
+      {avatar:'DR', nombre:'Dr. Ramírez', negocio:'Clínica Animalia · 3 veterinarios', problema:'Historia clínica en papel → perdía hojas, info incompleta, otro vet no sabía qué había hecho el anterior.', solucion:'Aura Vet con ficha digital + evolución de peso visible.', metric:'Todo el historial en 5 seg. Cero papeles. Atención 2× más rápida.'},
+      {avatar:'FG', nombre:'Federico G.', negocio:'Pet Shop con servicio médico · Devoto', problema:'No sabía cuánto le dejaba la venta de alimento vs la consulta. Mezclaba ingresos.', solucion:'Aura Vet separa ingresos por categoría + reportes mensuales.', metric:'Descubrió que la venta era el 65% del margen. Pivotó estrategia.'}
+    ],
+    auto: [
+      {avatar:'AL', nombre:'Alejandro L.', negocio:'Taller multimarca · Lanús · 4 técnicos', problema:'Los clientes llamaban 10 veces al día preguntando "¿ya está listo el auto?". Perdía 1 hora diaria solo en eso.', solucion:'El Asesor IA responde estado de OT por WhatsApp automático.', metric:'90% de llamadas evitadas. 1 hora/día recuperada.'},
+      {avatar:'MV', nombre:'Marcos V.', negocio:'Service Peugeot oficial · Morón', problema:'Perdía el rastro de cuándo toca el próximo service de cada cliente. Se iban a la competencia.', solucion:'El Planner IA recuerda por km/meses y agenda el próximo.', metric:'+USD 3.200/mes en services recuperados.'},
+      {avatar:'GR', nombre:'Gustavo R.', negocio:'Chapa y pintura · La Matanza', problema:'Los presupuestos tardaban 2 días. El cliente se iba a la competencia más rápida.', solucion:'Aura Auto arma presupuesto en 15 min con fotos del vehículo.', metric:'Cotiza 3× más rápido. Tasa de cierre: 28% → 48%.'}
+    ],
+    tools: [
+      {avatar:'RC', nombre:'Rubén C.', negocio:'Ferretería de barrio · San Martín', problema:'Vendía al mostrador y no sabía qué tenía en depósito. Compraba dos veces lo mismo.', solucion:'Aura Tools con POS + stock en tiempo real.', metric:'$420.000 ahorrados en compras duplicadas en 6 meses.'},
+      {avatar:'EM', nombre:'Estela M.', negocio:'Corralón · Zona Oeste · 8 empleados', problema:'Constructoras pedían presupuestos por teléfono y nadie documentaba. Se perdían ventas grandes.', solucion:'El Vendedor IA recibe consultas 24/7 y arma presupuesto PDF.', metric:'+35% presupuestos cerrados por respuesta rápida.'},
+      {avatar:'HP', nombre:'Hernán P.', negocio:'Casa de electricidad · San Justo', problema:'5 clientes con cuenta corriente y siempre pagaban tarde. Saldos desordenados.', solucion:'El Cobrador IA manda recordatorios y cuenta corriente visible al cliente.', metric:'Días promedio de pago: 45 → 12. Flujo de caja normalizado.'}
+    ],
+    finance: [
+      {avatar:'JB', nombre:'Julio B.', negocio:'Financiera familiar · 3 cobradores', problema:'Cada cobrador llevaba su planilla en papel. Sumar el día de todos era un delirio.', solucion:'Aura Finance consolida todo + ruteo óptimo por zona.', metric:'2 horas/día de admin recuperadas.'},
+      {avatar:'MF', nombre:'Melisa F.', negocio:'Préstamos personales · CABA', problema:'Morosidad del 12%, descubría tarde las cuotas vencidas sin seguimiento.', solucion:'El Recordador IA avisa 3 días antes + escalada automática post-vencimiento.', metric:'Morosidad bajó a 4.5% en 4 meses.'},
+      {avatar:'PA', nombre:'Patricio A.', negocio:'Mutual de socios · Quilmes', problema:'Score crediticio en papel, subjetivo. Otorgaba créditos que después no cobraba.', solucion:'Aura Finance + scoring automático con historial real.', metric:'Default rate 8% → 2.5%. Cartera más sana.'}
+    ],
+    logistic: [
+      {avatar:'DV', nombre:'Diego V.', negocio:'Cadetería · Zona Norte · 15 cadetes', problema:'Liquidación semanal de cadetes era un caos. Errores, discusiones por $200.', solucion:'Aura Logistic calcula comisión por viaje entregado + salario fijo.', metric:'Liquidación en 15 min (antes 4 hs). Cero discusiones.'},
+      {avatar:'LA', nombre:'Laura A.', negocio:'Distribución última milla · CABA', problema:'Empresas clientes preguntaban por cada envío. El operador no daba abasto.', solucion:'El Comercial IA responde estado de envíos + portal del cliente.', metric:'80% de consultas resueltas sin intervención humana.'},
+      {avatar:'FT', nombre:'Fernando T.', negocio:'Mensajería express · Microcentro', problema:'Facturaba a empresas pero los viajes se mezclaban. Facturaba mal y perdía plata.', solucion:'Aura Logistic consolida viajes facturables por empresa + factura con 1 click.', metric:'Recupero de $850.000 mal facturados en 2 meses.'}
+    ],
+    prop: [
+      {avatar:'CS', nombre:'Claudia S.', negocio:'Inmobiliaria · Belgrano · 6 propiedades', problema:'Los contratos se vencían sin que se diera cuenta. Propietarios enojados.', solucion:'El Renovador IA avisa 60 días antes + calcula nuevo valor con ICL.', metric:'100% de renovaciones a tiempo. Cero propietarios enojados.'},
+      {avatar:'AR', nombre:'Alejandro R.', negocio:'Administración de consorcios · Palermo', problema:'Cobranza de expensas era un trabajo full-time para 1 empleado.', solucion:'El Administrador IA genera recibos + manda recordatorios + link MP.', metric:'Empleado liberado para tareas de valor. Cobranza 96% al día.'},
+      {avatar:'VM', nombre:'Victoria M.', negocio:'Inmobiliaria boutique · Recoleta', problema:'Tenía 200 leads en una planilla sin calificar. No sabía a quién seguir.', solucion:'El Captador IA cruza leads con propiedades y prioriza matches.', metric:'Tasa de cierre 12% → 28% con mismo volumen.'}
+    ],
+    wear: [
+      {avatar:'CM', nombre:'Camila M.', negocio:'Boutique · Palermo Soho', problema:'Talle M del vestido negro se terminaba y no avisaba a quienes lo habían pedido.', solucion:'El Almacenero IA mantiene wishlist por clienta y notifica al reponer.', metric:'+18% ventas por notificaciones de "volvió tu talle".'},
+      {avatar:'JF', nombre:'Julieta F.', negocio:'Marca indumentaria · eCommerce + local', problema:'No sabía qué productos eran los más rentables por temporada.', solucion:'Aura Wear con reportes de rotación por producto + margen real.', metric:'Rediseñó compras. +22% margen otoño-invierno.'},
+      {avatar:'LG', nombre:'Lucas G.', negocio:'Multimarca masculino · Recoleta', problema:'Clientas VIP no se reconocían en caja. Ninguna atención especial.', solucion:'Aura Wear ficha de clienta con historial + alerta al empleado.', metric:'Tasa de retorno VIP subió 40%. Ticket promedio +$12k.'}
+    ],
+    commerce: [
+      {avatar:'OP', nombre:'Oscar P.', negocio:'Kiosco grande · Villa Urquiza', problema:'Al cerrar la caja no cuadraba casi nunca. Diferencias chicas que se acumulaban.', solucion:'Aura Commerce con caja registradora digital + cierre automático.', metric:'Caja cuadra 100%. $80.000/mes ahorrados en diferencias.'},
+      {avatar:'NC', nombre:'Natalia C.', negocio:'Almacén gourmet · Belgrano', problema:'Tenía 800 productos en Excel. Cambiar precios era una tortura.', solucion:'Aura Commerce bulk edit + historial de cambios de precios.', metric:'Actualización de precios de 2 hs → 10 min.'},
+      {avatar:'MA', nombre:'Matías A.', negocio:'Bazar + jugueteria · Lanús', problema:'Vendía fiado a clientes habituales y no sabía quién le debía qué.', solucion:'Aura Commerce con cuenta corriente por cliente + saldo visible.', metric:'Recupero de $230.000 en saldos olvidados del último año.'}
+    ]
+  };
+
+  window.AuraCasos = {
+    mount(selector, rubroId){
+      const container = typeof selector === 'string' ? document.querySelector(selector) : selector;
+      if(!container) return;
+      const casos = CASOS[rubroId] || [];
+      if(!casos.length) return;
+
+      const cards = casos.map(c => `
+        <div class="ycaso">
+          <div class="ycaso-persona">
+            <div class="ycaso-avatar">${c.avatar}</div>
+            <div class="ycaso-info">
+              <div class="ycaso-nombre">${c.nombre}</div>
+              <div class="ycaso-negocio">${c.negocio}</div>
+            </div>
+          </div>
+          <span class="ycaso-label problema">Problema</span>
+          <div class="ycaso-texto">${c.problema}</div>
+          <span class="ycaso-label solucion">Solución con Aura</span>
+          <div class="ycaso-texto">${c.solucion}</div>
+          <div class="ycaso-metric">
+            <div class="ycaso-metric-label">📈 Resultado</div>
+            <div class="ycaso-metric-value">${c.metric}</div>
+          </div>
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <section class="ycasos">
+          <div class="ycasos-head">
+            <div class="ycasos-eyebrow">Historias reales</div>
+            <h2 class="ycasos-title">Negocios como el tuyo que ya<br/>dejaron atrás el Excel</h2>
+            <p class="ycasos-sub">Casos basados en situaciones típicas del rubro. Cuando tengas Aura, tu historia va a estar acá.</p>
+          </div>
+          <div class="ycasos-grid">${cards}</div>
+        </section>
+      `;
+    }
+  };
+})();
+</script>
+
+<!-- END_YUSTA_CASOS_V1 -->
+
+<!-- YUSTA_LEAD_FORM_V1 -->
+<!-- ========================================================
+  YUSTA LABS — Lead Capture Form
+  Inyectable en cualquier landing. Al submit:
+  1) Abre WhatsApp con todos los datos pre-armados
+  2) Registra evento en GA4 (Lead)
+  3) Registra evento en Meta Pixel (Lead) si está activo
+  Uso: window.AuraLead.mount(containerSelector, { rubro })
+============================================================ -->
+<style>
+  .ylead{background:linear-gradient(135deg,rgba(240,180,41,0.04),rgba(240,180,41,0.01));border:1px solid rgba(240,180,41,0.2);border-radius:18px;padding:clamp(24px,3vw,36px);max-width:720px;margin:0 auto;}
+  .ylead-head{text-align:center;margin-bottom:24px;}
+  .ylead-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#F0B429;margin-bottom:8px;}
+  .ylead-title{font-family:'Bebas Neue','Barlow Condensed',Impact,sans-serif;font-size:clamp(24px,2.6vw,32px);font-weight:400;letter-spacing:0.02em;text-transform:uppercase;line-height:1.05;color:#F2F2F5;margin:0 0 8px;}
+  .ylead-sub{font-size:14px;color:#9E9EA8;max-width:480px;margin:0 auto;line-height:1.55;}
+  .ylead-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+  @media(max-width:560px){.ylead-grid{grid-template-columns:1fr;}}
+  .ylead-field{display:flex;flex-direction:column;gap:4px;}
+  .ylead-field-full{grid-column:1/-1;}
+  .ylead-label{font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9E9EA8;}
+  .ylead-label .req{color:#F0B429;}
+  .ylead-input, .ylead-select, .ylead-textarea{background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:11px 14px;color:#F2F2F5;font-family:inherit;font-size:14px;transition:border-color .15s;}
+  .ylead-input:focus, .ylead-select:focus, .ylead-textarea:focus{outline:none;border-color:#F0B429;}
+  .ylead-textarea{resize:vertical;min-height:80px;}
+  .ylead-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;flex-wrap:wrap;}
+  .ylead-policy{font-size:11px;color:#7A7A85;max-width:360px;line-height:1.5;}
+  .ylead-policy a{color:#F0B429;text-decoration:none;}
+  .ylead-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#F0B429;color:#07070A;padding:13px 26px;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:0.04em;border:none;cursor:pointer;transition:.15s;white-space:nowrap;}
+  .ylead-btn:hover{background:#FFD666;transform:translateY(-1px);}
+  .ylead-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .ylead-success{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.3);border-radius:14px;padding:20px;text-align:center;color:#22C55E;font-size:14px;line-height:1.6;display:none;}
+  .ylead-success.show{display:block;}
+  .ylead-success strong{display:block;font-size:18px;margin-bottom:6px;color:#4ADE80;}
+</style>
+
+<script type="module">
+  import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCtpv45L73IX7wlNORIFT3f1juaYPqrJK0",
+    authDomain: "aura-commerce-93e34.firebaseapp.com",
+    projectId: "aura-commerce-93e34",
+    storageBucket: "aura-commerce-93e34.firebasestorage.app",
+    messagingSenderId: "573180517854",
+    appId: "1:573180517854:web:44e7cc97232282da5fd14f"
+  };
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.__YLP_saveLead = async function(lead){
+    try {
+      await addDoc(collection(db, 'leads'), {
+        nombre: lead.nombre || '',
+        tel: lead.tel || '',
+        email: lead.email || '',
+        negocio: lead.negocio || '',
+        rubro: lead.rubro || 'otro',
+        tamano: lead.tamano || '',
+        mensaje: lead.mensaje || '',
+        fuente: 'web_form',
+        paginaOrigen: location.pathname,
+        estado: 'nuevo',
+        nota: '',
+        proximaAccion: '',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      return true;
+    } catch(e){ console.warn('Lead save failed', e); return false; }
+  };
+</script>
+<script>
+(function(){
+  const RUBROS = {
+    salon:'Peluquería / Estética',
+    fit:'Gimnasio / Fitness',
+    commerce:'Comercio / Kiosco',
+    food:'Restaurante / Gastronomía',
+    auto:'Taller mecánico',
+    vet:'Veterinaria',
+    tools:'Ferretería / Corralón',
+    finance:'Financiera / Préstamos',
+    logistic:'Logística / Cadetería',
+    prop:'Inmobiliaria',
+    wear:'Indumentaria / Boutique',
+    otro:'Otro rubro'
+  };
+
+  window.AuraLead = {
+    mount(selector, opts){
+      opts = opts || {};
+      const container = typeof selector === 'string' ? document.querySelector(selector) : selector;
+      if(!container) return;
+      const preRubro = opts.rubro || '';
+      const rubroOptions = Object.keys(RUBROS).map(k=>{
+        const selected = k === preRubro ? ' selected' : '';
+        return `<option value="${k}"${selected}>${RUBROS[k]}</option>`;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="ylead" id="ylead-wrap">
+          <div class="ylead-head">
+            <div class="ylead-eyebrow">📝 Hablemos sin compromiso</div>
+            <h2 class="ylead-title">Contanos sobre tu negocio<br/>y te armamos una demo personalizada</h2>
+            <p class="ylead-sub">Gratis, sin tarjeta, en 48 horas. Te respondemos por WhatsApp en menos de 4 horas hábiles.</p>
+          </div>
+
+          <form id="ylead-form" onsubmit="return AuraLead._submit(event)">
+            <div class="ylead-grid">
+              <div class="ylead-field">
+                <label class="ylead-label">Nombre <span class="req">*</span></label>
+                <input class="ylead-input" name="nombre" required placeholder="Nombre y apellido"/>
+              </div>
+              <div class="ylead-field">
+                <label class="ylead-label">WhatsApp <span class="req">*</span></label>
+                <input class="ylead-input" name="tel" required placeholder="11 2345 6789" type="tel"/>
+              </div>
+              <div class="ylead-field">
+                <label class="ylead-label">Email</label>
+                <input class="ylead-input" name="email" placeholder="tu@email.com" type="email"/>
+              </div>
+              <div class="ylead-field">
+                <label class="ylead-label">Nombre del negocio</label>
+                <input class="ylead-input" name="negocio" placeholder="Ej: Peluquería Camila"/>
+              </div>
+              <div class="ylead-field">
+                <label class="ylead-label">Rubro <span class="req">*</span></label>
+                <select class="ylead-select" name="rubro" required>
+                  <option value="">Elegí tu rubro…</option>
+                  ${rubroOptions}
+                </select>
+              </div>
+              <div class="ylead-field">
+                <label class="ylead-label">Tamaño</label>
+                <select class="ylead-select" name="tamano">
+                  <option value="">Elegí…</option>
+                  <option value="solo">Solo yo</option>
+                  <option value="2-5">2–5 personas</option>
+                  <option value="6-15">6–15 personas</option>
+                  <option value="16-50">16–50 personas</option>
+                  <option value="50+">Más de 50</option>
+                </select>
+              </div>
+              <div class="ylead-field ylead-field-full">
+                <label class="ylead-label">¿Qué necesitás resolver?</label>
+                <textarea class="ylead-textarea" name="mensaje" placeholder="Contanos brevemente tu principal dolor hoy (opcional)"></textarea>
+              </div>
+            </div>
+
+            <div class="ylead-footer">
+              <div class="ylead-policy">Al enviar aceptás nuestros <a href="/terminos">Términos</a> y <a href="/privacidad">Política de Privacidad</a>. No spam. No vendemos tus datos.</div>
+              <button type="submit" class="ylead-btn" id="ylead-submit">Quiero mi demo <span style="font-size:16px;">→</span></button>
+            </div>
+          </form>
+
+          <div class="ylead-success" id="ylead-success">
+            <strong>✅ ¡Listo! Te abrimos WhatsApp con tus datos</strong>
+            Revisá el mensaje antes de enviarlo. Te respondemos en menos de 4 horas hábiles.
+          </div>
+        </div>
+      `;
+    },
+
+    _submit(e){
+      e.preventDefault();
+      const f = e.target;
+      const data = {
+        nombre: f.nombre.value.trim(),
+        tel: f.tel.value.trim(),
+        email: f.email.value.trim(),
+        negocio: f.negocio.value.trim(),
+        rubro: f.rubro.value,
+        tamano: f.tamano.value,
+        mensaje: f.mensaje.value.trim()
+      };
+      if(!data.nombre || !data.tel || !data.rubro){ return false; }
+
+      // Guardar en Firestore (para que aparezca en panel-yustalabs)
+      try{ if(typeof window.__YLP_saveLead === 'function') window.__YLP_saveLead(data); }catch(e){}
+      // GA4 event
+      try{ if(typeof gtag === 'function') gtag('event','generate_lead',{ rubro:data.rubro, tamano:data.tamano }); }catch(e){}
+      // Meta Pixel
+      try{ if(typeof fbq === 'function') fbq('track','Lead',{ content_category:data.rubro }); }catch(e){}
+
+      const rubroLabel = {salon:'Peluquería',fit:'Gimnasio',commerce:'Comercio',food:'Restaurante',auto:'Taller',vet:'Veterinaria',tools:'Ferretería',finance:'Financiera',logistic:'Logística',prop:'Inmobiliaria',wear:'Indumentaria',otro:'Otro'}[data.rubro] || data.rubro;
+      const tamanoLabel = {solo:'Solo yo','2-5':'2-5 personas','6-15':'6-15 personas','16-50':'16-50 personas','50+':'Más de 50'}[data.tamano] || '-';
+
+      const msg = [
+        'Hola Yusta Labs! Completé el formulario de la web.',
+        '',
+        '👤 Nombre: '+data.nombre,
+        '📱 WhatsApp: '+data.tel,
+        data.email ? '✉️ Email: '+data.email : '',
+        data.negocio ? '🏢 Negocio: '+data.negocio : '',
+        '🎯 Rubro: '+rubroLabel,
+        data.tamano ? '📊 Tamaño: '+tamanoLabel : '',
+        '',
+        data.mensaje ? '💬 Necesito resolver:\n'+data.mensaje : 'Me interesa agendar una demo.'
+      ].filter(Boolean).join('\n');
+
+      const waUrl = 'https://wa.me/541124693394?text='+encodeURIComponent(msg);
+      window.open(waUrl,'_blank');
+
+      // Mostrar success
+      const wrap = document.getElementById('ylead-wrap');
+      const success = document.getElementById('ylead-success');
+      if(success){
+        f.style.display = 'none';
+        success.classList.add('show');
+      }
+      return false;
+    }
+  };
+})();
+</script>
+
+<!-- END_YUSTA_LEAD_FORM_V1 -->
+<script defer src="/assets/wa-fab.js"></script></body>
 </html>
