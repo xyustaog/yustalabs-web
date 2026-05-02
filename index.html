@@ -361,6 +361,101 @@
 .sc-route-pin .lbl{font-family:var(--font-mono);font-size:8px;color:#fff;background:rgba(0,0,0,0.86);padding:1.5px 5px;border-radius:3px;white-space:nowrap;letter-spacing:0.04em;font-weight:700;}
 .sc-route-stop{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(240,180,41,0.55);border:1.5px solid var(--gold);transform:translate(-50%,-50%);z-index:1;}
 
+/* ─── Aura Fit · socios + asistencia ─── */
+.sc-fit{flex:1;display:flex;flex-direction:column;gap:6px;min-height:60px;}
+.sc-fit-row{background:linear-gradient(180deg,rgba(255,255,255,0.030),rgba(255,255,255,0.012));border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:9px 12px;display:flex;align-items:center;gap:10px;transition:transform .15s,border-color .2s;}
+.sc-fit-row:hover{border-color:rgba(240,180,41,0.30);transform:translateX(2px);}
+.sc-fit-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:11px;font-weight:800;color:#0A0A0F;flex-shrink:0;letter-spacing:-0.01em;}
+.sc-fit-info{flex:1;min-width:0;}
+.sc-fit-name{font-family:var(--font-body);font-size:12px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.012em;}
+.sc-fit-plan{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;letter-spacing:0.04em;margin-top:1px;}
+.sc-fit-attend{display:flex;gap:2.5px;flex-shrink:0;}
+.sc-fit-d{width:7px;height:7px;border-radius:2px;background:rgba(255,255,255,0.10);}
+.sc-fit-d.on{background:#22C55E;box-shadow:0 0 4px rgba(34,197,94,0.5);}
+.sc-fit-d.miss{background:rgba(239,68,68,0.5);}
+
+/* ─── Aura Food · tickets de cocina ─── */
+.sc-food{flex:1;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;min-height:60px;}
+@media(max-width:540px){.sc-food{grid-template-columns:1fr;}}
+.sc-food-tk{background:linear-gradient(180deg,rgba(255,255,255,0.040),rgba(255,255,255,0.012));border:1px solid rgba(255,255,255,0.08);border-left:3px solid;border-radius:8px;padding:9px 11px;display:flex;flex-direction:column;gap:4px;font-family:var(--font-mono);}
+.sc-food-tk.warn{border-left-color:#F59E0B;}
+.sc-food-tk.ok{border-left-color:#22C55E;}
+.sc-food-tk.late{border-left-color:#EF4444;}
+.sc-food-tk-h{display:flex;justify-content:space-between;font-size:9.5px;color:#9CA1AE;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;}
+.sc-food-tk-h b{color:var(--text);}
+.sc-food-tk-items{font-family:var(--font-body);font-size:11.5px;color:var(--text);line-height:1.45;font-weight:500;}
+.sc-food-tk-foot{display:flex;justify-content:space-between;font-size:9.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-top:auto;padding-top:4px;border-top:1px dashed rgba(255,255,255,0.10);}
+.sc-food-tk-foot .st.warn{color:#F59E0B;}.sc-food-tk-foot .st.ok{color:#22C55E;}.sc-food-tk-foot .st.late{color:#EF4444;}
+.sc-food-tk-foot .tm{color:#7A7F8C;}
+
+/* ─── Aura Vet · ficha de paciente con vacunas ─── */
+.sc-vet{flex:1;background:linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.008));border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:11px;min-height:190px;}
+.sc-vet-h{display:flex;align-items:center;gap:11px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sc-vet-pet{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(240,180,41,0.20),rgba(240,180,41,0.06));border:1.5px solid rgba(240,180,41,0.40);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.sc-vet-info{flex:1;min-width:0;}
+.sc-vet-name{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);letter-spacing:-0.02em;}
+.sc-vet-meta{font-family:var(--font-mono);font-size:10px;color:#9CA1AE;letter-spacing:0.06em;margin-top:2px;}
+.sc-vet-tag{font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:5px;background:rgba(240,180,41,0.12);color:var(--gold);border:1px solid rgba(240,180,41,0.30);letter-spacing:0.06em;font-weight:700;flex-shrink:0;}
+.sc-vet-vac{display:flex;flex-direction:column;gap:5px;}
+.sc-vet-v{display:flex;align-items:center;gap:9px;padding:7px 10px;background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.05);border-radius:7px;font-family:var(--font-body);font-size:11.5px;}
+.sc-vet-v-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sc-vet-v-dot.ok{background:#22C55E;box-shadow:0 0 6px rgba(34,197,94,0.5);}
+.sc-vet-v-dot.warn{background:#F59E0B;box-shadow:0 0 6px rgba(245,158,11,0.5);}
+.sc-vet-v-dot.danger{background:#EF4444;box-shadow:0 0 6px rgba(239,68,68,0.5);}
+.sc-vet-v-name{flex:1;color:var(--text);font-weight:500;}
+.sc-vet-v-stat{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.06em;font-weight:700;text-transform:uppercase;}
+.sc-vet-v-stat.ok{color:#22C55E;}.sc-vet-v-stat.warn{color:#F59E0B;}.sc-vet-v-stat.danger{color:#EF4444;}
+
+/* ─── Aura Auto · bays del taller ─── */
+.sc-auto{flex:1;display:flex;flex-direction:column;gap:6px;min-height:60px;}
+.sc-auto-bay{background:linear-gradient(180deg,rgba(255,255,255,0.030),rgba(255,255,255,0.012));border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:9px 12px;display:grid;grid-template-columns:54px 1fr 90px;gap:11px;align-items:center;}
+.sc-auto-bay.busy{border-color:rgba(245,158,11,0.30);background:linear-gradient(180deg,rgba(245,158,11,0.06),rgba(245,158,11,0.012));}
+.sc-auto-bay.done{border-color:rgba(34,197,94,0.28);}
+.sc-auto-bay.idle{opacity:0.55;}
+.sc-auto-lbl{font-family:var(--font-mono);font-size:9.5px;font-weight:800;letter-spacing:0.10em;color:var(--gold);text-transform:uppercase;}
+.sc-auto-car{display:flex;flex-direction:column;gap:1px;min-width:0;}
+.sc-auto-car-n{font-family:var(--font-body);font-size:12px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-0.012em;}
+.sc-auto-car-s{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;letter-spacing:0.04em;}
+.sc-auto-prog{display:flex;flex-direction:column;gap:3px;}
+.sc-auto-bar{height:5px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;}
+.sc-auto-bar-fill{height:100%;background:linear-gradient(90deg,#F59E0B,var(--gold));border-radius:99px;}
+.sc-auto-bay.done .sc-auto-bar-fill{background:linear-gradient(90deg,#22C55E,#86EFAC);}
+.sc-auto-pct{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;text-align:right;letter-spacing:0.06em;font-weight:700;}
+
+/* ─── Aura Tools · stock por categoría ─── */
+.sc-tools{flex:1;display:flex;flex-direction:column;gap:7px;min-height:60px;}
+.sc-tools-cat{background:linear-gradient(180deg,rgba(255,255,255,0.030),rgba(255,255,255,0.012));border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:10px 13px;display:grid;grid-template-columns:120px 1fr 80px;gap:11px;align-items:center;}
+.sc-tools-cat:hover{border-color:rgba(240,180,41,0.28);}
+.sc-tools-name{font-family:var(--font-body);font-size:12px;font-weight:600;color:var(--text);letter-spacing:-0.012em;display:flex;align-items:center;gap:7px;}
+.sc-tools-name::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px rgba(240,180,41,0.45);flex-shrink:0;}
+.sc-tools-bar{height:8px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden;}
+.sc-tools-bar-fill{height:100%;background:linear-gradient(90deg,rgba(240,180,41,0.6),var(--gold));border-radius:99px;}
+.sc-tools-bar-fill.warn{background:linear-gradient(90deg,#F59E0B,#FBBF24);}
+.sc-tools-bar-fill.danger{background:linear-gradient(90deg,#EF4444,#F87171);}
+.sc-tools-num{font-family:var(--font-mono);font-size:11px;color:var(--text);text-align:right;font-weight:700;letter-spacing:-0.005em;font-feature-settings:"tnum";}
+.sc-tools-num small{color:#7A7F8C;font-weight:500;font-size:9px;display:block;letter-spacing:0.06em;}
+
+/* ─── Aura Finance · cards de préstamos ─── */
+.sc-fin{flex:1;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;min-height:60px;}
+@media(max-width:540px){.sc-fin{grid-template-columns:1fr;}}
+.sc-fin-card{background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.012));border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden;}
+.sc-fin-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
+.sc-fin-card.ok::before{background:#22C55E;}
+.sc-fin-card.warn::before{background:#F59E0B;}
+.sc-fin-card.danger::before{background:#EF4444;}
+.sc-fin-h{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.sc-fin-id{font-family:var(--font-mono);font-size:9px;color:#7A7F8C;letter-spacing:0.10em;text-transform:uppercase;font-weight:700;}
+.sc-fin-st{font-family:var(--font-mono);font-size:9px;font-weight:800;letter-spacing:0.10em;text-transform:uppercase;padding:2px 7px;border-radius:5px;}
+.sc-fin-st.ok{color:#22C55E;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);}
+.sc-fin-st.warn{color:#F59E0B;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);}
+.sc-fin-st.danger{color:#EF4444;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);}
+.sc-fin-name{font-family:var(--font-body);font-size:12px;font-weight:700;color:var(--text);letter-spacing:-0.012em;}
+.sc-fin-amt{font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--gold);letter-spacing:-0.025em;line-height:1;font-feature-settings:"tnum";}
+.sc-fin-prog{display:flex;flex-direction:column;gap:3px;margin-top:2px;}
+.sc-fin-prog-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;}
+.sc-fin-prog-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),#FFD166);border-radius:99px;}
+.sc-fin-prog-meta{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:9px;color:#7A7F8C;letter-spacing:0.04em;}
+
 /* Smooth fade-in en cambio de sección · usa keyframe animado por JS */
 .sc-fade-in{animation:scFade .35s var(--ease) both;}
 @keyframes scFade{
@@ -999,6 +1094,108 @@
         ${stops}${pins}
       </div>`;
     },
+    // Aura Fit · socios con asistencia semanal
+    fit: (data) => {
+      const palette = ['#F0B429','#60A5FA','#22C55E','#A78BFA','#EC4899','#06B6D4'];
+      return `<div class="sc-fit">${(data.members || []).map((m, i) => {
+        const c = palette[i % palette.length];
+        const init = (m.name || '?').split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase();
+        const dots = (m.attend || '').split('').map(d =>
+          d === '1' ? '<span class="sc-fit-d on"></span>' :
+          d === 'x' ? '<span class="sc-fit-d miss"></span>' :
+                      '<span class="sc-fit-d"></span>'
+        ).join('');
+        return `<div class="sc-fit-row">
+          <div class="sc-fit-av" style="background:${c};">${init}</div>
+          <div class="sc-fit-info">
+            <div class="sc-fit-name">${m.name}</div>
+            <div class="sc-fit-plan">${m.plan}</div>
+          </div>
+          <div class="sc-fit-attend">${dots}</div>
+        </div>`;
+      }).join('')}</div>`;
+    },
+    // Aura Food · tickets de cocina
+    food: (data) => {
+      const stMap = { warn: 'En cocina', ok: 'Listo ✓', late: 'Tardío!' };
+      return `<div class="sc-food">${(data.tickets || []).map(t => `
+        <div class="sc-food-tk ${t.t}">
+          <div class="sc-food-tk-h"><b>MESA ${t.mesa}</b><span>${t.hora}</span></div>
+          <div class="sc-food-tk-items">${t.items}</div>
+          <div class="sc-food-tk-foot"><span class="st ${t.t}">${stMap[t.t] || t.t}</span><span class="tm">${t.min || ''}</span></div>
+        </div>`).join('')}</div>`;
+    },
+    // Aura Vet · ficha de paciente con vacunas
+    vet: (data) => {
+      const vacs = (data.vacunas || []).map(v =>
+        `<div class="sc-vet-v">
+          <span class="sc-vet-v-dot ${v.t}"></span>
+          <span class="sc-vet-v-name">${v.name}</span>
+          <span class="sc-vet-v-stat ${v.t}">${v.stat}</span>
+        </div>`
+      ).join('');
+      return `<div class="sc-vet">
+        <div class="sc-vet-h">
+          <div class="sc-vet-pet">${data.emoji || '🐶'}</div>
+          <div class="sc-vet-info">
+            <div class="sc-vet-name">${data.name || 'Milo'}</div>
+            <div class="sc-vet-meta">${data.meta || 'Labrador · 3 años · 28kg'}</div>
+          </div>
+          <div class="sc-vet-tag">${data.tag || 'AL DÍA'}</div>
+        </div>
+        <div class="sc-vet-vac">${vacs}</div>
+      </div>`;
+    },
+    // Aura Auto · bays del taller con progreso
+    auto: (data) => {
+      return `<div class="sc-auto">${(data.bays || []).map((b, i) => {
+        const lbl = `BAY ${i+1}`;
+        if (b.idle) {
+          return `<div class="sc-auto-bay idle">
+            <div class="sc-auto-lbl">${lbl}</div>
+            <div class="sc-auto-car"><div class="sc-auto-car-n">— libre —</div><div class="sc-auto-car-s">disponible</div></div>
+            <div class="sc-auto-pct">—</div>
+          </div>`;
+        }
+        const cls = b.pct >= 100 ? 'done' : 'busy';
+        return `<div class="sc-auto-bay ${cls}">
+          <div class="sc-auto-lbl">${lbl}</div>
+          <div class="sc-auto-car">
+            <div class="sc-auto-car-n">${b.car}</div>
+            <div class="sc-auto-car-s">${b.work}</div>
+          </div>
+          <div class="sc-auto-prog">
+            <div class="sc-auto-bar"><div class="sc-auto-bar-fill" style="width:${b.pct}%;"></div></div>
+            <div class="sc-auto-pct">${b.pct}% · ${b.eta}</div>
+          </div>
+        </div>`;
+      }).join('')}</div>`;
+    },
+    // Aura Tools · stock por categoría con barras
+    tools: (data) => {
+      return `<div class="sc-tools">${(data.cats || []).map(c => `
+        <div class="sc-tools-cat">
+          <div class="sc-tools-name">${c.name}</div>
+          <div class="sc-tools-bar"><div class="sc-tools-bar-fill ${c.t || ''}" style="width:${c.pct}%;"></div></div>
+          <div class="sc-tools-num">${c.n}<small>${c.sub || 'SKUs'}</small></div>
+        </div>`).join('')}</div>`;
+    },
+    // Aura Finance · cards de préstamos con progreso
+    finance: (data) => {
+      return `<div class="sc-fin">${(data.loans || []).map(l => `
+        <div class="sc-fin-card ${l.t}">
+          <div class="sc-fin-h">
+            <span class="sc-fin-id">#${l.id}</span>
+            <span class="sc-fin-st ${l.t}">${l.stat}</span>
+          </div>
+          <div class="sc-fin-name">${l.name}</div>
+          <div class="sc-fin-amt">USD ${l.amt}</div>
+          <div class="sc-fin-prog">
+            <div class="sc-fin-prog-bar"><div class="sc-fin-prog-bar-fill" style="width:${(l.cuota / l.total) * 100}%;"></div></div>
+            <div class="sc-fin-prog-meta"><span>Cuota ${l.cuota}/${l.total}</span><span>Próx: ${l.next}</span></div>
+          </div>
+        </div>`).join('')}</div>`;
+    },
   };
 
   // Default rows renderer (fallback for sections without a custom theme)
@@ -1407,67 +1604,87 @@
     },
     more: {
       tabLabel: '+6 más',
-      caption: '6 verticales más · misma lógica adaptada al rubro',
+      caption: '6 verticales más · cada uno con su propia interfaz',
       sections: [
         { id:'fit',     icon:'users',   name:'Fit',
-          title:'Aura Fit · gimnasios, pilates, yoga',
+          title:'Aura Fit · socios y asistencia en vivo',
           stats:[['184','Socios activos'],['+12','Nuevos abr'],['94%','Renovación']],
-          rows:[
-            ['Membresías y cuotas','Activo','ok','Cobranza al día'],
-            ['Asistencia con QR','Activo','ok','En vivo'],
-            ['Vencimientos y avisos','Activo','ok','Auto'],
-            ['Reportes financieros','Activo','ok','Listo'],
-          ],
+          render: () => THEMES.fit({
+            members: [
+              { name:'María González',  plan:'Mensual · vence 12/5',  attend:'1101110' },
+              { name:'Juan Pérez',      plan:'Trimestral · al día',    attend:'1110111' },
+              { name:'Lucía Romero',    plan:'Anual · al día',         attend:'1011010' },
+              { name:'Diego Martínez',  plan:'Mensual · vencido 2d',   attend:'10x0x00' },
+              { name:'Sofía Castro',    plan:'Mensual · al día',       attend:'1111101' },
+            ],
+          }),
           cta:'Conocer Aura Fit →' },
         { id:'food',    icon:'pizza',   name:'Food',
-          title:'Aura Food · restaurantes y bares',
+          title:'Aura Food · cocina en tiempo real',
           stats:[['43','Comandas activas'],['8min','Promedio'],['12','Mesas ocupadas']],
-          rows:[
-            ['Comandas y cocina','Activo','ok','Tiempo real'],
-            ['Salón y mesas','Activo','ok','Mapa visual'],
-            ['Carta y stock','Activo','ok','Listo'],
-            ['Caja y delivery','Activo','ok','Listo'],
-          ],
+          render: () => THEMES.food({
+            tickets: [
+              { mesa:4,  hora:'14:23', items:'Milanesa napolitana · papas · agua',  t:'warn', min:'8 min' },
+              { mesa:7,  hora:'14:18', items:'Pizza muzzarella · cerveza 1L',        t:'ok',   min:'12 min' },
+              { mesa:12, hora:'14:30', items:'Ensalada caesar · agua con gas',       t:'warn', min:'2 min' },
+              { mesa:9,  hora:'14:08', items:'Suprema maryland · papas',             t:'late', min:'22 min' },
+            ],
+          }),
           cta:'Conocer Aura Food →' },
         { id:'vet',     icon:'paw',     name:'Vet',
-          title:'Aura Vet · veterinarias y clínicas',
+          title:'Aura Vet · ficha del paciente',
           stats:[['1.247','Pacientes'],['38','Vacunas hoy'],['$84K','Facturado']],
-          rows:[
-            ['Ficha de pacientes','Activo','ok','Historial'],
-            ['Vacunación y recordatorios','Activo','ok','Auto'],
-            ['Turnos online','Activo','ok','Listo'],
-            ['Farmacia y stock','Activo','ok','Listo'],
-          ],
+          render: () => THEMES.vet({
+            emoji: '🐶',
+            name: 'Milo',
+            meta: 'Labrador · 3 años · 28kg',
+            tag: '2 alertas',
+            vacunas: [
+              { name:'Antirrábica',          stat:'al día',     t:'ok' },
+              { name:'Triple viral (DHPP)',  stat:'al día',     t:'ok' },
+              { name:'Desparasitar',         stat:'vence 7d',   t:'warn' },
+              { name:'Antipulgas',           stat:'vencida 12d',t:'danger' },
+              { name:'Bordetella (kennel)',  stat:'al día',     t:'ok' },
+            ],
+          }),
           cta:'Conocer Aura Vet →' },
         { id:'auto',    icon:'car',     name:'Auto',
-          title:'Aura Auto · talleres mecánicos',
+          title:'Aura Auto · estado del taller en vivo',
           stats:[['28','OT activas'],['12','En curso'],['$420K','Cobrado mes']],
-          rows:[
-            ['Órdenes de trabajo','Activo','ok','Listo'],
-            ['Repuestos y stock','Activo','ok','Listo'],
-            ['Presupuestos','Activo','ok','Listo'],
-            ['Caja y facturación','Activo','ok','Listo'],
-          ],
+          render: () => THEMES.auto({
+            bays: [
+              { car:'Toyota Etios 2020',    work:'Cambio de aceite + filtros', pct:85,  eta:'15 min' },
+              { car:'Ford Ka 2018',         work:'Frenos delanteros',          pct:60,  eta:'1h 20min' },
+              { idle: true },
+              { car:'VW Gol Trend 2017',    work:'Diagnóstico eléctrico',      pct:30,  eta:'2 hs' },
+              { car:'Renault Sandero 2021', work:'Service 30k km',             pct:100, eta:'listo' },
+            ],
+          }),
           cta:'Conocer Aura Auto →' },
         { id:'tools',   icon:'box',     name:'Tools',
-          title:'Aura Tools · ferreterías y corralones',
+          title:'Aura Tools · stock por categoría',
           stats:[['3.482','SKUs'],['62','Bajo stock'],['$8.4M','Inventario']],
-          rows:[
-            ['Catálogo masivo (5K+ SKUs)','Activo','ok','Búsqueda fast'],
-            ['Presupuestos B2B','Activo','ok','Imprime ya'],
-            ['Lista de precios proveedores','Activo','ok','Listo'],
-            ['Caja con tarjetas + cuotas','Activo','ok','Listo'],
-          ],
+          render: () => THEMES.tools({
+            cats: [
+              { name:'Tornillería',  pct:88, n:'1.247', t:'' },
+              { name:'Eléctrica',    pct:62, n:'624',   t:'' },
+              { name:'Pinturería',   pct:34, n:'312',   t:'warn' },
+              { name:'Plomería',     pct:95, n:'1.840', t:'' },
+              { name:'Herramientas', pct:18, n:'128',   t:'danger' },
+            ],
+          }),
           cta:'Conocer Aura Tools →' },
         { id:'finance', icon:'cash',    name:'Finance',
-          title:'Aura Finance · prestamistas y financieras',
+          title:'Aura Finance · cartera de préstamos',
           stats:[['142','Préstamos'],['$8.94M','Cartera'],['96%','Cobrado']],
-          rows:[
-            ['Cartera de préstamos','Activo','ok','Cuotas auto'],
-            ['Cobranza y morosidad','Activo','ok','Alertas'],
-            ['Calculadora de intereses','Activo','ok','Listo'],
-            ['Reportes financieros','Activo','ok','Listo'],
-          ],
+          render: () => THEMES.finance({
+            loans: [
+              { id:'142', name:'M. González',   amt:'2.500',  cuota:6,  total:12, next:'5/5 (3d)',   stat:'Al día',   t:'ok' },
+              { id:'141', name:'J. Pérez',      amt:'4.800',  cuota:3,  total:24, next:'8/5 (6d)',   stat:'Al día',   t:'ok' },
+              { id:'140', name:'L. Ruiz',       amt:'1.200',  cuota:11, total:12, next:'12/5 (10d)', stat:'Vence 10d',t:'warn' },
+              { id:'139', name:'D. Martínez',   amt:'3.600',  cuota:8,  total:18, next:'2/5',       stat:'Atrasado', t:'danger' },
+            ],
+          }),
           cta:'Conocer Aura Finance →' },
       ],
     },
