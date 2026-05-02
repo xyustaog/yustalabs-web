@@ -84,18 +84,18 @@
             <label for="c-rubro">Rubro</label>
             <select id="c-rubro" required onchange="toggleRubroOtro(this.value)">
               <option value="" disabled selected>Elegí tu rubro…</option>
-              <option value="Aura Salon">Peluquería / Estética</option>
-              <option value="Aura Fit">Gimnasio</option>
-              <option value="Aura Finance">Financiera / Prestamista</option>
-              <option value="Aura Tools">Ferretería / Corralón</option>
-              <option value="Aura Vet">Veterinaria</option>
-              <option value="Aura Auto">Taller mecánico</option>
-              <option value="Aura Logistic">Logística / Cadetería</option>
-              <option value="Aura Food">Gastronomía</option>
-              <option value="Aura Wear">Indumentaria</option>
-              <option value="Aura Prop">Inmobiliaria</option>
-              <option value="Aura Commerce">Kiosco / Almacén / Comercio</option>
-              <option value="Otro">Otro (no está en la lista)</option>
+              <option value="salon">Peluquería / Estética</option>
+              <option value="fit">Gimnasio</option>
+              <option value="finance">Financiera / Prestamista</option>
+              <option value="tools">Ferretería / Corralón</option>
+              <option value="vet">Veterinaria</option>
+              <option value="auto">Taller mecánico</option>
+              <option value="logistic">Logística / Cadetería</option>
+              <option value="food">Gastronomía</option>
+              <option value="wear">Indumentaria</option>
+              <option value="prop">Inmobiliaria</option>
+              <option value="commerce">Kiosco / Almacén / Comercio</option>
+              <option value="otro">Otro (no está en la lista)</option>
             </select>
             <div id="c-rubro-otro-wrap">
               <input id="c-rubro-otro" type="text" placeholder="¿Cuál es tu rubro? Ej: lavadero, óptica, juguetería…" />
@@ -170,7 +170,7 @@
 function toggleRubroOtro(val){
   const wrap = document.getElementById('c-rubro-otro-wrap');
   const inp  = document.getElementById('c-rubro-otro');
-  if (val === 'Otro') {
+  if (val === 'otro') {
     wrap.classList.add('show');
     inp.required = true;
     setTimeout(() => inp.focus(), 100);
@@ -189,9 +189,9 @@ async function enviarForm(e){
   const b=document.getElementById('c-negocio').value;
   const t=document.getElementById('c-telefono').value;
   let   r=document.getElementById('c-rubro').value;
-  if (r === 'Otro') {
-    const otroVal = document.getElementById('c-rubro-otro').value.trim();
-    r = otroVal ? `Otro: ${otroVal}` : 'Otro';
+  let   rubroLibre = '';
+  if (r === 'otro') {
+    rubroLibre = document.getElementById('c-rubro-otro').value.trim();
   }
   const em=document.getElementById('c-email').value;
   const m=document.getElementById('c-mensaje').value;
@@ -201,17 +201,21 @@ async function enviarForm(e){
 
   // 1. Save lead to Firestore (panel kanban) + fire Lead pixel event.
   //    This runs even if WhatsApp fails to open, so we never lose the lead.
+  // Visible label for the rubro (sent to WA + saved as `rubroLabel`)
+  const rubroLabels = {salon:'Peluquería / Estética',fit:'Gimnasio',finance:'Financiera',tools:'Ferretería / Corralón',vet:'Veterinaria',auto:'Taller mecánico',logistic:'Logística / Cadetería',food:'Gastronomía',wear:'Indumentaria',prop:'Inmobiliaria',commerce:'Kiosco / Almacén / Comercio',otro:'Otro'};
+  const rubroDisplay = r === 'otro' && rubroLibre ? `Otro: ${rubroLibre}` : (rubroLabels[r] || r);
+
   if (window.yl && window.yl.saveLead) {
     try {
       await window.yl.saveLead({
-        nombre: n, negocio: b, telefono: t, rubro: r, email: em, mensaje: m,
+        nombre: n, negocio: b, telefono: t, rubro: r, rubroLibre: rubroLibre, email: em, mensaje: m,
         source: 'contacto-form',
       });
     } catch(err) { console.warn('lead save failed', err); }
   }
 
   // 2. Open WhatsApp with the pre-filled message for instant follow-up.
-  const msg=`Hola! Soy ${n} de ${b}.\n\nRubro: ${r}\nTeléfono: ${t}${em?'\nEmail: '+em:''}\n\nMensaje: ${m}\n\n(enviado desde yustalabs.com/contacto)`;
+  const msg=`Hola! Soy ${n} de ${b}.\n\nRubro: ${rubroDisplay}\nTeléfono: ${t}${em?'\nEmail: '+em:''}\n\nMensaje: ${m}\n\n(enviado desde yustalabs.com/contacto)`;
   window.open('https://wa.me/541124693394?text='+encodeURIComponent(msg),'_blank');
 
   success.style.display = 'block';
