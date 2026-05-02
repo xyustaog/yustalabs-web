@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- ─── Páginas core ─── -->
+  <url><loc>https://yustalabs.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://yustalabs.com/precios</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/proceso</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yustalabs.com/casos</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yustalabs.com/agentes</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yustalabs.com/servicios</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/nosotros</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://yustalabs.com/faq</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://yustalabs.com/contacto</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/garantia</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://yustalabs.com/rubros</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://yustalabs.com/showroom</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/custom</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+
+  <!-- ─── 11 productos Aura ─── -->
+  <url><loc>https://yustalabs.com/aura-commerce</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-prop</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-wear</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-salon</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-logistic</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-fit</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-food</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-vet</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-auto</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-tools</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yustalabs.com/aura-finance</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- ─── Demos en vivo ─── -->
+  <url><loc>https://yustalabs.com/probar-aura-commerce</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-commerce/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-prop/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-fit/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-food/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-vet/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-auto/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-salon/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-wear/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-logistic/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-tools/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-finance/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://yustalabs.com/aura-prop/demo</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <!-- ─── Legales ─── -->
+  <url><loc>https://yustalabs.com/terminos</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://yustalabs.com/privacidad</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

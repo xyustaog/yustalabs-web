@@ -1,0 +1,14 @@
+# Yusta Labs · robots.txt
+# Acceso público total · indexar todo
+
+User-agent: *
+Allow: /
+
+# No indexar áreas internas / páginas de marketing privadas
+Disallow: /cerebro/
+Disallow: /supercerebro/
+Disallow: /marketing/
+Disallow: /index-legacy.html
+
+# Sitemap
+Sitemap: https://yustalabs.com/sitemap.xml

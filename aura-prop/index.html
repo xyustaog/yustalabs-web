@@ -123,7 +123,8 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .prop-cmd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue) 30%,var(--cyan) 70%,transparent);opacity:.7}
 .prop-cmd-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
 .prop-cmd-brand{display:flex;align-items:center;gap:10px}
-.prop-cmd-mk{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--blue));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;color:#0a0708;letter-spacing:-1px;box-shadow:0 4px 12px rgba(200,169,122,0.25)}
+.prop-cmd-mk{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,rgba(240,180,41,0.18),rgba(240,180,41,0.06));border:1px solid rgba(240,180,41,0.40);display:flex;align-items:center;justify-content:center;color:var(--gold);box-shadow:inset 0 1px 0 rgba(240,180,41,0.18),0 0 12px rgba(240,180,41,0.10);flex-shrink:0;}
+.prop-cmd-mk svg{width:18px;height:18px;}
 .prop-cmd-title{font-family:var(--font-display);font-size:14px;letter-spacing:2.5px;color:var(--white);font-weight:800}
 .prop-cmd-sub{font-size:9.5px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:600;font-family:var(--font-body);margin-top:2px;line-height:1}
 .prop-cmd-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:7px 12px;flex:1;max-width:280px}
@@ -614,7 +615,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <div class="prop-cmd" id="propCmd">
         <div class="prop-cmd-head">
           <div class="prop-cmd-brand">
-            <div class="prop-cmd-mk">A</div>
+            <div class="prop-cmd-mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg></div>
             <div><span class="prop-cmd-title">CARTERA INMOBILIARIA</span><div class="prop-cmd-sub">CABA &middot; 47 activas &middot; tiempo real</div></div>
           </div>
           <div class="prop-cmd-search">
