@@ -284,21 +284,46 @@
    ═════════════════════════════════════════════════════════════════ */
 .sc-canvas{flex:1;min-height:60px;display:flex;flex-direction:column;gap:8px;position:relative;}
 
-/* ─── Aura Prop · mini mapa SVG con pins ─── */
-.sc-prop-map{flex:1;background:linear-gradient(160deg,#0E1218 0%,#161B22 100%);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px;position:relative;overflow:hidden;min-height:190px;}
+/* ─── Aura Prop · mini mapa SVG sofisticado con pins + detail panel ─── */
+.sc-prop-wrap{flex:1;display:grid;grid-template-columns:1fr 200px;gap:10px;min-height:240px;}
+@media(max-width:680px){.sc-prop-wrap{grid-template-columns:1fr;}.sc-prop-detail{order:-1;max-height:120px;}}
+.sc-prop-map{background:radial-gradient(ellipse at 30% 40%,#1A1F2A 0%,#0E1218 70%);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px;position:relative;overflow:hidden;min-height:220px;}
 .sc-prop-map svg{position:absolute;inset:0;width:100%;height:100%;}
+.sc-prop-map .pp-scan{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(240,180,41,0.06),transparent);transform:translateX(-100%);animation:scPropScan 6s ease-in-out infinite;pointer-events:none;}
+@keyframes scPropScan{0%,100%{transform:translateX(-100%);}50%{transform:translateX(100%);}}
 .sc-prop-map .pp-h{position:absolute;top:10px;left:14px;right:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:3;}
-.sc-prop-map .pp-h-l{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
-.sc-prop-map .pp-h-r{display:flex;gap:5px;}
-.sc-prop-map .pp-chip{font-family:var(--font-mono);font-size:9px;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);color:#9CA1AE;letter-spacing:0.06em;}
+.sc-prop-map .pp-h-l{font-family:var(--font-mono);font-size:9.5px;color:#B8BCC8;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:6px;}
+.sc-prop-map .pp-h-l::before{content:'';width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 8px #22C55E;animation:scPulseDot 1.6s infinite;}
+.sc-prop-map .pp-h-r{display:flex;gap:4px;}
+.sc-prop-map .pp-chip{font-family:var(--font-mono);font-size:9px;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);color:#9CA1AE;letter-spacing:0.06em;cursor:pointer;transition:all .15s;}
+.sc-prop-map .pp-chip:hover{border-color:rgba(255,255,255,0.20);color:var(--text);}
 .sc-prop-map .pp-chip.on{background:rgba(240,180,41,0.14);border-color:rgba(240,180,41,0.40);color:var(--gold);font-weight:700;}
-.sc-prop-pin{position:absolute;transform:translate(-50%,-100%);z-index:2;}
-.sc-prop-pin .dot{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(240,180,41,0.18),0 0 12px rgba(240,180,41,0.55);animation:scPropPin 2.4s ease-in-out infinite;cursor:pointer;}
-.sc-prop-pin.alt .dot{background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,0.18),0 0 12px rgba(34,197,94,0.55);}
-.sc-prop-pin.cold .dot{background:#60A5FA;box-shadow:0 0 0 3px rgba(96,165,250,0.18),0 0 10px rgba(96,165,250,0.45);}
-@keyframes scPropPin{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
-.sc-prop-pin .lbl{position:absolute;left:50%;top:-4px;transform:translate(-50%,-100%);font-family:var(--font-mono);font-size:8.5px;color:var(--gold);background:rgba(0,0,0,0.86);padding:2px 6px;border-radius:4px;white-space:nowrap;border:1px solid rgba(240,180,41,0.30);letter-spacing:0.04em;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none;}
-.sc-prop-pin:hover .lbl{opacity:1;}
+.sc-prop-pin{position:absolute;transform:translate(-50%,-100%);z-index:2;cursor:pointer;}
+.sc-prop-pin .dot{width:18px;height:18px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(240,180,41,0.16),0 0 14px rgba(240,180,41,0.55);transition:transform .25s var(--ease);position:relative;display:flex;align-items:center;justify-content:center;color:#0A0A0F;}
+.sc-prop-pin .dot::after{content:'';position:absolute;top:100%;left:50%;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--gold);transform:translateX(-50%);}
+.sc-prop-pin.alt .dot{background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,0.16),0 0 14px rgba(34,197,94,0.55);}
+.sc-prop-pin.alt .dot::after{border-top-color:#22C55E;}
+.sc-prop-pin.cold .dot{background:#60A5FA;box-shadow:0 0 0 4px rgba(96,165,250,0.16),0 0 12px rgba(96,165,250,0.45);}
+.sc-prop-pin.cold .dot::after{border-top-color:#60A5FA;}
+.sc-prop-pin.active .dot,.sc-prop-pin:hover .dot{transform:scale(1.25);}
+.sc-prop-pin .pulse{position:absolute;inset:0;border-radius:50%;background:inherit;opacity:0;animation:scPinPulse 2.2s ease-out infinite;pointer-events:none;}
+.sc-prop-pin:nth-child(2) .pulse{animation-delay:.4s;}
+.sc-prop-pin:nth-child(3) .pulse{animation-delay:.8s;}
+.sc-prop-pin:nth-child(4) .pulse{animation-delay:1.2s;}
+@keyframes scPinPulse{0%{transform:scale(1);opacity:.5;background:rgba(240,180,41,0.5);}100%{transform:scale(2.6);opacity:0;background:rgba(240,180,41,0);}}
+.sc-prop-pin .lbl{position:absolute;left:50%;top:-6px;transform:translate(-50%,-100%);font-family:var(--font-mono);font-size:9px;color:#fff;background:rgba(0,0,0,0.92);padding:3px 7px;border-radius:5px;white-space:nowrap;border:1px solid rgba(240,180,41,0.40);letter-spacing:0.04em;font-weight:700;opacity:1;transition:opacity .2s,transform .2s;pointer-events:none;backdrop-filter:blur(6px);}
+.sc-prop-pin.alt .lbl{border-color:rgba(34,197,94,0.45);}
+.sc-prop-pin.cold .lbl{border-color:rgba(96,165,250,0.45);}
+.sc-prop-pin.active .lbl,.sc-prop-pin:hover .lbl{transform:translate(-50%,-100%) translateY(-3px);}
+.sc-prop-detail{background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.012));border:1px solid rgba(240,180,41,0.20);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:0;}
+.sc-prop-detail-eb{font-family:var(--font-mono);font-size:9px;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:5px;}
+.sc-prop-detail-eb::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold);}
+.sc-prop-detail-zone{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.1;}
+.sc-prop-detail-price{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--gold);letter-spacing:-0.025em;line-height:1;font-feature-settings:"tnum";text-shadow:0 0 18px rgba(240,180,41,0.18);}
+.sc-prop-detail-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px;}
+.sc-prop-detail-mc{font-family:var(--font-mono);font-size:9.5px;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.08);color:#B8BCC8;letter-spacing:0.04em;font-weight:600;}
+.sc-prop-detail-status{margin-top:auto;padding-top:8px;border-top:1px dashed rgba(255,255,255,0.10);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;letter-spacing:0.06em;font-weight:600;}
+.sc-prop-detail-status .vis{color:var(--gold);font-weight:700;}
 
 /* ─── Aura Wear · rack con talles + colores ─── */
 .sc-wear{display:flex;flex-direction:column;gap:8px;flex:1;min-height:60px;}
@@ -1010,26 +1035,68 @@
   // Reciben opciones { stops, pins, items… } y devuelven HTML para inyectar
   // en .sc-canvas. Si una sección NO define `render`, cae al template de filas.
   const THEMES = {
-    // Aura Prop · mini SVG city map con pins de propiedades
+    // Aura Prop · mini SVG city map sofisticado · pins clickeables + detail panel
     propMap: (data) => {
-      const pins = (data.pins || []).map(p =>
-        `<div class="sc-prop-pin ${p.t || ''}" style="left:${p.x}%;top:${p.y}%;"><span class="lbl">${p.lbl}</span><span class="dot"></span></div>`
-      ).join('');
-      return `<div class="sc-prop-map">
-        <div class="pp-h">
-          <span class="pp-h-l">${data.zone || 'CABA · 47 propiedades'}</span>
-          <span class="pp-h-r"><span class="pp-chip on">Mapa</span><span class="pp-chip">Lista</span><span class="pp-chip">Tarjetas</span></span>
+      const pins = (data.pins || []).map((p, i) => {
+        const tipo = p.t === 'alt' ? 'En venta' : p.t === 'cold' ? 'Reservada' : 'Alquiler';
+        const props = `data-zone="${p.zone}" data-price="${p.price}" data-amb="${p.amb}" data-m2="${p.m2}" data-tipo="${tipo}" data-vis="${p.vis||0}"`;
+        return `<div class="sc-prop-pin ${p.t || ''} ${i===0?'active':''}" ${props} style="left:${p.x}%;top:${p.y}%;" data-pin="${i}">
+          <span class="lbl">${p.zone}</span>
+          <span class="pulse"></span>
+          <span class="dot"></span>
+        </div>`;
+      }).join('');
+      const first = (data.pins || [])[0] || {};
+      return `<div class="sc-prop-wrap">
+        <div class="sc-prop-map" data-prop-map>
+          <span class="pp-scan"></span>
+          <div class="pp-h">
+            <span class="pp-h-l">${data.zone || 'CABA · 47 propiedades · tiempo real'}</span>
+            <span class="pp-h-r"><span class="pp-chip on">Mapa</span><span class="pp-chip">Lista</span><span class="pp-chip">Cards</span></span>
+          </div>
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <pattern id="propGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M0 0L32 0M0 0L0 32" stroke="rgba(255,255,255,0.045)" stroke-width="1"/></pattern>
+              <linearGradient id="riverG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(96,165,250,0.05)"/><stop offset="50%" stop-color="rgba(96,165,250,0.30)"/><stop offset="100%" stop-color="rgba(96,165,250,0.05)"/></linearGradient>
+            </defs>
+            <rect width="400" height="240" fill="url(#propGrid)"/>
+            <!-- Avenidas principales (gold) -->
+            <path d="M0 80 L400 80" stroke="rgba(240,180,41,0.22)" stroke-width="1.2"/>
+            <path d="M0 160 L400 160" stroke="rgba(240,180,41,0.22)" stroke-width="1.2"/>
+            <path d="M110 0 L110 240" stroke="rgba(240,180,41,0.22)" stroke-width="1.2"/>
+            <path d="M260 0 L260 240" stroke="rgba(240,180,41,0.22)" stroke-width="1.2"/>
+            <!-- Calles secundarias (más sutiles) -->
+            <path d="M0 40 L400 40" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+            <path d="M0 120 L400 120" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+            <path d="M0 200 L400 200" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+            <path d="M55 0 L55 240" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+            <path d="M180 0 L180 240" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+            <path d="M325 0 L325 240" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+            <!-- Río de la Plata (curva al sureste) -->
+            <path d="M30 30 Q200 70 380 50" stroke="url(#riverG)" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <!-- Etiquetas de barrios -->
+            <text x="60" y="65" fill="rgba(184,188,200,0.45)" font-size="8" font-family="ui-monospace,monospace" letter-spacing="0.08em">BELGRANO</text>
+            <text x="160" y="115" fill="rgba(184,188,200,0.45)" font-size="8" font-family="ui-monospace,monospace" letter-spacing="0.08em">PALERMO</text>
+            <text x="290" y="105" fill="rgba(184,188,200,0.45)" font-size="8" font-family="ui-monospace,monospace" letter-spacing="0.08em">RECOLETA</text>
+            <text x="80" y="200" fill="rgba(184,188,200,0.40)" font-size="7" font-family="ui-monospace,monospace" letter-spacing="0.08em">CABALLITO</text>
+            <text x="280" y="195" fill="rgba(184,188,200,0.40)" font-size="7" font-family="ui-monospace,monospace" letter-spacing="0.08em">ALMAGRO</text>
+          </svg>
+          ${pins}
         </div>
-        <svg viewBox="0 0 400 220" preserveAspectRatio="none" aria-hidden="true">
-          <defs><pattern id="propGrid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M0 0L36 0M0 0L0 36" stroke="rgba(255,255,255,0.04)" stroke-width="1"/></pattern></defs>
-          <rect width="400" height="220" fill="url(#propGrid)"/>
-          <path d="M0 70 L400 70" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
-          <path d="M0 140 L400 140" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
-          <path d="M120 0 L120 220" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
-          <path d="M260 0 L260 220" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
-          <path d="M40 50 Q200 90 380 60" stroke="rgba(96,165,250,0.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
-        </svg>
-        ${pins}
+        <div class="sc-prop-detail" data-prop-detail>
+          <span class="sc-prop-detail-eb">Propiedad seleccionada</span>
+          <div class="sc-prop-detail-zone" data-d-zone>${first.zone || ''}</div>
+          <div class="sc-prop-detail-price" data-d-price>USD ${first.price || ''}</div>
+          <div class="sc-prop-detail-meta">
+            <span class="sc-prop-detail-mc" data-d-tipo>${first.t === 'alt' ? 'En venta' : first.t === 'cold' ? 'Reservada' : 'Alquiler'}</span>
+            <span class="sc-prop-detail-mc" data-d-amb>${first.amb || ''} amb</span>
+            <span class="sc-prop-detail-mc" data-d-m2>${first.m2 || ''} m²</span>
+          </div>
+          <div class="sc-prop-detail-status">
+            <span data-d-vis>👁 ${first.vis || 0} visitas</span>
+            <span class="vis">Ver más →</span>
+          </div>
+        </div>
       </div>`;
     },
     // Aura Wear · cards de prendas con talles y stock
@@ -1061,17 +1128,18 @@
         </div>
       </div>`;
     },
-    // Aura Commerce · POS con grid de productos + ticket
+    // Aura Commerce · POS interactivo · click producto → suma al ticket
     pos: (data) => {
-      const prods = (data.products || []).map(p => `<div class="sc-pos-prod">${p.n}<b>$${p.p}</b></div>`).join('');
-      const lines = (data.ticket || []).map(l => `<div class="sc-pos-tk-line"><span>${l.n}</span><span>$${l.p}</span></div>`).join('');
-      const total = (data.ticket || []).reduce((s,l) => s + (parseFloat((l.p+'').replace(/\./g,'').replace(',','.')) || 0), 0);
+      const prods = (data.products || []).map(p => {
+        const priceNum = parseFloat((p.p+'').replace(/\./g,'').replace(',','.')) || 0;
+        return `<div class="sc-pos-prod" data-prod="${p.n}" data-price="${priceNum}">${p.n}<b>$${p.p}</b></div>`;
+      }).join('');
       return `<div class="sc-pos">
-        <div class="sc-pos-grid">${prods}</div>
+        <div class="sc-pos-grid" data-pos-grid>${prods}</div>
         <div class="sc-pos-ticket">
           <div class="sc-pos-tk-h">TICKET #1247<small>${data.date || '02/05 · 14:23'}</small></div>
-          ${lines}
-          <div class="sc-pos-tk-total"><span>TOTAL</span><span>$${total.toLocaleString('es-AR')}</span></div>
+          <div data-pos-items style="display:flex;flex-direction:column;gap:5px;flex:1;"></div>
+          <div class="sc-pos-tk-total"><span>TOTAL</span><span data-pos-total>$0</span></div>
           <div class="sc-pos-tk-foot">EFECTIVO · gracias por tu compra</div>
         </div>
       </div>`;
@@ -1266,13 +1334,13 @@
           render: () => THEMES.propMap({
             zone: 'CABA · 47 propiedades · tiempo real',
             pins: [
-              {x:18, y:38, lbl:'Belgrano · USD 185K', t:''},
-              {x:32, y:62, lbl:'Caballito · USD 142K', t:'alt'},
-              {x:48, y:34, lbl:'Palermo · USD 220K', t:''},
-              {x:62, y:78, lbl:'Almagro · USD 98K', t:'cold'},
-              {x:74, y:46, lbl:'Recoleta · USD 310K', t:''},
-              {x:84, y:24, lbl:'Núñez · USD 175K', t:'alt'},
-              {x:24, y:84, lbl:'Boedo · USD 85K', t:'cold'},
+              {x:22, y:40, zone:'Belgrano',  price:'185.000', amb:3, m2:78,  vis:34, t:''},
+              {x:36, y:65, zone:'Caballito', price:'142.000', amb:2, m2:58,  vis:18, t:'alt'},
+              {x:50, y:38, zone:'Palermo',   price:'220.000', amb:3, m2:85,  vis:42, t:''},
+              {x:64, y:80, zone:'Almagro',   price:'98.000',  amb:2, m2:48,  vis:9,  t:'cold'},
+              {x:76, y:48, zone:'Recoleta',  price:'310.000', amb:4, m2:120, vis:56, t:''},
+              {x:86, y:26, zone:'Núñez',     price:'175.000', amb:3, m2:72,  vis:21, t:'alt'},
+              {x:28, y:86, zone:'Boedo',     price:'85.000',  amb:2, m2:42,  vis:7,  t:'cold'},
             ],
           }),
           cta:'+ Publicar propiedad' },
@@ -1731,7 +1799,86 @@
       b.classList.toggle('active', isActive);
       b.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
+    // Wire per-theme micro-interactions (after innerHTML swap)
+    wireThemeInteractions();
     pulseFade();
+  }
+
+  // Theme-specific interactions (clickable pins → side detail panel, etc.)
+  function wireThemeInteractions(){
+    // ─── Aura Prop · pin click updates detail panel ───
+    const map = els.canvas.querySelector('[data-prop-map]');
+    const det = els.canvas.querySelector('[data-prop-detail]');
+    if (map && det) {
+      const dZone  = det.querySelector('[data-d-zone]');
+      const dPrice = det.querySelector('[data-d-price]');
+      const dTipo  = det.querySelector('[data-d-tipo]');
+      const dAmb   = det.querySelector('[data-d-amb]');
+      const dM2    = det.querySelector('[data-d-m2]');
+      const dVis   = det.querySelector('[data-d-vis]');
+      const pins = map.querySelectorAll('.sc-prop-pin');
+      pins.forEach(pin => {
+        const update = () => {
+          pins.forEach(p => p.classList.remove('active'));
+          pin.classList.add('active');
+          dZone.textContent  = pin.dataset.zone;
+          dPrice.textContent = 'USD ' + pin.dataset.price;
+          dTipo.textContent  = pin.dataset.tipo;
+          dAmb.textContent   = pin.dataset.amb + ' amb';
+          dM2.textContent    = pin.dataset.m2 + ' m²';
+          dVis.textContent   = '👁 ' + pin.dataset.vis + ' visitas';
+          // Pulse the detail card
+          det.style.animation = 'none'; void det.offsetWidth;
+          det.style.animation = 'scFade .35s var(--ease) both';
+        };
+        pin.addEventListener('mouseenter', update);
+        pin.addEventListener('click', update);
+      });
+    }
+    // ─── Aura Commerce · clickable products add to ticket ───
+    const posGrid = els.canvas.querySelector('[data-pos-grid]');
+    const posItems = els.canvas.querySelector('[data-pos-items]');
+    const posTotal = els.canvas.querySelector('[data-pos-total]');
+    if (posGrid && posItems && posTotal) {
+      const cart = [];
+      posGrid.querySelectorAll('[data-prod]').forEach(p => {
+        p.addEventListener('click', () => {
+          const name = p.dataset.prod;
+          const price = parseFloat(p.dataset.price);
+          const ex = cart.find(x => x.name === name);
+          if (ex) ex.qty++; else cart.push({ name, price, qty: 1 });
+          renderCart();
+          // Visual feedback
+          p.style.transform = 'scale(0.94)';
+          setTimeout(() => { p.style.transform = ''; }, 140);
+        });
+      });
+      function renderCart(){
+        if (cart.length === 0) { posItems.innerHTML = '<div class="sc-pos-tk-line"><span style="color:#888;font-style:italic;">Tocá un producto…</span><span></span></div>'; posTotal.textContent = '$0'; return; }
+        posItems.innerHTML = cart.map(c =>
+          `<div class="sc-pos-tk-line"><span>${c.name}${c.qty > 1 ? ` x${c.qty}` : ''}</span><span>$${(c.price * c.qty).toLocaleString('es-AR')}</span></div>`
+        ).join('');
+        const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+        posTotal.textContent = '$' + total.toLocaleString('es-AR');
+      }
+      renderCart();
+    }
+    // ─── Aura Salon · clickable cells highlight ───
+    els.canvas.querySelectorAll('.sc-salon-cell').forEach(c => {
+      c.addEventListener('click', () => {
+        if (c.classList.contains('lib')) return;
+        c.style.boxShadow = '0 0 12px rgba(240,180,41,0.55)';
+        c.style.transform = 'scale(1.08)';
+        setTimeout(() => { c.style.boxShadow = ''; c.style.transform = ''; }, 600);
+      });
+    });
+    // ─── Aura Wear · chip click → highlight ───
+    els.canvas.querySelectorAll('.sc-wear-chip').forEach(c => {
+      c.addEventListener('click', () => {
+        c.style.transform = 'scale(1.15)';
+        setTimeout(() => { c.style.transform = ''; }, 200);
+      });
+    });
   }
 
   function renderRubro(rubroId) {
