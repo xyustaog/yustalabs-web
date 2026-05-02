@@ -24,12 +24,12 @@
 
   .gate-form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
   @media(max-width:600px){.gate-form .row{grid-template-columns:1fr;}}
-  .gate-form label{display:block;font-size:11.5px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+  .gate-form label{display:block;font-size:11.5px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-weight:700;margin-bottom:6px;}
   .gate-form label .opt{font-size:11px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500;margin-left:4px;}
   .gate-form input,.gate-form select,.gate-form textarea{box-sizing:border-box;width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:11px;padding:14px 16px;color:var(--text);font-family:inherit;font-size:15px;line-height:1.4;transition:border-color var(--t),background var(--t),box-shadow var(--t);text-transform:none;}
   .gate-form input:hover,.gate-form select:hover,.gate-form textarea:hover{border-color:rgba(255,255,255,0.20);}
   .gate-form input:focus,.gate-form select:focus,.gate-form textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.05);box-shadow:0 0 0 3px rgba(240,180,41,0.18);}
-  .gate-form input::placeholder,.gate-form textarea::placeholder{color:rgba(255,255,255,0.30);font-weight:400;}
+  .gate-form input::placeholder,.gate-form textarea::placeholder{color:rgba(255,255,255,0.30);font-weight:700;}
   .gate-form textarea{resize:vertical;min-height:110px;line-height:1.55;}
   .gate-form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23B4B4C0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;cursor:pointer;}
   .gate-form-field{margin-bottom:14px;}
@@ -75,7 +75,7 @@
   .gate-unlocked{display:none;padding:28px clamp(24px,3vw,32px);background:linear-gradient(180deg,rgba(34,197,94,0.06),rgba(34,197,94,0.01));border:1px solid rgba(34,197,94,0.30);border-radius:18px;text-align:center;}
   .gate-unlocked.visible{display:block;}
   .gate-unlocked .uic{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.12);border:2px solid rgba(34,197,94,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#22C55E;}
-  .gate-unlocked h3{font-family:var(--font-display);font-size:24px;text-transform:uppercase;color:var(--text);font-weight:400;letter-spacing:0.005em;margin:0 0 10px;line-height:1.1;}
+  .gate-unlocked h3{font-family:var(--font-display);font-size:24px;text-transform:none;color:var(--text);font-weight:700;letter-spacing:0.005em;margin:0 0 10px;line-height:1.1;}
   .gate-unlocked p{font-size:14px;color:#CBD5E1;margin:0 0 18px;line-height:1.55;}
   .gate-unlocked p strong{color:var(--text);font-weight:700;}
   .gate-unlocked .uflow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0;text-align:left;}
@@ -91,7 +91,7 @@
   .gate-info{display:flex;flex-direction:column;gap:14px;position:sticky;top:90px;}
   @media(max-width:880px){.gate-info{position:static;}}
   .gate-info-card{background:linear-gradient(180deg,rgba(240,180,41,0.05),rgba(240,180,41,0.005));border:1px solid rgba(240,180,41,0.25);border-radius:16px;padding:22px;}
-  .gate-info-card h3{font-family:var(--font-display);font-size:20px;text-transform:uppercase;letter-spacing:0.005em;font-weight:400;margin:0 0 14px;color:var(--text);}
+  .gate-info-card h3{font-family:var(--font-display);font-size:20px;text-transform:none;letter-spacing:0.005em;font-weight:700;margin:0 0 14px;color:var(--text);}
   .gate-info-card ol{list-style:none;padding:0;margin:0;counter-reset:step;}
   .gate-info-card ol li{padding:11px 0;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid rgba(240,180,41,0.12);counter-increment:step;}
   .gate-info-card ol li:last-child{border-bottom:none;padding-bottom:0;}

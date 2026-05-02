@@ -17,7 +17,7 @@
   .casos-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:28px;max-width:900px;}
   .casos-stat{background:linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.005));border:1px solid var(--border);border-radius:14px;padding:18px 20px;}
   .casos-stat-v{font-family:var(--font-display);font-size:38px;color:var(--gold);line-height:1;letter-spacing:-0.005em;}
-  .casos-stat-l{font-size:11.5px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-top:6px;}
+  .casos-stat-l{font-size:11.5px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-weight:600;margin-top:6px;}
 
   /* ── Caso card ─────────────────────────────────────────────── */
   .caso{
@@ -37,7 +37,7 @@
   .caso-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
   .caso-logo{width:56px;height:56px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;color:#0A0B0F;font-weight:800;letter-spacing:-0.01em;flex-shrink:0;box-shadow:0 6px 18px rgba(0,0,0,0.4);}
   .caso-meta-line{font-size:11px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;font-weight:700;margin-bottom:4px;}
-  .caso-name{font-family:var(--font-display);font-size:clamp(24px,2.6vw,32px);text-transform:uppercase;letter-spacing:0.005em;color:var(--text);font-weight:400;line-height:1.05;}
+  .caso-name{font-family:var(--font-display);font-size:clamp(24px,2.6vw,32px);text-transform:uppercase;letter-spacing:0.005em;color:var(--text);font-weight:700;line-height:1.05;}
 
   .caso-quote{font-size:18px;line-height:1.55;color:var(--text);margin:18px 0 22px;font-style:italic;font-weight:500;letter-spacing:-0.005em;}
   .caso-quote::before{content:'\201C';font-family:Georgia,serif;font-size:48px;color:var(--gold);line-height:0.8;margin-right:8px;vertical-align:-12px;font-style:normal;}
@@ -50,14 +50,14 @@
   .caso-stat-cell-l{font-size:11px;color:var(--muted);letter-spacing:0.04em;margin-top:4px;line-height:1.4;}
 
   .caso-side{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;padding:22px;}
-  .caso-side h4{font-size:10.5px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;}
+  .caso-side h4{font-size:10.5px;font-weight:800;letter-spacing:0.16em;text-transform:none;color:var(--gold);margin:0 0 12px;}
   .caso-side ul{list-style:none;padding:0;margin:0;font-size:13px;color:#B8BCC8;line-height:1.7;}
   .caso-side ul li{padding:5px 0;display:flex;gap:10px;align-items:flex-start;}
   .caso-side ul li::before{content:'✓';color:#22C55E;font-weight:900;flex-shrink:0;}
 
   /* ── Tour visual del sistema — réplica fiel del SLE real ─── */
   .caso-screens{margin-top:36px;padding:36px clamp(20px,4vw,40px);background:linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.005));border:1px solid var(--border);border-radius:20px;}
-  .caso-screens-head h3{font-family:var(--font-display);font-size:clamp(22px,2.4vw,30px);text-transform:uppercase;letter-spacing:0.005em;font-weight:400;margin:0 0 8px;color:var(--text);}
+  .caso-screens-head h3{font-family:var(--font-display);font-size:clamp(22px,2.4vw,30px);text-transform:uppercase;letter-spacing:0.005em;font-weight:700;margin:0 0 8px;color:var(--text);}
   .caso-screens-head p{color:var(--muted);font-size:13.5px;line-height:1.6;margin:0 0 24px;max-width:600px;}
 
   /* App frame — replica del look real de SLE (light theme con navy header) */
@@ -82,7 +82,7 @@
     box-shadow:0 0 10px rgba(245,158,11,0.4);
   }
   .sle-nav-brand-text{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:800;letter-spacing:0.5px;}
-  .sle-nav-brand-sub{font-size:8px;color:#94A3B8;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;margin-top:1px;}
+  .sle-nav-brand-sub{font-size:8px;color:#94A3B8;letter-spacing:0.16em;text-transform:none;font-weight:600;margin-top:1px;}
   .sle-nav-items{display:flex;gap:16px;flex:1;justify-content:center;}
   .sle-nav-item{color:#CBD5E1;font-size:11.5px;font-weight:600;}
   .sle-nav-item.active{
@@ -168,7 +168,7 @@
   .verify-section{margin-top:40px;}
   .verify-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#22C55E;margin-bottom:14px;}
   .verify-eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 10px #22C55E;}
-  .verify-title{font-family:var(--font-display);font-size:clamp(26px,3vw,38px);text-transform:uppercase;color:var(--text);font-weight:400;letter-spacing:0.005em;margin:0 0 12px;line-height:1.05;}
+  .verify-title{font-family:var(--font-display);font-size:clamp(26px,3vw,38px);text-transform:uppercase;color:var(--text);font-weight:700;letter-spacing:0.005em;margin:0 0 12px;line-height:1.05;}
   .verify-sub{font-size:14.5px;color:var(--muted);max-width:680px;line-height:1.6;margin:0 0 28px;}
   .verify-sub strong{color:var(--text);font-weight:700;}
 
@@ -185,7 +185,7 @@
   .gbp-cat{font-size:12px;color:#94A3B8;margin-top:2px;line-height:1.3;}
 
   .gbp-rating-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
-  .gbp-rating-num{font-family:var(--font-display);font-size:42px;font-weight:400;color:#FBBC05;line-height:1;letter-spacing:-0.005em;}
+  .gbp-rating-num{font-family:var(--font-display);font-size:42px;font-weight:700;color:#FBBC05;line-height:1;letter-spacing:-0.005em;}
   .gbp-stars{color:#FBBC05;font-size:18px;letter-spacing:2px;line-height:1;}
   .gbp-reviews-count{font-size:13px;color:#94A3B8;font-weight:600;}
   .gbp-reviews-count a{color:#60A5FA;text-decoration:none;border-bottom:1px dashed rgba(96,165,250,0.4);font-weight:700;}
@@ -209,7 +209,7 @@
   .verify-map-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
   .verify-map-head h4{font-size:13px;font-weight:800;color:var(--text);margin:0;letter-spacing:-0.005em;}
   .verify-map-head p{font-size:11.5px;color:var(--muted);margin:3px 0 0;line-height:1.4;}
-  .verify-map-pill{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#22C55E;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:5px 10px;border-radius:999px;flex-shrink:0;}
+  .verify-map-pill{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:none;color:#22C55E;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:5px 10px;border-radius:999px;flex-shrink:0;}
   .verify-map-iframe{width:100%;height:240px;border:0;border-radius:12px;filter:grayscale(0.15) contrast(1.05);}
   .verify-map-foot{font-size:11.5px;color:var(--muted);line-height:1.5;display:flex;align-items:flex-start;gap:8px;}
   .verify-map-foot strong{color:#E5E7EB;font-weight:700;}
@@ -700,7 +700,7 @@
   <div class="wrap">
     <div class="casos-cta reveal">
       <div class="section-eyebrow" style="color:var(--gold);">Tu negocio puede ser el próximo caso</div>
-      <h2 style="font-family:var(--font-display);font-size:clamp(28px,3.4vw,42px);text-transform:uppercase;letter-spacing:0.005em;font-weight:400;margin:8px 0 14px;">¿Tu rubro necesita<br/>un sistema real?</h2>
+      <h2 style="font-family:var(--font-display);font-size:clamp(28px,3.4vw,42px);text-transform:none;letter-spacing:0.005em;font-weight:700;margin:8px 0 14px;">¿Tu rubro necesita<br/>un sistema real?</h2>
       <p style="color:var(--muted);font-size:15px;line-height:1.7;max-width:560px;margin:0 auto 24px;">Te armamos una demo con tu logo, tus productos y tus clientes en 48 horas. Sin compromiso, sin costo.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <a href="/contacto" class="btn btn-gold btn-lg">Pedir demo gratis →</a>

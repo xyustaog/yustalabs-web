@@ -34,7 +34,7 @@
   .show-star-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
   .show-star-eyebrow .live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22C55E;box-shadow:0 0 8px #22C55E;animation:pulseLive 1.6s infinite;}
   @keyframes pulseLive{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.55;transform:scale(0.85);}}
-  .show-star h2{font-family:var(--font-display);font-size:clamp(30px,4vw,44px);text-transform:uppercase;letter-spacing:0.005em;line-height:1.05;margin:0 0 14px;font-weight:400;color:var(--text);}
+  .show-star h2{font-family:var(--font-display);font-size:clamp(30px,4vw,44px);text-transform:none;letter-spacing:0.005em;line-height:1.05;margin:0 0 14px;font-weight:700;color:var(--text);}
   .show-star h2 .gold{color:var(--gold);}
   .show-star p{font-size:15.5px;color:var(--muted);line-height:1.65;margin:0 0 22px;}
   .show-star p strong{color:var(--text);font-weight:700;}
@@ -60,7 +60,7 @@
   .show-star-mock-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);}
   .show-star-mock-head-logo{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#F0B429,#FFD166);display:flex;align-items:center;justify-content:center;color:#0A0A10;font-weight:900;font-size:13px;}
   .show-star-mock-head strong{font-size:12px;color:var(--text);letter-spacing:-0.005em;}
-  .show-star-mock-head em{margin-left:auto;font-size:9px;font-style:normal;color:#22C55E;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+  .show-star-mock-head em{margin-left:auto;font-size:9px;font-style:normal;color:#22C55E;font-weight:700;letter-spacing:0.1em;text-transform:none;}
   .show-star-mock-body{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:12px;}
   .show-star-mock-cell{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:9px;display:flex;flex-direction:column;justify-content:space-between;}
   .show-star-mock-cell-l{font-size:8px;color:#7A7A8C;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;}
@@ -72,7 +72,7 @@
   /* ── Grid de demos por rubro ─────────────────────────── */
   .show-grid-section{margin-top:64px;}
   .show-grid-section-h{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px;flex-wrap:wrap;}
-  .show-grid-section-title{font-family:var(--font-display);font-size:clamp(24px,2.6vw,32px);text-transform:uppercase;letter-spacing:0.005em;font-weight:400;margin:0;}
+  .show-grid-section-title{font-family:var(--font-display);font-size:clamp(24px,2.6vw,32px);text-transform:uppercase;letter-spacing:0.005em;font-weight:700;margin:0;}
   .show-grid-section-sub{font-size:13.5px;color:var(--muted);max-width:520px;line-height:1.55;margin:0;}
   .show-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
 
@@ -93,8 +93,8 @@
   .show-card:hover::before{opacity:0.7;}
   .show-card-head{display:flex;align-items:center;gap:10px;}
   .show-card-dot{width:10px;height:10px;border-radius:50%;background:var(--accent,var(--gold));box-shadow:0 0 12px var(--accent,var(--gold));}
-  .show-card-rubro{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;}
-  .show-card-name{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;letter-spacing:-0.005em;text-transform:uppercase;line-height:1;color:var(--text);margin:6px 0 0;}
+  .show-card-rubro{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:0.14em;text-transform:none;}
+  .show-card-name{font-family:var(--font-display);font-size:30px;font-weight:800;letter-spacing:-0.005em;text-transform:uppercase;line-height:1;color:var(--text);margin:6px 0 0;}
   .show-card-name .accent{color:var(--accent,var(--gold));}
   .show-card-desc{font-size:13px;color:#9C9CB0;line-height:1.55;flex:1;margin:6px 0 14px;}
   .show-card-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:0.04em;color:var(--accent,var(--gold));margin-top:auto;}
@@ -104,7 +104,7 @@
 
   /* ── Bottom CTA ──────────────────────────────────────── */
   .show-bottom-cta{margin-top:64px;padding:clamp(36px,5vw,56px);text-align:center;background:linear-gradient(135deg,rgba(240,180,41,0.06),rgba(240,180,41,0.01));border:1px solid rgba(240,180,41,0.22);border-radius:20px;}
-  .show-bottom-cta h2{font-family:var(--font-display);font-size:clamp(28px,3.4vw,42px);text-transform:uppercase;letter-spacing:0.005em;font-weight:400;margin:8px 0 12px;}
+  .show-bottom-cta h2{font-family:var(--font-display);font-size:clamp(28px,3.4vw,42px);text-transform:uppercase;letter-spacing:0.005em;font-weight:700;margin:8px 0 12px;}
   .show-bottom-cta p{color:var(--muted);font-size:15px;line-height:1.7;max-width:560px;margin:0 auto 24px;}
 </style>
 </head>
@@ -310,7 +310,7 @@
             <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);"></span>
             Tier Enterprise · Próximamente
           </div>
-          <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,46px);font-weight:400;line-height:1.05;letter-spacing:0.005em;text-transform:uppercase;margin:0 0 16px;color:var(--text);">
+          <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,46px);font-weight:700;line-height:1.05;letter-spacing:0.005em;text-transform:none;margin:0 0 16px;color:var(--text);">
             Aura <span style="color:var(--gold);">Master</span><br/>
             <span style="color:transparent;-webkit-text-stroke:1.3px rgba(255,255,255,0.32);">la demo definitiva</span>
           </h2>

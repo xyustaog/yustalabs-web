@@ -49,29 +49,31 @@
   font-family:var(--font-script);
   font-style:italic;
   font-weight:700;
-  background:linear-gradient(135deg,#FFD166,#F0B429 55%,#C8941F);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  display:inline-block;padding:0 4px;
-  letter-spacing:-0.005em;
+  color:var(--gold);
+  display:inline;
+  padding:0 0.08em 0 0.06em;
+  margin:0 0.02em;
+  letter-spacing:0;
+  text-shadow:0 0 22px rgba(240,180,41,0.32);
 }
 .hero-title .row-coda{
   display:block;
-  margin-top:14px;
+  margin-top:18px;
   font-family:var(--font-display);
-  font-size:clamp(20px,2.4vw,36px);
+  font-size:clamp(22px,2.6vw,38px);
   font-weight:500;
-  letter-spacing:-0.02em;
-  color:var(--muted);
-  font-style:italic;
-  line-height:1;
+  letter-spacing:-0.025em;
+  color:var(--cream-mute,#B8B8C0);
+  line-height:1.1;
 }
 .hero-title .row-coda .strike{
-  position:relative;color:var(--text);font-style:normal;font-weight:600;
+  position:relative;color:var(--text);font-weight:600;
+  display:inline-block;padding:0 0.05em;
 }
 .hero-title .row-coda .strike::after{
-  content:'';position:absolute;left:-2px;right:-2px;top:55%;height:2px;
-  background:var(--gold);transform:rotate(-3deg);
+  content:'';position:absolute;left:-2px;right:-2px;top:50%;height:2px;
+  background:var(--gold);transform:translateY(-1px) rotate(-3deg);
+  border-radius:2px;
 }
 .hero-lead{font-size:clamp(16px,1.8vw,19px);color:#B4B4C0;max-width:640px;margin:0 auto 20px;line-height:1.55;}
 .hero-lead strong{color:var(--text);font-weight:700;}
@@ -87,66 +89,115 @@
 .hero-microtrust{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;font-size:12px;color:var(--muted);}
 .hero-microtrust span{display:inline-flex;align-items:center;gap:5px;}
 .hero-microtrust .check{color:var(--gold);font-weight:900;font-size:13px;}
-/* ─── Interactive Showcase · "Aura en acción" (Apple keynote style) ─── */
+/* ═════════════════════════════════════════════════════════════════
+   Showcase · "Aura en acción" (Apple keynote · interactive 2 niveles)
+   Tabs (rubros) → Sidebar (secciones del producto) → Mock content
+   ═════════════════════════════════════════════════════════════════ */
 .showcase{padding:clamp(56px,8vw,100px) 0 clamp(40px,6vw,80px);position:relative;overflow:hidden;border-top:1px solid var(--border);}
 .showcase::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:680px;height:480px;background:radial-gradient(ellipse,rgba(240,180,41,0.10),transparent 65%);filter:blur(60px);pointer-events:none;}
-.showcase-head{text-align:center;max-width:760px;margin:0 auto 36px;position:relative;z-index:2;}
+.showcase-head{text-align:center;max-width:760px;margin:0 auto 36px;padding:0 clamp(20px,4vw,24px);position:relative;z-index:2;}
 .showcase-eyebrow{font-family:var(--font-mono);font-size:12px;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px;font-weight:500;}
 .showcase-eyebrow::before{content:'';width:18px;height:1px;background:var(--gold);}
-.showcase-title{font-family:var(--font-display);font-size:clamp(32px,4.4vw,52px);font-weight:700;letter-spacing:-0.035em;line-height:1.05;margin:0 0 14px;color:var(--text);}
-.showcase-title .accent-script{font-family:var(--font-script);font-style:italic;font-weight:700;background:linear-gradient(135deg,#FFD166,#F0B429 55%,#C8941F);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;padding:0 4px;letter-spacing:-0.005em;}
-.showcase-sub{font-size:clamp(15px,1.4vw,18px);color:var(--cream-mute,#B8B8C0);line-height:1.55;margin:0 auto;max-width:560px;}
-.showcase-frame{position:relative;max-width:1100px;margin:0 auto;padding:0 clamp(16px,3vw,24px);z-index:2;}
-.showcase-card{background:linear-gradient(160deg,#14141B,#1B1B24);border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:0 32px 80px rgba(0,0,0,0.55),0 0 0 1px rgba(240,180,41,0.06);position:relative;overflow:hidden;}
+.showcase-title{font-family:var(--font-display);font-size:clamp(28px,4.4vw,52px);font-weight:700;letter-spacing:-0.035em;line-height:1.06;margin:0 0 14px;color:var(--text);}
+.showcase-title .accent-script{font-family:var(--font-script);font-style:italic;font-weight:700;color:var(--gold);display:inline;padding:0 0.08em 0 0.06em;text-shadow:0 0 22px rgba(240,180,41,0.32);}
+.showcase-sub{font-size:clamp(14px,1.4vw,18px);color:var(--cream-mute,#B8B8C0);line-height:1.55;margin:0 auto;max-width:560px;}
+
+.showcase-frame{position:relative;max-width:1100px;margin:0 auto;padding:0 clamp(12px,3vw,24px);z-index:2;}
+.showcase-card{background:linear-gradient(160deg,#14141B,#1B1B24);border:1px solid var(--border);border-radius:22px;padding:clamp(14px,2vw,20px);box-shadow:0 32px 80px rgba(0,0,0,0.55),0 0 0 1px rgba(240,180,41,0.06);position:relative;overflow:hidden;}
 .showcase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.6;}
 /* Brackets motif (firma del logo) */
-.showcase-card::after{display:none;}
-.showcase-card .br-tl,.showcase-card .br-tr,.showcase-card .br-bl,.showcase-card .br-br{position:absolute;width:14px;height:14px;border:1.5px solid var(--gold);opacity:0.55;}
+.showcase-card .br-tl,.showcase-card .br-tr,.showcase-card .br-bl,.showcase-card .br-br{position:absolute;width:14px;height:14px;border:1.5px solid var(--gold);opacity:0.55;pointer-events:none;}
 .showcase-card .br-tl{top:8px;left:8px;border-right:none;border-bottom:none;}
 .showcase-card .br-tr{top:8px;right:8px;border-left:none;border-bottom:none;}
 .showcase-card .br-bl{bottom:8px;left:8px;border-right:none;border-top:none;}
 .showcase-card .br-br{bottom:8px;right:8px;border-left:none;border-top:none;}
-/* Tabs */
-.sc-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;padding:2px;}
+
+/* Tabs · rubros */
+.sc-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding:2px;}
 .sc-tabs::-webkit-scrollbar{display:none;}
-.sc-tab{padding:8px 16px;border-radius:999px;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:0.02em;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;white-space:nowrap;transition:all var(--t) var(--ease);}
-.sc-tab:hover:not(.active){color:var(--text);border-color:rgba(255,255,255,0.18);}
+.sc-tab{padding:8px 16px;border-radius:999px;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:0.02em;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;white-space:nowrap;transition:all var(--t) var(--ease);min-height:36px;}
+.sc-tab:hover:not(.active){color:var(--text);border-color:rgba(255,255,255,0.22);}
 .sc-tab.active{background:var(--gold);color:#0A0A0F;border-color:var(--gold);box-shadow:0 2px 14px rgba(240,180,41,0.32);font-weight:700;}
-/* Screen container */
-.sc-screen{background:#000;border-radius:14px;aspect-ratio:16/10;position:relative;overflow:hidden;}
-.sc-app{position:absolute;inset:0;background:linear-gradient(135deg,#16161D,#0F0F15);display:flex;}
-.sc-side{width:64px;background:rgba(0,0,0,0.4);border-right:1px solid rgba(255,255,255,0.05);padding:18px 0;display:flex;flex-direction:column;gap:10px;align-items:center;}
-.sc-side-i{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;}
-.sc-side-i.active{background:var(--gold);border-color:var(--gold);color:#0A0A0F;box-shadow:0 0 12px rgba(240,180,41,0.45);}
-.sc-main{flex:1;padding:20px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:14px;min-width:0;}
-.sc-topbar{display:flex;align-items:center;justify-content:space-between;}
-.sc-h{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.015em;}
-.sc-pill{font-family:var(--font-mono);font-size:9px;padding:3px 9px;border-radius:999px;background:rgba(34,197,94,0.10);color:#22C55E;border:1px solid rgba(34,197,94,0.22);letter-spacing:0.06em;display:inline-flex;align-items:center;gap:5px;}
+
+/* Screen container · responsive */
+.sc-screen{background:#000;border-radius:14px;position:relative;overflow:hidden;min-height:480px;}
+@media(min-width:760px){.sc-screen{aspect-ratio:16/10;min-height:0;}}
+.sc-app{position:absolute;inset:0;background:linear-gradient(135deg,#16161D,#0F0F15);display:flex;flex-direction:column;}
+@media(min-width:760px){.sc-app{flex-direction:row;}}
+
+/* Sidebar · vertical en desktop, horizontal scrollable en mobile */
+.sc-side{
+  background:rgba(0,0,0,0.4);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  padding:10px;
+  display:flex;flex-direction:row;gap:6px;
+  overflow-x:auto;scrollbar-width:none;
+  flex-shrink:0;
+}
+.sc-side::-webkit-scrollbar{display:none;}
+@media(min-width:760px){
+  .sc-side{
+    flex-direction:column;width:148px;padding:14px 10px;gap:4px;
+    border-right:1px solid rgba(255,255,255,0.05);border-bottom:none;
+    overflow-x:visible;overflow-y:auto;
+  }
+}
+.sc-nav-i{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 12px;border-radius:8px;
+  background:transparent;border:1px solid transparent;
+  color:var(--cream-mute,#B8B8C0);
+  font-family:var(--font-body);font-size:12px;font-weight:500;
+  cursor:pointer;white-space:nowrap;
+  transition:background var(--t),color var(--t),border-color var(--t);
+  min-height:36px;
+}
+.sc-nav-i:hover:not(.active){background:rgba(255,255,255,0.04);color:var(--text);}
+.sc-nav-i.active{background:rgba(240,180,41,0.10);border-color:rgba(240,180,41,0.30);color:var(--gold);font-weight:600;}
+.sc-nav-i .ic{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;font-size:14px;flex-shrink:0;}
+
+/* Main content area */
+.sc-main{flex:1;padding:clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden;}
+.sc-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.sc-h{font-family:var(--font-display);font-size:clamp(13px,1.6vw,16px);font-weight:600;color:var(--text);letter-spacing:-0.018em;line-height:1.2;}
+.sc-pill{font-family:var(--font-mono);font-size:9px;padding:3px 9px;border-radius:999px;background:rgba(34,197,94,0.10);color:#22C55E;border:1px solid rgba(34,197,94,0.22);letter-spacing:0.06em;display:inline-flex;align-items:center;gap:5px;flex-shrink:0;}
 .sc-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;}
-.sc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.sc-stat{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:11px 14px;}
-.sc-stat-n{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-0.02em;}
-.sc-stat-l{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.10em;margin-top:5px;}
-.sc-rows{display:flex;flex-direction:column;gap:5px;flex:1;}
-.sc-row{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:7px;padding:9px 12px;display:flex;align-items:center;gap:10px;}
-.sc-row-bar{height:5px;border-radius:3px;background:rgba(255,255,255,0.08);flex:1;}
-.sc-row-bar.gold{background:var(--gold);width:62%;flex:none;}
-.sc-row-bar.med{background:rgba(255,255,255,0.18);width:48%;flex:none;}
-.sc-row-bar.faint{background:rgba(255,255,255,0.10);width:80%;flex:none;}
-.sc-cta{align-self:flex-start;padding:8px 14px;background:var(--gold);color:#0A0A0F;border-radius:8px;font-family:var(--font-body);font-size:11.5px;font-weight:700;box-shadow:0 0 12px rgba(240,180,41,0.45);animation:scPulse 2.8s infinite;}
+.sc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.sc-stat{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:9px;padding:9px 11px;min-width:0;}
+.sc-stat-n{font-family:var(--font-display);font-size:clamp(15px,2vw,22px);font-weight:700;color:var(--gold);line-height:1;letter-spacing:-0.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sc-stat-l{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.10em;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sc-rows{display:flex;flex-direction:column;gap:5px;flex:1;min-height:60px;}
+.sc-row{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:7px;padding:8px 11px;display:flex;align-items:center;gap:10px;}
+.sc-row-name{font-family:var(--font-body);font-size:11px;color:var(--text);font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sc-row-val{font-family:var(--font-mono);font-size:11px;color:var(--gold);font-weight:600;flex-shrink:0;}
+.sc-row-tag{font-family:var(--font-mono);font-size:9px;padding:2px 7px;border-radius:5px;letter-spacing:0.04em;flex-shrink:0;}
+.sc-row-tag.ok{background:rgba(34,197,94,0.12);color:#22C55E;}
+.sc-row-tag.warn{background:rgba(245,158,11,0.12);color:#F59E0B;}
+.sc-row-tag.danger{background:rgba(239,68,68,0.12);color:#EF4444;}
+.sc-cta{align-self:flex-start;padding:8px 14px;background:var(--gold);color:#0A0A0F;border-radius:8px;font-family:var(--font-body);font-size:11.5px;font-weight:700;box-shadow:0 0 12px rgba(240,180,41,0.45);animation:scPulse 2.8s infinite;cursor:default;border:none;}
 @keyframes scPulse{0%,100%{box-shadow:0 0 12px rgba(240,180,41,0.45)}50%{box-shadow:0 0 22px rgba(240,180,41,0.75)}}
-.sc-caption{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);padding:5px 12px;border-radius:999px;font-family:var(--font-mono);font-size:10.5px;color:var(--cream-mute,#B8B8C0);letter-spacing:0.04em;}
-.showcase-foot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:24px;flex-wrap:wrap;}
+.sc-caption{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);padding:5px 12px;border-radius:999px;font-family:var(--font-mono);font-size:10px;color:var(--cream-mute,#B8B8C0);letter-spacing:0.04em;max-width:90%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.showcase-foot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:24px;flex-wrap:wrap;padding:0 clamp(16px,3vw,24px);}
 .showcase-foot a.btn{font-size:14px;}
-.showcase-foot-text{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:0.04em;}
-@media(max-width:768px){
-  .sc-side{width:50px;}
-  .sc-side-i{width:26px;height:26px;}
-  .sc-main{padding:14px;}
-  .sc-stats{gap:6px;}
-  .sc-stat{padding:8px 10px;}
-  .sc-stat-n{font-size:16px;}
-  .sc-tab{padding:6px 12px;font-size:11px;}
+.showcase-foot-text{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:0.04em;text-align:center;}
+
+@media(max-width:759px){
+  .showcase{padding:48px 0 32px;}
+  .showcase-card{padding:10px;border-radius:16px;}
+  .showcase-card .br-tl,.showcase-card .br-tr,.showcase-card .br-bl,.showcase-card .br-br{width:11px;height:11px;}
+  .sc-tab{padding:7px 12px;font-size:11px;min-height:32px;}
+  .sc-side{padding:8px;}
+  .sc-nav-i{padding:7px 11px;font-size:11.5px;min-height:32px;}
+  .sc-main{padding:12px;gap:10px;}
+  .sc-stats{gap:5px;}
+  .sc-stat{padding:7px 9px;border-radius:8px;}
+  .sc-row{padding:7px 10px;}
+  .sc-row-name{font-size:10.5px;}
+  .sc-row-val{font-size:10.5px;}
+  .sc-row-tag{font-size:8.5px;padding:2px 6px;}
+  .sc-cta{font-size:11px;padding:7px 12px;}
+  .sc-caption{font-size:9.5px;padding:4px 10px;bottom:8px;}
 }
 
 .hero-scroll-cue{position:absolute;left:50%;transform:translateX(-50%);bottom:28px;font-size:10px;color:var(--muted);letter-spacing:0.18em;text-transform:uppercase;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:8px;animation:scrollCue 2s ease-in-out infinite;pointer-events:none;}
@@ -595,6 +646,7 @@
     <div class="showcase-card">
       <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
 
+      <!-- Nivel 1: Tabs por rubro -->
       <div class="sc-tabs" role="tablist" data-showcase-tabs>
         <button class="sc-tab active" data-rubro="commerce" role="tab" aria-selected="true">Aura Commerce</button>
         <button class="sc-tab" data-rubro="logistic" role="tab" aria-selected="false">Aura Logistic</button>
@@ -604,15 +656,14 @@
         <button class="sc-tab" data-rubro="more" role="tab" aria-selected="false">+6 más</button>
       </div>
 
+      <!-- Mock app screen -->
       <div class="sc-screen">
         <div class="sc-app">
-          <div class="sc-side">
-            <div class="sc-side-i active">⌂</div>
-            <div class="sc-side-i">$</div>
-            <div class="sc-side-i">▤</div>
-            <div class="sc-side-i">◷</div>
-            <div class="sc-side-i">⚙</div>
-          </div>
+          <!-- Nivel 2: Sidebar con secciones del rubro activo (clickable) -->
+          <nav class="sc-side" data-sc-nav role="tablist" aria-label="Funciones del producto">
+            <!-- contenido inyectado por JS -->
+          </nav>
+          <!-- Main content area · cambia según tab + sidebar item -->
           <div class="sc-main">
             <div class="sc-topbar">
               <div class="sc-h" data-sc-title>Caja del día · Commerce</div>
@@ -623,55 +674,367 @@
               <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-2>177</div><div class="sc-stat-l" data-sc-stat-2l>Operaciones</div></div>
               <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-3>5min</div><div class="sc-stat-l" data-sc-stat-3l>Cierre</div></div>
             </div>
-            <div class="sc-rows">
-              <div class="sc-row"><div class="sc-row-bar faint"></div></div>
-              <div class="sc-row"><div class="sc-row-bar gold"></div></div>
-              <div class="sc-row"><div class="sc-row-bar med"></div></div>
-              <div class="sc-row"><div class="sc-row-bar faint"></div></div>
+            <div class="sc-rows" data-sc-rows>
+              <!-- contenido inyectado por JS -->
             </div>
-            <div class="sc-cta" data-sc-cta>+ Cobrar</div>
+            <button class="sc-cta" type="button" data-sc-cta>+ Cobrar</button>
           </div>
         </div>
-        <div class="sc-caption" data-sc-caption>Mockup ilustrativo · video real próximamente</div>
+        <div class="sc-caption" data-sc-caption>Vista de Aura Commerce · kiosco / comercio / mayorista</div>
       </div>
     </div>
 
     <div class="showcase-foot">
-      <a href="/showroom" class="btn btn-gold">Ver tu rubro en vivo <svg class="ico" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"/></svg></a>
-      <span class="showcase-foot-text">11 verticales disponibles · pago único</span>
+      <a href="/showroom" class="btn btn-gold">Probar tu rubro en vivo <svg class="ico" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/icons.svg#arrow-right"/></svg></a>
+      <span class="showcase-foot-text">11 verticales · pago único · cliente queda dueño</span>
     </div>
   </div>
 </section>
 
 <script>
-// Showcase: cambio de tab cambia título + stats + CTA del mockup
+/* ═══════════════════════════════════════════════════════════════
+   Showcase interactivo · 2 niveles
+     · tab (rubro) → activa rubro + carga sidebar
+     · sidebar item (sección) → cambia título + stats + filas + CTA
+   ═══════════════════════════════════════════════════════════════ */
 (function(){
-  const data = {
-    commerce: { title:'Caja del día · Commerce',  s1:['$2.4M','Cobrado hoy'],  s2:['177','Operaciones'],   s3:['5min','Cierre'],            cta:'+ Cobrar',       cap:'Vista de Aura Commerce — kiosco / comercio / mayorista' },
-    logistic: { title:'Liquidación cadetes · Logistic', s1:['$6.3M','Facturado/mes'],s2:['177','Viajes/abr'],s3:['−95%','Tiempo cierre'], cta:'+ Cargar viaje', cap:'Vista de Aura Logistic — usado en producción por SLE Mensajería' },
-    fit:      { title:'Socios al día · Fit',     s1:['184','Socios activos'], s2:['$1.8M','Cuotas/mes'],   s3:['12','Vencen hoy'],          cta:'+ Cobrar cuota', cap:'Vista de Aura Fit — gimnasios / pilates / yoga' },
-    food:     { title:'Pedidos · Food',           s1:['43','Comandas activas'],s2:['$612K','Vendido hoy'], s3:['8min','Tiempo cocina'],     cta:'+ Comanda',      cap:'Vista de Aura Food — restaurantes / panadería / bares' },
-    vet:      { title:'Agenda del día · Vet',     s1:['28','Turnos hoy'],      s2:['$340K','Facturado'],   s3:['12','Recetas'],             cta:'+ Nuevo turno',  cap:'Vista de Aura Vet — veterinarias / clínicas pequeñas' },
-    more:     { title:'+6 rubros más',            s1:['11','Verticales'],      s2:['1','Cerebro'],         s3:['∞','Adaptación'],           cta:'Ver todos →',    cap:'Auto · Salon · Prop · Wear · Tools · Finance' },
+  const RUBROS = {
+    commerce: {
+      tabLabel: 'Aura Commerce',
+      caption: 'Vista de Aura Commerce · kiosco / comercio / mayorista',
+      sections: [
+        { id:'caja',    icon:'$', name:'Caja',
+          title:'Caja del día · Commerce',
+          stats:[['$2.4M','Cobrado hoy'],['177','Operaciones'],['5min','Cierre']],
+          rows:[
+            ['Distribuidora López','$24.300','ok','Pagado'],
+            ['García, M.','$12.450','ok','Pagado'],
+            ['Pérez, J.','$8.200','warn','Pendiente'],
+            ['Almacén Sol','$45.700','ok','Pagado'],
+          ],
+          cta:'+ Cobrar' },
+        { id:'stock',   icon:'▤', name:'Stock',
+          title:'Inventario · Commerce',
+          stats:[['1.247','SKUs activos'],['18','Bajo stock'],['$8.4M','Valor inventario']],
+          rows:[
+            ['Coca 2.25L · pack 6','42 un','ok','En stock'],
+            ['Yerba La Merced 1kg','8 un','warn','Reponer'],
+            ['Pan lactal','0 un','danger','Sin stock'],
+            ['Cerveza Quilmes 1L','156 un','ok','En stock'],
+          ],
+          cta:'+ Producto' },
+        { id:'cuentas', icon:'◷', name:'Cuentas corrientes',
+          title:'Cuentas corrientes · clientes B2B',
+          stats:[['38','Clientes activos'],['$486K','Saldo total'],['12','Vencen esta sem']],
+          rows:[
+            ['Sanatorio Norte','$145.200','warn','Vence en 3d'],
+            ['Centro Médico SA','$78.500','ok','Al día'],
+            ['Distribuidora Norte','$92.300','danger','Vencido 5d'],
+            ['Empresa Sur SRL','$54.200','ok','Al día'],
+          ],
+          cta:'+ Cliente' },
+        { id:'reportes',icon:'⚙', name:'Reportes',
+          title:'Cierre del mes · abril 2026',
+          stats:[['$28.4M','Facturado mes'],['+18%','vs marzo'],['76%','Margen bruto']],
+          rows:[
+            ['Ventas mostrador','$18.2M','ok','+12%'],
+            ['Ventas mayorista','$8.1M','ok','+24%'],
+            ['Cuentas cobradas','$2.1M','ok','+8%'],
+            ['Gastos operativos','-$4.3M','warn','+3%'],
+          ],
+          cta:'Exportar PDF' },
+      ],
+    },
+    logistic: {
+      tabLabel: 'Aura Logistic',
+      caption: 'Vista de Aura Logistic · usado en producción por SLE Mensajería',
+      sections: [
+        { id:'viajes',  icon:'⌂', name:'Viajes',
+          title:'Viajes del día · Logistic',
+          stats:[['43','Viajes hoy'],['$284K','Facturado'],['8','En curso']],
+          rows:[
+            ['#247 · Belgrano → Caballito','$3.200','ok','Entregado'],
+            ['#248 · Recoleta → Palermo','$2.400','ok','Entregado'],
+            ['#249 · Núñez → Microcentro','$4.100','warn','En curso'],
+            ['#250 · Saavedra → Once','$3.800','warn','Asignado'],
+          ],
+          cta:'+ Cargar viaje' },
+        { id:'cadetes', icon:'$', name:'Cadetes',
+          title:'Equipo · Logistic',
+          stats:[['12','Activos hoy'],['$1.42M','Liquidado mes'],['4.8★','Rating prom']],
+          rows:[
+            ['Cadete #03','18 viajes','ok','En ruta'],
+            ['Cadete #07','22 viajes','ok','En ruta'],
+            ['Cadete #11','15 viajes','warn','Pausado'],
+            ['Cadete #14','9 viajes','ok','En ruta'],
+          ],
+          cta:'+ Sumar cadete' },
+        { id:'liquidacion',icon:'▤',name:'Liquidación',
+          title:'Liquidación cadetes · 5 minutos',
+          stats:[['$6.3M','Facturado mes'],['177','Viajes/abr'],['−95%','Tiempo cierre']],
+          rows:[
+            ['Cadete #03 · liq abril','$245.300','ok','Cerrado'],
+            ['Cadete #07 · liq abril','$298.700','ok','Cerrado'],
+            ['Cadete #11 · liq abril','$182.400','warn','Pendiente'],
+            ['Cadete #14 · liq abril','$156.800','ok','Cerrado'],
+          ],
+          cta:'Cerrar mes →' },
+        { id:'empresas',icon:'◷', name:'Empresas',
+          title:'Empresas cliente · cuentas',
+          stats:[['28','Empresas activas'],['$4.8M','Facturación abr'],['96%','Cobrado']],
+          rows:[
+            ['Empresa A · Recoleta','$1.2M','ok','Al día'],
+            ['Empresa B · CABA','$890K','warn','Vence en 5d'],
+            ['Empresa C · Núñez','$420K','ok','Al día'],
+            ['Empresa D · GBA','$640K','ok','Al día'],
+          ],
+          cta:'+ Empresa' },
+      ],
+    },
+    fit: {
+      tabLabel: 'Aura Fit',
+      caption: 'Vista de Aura Fit · gimnasios / pilates / yoga / box',
+      sections: [
+        { id:'socios',  icon:'⌂', name:'Socios',
+          title:'Socios activos · Fit',
+          stats:[['184','Socios activos'],['+12','Nuevos abr'],['94%','Renovación']],
+          rows:[
+            ['López, María · Mensual','$18.000','ok','Al día'],
+            ['Pérez, Juan · Trimestral','$48.000','warn','Vence en 3d'],
+            ['García, Lucía · Anual','$170.000','ok','Al día'],
+            ['Martínez, D. · Mensual','$18.000','danger','Vencido 5d'],
+          ],
+          cta:'+ Socio' },
+        { id:'cuotas',  icon:'$', name:'Cuotas',
+          title:'Cobro de cuotas · hoy',
+          stats:[['$284K','Cobrado hoy'],['18','Cuotas hoy'],['72%','Efectivo']],
+          rows:[
+            ['López, M. · Mensual','$18.000','ok','Efectivo'],
+            ['Romero, S. · Mensual','$18.000','ok','Transfer'],
+            ['Núñez, P. · Trimestral','$48.000','ok','Efectivo'],
+            ['Acosta, R. · Mensual','$18.000','ok','Transfer'],
+          ],
+          cta:'+ Cobrar cuota' },
+        { id:'venc',    icon:'◷', name:'Vencimientos',
+          title:'Vencimientos · próximos 7 días',
+          stats:[['12','Vencen hoy'],['28','Próx 3 días'],['8','Vencidos']],
+          rows:[
+            ['Pérez, Juan','Vence en 1d','warn','Mensual'],
+            ['Núñez, P.','Vence hoy','warn','Trimestral'],
+            ['Castro, A.','Vencido 2d','danger','Mensual'],
+            ['Sánchez, F.','Vence en 5d','ok','Mensual'],
+          ],
+          cta:'Notificar todos' },
+        { id:'caja-fit',icon:'⚙', name:'Mis números',
+          title:'Mis números · abril 2026',
+          stats:[['$1.8M','Cuotas mes'],['+22%','vs marzo'],['$340K','Gastos']],
+          rows:[
+            ['Cuotas cobradas','$1.8M','ok','Ingreso'],
+            ['Alquiler','$280K','warn','Gasto'],
+            ['Sueldos','$420K','warn','Gasto'],
+            ['Equipamiento','$60K','warn','Gasto'],
+          ],
+          cta:'Exportar mes' },
+      ],
+    },
+    food: {
+      tabLabel: 'Aura Food',
+      caption: 'Vista de Aura Food · restaurantes / panaderías / bares',
+      sections: [
+        { id:'comandas',icon:'⌂', name:'Comandas',
+          title:'Comandas activas · cocina',
+          stats:[['43','Comandas activas'],['8min','Promedio'],['12','Mesas ocupadas']],
+          rows:[
+            ['Mesa 4 · Milanesa + papas','$8.400','warn','En cocina'],
+            ['Mesa 7 · Pizza + cerveza','$6.200','ok','Listo'],
+            ['Mesa 12 · Ensalada + agua','$3.800','warn','Pedido'],
+            ['Take away · Empanadas','$4.600','warn','Cocina'],
+          ],
+          cta:'+ Comanda' },
+        { id:'menu',    icon:'▤', name:'Menú',
+          title:'Carta · platos activos',
+          stats:[['68','Platos activos'],['12','Sin stock'],['$3.2K','Ticket prom']],
+          rows:[
+            ['Milanesa napolitana','$4.200','ok','Disponible'],
+            ['Pizza muzzarella','$3.800','ok','Disponible'],
+            ['Suprema maryland','$5.400','danger','Sin stock'],
+            ['Tortilla de papa','$2.800','warn','Pocas'],
+          ],
+          cta:'+ Plato' },
+        { id:'mesas',   icon:'◷', name:'Mesas',
+          title:'Salón · ocupación en vivo',
+          stats:[['12/18','Ocupadas'],['$48K','Cuenta abierta'],['44min','Tiempo prom']],
+          rows:[
+            ['Mesa 1 · 4 personas','$8.400','warn','Comiendo'],
+            ['Mesa 4 · 2 personas','$5.200','warn','Comiendo'],
+            ['Mesa 7 · 6 personas','$12.800','ok','Postre'],
+            ['Mesa 12 · 3 personas','$3.800','warn','Pedido'],
+          ],
+          cta:'+ Reserva' },
+        { id:'caja-food',icon:'$',name:'Caja',
+          title:'Caja del día · Food',
+          stats:[['$612K','Vendido hoy'],['142','Comandas hoy'],['$4.3K','Ticket prom']],
+          rows:[
+            ['Mesa 7 · cerrada','$12.800','ok','Pagado'],
+            ['Take away · cerrado','$4.600','ok','Transfer'],
+            ['Mesa 1 · cerrada','$8.400','ok','Efectivo'],
+            ['Mesa 4 · pendiente','$5.200','warn','Abierta'],
+          ],
+          cta:'Cerrar caja' },
+      ],
+    },
+    vet: {
+      tabLabel: 'Aura Vet',
+      caption: 'Vista de Aura Vet · veterinarias / clínicas pequeñas',
+      sections: [
+        { id:'agenda',  icon:'⌂', name:'Agenda',
+          title:'Turnos · hoy',
+          stats:[['28','Turnos hoy'],['$340K','Facturado'],['96%','Asistencia']],
+          rows:[
+            ['09:00 · Toby (Labrador)','Vacuna','ok','Confirmado'],
+            ['10:30 · Luna (Gato)','Control','ok','En sala'],
+            ['11:00 · Rocky (Bulldog)','Cirugía','warn','Esperando'],
+            ['12:00 · Mía (Persa)','Castración','ok','Confirmado'],
+          ],
+          cta:'+ Nuevo turno' },
+        { id:'pacientes',icon:'$', name:'Pacientes',
+          title:'Fichas · pacientes activos',
+          stats:[['1.847','Pacientes'],['+24','Nuevos abr'],['86%','Vacunados']],
+          rows:[
+            ['Toby · Labrador · 4 años','OK','ok','Vigente'],
+            ['Luna · Gato · 6 años','Diabetes','warn','Tratamiento'],
+            ['Rocky · Bulldog · 2 años','Cirugía hoy','warn','Quirófano'],
+            ['Mía · Persa · 3 años','OK','ok','Vigente'],
+          ],
+          cta:'+ Paciente' },
+        { id:'recetas', icon:'▤', name:'Recetas',
+          title:'Recetas emitidas · abril',
+          stats:[['142','Recetas mes'],['$84K','Medicamentos'],['12','Pendientes hoy']],
+          rows:[
+            ['Toby · Antibiótico','$4.200','ok','Emitida'],
+            ['Luna · Insulina','$8.400','ok','Emitida'],
+            ['Rocky · Analgésico','$2.100','warn','Pendiente'],
+            ['Mía · Vitaminas','$1.800','ok','Emitida'],
+          ],
+          cta:'+ Receta' },
+        { id:'caja-vet',icon:'⚙', name:'Caja',
+          title:'Caja del día · Vet',
+          stats:[['$340K','Facturado hoy'],['28','Tickets'],['$12K','Ticket prom']],
+          rows:[
+            ['Toby · Vacuna + control','$8.400','ok','Pagado'],
+            ['Luna · Análisis','$12.600','ok','Pagado'],
+            ['Rocky · Cirugía','$48.200','warn','Pendiente'],
+            ['Mía · Castración','$32.400','ok','Pagado'],
+          ],
+          cta:'Cerrar caja' },
+      ],
+    },
+    more: {
+      tabLabel: '+6 más',
+      caption: 'Auto · Salon · Prop · Wear · Tools · Finance · todos con la misma lógica',
+      sections: [
+        { id:'auto',    icon:'⌂', name:'Auto',
+          title:'Aura Auto · talleres mecánicos',
+          stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
+          rows:[
+            ['Cliente · vehículo · OT','—','ok','Active'],
+            ['Repuestos · stock','—','ok','Active'],
+            ['Presupuestos · aprobados','—','ok','Active'],
+            ['Caja · facturación','—','ok','Active'],
+          ],
+          cta:'Ver Aura Auto →' },
+        { id:'salon',   icon:'$', name:'Salon',
+          title:'Aura Salon · peluquerías / estética',
+          stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
+          rows:[
+            ['Agenda · profesionales','—','ok','Active'],
+            ['Servicios · catálogo','—','ok','Active'],
+            ['Productos · stock','—','ok','Active'],
+            ['Comisiones · staff','—','ok','Active'],
+          ],
+          cta:'Ver Aura Salon →' },
+        { id:'prop',    icon:'▤', name:'Prop',
+          title:'Aura Prop · inmobiliarias',
+          stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
+          rows:[
+            ['Propiedades · ficha','—','ok','Active'],
+            ['Visitas · agenda','—','ok','Active'],
+            ['Contratos · alquiler','—','ok','Active'],
+            ['Comisiones · venta','—','ok','Active'],
+          ],
+          cta:'Ver Aura Prop →' },
+        { id:'todos',   icon:'⚙', name:'Ver todos',
+          title:'11 verticales · 1 sistema operativo',
+          stats:[['Wear','Indumentaria'],['Tools','Ferreterías'],['Finance','Crédito']],
+          rows:[
+            ['Aura Wear','Indumentaria · stock por talle/color','ok','Disponible'],
+            ['Aura Tools','Ferretería · ventas + presupuestos','ok','Disponible'],
+            ['Aura Finance','Préstamos · cuotas + cobranza','ok','Disponible'],
+            ['¿Tu rubro?','Cotización personalizada en 48hs','warn','A medida'],
+          ],
+          cta:'Ver showroom →' },
+      ],
+    },
   };
-  const tabs = document.querySelectorAll('[data-showcase-tabs] .sc-tab');
-  const t = document.querySelector('[data-sc-title]');
-  const s1 = document.querySelector('[data-sc-stat-1]'), s1l = document.querySelector('[data-sc-stat-1l]');
-  const s2 = document.querySelector('[data-sc-stat-2]'), s2l = document.querySelector('[data-sc-stat-2l]');
-  const s3 = document.querySelector('[data-sc-stat-3]'), s3l = document.querySelector('[data-sc-stat-3l]');
-  const cta = document.querySelector('[data-sc-cta]');
-  const cap = document.querySelector('[data-sc-caption]');
-  tabs.forEach(b => b.addEventListener('click', () => {
-    const r = b.dataset.rubro; const d = data[r]; if (!d) return;
-    tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
+
+  const els = {
+    tabs: document.querySelectorAll('[data-showcase-tabs] .sc-tab'),
+    nav:  document.querySelector('[data-sc-nav]'),
+    title:document.querySelector('[data-sc-title]'),
+    s1:document.querySelector('[data-sc-stat-1]'),  s1l:document.querySelector('[data-sc-stat-1l]'),
+    s2:document.querySelector('[data-sc-stat-2]'),  s2l:document.querySelector('[data-sc-stat-2l]'),
+    s3:document.querySelector('[data-sc-stat-3]'),  s3l:document.querySelector('[data-sc-stat-3l]'),
+    rows: document.querySelector('[data-sc-rows]'),
+    cta:  document.querySelector('[data-sc-cta]'),
+    cap:  document.querySelector('[data-sc-caption]'),
+  };
+
+  function renderSection(rubroId, sectionId) {
+    const r = RUBROS[rubroId]; if (!r) return;
+    const s = r.sections.find(x => x.id === sectionId) || r.sections[0];
+    els.title.textContent = s.title;
+    els.s1.textContent = s.stats[0][0];  els.s1l.textContent = s.stats[0][1];
+    els.s2.textContent = s.stats[1][0];  els.s2l.textContent = s.stats[1][1];
+    els.s3.textContent = s.stats[2][0];  els.s3l.textContent = s.stats[2][1];
+    els.rows.innerHTML = s.rows.map(([name, val, tag, label]) =>
+      `<div class="sc-row"><span class="sc-row-name">${name}</span><span class="sc-row-val">${val}</span><span class="sc-row-tag ${tag}">${label}</span></div>`
+    ).join('');
+    els.cta.textContent = s.cta;
+    els.cap.textContent = r.caption;
+    // Update sidebar active state
+    els.nav.querySelectorAll('.sc-nav-i').forEach(b => {
+      const isActive = b.dataset.section === s.id;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
+  function renderRubro(rubroId) {
+    const r = RUBROS[rubroId]; if (!r) return;
+    // Build sidebar
+    els.nav.innerHTML = r.sections.map((s, i) =>
+      `<button type="button" class="sc-nav-i ${i===0?'active':''}" data-section="${s.id}" role="tab" aria-selected="${i===0?'true':'false'}">
+        <span class="ic">${s.icon}</span><span>${s.name}</span>
+      </button>`
+    ).join('');
+    // Wire sidebar clicks
+    els.nav.querySelectorAll('.sc-nav-i').forEach(b => {
+      b.addEventListener('click', () => renderSection(rubroId, b.dataset.section));
+    });
+    // Render first section
+    renderSection(rubroId, r.sections[0].id);
+  }
+
+  // Wire tabs
+  els.tabs.forEach(b => b.addEventListener('click', () => {
+    const r = b.dataset.rubro;
+    els.tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
     b.classList.add('active'); b.setAttribute('aria-selected','true');
-    t.textContent = d.title;
-    s1.textContent = d.s1[0]; s1l.textContent = d.s1[1];
-    s2.textContent = d.s2[0]; s2l.textContent = d.s2[1];
-    s3.textContent = d.s3[0]; s3l.textContent = d.s3[1];
-    cta.textContent = d.cta;
-    cap.textContent = d.cap;
+    renderRubro(r);
   }));
+
+  // Initial render
+  renderRubro('commerce');
 })();
 </script>
 

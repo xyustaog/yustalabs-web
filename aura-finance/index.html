@@ -23,18 +23,18 @@
   --text:#eef1f8;--muted:#606e90;--muted2:#8da0c8;--white:#ffffff;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:300;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:300;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+button{cursor:pointer;font-family:var(--font-body)}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(20px,5vw,60px);height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,16,0.7);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s}
 .nav.scrolled{border-color:var(--border)}
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-brand-gold{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:400;letter-spacing:-0.01em;color:#F0B429}.nav-brand-yl{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:var(--text,#F0F0FF)}
+.nav-brand-gold{font-family:var(--font-body),'Inter',sans-serif;font-size:15px;font-weight:400;letter-spacing:-0.01em;color:#F0B429}.nav-brand-yl{font-family:var(--font-body),'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:var(--text,#F0F0FF)}
 .nav-brand-sep{color:var(--border2);margin:0 4px}
-.nav-brand-ac{font-family:'Bebas Neue',Impact,sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+.nav-brand-ac{font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
 .nav-links{display:flex;gap:2px;align-items:center}
 .nav-link{padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;color:var(--muted);transition:.2s;border:none;background:none;letter-spacing:.3px}
 .nav-link:hover{color:var(--text);background:rgba(255,255,255,0.04)}
@@ -44,7 +44,7 @@ button{cursor:pointer;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:1px;transition:.3s}
 .mobile-menu{position:fixed;inset:0;z-index:999;background:rgba(8,8,16,0.97);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .3s}
 .mobile-menu.open{opacity:1;pointer-events:all}
-.mobile-menu a{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);padding:10px 24px;border-radius:10px;transition:.2s}
+.mobile-menu a{font-family:var(--font-display);font-size:clamp(28px,6vw,40px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);padding:10px 24px;border-radius:10px;transition:.2s}
 .mobile-menu a:hover{color:var(--cyan);background:var(--cyan-dim)}
 #hero{min-height:100vh;display:flex;align-items:center;padding:100px clamp(20px,5vw,60px) 80px;position:relative;overflow:hidden}
 .hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");background-size:200px;opacity:.4;pointer-events:none}
@@ -52,13 +52,13 @@ button{cursor:pointer;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
 .hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(30,64,175,.12) 0%,transparent 65%);pointer-events:none}
 .hero-glow2{position:absolute;bottom:0;right:-10%;width:500px;height:400px;background:radial-gradient(ellipse,rgba(96,165,250,.06) 0%,transparent 65%);pointer-events:none}
 .hero-content{position:relative;max-width:780px}
-.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:100px;padding:7px 18px;margin-bottom:32px;font-family:'Bebas Neue',Impact,sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:100px;padding:7px 18px;margin-bottom:32px;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-#hero h1{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(52px,8vw,96px);font-weight:900;line-height:.92;letter-spacing:-1px;color:var(--white);margin-bottom:8px}
+#hero h1{font-family:var(--font-display);font-size:clamp(52px,8vw,96px);font-weight:900;line-height:.92;letter-spacing:-1px;color:var(--white);margin-bottom:8px}
 #hero h1 .accent{color:var(--cyan)}
 #hero h1 .dim{color:var(--muted2)}
-.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--muted2);max-width:540px;line-height:1.65;margin:24px 0 40px;font-weight:400}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--muted2);max-width:540px;line-height:1.65;margin:24px 0 40px;font-weight:700}
 .hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
 .hero-pill{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.02)}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
@@ -69,14 +69,14 @@ button{cursor:pointer;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:9px;background:rgba(255,255,255,.04);color:var(--text);font-size:15px;font-weight:600;border:1px solid var(--border2);transition:.2s}
 .btn-secondary:hover{background:rgba(255,255,255,.07);border-color:rgba(59,91,219,.5);transform:translateY(-2px)}
 .hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
-.hero-stat .num{font-family:'Bebas Neue',Impact,sans-serif;font-size:36px;font-weight:800;color:var(--white);line-height:1}
+.hero-stat .num{font-family:var(--font-display);font-size:36px;font-weight:800;color:var(--white);line-height:1}
 .hero-stat .num span{color:var(--cyan)}
 .hero-stat .label{font-size:13px;color:var(--muted);margin-top:4px;letter-spacing:.3px}
 section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .wrap{max-width:1100px;margin:0 auto}
-.section-label{display:inline-flex;align-items:center;gap:10px;font-family:'Bebas Neue',Impact,sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:none;color:var(--cyan);margin-bottom:16px}
 .section-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
-.section-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.5px;color:var(--white);margin-bottom:14px}
+.section-title{font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.5px;color:var(--white);margin-bottom:14px}
 .section-desc{font-size:16px;color:var(--muted2);max-width:540px;line-height:1.7;margin-bottom:48px}
 .fade{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .fade.visible{opacity:1;transform:translateY(0)}
@@ -102,11 +102,11 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .demo-header{display:flex;align-items:center;gap:8px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
 .demo-dot{width:10px;height:10px;border-radius:50%}
 .demo-dot-r{background:#ff5f57}.demo-dot-y{background:#febc2e}.demo-dot-g{background:#28c840}
-.demo-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-left:auto}
+.demo-title{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-left:auto}
 .demo-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .demo-kpi{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:12px}
 .demo-kpi-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.demo-kpi-value{font-family:'Bebas Neue',Impact,sans-serif;font-size:24px;font-weight:800;color:var(--white)}
+.demo-kpi-value{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--white)}
 .demo-kpi-value.cyan{color:var(--cyan)}
 .demo-kpi-value.blue{color:var(--blue-light)}
 .demo-kpi-value.warn{color:#fab005}
@@ -125,60 +125,60 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .fbk::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--fin-gold-d),var(--fin-gold) 30%,var(--fin-gold) 70%,var(--fin-gold-d))}
 .fbk-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(212,175,55,0.12);background:rgba(0,0,0,0.2)}
 .fbk-brand{display:flex;align-items:center;gap:10px}
-.fbk-brand-mk{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--fin-gold),var(--fin-gold-d));display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',serif;font-weight:800;font-size:18px;color:#0A1628;letter-spacing:-1px;box-shadow:0 2px 8px rgba(212,175,55,0.3)}
+.fbk-brand-mk{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--fin-gold),var(--fin-gold-d));display:flex;align-items:center;justify-content:center;font-family:var(--font-display),serif;font-weight:800;font-size:18px;color:#0A1628;letter-spacing:-1px;box-shadow:0 2px 8px rgba(212,175,55,0.3)}
 .fbk-brand-info{display:flex;flex-direction:column;gap:0;line-height:1}
-.fbk-brand-tit{font-family:'Bebas Neue',serif;font-size:14px;letter-spacing:2.5px;color:var(--fin-cream);font-weight:800}
-.fbk-brand-sub{font-size:9.5px;letter-spacing:1.5px;color:var(--fin-muted);text-transform:uppercase;font-weight:600;font-family:'Barlow Condensed',sans-serif;margin-top:2px}
-.fbk-meta{display:flex;align-items:center;gap:14px;font-family:'Barlow Condensed',sans-serif;font-size:10.5px;letter-spacing:.5px;color:var(--fin-muted)}
+.fbk-brand-tit{font-family:var(--font-display),serif;font-size:14px;letter-spacing:2.5px;color:var(--fin-cream);font-weight:800}
+.fbk-brand-sub{font-size:9.5px;letter-spacing:1.5px;color:var(--fin-muted);text-transform:uppercase;font-weight:600;font-family:var(--font-display);margin-top:2px}
+.fbk-meta{display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-size:10.5px;letter-spacing:.5px;color:var(--fin-muted)}
 .fbk-meta-i{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
 .fbk-meta-l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700}
 .fbk-meta-v{font-size:11px;color:var(--fin-cream);font-weight:600;font-variant-numeric:tabular-nums}
 .fbk-meta-v.em{color:var(--fin-emerald)}
-.fbk-period{display:inline-flex;align-items:center;gap:6px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:5px;padding:3px 9px;font-size:10px;font-weight:700;color:var(--fin-gold);letter-spacing:1.2px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif}
+.fbk-period{display:inline-flex;align-items:center;gap:6px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:5px;padding:3px 9px;font-size:10px;font-weight:700;color:var(--fin-gold);letter-spacing:1.2px;text-transform:uppercase;font-family:var(--font-display)}
 .fbk-portfolio{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;padding:20px;align-items:start}
 .fbk-summary{background:linear-gradient(135deg,rgba(212,175,55,0.04),rgba(16,185,129,0.03));border:1px solid rgba(212,175,55,0.1);border-radius:14px;padding:18px}
-.fbk-summary-title{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;margin-bottom:6px}
-.fbk-summary-amount{font-family:'Bebas Neue',serif;font-size:42px;color:var(--fin-cream);line-height:1;letter-spacing:-1px;font-weight:700;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.fbk-summary-title{font-family:var(--font-display);font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;margin-bottom:6px}
+.fbk-summary-amount{font-family:var(--font-display),serif;font-size:42px;color:var(--fin-cream);line-height:1;letter-spacing:-1px;font-weight:700;margin-bottom:8px;font-variant-numeric:tabular-nums}
 .fbk-summary-amount .cur{font-size:18px;color:var(--fin-gold);margin-right:5px;letter-spacing:1px}
 .fbk-summary-amount .dec{font-size:22px;color:var(--fin-muted);font-weight:600}
-.fbk-summary-trend{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--fin-emerald);font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;background:rgba(16,185,129,0.1);padding:3px 9px;border-radius:5px;border:1px solid rgba(16,185,129,0.2)}
+.fbk-summary-trend{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--fin-emerald);font-weight:700;font-family:var(--font-display);letter-spacing:.5px;background:rgba(16,185,129,0.1);padding:3px 9px;border-radius:5px;border:1px solid rgba(16,185,129,0.2)}
 .fbk-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
 .fbk-stat{padding:10px 12px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.04);border-radius:8px;display:flex;flex-direction:column;gap:3px}
-.fbk-stat-l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;font-family:'Barlow Condensed',sans-serif}
-.fbk-stat-v{font-family:'Bebas Neue',serif;font-size:18px;color:var(--fin-cream);font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.fbk-stat-l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;font-family:var(--font-display)}
+.fbk-stat-v{font-family:var(--font-display),serif;font-size:18px;color:var(--fin-cream);font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
 .fbk-stat-v.em{color:var(--fin-emerald)}
 .fbk-stat-v.go{color:var(--fin-gold)}
 .fbk-stat-v.rd{color:var(--fin-red)}
-.fbk-stat-sub{font-size:9.5px;color:var(--fin-muted);font-weight:600;font-family:'Barlow Condensed',sans-serif}
+.fbk-stat-sub{font-size:9.5px;color:var(--fin-muted);font-weight:600;font-family:var(--font-display)}
 .fbk-portfolio-r{display:flex;flex-direction:column;gap:14px}
 .fbk-donut{display:flex;align-items:center;gap:18px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:14px}
 .fbk-donut svg{width:130px;height:130px;flex-shrink:0;transform:rotate(-90deg)}
 .fbk-donut svg circle{fill:none;stroke-width:14;stroke-linecap:butt}
 .fbk-donut-legend{flex:1;display:flex;flex-direction:column;gap:9px}
-.fbk-donut-title{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;margin-bottom:2px}
+.fbk-donut-title{font-family:var(--font-display);font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;margin-bottom:2px}
 .fbk-donut-row{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--fin-text)}
 .fbk-donut-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .fbk-donut-row span:nth-child(2){flex:1}
-.fbk-donut-pct{font-family:'Bebas Neue',serif;font-size:13px;color:var(--fin-cream);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.fbk-donut-pct{font-family:var(--font-display),serif;font-size:13px;color:var(--fin-cream);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.5px}
 .fbk-spark{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:12px 14px;position:relative}
 .fbk-spark-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.fbk-spark-l{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fin-muted);font-weight:700}
-.fbk-spark-v{font-family:'Bebas Neue',serif;font-size:18px;color:var(--fin-emerald);font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.fbk-spark-l{font-family:var(--font-display);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fin-muted);font-weight:700}
+.fbk-spark-v{font-family:var(--font-display),serif;font-size:18px;color:var(--fin-emerald);font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
 .fbk-spark svg{width:100%;height:50px;display:block}
 .fbk-ledger{padding:0 20px 20px}
 .fbk-ledger-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(212,175,55,0.12)}
-.fbk-ledger-tit{font-family:'Bebas Neue',serif;font-size:14px;letter-spacing:2.5px;color:var(--fin-cream);font-weight:800}
+.fbk-ledger-tit{font-family:var(--font-display),serif;font-size:14px;letter-spacing:2.5px;color:var(--fin-cream);font-weight:800}
 .fbk-ledger-tools{display:flex;gap:6px}
-.fbk-ledger-tools span{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:5px;font-family:'Barlow Condensed',sans-serif;border:1px solid rgba(255,255,255,0.06);color:var(--fin-muted);cursor:pointer}
+.fbk-ledger-tools span{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:5px;font-family:var(--font-display);border:1px solid rgba(255,255,255,0.06);color:var(--fin-muted);cursor:pointer}
 .fbk-ledger-tools span.on{background:rgba(212,175,55,0.12);color:var(--fin-gold);border-color:rgba(212,175,55,0.3)}
-.fbk-table{display:block;font-family:'Plus Jakarta Sans',sans-serif}
+.fbk-table{display:block;font-family:var(--font-body)}
 .fbk-tr{display:grid;grid-template-columns:1.6fr .9fr .8fr 1.4fr .8fr .9fr;gap:10px;align-items:center;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.04);transition:.15s;cursor:pointer}
 .fbk-tr:hover{background:rgba(212,175,55,0.04)}
 .fbk-tr:last-child{border-bottom:none}
-.fbk-tr.h{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;padding:6px 8px;border-bottom:1px solid rgba(212,175,55,0.15);cursor:default}
+.fbk-tr.h{font-family:var(--font-display);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--fin-muted);font-weight:700;padding:6px 8px;border-bottom:1px solid rgba(212,175,55,0.15);cursor:default}
 .fbk-tr.h:hover{background:transparent}
 .fbk-cli{display:flex;align-items:center;gap:9px;min-width:0}
-.fbk-cli-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',serif;font-size:11px;font-weight:800;color:#fff;letter-spacing:.5px;flex-shrink:0;border:2px solid rgba(212,175,55,0.15);position:relative}
+.fbk-cli-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display),serif;font-size:11px;font-weight:800;color:#fff;letter-spacing:.5px;flex-shrink:0;border:2px solid rgba(212,175,55,0.15);position:relative}
 .fbk-cli-av.c1{background:linear-gradient(135deg,#0EA5E9,#0369A1)}
 .fbk-cli-av.c2{background:linear-gradient(135deg,#EC4899,#9F1239);color:#fff}
 .fbk-cli-av.c3{background:linear-gradient(135deg,#10B981,#047857);color:#fff}
@@ -187,28 +187,28 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .fbk-cli-av.c6{background:linear-gradient(135deg,#F97316,#9A3412);color:#fff}
 .fbk-cli-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
 .fbk-cli-name{font-size:12.5px;color:var(--fin-cream);font-weight:600;line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fbk-cli-dni{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--fin-muted);letter-spacing:.5px;font-weight:600;font-variant-numeric:tabular-nums}
-.fbk-amt{font-family:'Bebas Neue',serif;font-size:16px;color:var(--fin-cream);font-weight:700;letter-spacing:.3px;font-variant-numeric:tabular-nums}
+.fbk-cli-dni{font-family:var(--font-display);font-size:10px;color:var(--fin-muted);letter-spacing:.5px;font-weight:600;font-variant-numeric:tabular-nums}
+.fbk-amt{font-family:var(--font-display),serif;font-size:16px;color:var(--fin-cream);font-weight:700;letter-spacing:.3px;font-variant-numeric:tabular-nums}
 .fbk-amt small{font-size:10px;color:var(--fin-gold);margin-right:3px;letter-spacing:.5px}
-.fbk-rate{font-family:'Bebas Neue',serif;font-size:14px;color:var(--fin-emerald);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.3px}
+.fbk-rate{font-family:var(--font-display),serif;font-size:14px;color:var(--fin-emerald);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.3px}
 .fbk-prog{display:flex;align-items:center;gap:8px}
 .fbk-prog-cells{display:flex;flex:1;gap:1.5px;height:8px;background:rgba(255,255,255,0.04);border-radius:2px;padding:0;overflow:hidden}
 .fbk-prog-c{flex:1;background:rgba(255,255,255,0.06);border-radius:1px;min-width:2px}
 .fbk-prog-c.paid{background:linear-gradient(180deg,var(--fin-emerald),var(--fin-emerald-d))}
 .fbk-prog-c.late{background:var(--fin-red);animation:pulse 1.4s infinite}
 .fbk-prog-c.next{background:var(--fin-gold);box-shadow:0 0 5px rgba(212,175,55,0.6)}
-.fbk-prog-l{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;color:var(--fin-cream);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.3px;min-width:32px;text-align:right}
-.fbk-next{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--fin-cream);letter-spacing:.3px;font-weight:600}
+.fbk-prog-l{font-family:var(--font-display);font-size:10.5px;color:var(--fin-cream);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.3px;min-width:32px;text-align:right}
+.fbk-next{font-family:var(--font-display);font-size:11px;color:var(--fin-cream);letter-spacing:.3px;font-weight:600}
 .fbk-next small{display:block;font-size:9.5px;color:var(--fin-muted);font-weight:600;letter-spacing:.5px;margin-top:1px}
-.fbk-status{display:inline-flex;align-items:center;gap:5px;font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:5px;justify-self:start}
+.fbk-status{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:5px;justify-self:start}
 .fbk-status.ok{background:rgba(16,185,129,0.12);color:var(--fin-emerald);border:1px solid rgba(16,185,129,0.25)}
 .fbk-status.late{background:rgba(220,38,38,0.12);color:var(--fin-red);border:1px solid rgba(220,38,38,0.3)}
 .fbk-status.new{background:rgba(212,175,55,0.12);color:var(--fin-gold);border:1px solid rgba(212,175,55,0.3)}
 .fbk-status.done{background:rgba(122,138,158,0.12);color:var(--fin-muted);border:1px solid rgba(122,138,158,0.25)}
 .fbk-status::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
-.fbk-foot{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,0.25);border-top:1px solid rgba(212,175,55,0.12);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700}
+.fbk-foot{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,0.25);border-top:1px solid rgba(212,175,55,0.12);font-family:var(--font-display);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--fin-muted);font-weight:700}
 .fbk-foot-c{color:var(--fin-cream)}
-.fbk-foot-c strong{color:var(--fin-gold);font-family:'Bebas Neue',serif;font-size:13px;letter-spacing:1px;font-weight:700}
+.fbk-foot-c strong{color:var(--fin-gold);font-family:var(--font-display),serif;font-size:13px;letter-spacing:1px;font-weight:700}
 @media(max-width:760px){
   .fbk-portfolio{grid-template-columns:1fr}
   .fbk-tr{grid-template-columns:1.4fr .8fr 1fr;gap:8px}
@@ -221,14 +221,14 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .fin-chart{position:relative;height:100px;margin-bottom:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:10px 12px;overflow:hidden}
 .fin-chart svg{width:100%;height:100%;display:block}
 .fin-chart-head{display:flex;align-items:center;justify-content:space-between;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
-.fin-chart-head strong{font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;color:var(--cyan);letter-spacing:.5px}
+.fin-chart-head strong{font-family:var(--font-display);font-size:14px;color:var(--cyan);letter-spacing:.5px}
 .fin-chart-trend{font-size:10px;color:#22c55e;font-weight:700}
 .fin-loans{display:flex;flex-direction:column;gap:8px}
 .fin-loan{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:10px;padding:9px 11px;transition:.2s}
 .fin-loan:hover{border-color:var(--cyan)}
 .fin-loan-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .fin-loan-name{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--white);font-weight:600;flex:1;min-width:0}
-.fin-loan-amt{font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;color:var(--cyan);letter-spacing:.5px;font-weight:800}
+.fin-loan-amt{font-family:var(--font-display);font-size:14px;color:var(--cyan);letter-spacing:.5px;font-weight:800}
 .fin-loan-cuotas{height:6px;background:rgba(255,255,255,.04);border-radius:3px;display:flex;gap:1.5px;padding:0;overflow:hidden}
 .fin-cuota{flex:1;background:rgba(255,255,255,.06);border-radius:1px}
 .fin-cuota.paid{background:linear-gradient(180deg,var(--blue-light),var(--blue))}
@@ -239,7 +239,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .fin-loan-tag.ok{background:rgba(34,197,94,.15);color:#22c55e}
 .fin-loan-tag.late{background:rgba(239,68,68,.15);color:#ef4444}
 .fin-loan-tag.done{background:rgba(96,165,250,.15);color:var(--cyan)}
-.fin-loan-cli{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',Impact,sans-serif;font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
+.fin-loan-cli{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
 .fin-loan-cli.c1{background:linear-gradient(135deg,#60A5FA,#1E40AF)}
 .fin-loan-cli.c2{background:linear-gradient(135deg,#F472B6,#BE185D)}
 .fin-loan-cli.c3{background:linear-gradient(135deg,#4ADE80,#16A34A)}
@@ -249,7 +249,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .feature-card{background:var(--bg);padding:32px;transition:.2s}
 .feature-card:hover{background:var(--surface)}
 .feature-icon{width:44px;height:44px;border-radius:10px;background:var(--cyan-dim);border:1px solid rgba(6,214,160,.2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
-.feature-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
+.feature-title{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
 .feature-desc{font-size:13px;color:var(--muted);line-height:1.6}
 .feature-highlight{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
 #pricing{background:var(--surface);border-top:1px solid var(--border)}
@@ -261,9 +261,9 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .price-card.addon{padding:24px 28px;border-style:dashed}
 .price-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,91,219,.12);border:1px solid rgba(59,91,219,.25);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px}
 .price-badge.addon-badge{background:rgba(6,214,160,.08);border-color:rgba(6,214,160,.2);color:var(--cyan)}
-.price-name{font-family:'Bebas Neue',Impact,sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
+.price-name{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--white);margin-bottom:6px}
 .price-desc{font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.5}
-.price-amount{font-family:'Bebas Neue',Impact,sans-serif;font-size:56px;font-weight:900;color:var(--white);line-height:1;margin:16px 0 4px}
+.price-amount{font-family:var(--font-display);font-size:56px;font-weight:900;color:var(--white);line-height:1;margin:16px 0 4px}
 .price-amount.addon-amount{font-size:42px}
 .price-amount .currency{font-size:24px;vertical-align:top;margin-top:10px;display:inline-block;color:var(--muted2)}
 .price-amount .suffix{font-size:20px;color:var(--muted)}
@@ -306,7 +306,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
   margin-bottom: 14px;
 }
 .lite-title {
-  font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif;
+  font-family:var(--font-display);
   font-size: 34px;
   font-weight: 700;
   color: var(--text);
@@ -346,7 +346,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
   margin-bottom: 6px;
 }
 .lite-price {
-  font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif;
+  font-family:var(--font-display);
   font-size: 72px;
   font-weight: 900;
   color: var(--text);
@@ -426,20 +426,20 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .comp-table td{padding:13px 18px;font-size:14px;border-bottom:1px solid rgba(59,91,219,.06);color:var(--muted2)}
 .comp-table tr:last-child td{border-bottom:none}
 .comp-table td.service{color:var(--text);font-weight:500}
-.comp-table td.highlight{color:var(--cyan);font-weight:700;background:rgba(6,214,160,.04);font-family:'Bebas Neue',Impact,sans-serif;font-size:15px;letter-spacing:.5px}
+.comp-table td.highlight{color:var(--cyan);font-weight:700;background:rgba(6,214,160,.04);font-family:var(--font-display);font-size:15px;letter-spacing:.5px}
 .comp-table tr:hover td{background:rgba(255,255,255,.02)}
 .comp-chip{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .chip-green{background:rgba(6,214,160,.12);color:var(--cyan)}
 .chip-blue{background:rgba(59,91,219,.12);color:var(--blue-light)}
 .why-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
 .why-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px}
-.why-card-num{font-family:'Bebas Neue',Impact,sans-serif;font-size:42px;font-weight:900;color:var(--blue-light);line-height:1}
-.why-card-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white)}
+.why-card-num{font-family:var(--font-display);font-size:42px;font-weight:900;color:var(--blue-light);line-height:1}
+.why-card-title{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:.5px;color:var(--white)}
 .why-card-desc{font-size:13px;color:var(--muted);line-height:1.6}
 #cta{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px);position:relative;overflow:hidden}
 .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,91,219,.12) 0%,transparent 65%);pointer-events:none}
-.cta-label{display:inline-flex;align-items:center;gap:8px;font-family:'Bebas Neue',Impact,sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
-.cta-title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(40px,6vw,68px);font-weight:900;color:var(--white);line-height:1;margin-bottom:16px}
+.cta-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+.cta-title{font-family:var(--font-display);font-size:clamp(40px,6vw,68px);font-weight:900;color:var(--white);line-height:1;margin-bottom:16px}
 .cta-sub{font-size:17px;color:var(--muted2);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .btn-whatsapp{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:10px;background:#25D366;color:#fff;font-size:16px;font-weight:700;border:none;transition:.2s;letter-spacing:.3px}
@@ -447,7 +447,7 @@ section{padding:clamp(80px,10vw,120px) clamp(20px,5vw,60px)}
 .btn-whatsapp svg{width:22px;height:22px}
 footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clamp(20px,5vw,60px)}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.footer-brand{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em}.footer-brand .rubro-accent{font-family:'Bebas Neue',Impact,sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
+.footer-brand{font-family:var(--font-body),'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em}.footer-brand .rubro-accent{font-family:var(--font-display);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
 .footer-brand span{color:var(--cyan)}
 .footer-links{display:flex;gap:24px}
 .footer-link{font-size:13px;color:var(--muted);transition:.2s}
@@ -456,8 +456,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
 .float-wa{position:fixed;bottom:28px;right:28px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:.2s;border:none}
 .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.45)}
 .float-wa svg{width:28px;height:28px;fill:#fff}
-#hero h1 { font-family: 'Bebas Neue', Impact, sans-serif !important; font-weight: 900; letter-spacing: -2px; font-style: normal; }
-.section-title { font-family: 'Bebas Neue', Impact, sans-serif !important; font-weight: 900; }
+#hero h1 { font-family:var(--font-display) !important; font-weight: 900; letter-spacing: -2px; font-style: normal; }
+.section-title { font-family:var(--font-display) !important; font-weight: 900; }
 @media(max-width:900px){.nav-links{display:none}.nav-burger{display:flex}.tab-panel.active{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr 1fr}.pricing-grid,.pricing-addons{grid-template-columns:1fr}.why-cards{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.tabs{flex-direction:column}.tab{min-width:auto}.features-grid{grid-template-columns:1fr}.why-cards{grid-template-columns:1fr}.hero-stats{gap:24px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
 </style>
@@ -553,7 +553,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <div style="background:var(--card);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
       <div style="flex:1;min-width:240px;">
         <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">La solución</div>
-        <h3 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.7rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px;">Aura Finance controla tu cartera. En tiempo real.</h3>
+        <h3 style="font-family:var(--font-display);font-size:1.7rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px;">Aura Finance controla tu cartera. En tiempo real.</h3>
         <p style="font-size:14px;color:var(--muted2);line-height:1.6;">Créditos, cobros y morosidad organizados. Para prestamistas, financieras y negocios con cuotas en Argentina.</p>
       </div>
       <a href="/aura-finance/demo" target="_blank" class="btn-demo" style="flex-shrink:0;">Ver cómo funciona →</a>
@@ -847,7 +847,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;">
-        <h3 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:24px;letter-spacing:.5px;">Ingresá los datos de tu negocio</h3>
+        <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:24px;letter-spacing:.5px;">Ingresá los datos de tu negocio</h3>
         <div style="display:flex;flex-direction:column;gap:22px;">
           <div>
             <label style="display:block;font-size:13px;color:var(--muted);margin-bottom:8px;">Créditos activos en cartera</label>
@@ -869,17 +869,17 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:14px;padding:24px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(239,68,68,0.8);margin-bottom:8px;">Perdés por mes</div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;font-weight:900;color:#ef4444;line-height:1;" id="roi-perdida">$0</div>
+          <div style="font-family:var(--font-display);font-size:2.6rem;font-weight:900;color:#ef4444;line-height:1;" id="roi-perdida">$0</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px;">en cuotas vencidas sin cobrar y mora no gestionada</div>
         </div>
         <div style="background:rgba(var(--blue-rgb,59,91,219),0.06);border:1px solid rgba(var(--blue-rgb,59,91,219),0.2);border-radius:14px;padding:24px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:8px;">Aura te cuesta (pago único)</div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;font-weight:900;color:var(--blue-light);line-height:1;">USD 900</div>
+          <div style="font-family:var(--font-display);font-size:2.6rem;font-weight:900;color:var(--blue-light);line-height:1;">USD 900</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px;">se recupera en <span id="roi-meses" style="color:var(--white);font-weight:700;">menos de 1 mes</span></div>
         </div>
         <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:14px;padding:24px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;">Ganás extra por mes</div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;" id="roi-ganancia">$0</div>
+          <div style="font-family:var(--font-display);font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;" id="roi-ganancia">$0</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px;">con operaciones recuperadas y gestión eficiente</div>
         </div>
         <a href="https://wa.me/541124693394?text=Hola!%20Calculé%20mi%20ROI%20y%20me%20interesa%20Aura%20Finance." target="_blank" class="btn-primary" style="text-align:center;justify-content:center;">Quiero recuperar esa plata →</a>
@@ -892,8 +892,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
 <section id="testimonio" style="padding:64px clamp(20px,5vw,60px);background:var(--bg);border-top:1px solid var(--border);">
   <div class="wrap">
     <div style="max-width:680px;margin:0 auto;text-align:center;">
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:4rem;color:var(--blue);line-height:1;margin-bottom:20px;opacity:.6;">❝</div>
-      <blockquote style="font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.35;margin-bottom:28px;">"Tenía el 20% de mi cartera morosa sin seguimiento activo. La Cobradora de Aura recuperó el 60% de esa mora en 45 días enviando mensajes personalizados. Fue la mejor inversión del año."</blockquote>
+      <div style="font-family:var(--font-display);font-size:4rem;color:var(--blue);line-height:1;margin-bottom:20px;opacity:.6;">❝</div>
+      <blockquote style="font-family:var(--font-display);font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.35;margin-bottom:28px;">"Tenía el 20% de mi cartera morosa sin seguimiento activo. La Cobradora de Aura recuperó el 60% de esa mora en 45 días enviando mensajes personalizados. Fue la mejor inversión del año."</blockquote>
       <div style="display:flex;align-items:center;justify-content:center;gap:14px;">
         <div style="width:44px;height:44px;border-radius:50%;background:rgba(var(--blue-rgb,59,91,219),0.15);border:2px solid rgba(var(--blue-rgb,59,91,219),0.35);display:flex;align-items:center;justify-content:center;font-size:18px;">💼</div>
         <div style="text-align:left;">
@@ -917,7 +917,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <div class="agents-notice fade fade-delay-1" style="max-width:900px;margin:0 auto 40px;background:linear-gradient(135deg,rgba(240,180,41,0.08),rgba(240,180,41,0.03));border:1px solid rgba(240,180,41,0.25);border-radius:14px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;">
       <div style="flex-shrink:0;width:36px;height:36px;border-radius:10px;background:rgba(240,180,41,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;">💡</div>
       <div style="flex:1">
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;letter-spacing:2.5px;color:#F0B429;font-weight:700;margin-bottom:4px;">IMPORTANTE ANTES DE ELEGIR TU PLAN</div>
+        <div style="font-family:var(--font-display);font-size:14px;letter-spacing:2.5px;color:#F0B429;font-weight:700;margin-bottom:4px;">IMPORTANTE ANTES DE ELEGIR TU PLAN</div>
         <p style="font-size:14px;color:var(--text,#F2F2F5);line-height:1.55;margin:0 0 6px 0;"><strong>Aura es tu sistema de gestión. Los agentes IA son módulos opcionales que podés sumar cuando quieras.</strong></p>
         <p style="font-size:13px;color:var(--muted,#8A8A94);line-height:1.55;margin:0;">Podés empezar con solo la aplicación y, cuando veas el valor, agregar agentes por separado (USD 300 c/u de setup, una sola vez) o en 3 agentes por USD 800 de setup. El Plan Premium agrega servicios one-time (migración de data + capacitación) al Combo.</p>
       </div>
@@ -1037,42 +1037,42 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de consultas</div>
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Asesor</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Asesor</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Un cliente potencial pregunta por condiciones de un préstamo. El agente explica opciones, calcula cuotas aproximadas y agenda la reunión — solo o con vos.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: consultas de clientes sobre saldos y cuotas a cualquier hora</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">💳</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de cobranza</div>
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Cobrador</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Cobrador</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Vencimientos, moras y seguimiento de cuotas. El agente contacta deudores, acuerda refinanciaciones y actualiza el estado de cada crédito en tiempo real.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: mora del 20%+ sin tiempo para llamar a cada deudor</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">📋</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de cartera</div>
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Analista de Cartera</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Analista de Cartera</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Análisis de cartera en vivo: qué créditos están al día, cuáles en riesgo, cuánto representa cada segmento en pesos y en porcentaje.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: no saber qué cartera está por caer en default</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de datos</div>
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Controller</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Controller</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Informe diario: cartera vencida, recuperos del mes, tasa de mora y proyección de cobranza. Llega solo a tu WhatsApp antes de que empiece el día.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: control documental y compliance sin papel</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">📱</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de captación</div>
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Comercial</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Comercial</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Campañas de pre-aprobación, recordatorios de cuotas próximas, promociones de refinanciación para buenos pagadores. Marketing financiero automatizado.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: comunicación con cartera actual sobre nuevos productos</div>
     </div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;">
       <div style="font-size:1.8rem;margin-bottom:10px;">💌</div>
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;">Agente de retención</div>
-      <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Fidelizador</div>
+      <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px;">El Fidelizador</div>
       <div style="font-size:13px;color:var(--muted2);line-height:1.65;">Clientes que pagaron todo y tienen historial limpio. El agente los contacta con una nueva oferta personalizada antes de que vayan a la competencia.</div>
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--cyan);font-weight:600;line-height:1.5;">→ Resuelve: clientes VIP que se van a la competencia sin que te enteres</div>
     </div>
@@ -1080,20 +1080,20 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
   <!-- Pricing box agentes -->
   <div style="margin-bottom:32px;">
     <div style="text-align:center;margin-bottom:24px;">
-      <h3 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:8px;">Comprás el agente una vez.<br><span style="color:var(--cyan)">Lo mantenemos funcionando siempre.</span></h3>
+      <h3 style="font-family:var(--font-display);font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:8px;">Comprás el agente una vez.<br><span style="color:var(--cyan)">Lo mantenemos funcionando siempre.</span></h3>
       <p style="font-size:13px;color:var(--muted);max-width:500px;margin:0 auto;">Las APIs de WhatsApp e IA van a <strong style="color:var(--text)">tu nombre</strong> — vos tenés el control, nosotros no tocamos eso.</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;">
         <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Por agente</div>
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>250</div>
+        <div style="font-family:var(--font-display);font-size:2.8rem;color:var(--white);line-height:1;margin-bottom:2px;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>250</div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Setup completo</div>
         <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ desde USD 35/mes plan</div>
       </div>
       <div style="background:var(--card);border:2px solid rgba(var(--blue-rgb,59,91,219),0.4);border-radius:14px;padding:28px;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:0 0 0 10px;">Más elegido</div>
         <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);margin-bottom:10px;">Combo 3 agentes</div>
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2.8rem;color:var(--blue-light);line-height:1;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>750</div>
+        <div style="font-family:var(--font-display);font-size:2.8rem;color:var(--blue-light);line-height:1;"><span style="font-size:1.2rem;color:var(--muted);">USD </span>750</div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Pago único · Plan Esencial · 3 agentes</div>
         <div style="font-size:13px;color:var(--cyan);font-weight:600;margin-bottom:14px;">+ desde USD 100/mes plan</div>
       </div>
@@ -1142,36 +1142,36 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px clam
       <div style="position:absolute;top:36px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,var(--border),var(--blue),var(--cyan),var(--border));z-index:0;"></div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:#075E54;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;box-shadow:0 0 20px rgba(7,94,84,0.3);">💬</div>
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">1 — Vence una cuota</div>
+        <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">1 — Vence una cuota</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">El sistema detecta que mañana vence la cuota 3 de María López</div>
       </div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--blue-rgb,59,91,219),0.15);border:1px solid rgba(var(--blue-rgb,59,91,219),0.3);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">🤖</div>
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">2 — Agente responde</div>
+        <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">2 — Agente responde</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Envía recordatorio amable, gestiona la respuesta y acuerda pago</div>
       </div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--cyan-rgb,6,214,160),0.08);border:1px solid rgba(var(--cyan-rgb,6,214,160),0.2);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">💳</div>
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">3 — Pago registrado</div>
+        <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">3 — Pago registrado</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Cobro confirmado y cartera actualizada automáticamente</div>
       </div>
       <div style="text-align:center;padding:0 12px;position:relative;z-index:1;">
         <div style="width:72px;height:72px;border-radius:18px;background:rgba(var(--blue-rgb,59,91,219),0.08);border:1px solid rgba(var(--blue-rgb,59,91,219),0.15);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;">📊</div>
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">4 — Vos sabés todo</div>
+        <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--white);margin-bottom:6px;">4 — Vos sabés todo</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Panel actualizado. Resumen diario a las 9am en tu WhatsApp</div>
       </div>
     </div>
     <div style="margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">24/7</div>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--cyan);">24/7</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Opera sin parar, sin vacaciones</div>
       </div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">&lt;30s</div>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--cyan);">&lt;30s</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Tiempo promedio de respuesta</div>
       </div>
       <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);">0 errores</div>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--cyan);">0 errores</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Sin olvidos, sin duplicados</div>
       </div>
     </div>
@@ -1324,7 +1324,7 @@ fades.forEach(f=>observer.observe(f))
   .ycasos{padding:60px 0;border-top:1px solid rgba(255,255,255,0.05);}
   .ycasos-head{text-align:center;max-width:700px;margin:0 auto 40px;}
   .ycasos-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#F0B429;margin-bottom:8px;}
-  .ycasos-title{font-family:'Bebas Neue','Barlow Condensed',Impact,sans-serif;font-size:clamp(26px,3vw,38px);font-weight:400;letter-spacing:0.02em;text-transform:uppercase;line-height:1.1;margin:0 0 10px;}
+  .ycasos-title{font-family:var(--font-display);font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:0.02em;text-transform:none;line-height:1.1;margin:0 0 10px;}
   .ycasos-sub{font-size:14.5px;color:#9E9EA8;line-height:1.6;}
   .ycasos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
   .ycaso{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:.2s;}
@@ -1461,7 +1461,7 @@ fades.forEach(f=>observer.observe(f))
   .ylead{background:linear-gradient(135deg,rgba(240,180,41,0.04),rgba(240,180,41,0.01));border:1px solid rgba(240,180,41,0.2);border-radius:18px;padding:clamp(24px,3vw,36px);max-width:720px;margin:0 auto;}
   .ylead-head{text-align:center;margin-bottom:24px;}
   .ylead-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#F0B429;margin-bottom:8px;}
-  .ylead-title{font-family:'Bebas Neue','Barlow Condensed',Impact,sans-serif;font-size:clamp(24px,2.6vw,32px);font-weight:400;letter-spacing:0.02em;text-transform:uppercase;line-height:1.05;color:#F2F2F5;margin:0 0 8px;}
+  .ylead-title{font-family:var(--font-display);font-size:clamp(24px,2.6vw,32px);font-weight:700;letter-spacing:0.02em;text-transform:none;line-height:1.05;color:#F2F2F5;margin:0 0 8px;}
   .ylead-sub{font-size:14px;color:#9E9EA8;max-width:480px;margin:0 auto;line-height:1.55;}
   .ylead-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
   @media(max-width:560px){.ylead-grid{grid-template-columns:1fr;}}
