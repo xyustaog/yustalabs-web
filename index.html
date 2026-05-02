@@ -125,10 +125,10 @@
 .sc-app{position:absolute;inset:0;background:linear-gradient(135deg,#16161D,#0F0F15);display:flex;flex-direction:column;}
 @media(min-width:760px){.sc-app{flex-direction:row;}}
 
-/* Sidebar · vertical en desktop, horizontal scrollable en mobile */
+/* Sidebar · vertical en desktop, horizontal scrollable en mobile · premium polish */
 .sc-side{
-  background:rgba(0,0,0,0.4);
-  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.30));
+  border-bottom:1px solid rgba(255,255,255,0.06);
   padding:10px;
   display:flex;flex-direction:row;gap:6px;
   overflow-x:auto;scrollbar-width:none;
@@ -137,46 +137,151 @@
 .sc-side::-webkit-scrollbar{display:none;}
 @media(min-width:760px){
   .sc-side{
-    flex-direction:column;width:148px;padding:14px 10px;gap:4px;
-    border-right:1px solid rgba(255,255,255,0.05);border-bottom:none;
+    flex-direction:column;width:188px;padding:16px 12px;gap:4px;
+    border-right:1px solid rgba(255,255,255,0.06);border-bottom:none;
     overflow-x:visible;overflow-y:auto;
   }
 }
 .sc-nav-i{
-  display:flex;align-items:center;gap:9px;
-  padding:8px 12px;border-radius:8px;
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:9px;
   background:transparent;border:1px solid transparent;
   color:var(--cream-mute,#B8B8C0);
-  font-family:var(--font-body);font-size:12px;font-weight:500;
+  font-family:var(--font-body);font-size:12.5px;font-weight:500;letter-spacing:-0.005em;
   cursor:pointer;white-space:nowrap;
-  transition:background var(--t),color var(--t),border-color var(--t);
-  min-height:36px;
+  transition:background .22s var(--ease),color .22s var(--ease),border-color .22s var(--ease),transform .15s var(--ease);
+  min-height:38px;position:relative;overflow:hidden;
+  /* Truncate gracefully if very long */
+  text-overflow:ellipsis;
 }
-.sc-nav-i:hover:not(.active){background:rgba(255,255,255,0.04);color:var(--text);}
-.sc-nav-i.active{background:rgba(240,180,41,0.10);border-color:rgba(240,180,41,0.30);color:var(--gold);font-weight:600;}
-.sc-nav-i .ic{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;font-size:14px;flex-shrink:0;}
+.sc-nav-i > span:last-child{overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.sc-nav-i:hover:not(.active){background:rgba(255,255,255,0.045);color:var(--text);transform:translateX(1px);}
+.sc-nav-i.active{
+  background:linear-gradient(135deg,rgba(240,180,41,0.14),rgba(240,180,41,0.06));
+  border-color:rgba(240,180,41,0.35);
+  color:var(--gold);font-weight:600;
+  box-shadow:0 0 18px rgba(240,180,41,0.10),inset 0 1px 0 rgba(240,180,41,0.10);
+}
+/* Bracket motif sutil sólo en active (firma del logo) */
+.sc-nav-i.active::before,.sc-nav-i.active::after{
+  content:'';position:absolute;width:6px;height:6px;border:1px solid var(--gold);opacity:0.6;
+}
+.sc-nav-i.active::before{top:4px;left:4px;border-right:none;border-bottom:none;}
+.sc-nav-i.active::after{bottom:4px;right:4px;border-left:none;border-top:none;}
+.sc-nav-i .ic{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;flex-shrink:0;
+  color:inherit;
+}
+.sc-nav-i .ic svg{width:16px;height:16px;}
 
-/* Main content area */
-.sc-main{flex:1;padding:clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:12px;min-width:0;overflow:hidden;}
+/* Main content area · premium polish */
+.sc-main{flex:1;padding:clamp(16px,2.2vw,24px);display:flex;flex-direction:column;gap:14px;min-width:0;overflow:hidden;position:relative;}
 .sc-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.sc-h{font-family:var(--font-display);font-size:clamp(13px,1.6vw,16px);font-weight:600;color:var(--text);letter-spacing:-0.018em;line-height:1.2;}
-.sc-pill{font-family:var(--font-mono);font-size:9px;padding:3px 9px;border-radius:999px;background:rgba(34,197,94,0.10);color:#22C55E;border:1px solid rgba(34,197,94,0.22);letter-spacing:0.06em;display:inline-flex;align-items:center;gap:5px;flex-shrink:0;}
-.sc-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;}
-.sc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
-.sc-stat{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:9px;padding:9px 11px;min-width:0;}
-.sc-stat-n{font-family:var(--font-display);font-size:clamp(15px,2vw,22px);font-weight:700;color:var(--gold);line-height:1;letter-spacing:-0.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sc-stat-l{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.10em;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sc-rows{display:flex;flex-direction:column;gap:5px;flex:1;min-height:60px;}
-.sc-row{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:7px;padding:8px 11px;display:flex;align-items:center;gap:10px;}
-.sc-row-name{font-family:var(--font-body);font-size:11px;color:var(--text);font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sc-row-val{font-family:var(--font-mono);font-size:11px;color:var(--gold);font-weight:600;flex-shrink:0;}
-.sc-row-tag{font-family:var(--font-mono);font-size:9px;padding:2px 7px;border-radius:5px;letter-spacing:0.04em;flex-shrink:0;}
-.sc-row-tag.ok{background:rgba(34,197,94,0.12);color:#22C55E;}
-.sc-row-tag.warn{background:rgba(245,158,11,0.12);color:#F59E0B;}
-.sc-row-tag.danger{background:rgba(239,68,68,0.12);color:#EF4444;}
-.sc-cta{align-self:flex-start;padding:8px 14px;background:var(--gold);color:#0A0A0F;border-radius:8px;font-family:var(--font-body);font-size:11.5px;font-weight:700;box-shadow:0 0 12px rgba(240,180,41,0.45);animation:scPulse 2.8s infinite;cursor:default;border:none;}
-@keyframes scPulse{0%,100%{box-shadow:0 0 12px rgba(240,180,41,0.45)}50%{box-shadow:0 0 22px rgba(240,180,41,0.75)}}
-.sc-caption{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);padding:5px 12px;border-radius:999px;font-family:var(--font-mono);font-size:10px;color:var(--cream-mute,#B8B8C0);letter-spacing:0.04em;max-width:90%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sc-h{
+  font-family:var(--font-display);font-size:clamp(14px,1.7vw,18px);font-weight:600;
+  color:var(--text);letter-spacing:-0.022em;line-height:1.2;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.sc-h::before{content:'';width:3px;height:14px;background:var(--gold);border-radius:2px;display:inline-block;flex-shrink:0;}
+.sc-pill{
+  font-family:var(--font-mono);font-size:9.5px;padding:4px 10px;border-radius:999px;
+  background:rgba(34,197,94,0.10);color:#22C55E;border:1px solid rgba(34,197,94,0.25);
+  letter-spacing:0.08em;display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+  text-transform:uppercase;font-weight:600;
+}
+.sc-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 8px #22C55E;animation:scPulseDot 1.6s infinite;}
+@keyframes scPulseDot{0%,100%{opacity:1;box-shadow:0 0 8px #22C55E}50%{opacity:.55;box-shadow:0 0 4px #22C55E}}
+
+/* Stats con micro-interacción y barra inferior decorativa */
+.sc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.sc-stat{
+  background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015));
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;padding:11px 13px;min-width:0;
+  position:relative;overflow:hidden;
+  transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+}
+.sc-stat::after{
+  content:'';position:absolute;left:13px;right:13px;bottom:6px;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  border-radius:1px;opacity:0;transition:opacity .35s var(--ease);
+}
+.sc-stat:hover{transform:translateY(-2px);border-color:rgba(240,180,41,0.30);background:linear-gradient(180deg,rgba(240,180,41,0.06),rgba(240,180,41,0.015));}
+.sc-stat:hover::after{opacity:1;}
+.sc-stat-n{
+  font-family:var(--font-display);font-size:clamp(16px,2.1vw,24px);font-weight:700;
+  color:var(--gold);line-height:1;letter-spacing:-0.025em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.sc-stat-l{
+  font-family:var(--font-mono);font-size:9px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:0.10em;margin-top:6px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* Rows con hover lift + active highlight */
+.sc-rows{display:flex;flex-direction:column;gap:6px;flex:1;min-height:60px;}
+.sc-row{
+  background:linear-gradient(180deg,rgba(255,255,255,0.030),rgba(255,255,255,0.012));
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:8px;padding:9px 12px;
+  display:flex;align-items:center;gap:10px;
+  transition:transform .15s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+  cursor:default;
+}
+.sc-row:hover{
+  background:linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.020));
+  border-color:rgba(255,255,255,0.12);transform:translateX(2px);
+}
+.sc-row-name{
+  font-family:var(--font-body);font-size:11.5px;color:var(--text);font-weight:500;
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  letter-spacing:-0.005em;
+}
+.sc-row-val{font-family:var(--font-mono);font-size:11.5px;color:var(--gold);font-weight:600;flex-shrink:0;letter-spacing:-0.005em;}
+.sc-row-tag{
+  font-family:var(--font-mono);font-size:9.5px;padding:3px 8px;border-radius:6px;
+  letter-spacing:0.05em;flex-shrink:0;font-weight:600;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.sc-row-tag::before{content:'';width:4px;height:4px;border-radius:50%;flex-shrink:0;}
+.sc-row-tag.ok{background:rgba(34,197,94,0.12);color:#22C55E;border:1px solid rgba(34,197,94,0.22);}
+.sc-row-tag.ok::before{background:#22C55E;box-shadow:0 0 4px #22C55E;}
+.sc-row-tag.warn{background:rgba(245,158,11,0.12);color:#F59E0B;border:1px solid rgba(245,158,11,0.22);}
+.sc-row-tag.warn::before{background:#F59E0B;box-shadow:0 0 4px #F59E0B;}
+.sc-row-tag.danger{background:rgba(239,68,68,0.12);color:#EF4444;border:1px solid rgba(239,68,68,0.22);}
+.sc-row-tag.danger::before{background:#EF4444;box-shadow:0 0 4px #EF4444;}
+
+/* CTA premium */
+.sc-cta{
+  align-self:flex-start;padding:9px 16px;
+  background:linear-gradient(135deg,var(--gold-hi,#FFD166),var(--gold) 60%);
+  color:#0A0A0F;border-radius:9px;
+  font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:-0.005em;
+  box-shadow:0 0 18px rgba(240,180,41,0.50),inset 0 1px 0 rgba(255,255,255,0.30);
+  animation:scPulse 2.8s infinite;cursor:pointer;border:none;
+  transition:transform .15s var(--ease);
+}
+.sc-cta:hover{transform:translateY(-1px);}
+@keyframes scPulse{0%,100%{box-shadow:0 0 18px rgba(240,180,41,0.50),inset 0 1px 0 rgba(255,255,255,0.30)}50%{box-shadow:0 0 28px rgba(240,180,41,0.85),inset 0 1px 0 rgba(255,255,255,0.30)}}
+
+.sc-caption{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,0.78);backdrop-filter:blur(10px);
+  padding:5px 14px;border-radius:999px;
+  border:1px solid rgba(255,255,255,0.08);
+  font-family:var(--font-mono);font-size:10px;color:var(--cream-mute,#B8B8C0);
+  letter-spacing:0.04em;max-width:92%;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* Smooth fade-in en cambio de sección · usa keyframe animado por JS */
+.sc-fade-in{animation:scFade .35s var(--ease) both;}
+@keyframes scFade{
+  from{opacity:0;transform:translateY(4px);}
+  to{opacity:1;transform:translateY(0);}
+}
 
 .showcase-foot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:24px;flex-wrap:wrap;padding:0 clamp(16px,3vw,24px);}
 .showcase-foot a.btn{font-size:14px;}
@@ -698,12 +803,35 @@
      · sidebar item (sección) → cambia título + stats + filas + CTA
    ═══════════════════════════════════════════════════════════════ */
 (function(){
+  // Lucide-style minimalist SVG icons (consistent visual language, no emoji)
+  const ICONS = {
+    cash:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>',
+    box:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>',
+    users:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    chart:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 12l4-4 4 4 6-6"/></svg>',
+    truck:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v11"/><path d="M14 9h4l4 4v4a1 1 0 0 1-1 1h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+    bike:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5V14l-3-3 4-3 2 3h2"/></svg>',
+    receipt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8H8M16 12H8M13 16H8"/></svg>',
+    building:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg>',
+    calendar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    clock:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+    pizza:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01M11 15h.01M16 16h.01M2 16l20 6-6-20A20 20 0 0 0 2 16Z"/></svg>',
+    menu:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    grid:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+    paw:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><circle cx="9" cy="13" r="4"/><path d="M14 19c2 0 3 1 3 3-1 1-3 1-5 0-1 0-2-1-3-1-2 1-3 1-4 0-1-2 0-3 2-3"/></svg>',
+    pill:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>',
+    car:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>',
+    scissors:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></svg>',
+    home:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    layers:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2-10 5 10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>',
+  };
+
   const RUBROS = {
     commerce: {
       tabLabel: 'Aura Commerce',
       caption: 'Vista de Aura Commerce · kiosco / comercio / mayorista',
       sections: [
-        { id:'caja',    icon:'$', name:'Caja',
+        { id:'caja',    icon:'cash',    name:'Caja',
           title:'Caja del día · Commerce',
           stats:[['$2.4M','Cobrado hoy'],['177','Operaciones'],['5min','Cierre']],
           rows:[
@@ -713,7 +841,7 @@
             ['Almacén Sol','$45.700','ok','Pagado'],
           ],
           cta:'+ Cobrar' },
-        { id:'stock',   icon:'▤', name:'Stock',
+        { id:'stock',   icon:'box',     name:'Stock',
           title:'Inventario · Commerce',
           stats:[['1.247','SKUs activos'],['18','Bajo stock'],['$8.4M','Valor inventario']],
           rows:[
@@ -723,17 +851,17 @@
             ['Cerveza Quilmes 1L','156 un','ok','En stock'],
           ],
           cta:'+ Producto' },
-        { id:'cuentas', icon:'◷', name:'Cuentas corrientes',
+        { id:'cuentas', icon:'receipt', name:'Cuentas CC',
           title:'Cuentas corrientes · clientes B2B',
-          stats:[['38','Clientes activos'],['$486K','Saldo total'],['12','Vencen esta sem']],
+          stats:[['38','Clientes activos'],['$486K','Saldo total'],['12','Vencen sem']],
           rows:[
-            ['Sanatorio Norte','$145.200','warn','Vence en 3d'],
+            ['Sanatorio Norte','$145.200','warn','Vence 3d'],
             ['Centro Médico SA','$78.500','ok','Al día'],
-            ['Distribuidora Norte','$92.300','danger','Vencido 5d'],
+            ['Distribuidora Norte','$92.300','danger','Vencido'],
             ['Empresa Sur SRL','$54.200','ok','Al día'],
           ],
           cta:'+ Cliente' },
-        { id:'reportes',icon:'⚙', name:'Reportes',
+        { id:'reportes',icon:'chart',   name:'Reportes',
           title:'Cierre del mes · abril 2026',
           stats:[['$28.4M','Facturado mes'],['+18%','vs marzo'],['76%','Margen bruto']],
           rows:[
@@ -749,7 +877,7 @@
       tabLabel: 'Aura Logistic',
       caption: 'Vista de Aura Logistic · usado en producción por SLE Mensajería',
       sections: [
-        { id:'viajes',  icon:'⌂', name:'Viajes',
+        { id:'viajes',  icon:'truck',   name:'Viajes',
           title:'Viajes del día · Logistic',
           stats:[['43','Viajes hoy'],['$284K','Facturado'],['8','En curso']],
           rows:[
@@ -759,7 +887,7 @@
             ['#250 · Saavedra → Once','$3.800','warn','Asignado'],
           ],
           cta:'+ Cargar viaje' },
-        { id:'cadetes', icon:'$', name:'Cadetes',
+        { id:'cadetes', icon:'bike',    name:'Cadetes',
           title:'Equipo · Logistic',
           stats:[['12','Activos hoy'],['$1.42M','Liquidado mes'],['4.8★','Rating prom']],
           rows:[
@@ -769,7 +897,7 @@
             ['Cadete #14','9 viajes','ok','En ruta'],
           ],
           cta:'+ Sumar cadete' },
-        { id:'liquidacion',icon:'▤',name:'Liquidación',
+        { id:'liquidacion',icon:'receipt',name:'Liquidación',
           title:'Liquidación cadetes · 5 minutos',
           stats:[['$6.3M','Facturado mes'],['177','Viajes/abr'],['−95%','Tiempo cierre']],
           rows:[
@@ -779,12 +907,12 @@
             ['Cadete #14 · liq abril','$156.800','ok','Cerrado'],
           ],
           cta:'Cerrar mes →' },
-        { id:'empresas',icon:'◷', name:'Empresas',
+        { id:'empresas',icon:'building',name:'Empresas',
           title:'Empresas cliente · cuentas',
           stats:[['28','Empresas activas'],['$4.8M','Facturación abr'],['96%','Cobrado']],
           rows:[
             ['Empresa A · Recoleta','$1.2M','ok','Al día'],
-            ['Empresa B · CABA','$890K','warn','Vence en 5d'],
+            ['Empresa B · CABA','$890K','warn','Vence 5d'],
             ['Empresa C · Núñez','$420K','ok','Al día'],
             ['Empresa D · GBA','$640K','ok','Al día'],
           ],
@@ -795,17 +923,17 @@
       tabLabel: 'Aura Fit',
       caption: 'Vista de Aura Fit · gimnasios / pilates / yoga / box',
       sections: [
-        { id:'socios',  icon:'⌂', name:'Socios',
+        { id:'socios',  icon:'users',   name:'Socios',
           title:'Socios activos · Fit',
           stats:[['184','Socios activos'],['+12','Nuevos abr'],['94%','Renovación']],
           rows:[
             ['López, María · Mensual','$18.000','ok','Al día'],
-            ['Pérez, Juan · Trimestral','$48.000','warn','Vence en 3d'],
+            ['Pérez, Juan · Trimestral','$48.000','warn','Vence 3d'],
             ['García, Lucía · Anual','$170.000','ok','Al día'],
-            ['Martínez, D. · Mensual','$18.000','danger','Vencido 5d'],
+            ['Martínez, D. · Mensual','$18.000','danger','Vencido'],
           ],
           cta:'+ Socio' },
-        { id:'cuotas',  icon:'$', name:'Cuotas',
+        { id:'cuotas',  icon:'cash',    name:'Cuotas',
           title:'Cobro de cuotas · hoy',
           stats:[['$284K','Cobrado hoy'],['18','Cuotas hoy'],['72%','Efectivo']],
           rows:[
@@ -815,17 +943,17 @@
             ['Acosta, R. · Mensual','$18.000','ok','Transfer'],
           ],
           cta:'+ Cobrar cuota' },
-        { id:'venc',    icon:'◷', name:'Vencimientos',
+        { id:'venc',    icon:'calendar',name:'Vencimientos',
           title:'Vencimientos · próximos 7 días',
           stats:[['12','Vencen hoy'],['28','Próx 3 días'],['8','Vencidos']],
           rows:[
-            ['Pérez, Juan','Vence en 1d','warn','Mensual'],
+            ['Pérez, Juan','Vence 1d','warn','Mensual'],
             ['Núñez, P.','Vence hoy','warn','Trimestral'],
             ['Castro, A.','Vencido 2d','danger','Mensual'],
-            ['Sánchez, F.','Vence en 5d','ok','Mensual'],
+            ['Sánchez, F.','Vence 5d','ok','Mensual'],
           ],
           cta:'Notificar todos' },
-        { id:'caja-fit',icon:'⚙', name:'Mis números',
+        { id:'caja-fit',icon:'chart',   name:'Mis números',
           title:'Mis números · abril 2026',
           stats:[['$1.8M','Cuotas mes'],['+22%','vs marzo'],['$340K','Gastos']],
           rows:[
@@ -841,7 +969,7 @@
       tabLabel: 'Aura Food',
       caption: 'Vista de Aura Food · restaurantes / panaderías / bares',
       sections: [
-        { id:'comandas',icon:'⌂', name:'Comandas',
+        { id:'comandas',icon:'pizza',   name:'Comandas',
           title:'Comandas activas · cocina',
           stats:[['43','Comandas activas'],['8min','Promedio'],['12','Mesas ocupadas']],
           rows:[
@@ -851,7 +979,7 @@
             ['Take away · Empanadas','$4.600','warn','Cocina'],
           ],
           cta:'+ Comanda' },
-        { id:'menu',    icon:'▤', name:'Menú',
+        { id:'menu',    icon:'menu',    name:'Menú',
           title:'Carta · platos activos',
           stats:[['68','Platos activos'],['12','Sin stock'],['$3.2K','Ticket prom']],
           rows:[
@@ -861,7 +989,7 @@
             ['Tortilla de papa','$2.800','warn','Pocas'],
           ],
           cta:'+ Plato' },
-        { id:'mesas',   icon:'◷', name:'Mesas',
+        { id:'mesas',   icon:'grid',    name:'Mesas',
           title:'Salón · ocupación en vivo',
           stats:[['12/18','Ocupadas'],['$48K','Cuenta abierta'],['44min','Tiempo prom']],
           rows:[
@@ -871,7 +999,7 @@
             ['Mesa 12 · 3 personas','$3.800','warn','Pedido'],
           ],
           cta:'+ Reserva' },
-        { id:'caja-food',icon:'$',name:'Caja',
+        { id:'caja-food',icon:'cash',   name:'Caja',
           title:'Caja del día · Food',
           stats:[['$612K','Vendido hoy'],['142','Comandas hoy'],['$4.3K','Ticket prom']],
           rows:[
@@ -887,7 +1015,7 @@
       tabLabel: 'Aura Vet',
       caption: 'Vista de Aura Vet · veterinarias / clínicas pequeñas',
       sections: [
-        { id:'agenda',  icon:'⌂', name:'Agenda',
+        { id:'agenda',  icon:'calendar',name:'Agenda',
           title:'Turnos · hoy',
           stats:[['28','Turnos hoy'],['$340K','Facturado'],['96%','Asistencia']],
           rows:[
@@ -897,7 +1025,7 @@
             ['12:00 · Mía (Persa)','Castración','ok','Confirmado'],
           ],
           cta:'+ Nuevo turno' },
-        { id:'pacientes',icon:'$', name:'Pacientes',
+        { id:'pacientes',icon:'paw',    name:'Pacientes',
           title:'Fichas · pacientes activos',
           stats:[['1.847','Pacientes'],['+24','Nuevos abr'],['86%','Vacunados']],
           rows:[
@@ -907,7 +1035,7 @@
             ['Mía · Persa · 3 años','OK','ok','Vigente'],
           ],
           cta:'+ Paciente' },
-        { id:'recetas', icon:'▤', name:'Recetas',
+        { id:'recetas', icon:'pill',    name:'Recetas',
           title:'Recetas emitidas · abril',
           stats:[['142','Recetas mes'],['$84K','Medicamentos'],['12','Pendientes hoy']],
           rows:[
@@ -917,7 +1045,7 @@
             ['Mía · Vitaminas','$1.800','ok','Emitida'],
           ],
           cta:'+ Receta' },
-        { id:'caja-vet',icon:'⚙', name:'Caja',
+        { id:'caja-vet',icon:'cash',    name:'Caja',
           title:'Caja del día · Vet',
           stats:[['$340K','Facturado hoy'],['28','Tickets'],['$12K','Ticket prom']],
           rows:[
@@ -933,44 +1061,44 @@
       tabLabel: '+6 más',
       caption: 'Auto · Salon · Prop · Wear · Tools · Finance · todos con la misma lógica',
       sections: [
-        { id:'auto',    icon:'⌂', name:'Auto',
+        { id:'auto',    icon:'car',     name:'Auto',
           title:'Aura Auto · talleres mecánicos',
           stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
           rows:[
-            ['Cliente · vehículo · OT','—','ok','Active'],
-            ['Repuestos · stock','—','ok','Active'],
-            ['Presupuestos · aprobados','—','ok','Active'],
-            ['Caja · facturación','—','ok','Active'],
+            ['Cliente · vehículo · OT','Activo','ok','Disponible'],
+            ['Repuestos · stock','Activo','ok','Disponible'],
+            ['Presupuestos · aprobados','Activo','ok','Disponible'],
+            ['Caja · facturación','Activo','ok','Disponible'],
           ],
           cta:'Ver Aura Auto →' },
-        { id:'salon',   icon:'$', name:'Salon',
+        { id:'salon',   icon:'scissors',name:'Salon',
           title:'Aura Salon · peluquerías / estética',
           stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
           rows:[
-            ['Agenda · profesionales','—','ok','Active'],
-            ['Servicios · catálogo','—','ok','Active'],
-            ['Productos · stock','—','ok','Active'],
-            ['Comisiones · staff','—','ok','Active'],
+            ['Agenda · profesionales','Activo','ok','Disponible'],
+            ['Servicios · catálogo','Activo','ok','Disponible'],
+            ['Productos · stock','Activo','ok','Disponible'],
+            ['Comisiones · staff','Activo','ok','Disponible'],
           ],
           cta:'Ver Aura Salon →' },
-        { id:'prop',    icon:'▤', name:'Prop',
+        { id:'prop',    icon:'home',    name:'Prop',
           title:'Aura Prop · inmobiliarias',
           stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
           rows:[
-            ['Propiedades · ficha','—','ok','Active'],
-            ['Visitas · agenda','—','ok','Active'],
-            ['Contratos · alquiler','—','ok','Active'],
-            ['Comisiones · venta','—','ok','Active'],
+            ['Propiedades · ficha','Activo','ok','Disponible'],
+            ['Visitas · agenda','Activo','ok','Disponible'],
+            ['Contratos · alquiler','Activo','ok','Disponible'],
+            ['Comisiones · venta','Activo','ok','Disponible'],
           ],
           cta:'Ver Aura Prop →' },
-        { id:'todos',   icon:'⚙', name:'Ver todos',
+        { id:'todos',   icon:'layers',  name:'Ver todos',
           title:'11 verticales · 1 sistema operativo',
-          stats:[['Wear','Indumentaria'],['Tools','Ferreterías'],['Finance','Crédito']],
+          stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
           rows:[
-            ['Aura Wear','Indumentaria · stock por talle/color','ok','Disponible'],
-            ['Aura Tools','Ferretería · ventas + presupuestos','ok','Disponible'],
-            ['Aura Finance','Préstamos · cuotas + cobranza','ok','Disponible'],
-            ['¿Tu rubro?','Cotización personalizada en 48hs','warn','A medida'],
+            ['Aura Wear','Indumentaria · talles/colores','ok','Disponible'],
+            ['Aura Tools','Ferretería · ventas + presup','ok','Disponible'],
+            ['Aura Finance','Préstamos · cuotas','ok','Disponible'],
+            ['¿Tu rubro?','Cotización en 48hs','warn','A medida'],
           ],
           cta:'Ver showroom →' },
       ],
@@ -988,6 +1116,16 @@
     cta:  document.querySelector('[data-sc-cta]'),
     cap:  document.querySelector('[data-sc-caption]'),
   };
+
+  // Helper: trigger fade-in animation on the main content area
+  function pulseFade() {
+    const main = document.querySelector('.sc-main');
+    if (!main) return;
+    main.classList.remove('sc-fade-in');
+    // Force reflow para que la animación re-dispare
+    void main.offsetWidth;
+    main.classList.add('sc-fade-in');
+  }
 
   function renderSection(rubroId, sectionId) {
     const r = RUBROS[rubroId]; if (!r) return;
@@ -1007,16 +1145,18 @@
       b.classList.toggle('active', isActive);
       b.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
+    pulseFade();
   }
 
   function renderRubro(rubroId) {
     const r = RUBROS[rubroId]; if (!r) return;
-    // Build sidebar
-    els.nav.innerHTML = r.sections.map((s, i) =>
-      `<button type="button" class="sc-nav-i ${i===0?'active':''}" data-section="${s.id}" role="tab" aria-selected="${i===0?'true':'false'}">
-        <span class="ic">${s.icon}</span><span>${s.name}</span>
-      </button>`
-    ).join('');
+    // Build sidebar with SVG icons
+    els.nav.innerHTML = r.sections.map((s, i) => {
+      const iconSvg = ICONS[s.icon] || ICONS.grid;
+      return `<button type="button" class="sc-nav-i ${i===0?'active':''}" data-section="${s.id}" role="tab" aria-selected="${i===0?'true':'false'}" title="${s.name}">
+        <span class="ic">${iconSvg}</span><span>${s.name}</span>
+      </button>`;
+    }).join('');
     // Wire sidebar clicks
     els.nav.querySelectorAll('.sc-nav-i').forEach(b => {
       b.addEventListener('click', () => renderSection(rubroId, b.dataset.section));
