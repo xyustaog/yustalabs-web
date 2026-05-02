@@ -17,7 +17,8 @@
     .story blockquote{font-family:var(--font-display);font-size:clamp(26px,3vw,40px);line-height:1.15;text-transform:uppercase;color:var(--text);margin:44px 0;padding:26px 30px;border-left:3px solid var(--gold);background:var(--card);border-radius:0 14px 14px 0;letter-spacing:0.01em;}
     .chapter-label{display:inline-block;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:36px;margin-bottom:4px;}
     .chapter-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--gold);margin-right:10px;vertical-align:middle;}
-    .pillar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:28px 0;}
+    .pillar-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0;}
+    @media(max-width:680px){.pillar-grid{grid-template-columns:1fr;}}
     .pillar{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
     .pillar-num{font-family:var(--font-display);font-size:32px;color:var(--gold);line-height:1;margin-bottom:8px;}
     .pillar-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px;}

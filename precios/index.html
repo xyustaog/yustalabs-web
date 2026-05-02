@@ -452,14 +452,14 @@
   const fmt = (usd) => 'USD ' + Math.round(usd).toLocaleString('es-AR');
   function calc(){
     const opt = productSel.options[productSel.selectedIndex];
-    const instalación = parseFloat(opt.dataset.instalación);
+    const setup = parseFloat(opt.dataset.setup);
     const mantMonth = parseFloat(opt.dataset.mant);
     const renewMaint = maintSel.value === 'yes';
     const compMonth = parseFloat(compSel.value);
-    const auraY1 = instalación;
+    const auraY1 = setup;
     let auraY5;
-    if(renewMaint){ auraY5 = instalación + (mantMonth * 48); }
-    else { auraY5 = instalación + 400; }
+    if(renewMaint){ auraY5 = setup + (mantMonth * 48); }
+    else { auraY5 = setup + 400; }
     const compY5 = compMonth * 60;
     const savings = compY5 - auraY5;
     const savingsPct = Math.round((savings / compY5) * 100);
