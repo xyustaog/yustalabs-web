@@ -278,6 +278,89 @@
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
+/* ═════════════════════════════════════════════════════════════════
+   Themed canvases · una visualización única por rubro
+   Reemplaza .sc-rows cuando la sección define render() custom
+   ═════════════════════════════════════════════════════════════════ */
+.sc-canvas{flex:1;min-height:60px;display:flex;flex-direction:column;gap:8px;position:relative;}
+
+/* ─── Aura Prop · mini mapa SVG con pins ─── */
+.sc-prop-map{flex:1;background:linear-gradient(160deg,#0E1218 0%,#161B22 100%);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px;position:relative;overflow:hidden;min-height:190px;}
+.sc-prop-map svg{position:absolute;inset:0;width:100%;height:100%;}
+.sc-prop-map .pp-h{position:absolute;top:10px;left:14px;right:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:3;}
+.sc-prop-map .pp-h-l{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
+.sc-prop-map .pp-h-r{display:flex;gap:5px;}
+.sc-prop-map .pp-chip{font-family:var(--font-mono);font-size:9px;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);color:#9CA1AE;letter-spacing:0.06em;}
+.sc-prop-map .pp-chip.on{background:rgba(240,180,41,0.14);border-color:rgba(240,180,41,0.40);color:var(--gold);font-weight:700;}
+.sc-prop-pin{position:absolute;transform:translate(-50%,-100%);z-index:2;}
+.sc-prop-pin .dot{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(240,180,41,0.18),0 0 12px rgba(240,180,41,0.55);animation:scPropPin 2.4s ease-in-out infinite;cursor:pointer;}
+.sc-prop-pin.alt .dot{background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,0.18),0 0 12px rgba(34,197,94,0.55);}
+.sc-prop-pin.cold .dot{background:#60A5FA;box-shadow:0 0 0 3px rgba(96,165,250,0.18),0 0 10px rgba(96,165,250,0.45);}
+@keyframes scPropPin{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
+.sc-prop-pin .lbl{position:absolute;left:50%;top:-4px;transform:translate(-50%,-100%);font-family:var(--font-mono);font-size:8.5px;color:var(--gold);background:rgba(0,0,0,0.86);padding:2px 6px;border-radius:4px;white-space:nowrap;border:1px solid rgba(240,180,41,0.30);letter-spacing:0.04em;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none;}
+.sc-prop-pin:hover .lbl{opacity:1;}
+
+/* ─── Aura Wear · rack con talles + colores ─── */
+.sc-wear{display:flex;flex-direction:column;gap:8px;flex:1;min-height:60px;}
+.sc-wear-card{background:linear-gradient(180deg,rgba(255,255,255,0.030),rgba(255,255,255,0.012));border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:8px;transition:transform .15s,border-color .2s;}
+.sc-wear-card:hover{border-color:rgba(240,180,41,0.30);transform:translateY(-1px);}
+.sc-wear-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.sc-wear-name{font-family:var(--font-body);font-size:12.5px;font-weight:600;color:var(--text);letter-spacing:-0.012em;}
+.sc-wear-colors{display:flex;gap:4px;}
+.sc-wear-color{width:12px;height:12px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.20);}
+.sc-wear-sizes{display:flex;gap:5px;flex-wrap:wrap;}
+.sc-wear-chip{font-family:var(--font-mono);font-size:9.5px;padding:3px 8px;border-radius:6px;background:rgba(34,197,94,0.10);color:#22C55E;border:1px solid rgba(34,197,94,0.22);letter-spacing:0.04em;font-weight:600;display:inline-flex;align-items:center;gap:3px;}
+.sc-wear-chip.warn{background:rgba(245,158,11,0.10);color:#F59E0B;border-color:rgba(245,158,11,0.22);}
+.sc-wear-chip.danger{background:rgba(239,68,68,0.10);color:#EF4444;border-color:rgba(239,68,68,0.22);}
+.sc-wear-chip b{font-weight:800;font-feature-settings:"tnum";}
+
+/* ─── Aura Salon · agenda semanal ─── */
+.sc-salon{flex:1;background:rgba(0,0,0,0.20);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:5px;min-height:190px;}
+.sc-salon-head{display:grid;grid-template-columns:42px repeat(5,1fr);gap:4px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sc-salon-day{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;text-align:center;letter-spacing:0.08em;font-weight:600;text-transform:uppercase;}
+.sc-salon-day.today{color:var(--gold);font-weight:800;}
+.sc-salon-row{display:grid;grid-template-columns:42px repeat(5,1fr);gap:4px;align-items:center;}
+.sc-salon-time{font-family:var(--font-mono);font-size:9.5px;color:#7A7F8C;text-align:right;padding-right:5px;}
+.sc-salon-cell{height:22px;border-radius:5px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:8.5px;font-weight:700;letter-spacing:0.04em;}
+.sc-salon-cell.lu{background:rgba(240,180,41,0.18);border-color:rgba(240,180,41,0.40);color:var(--gold);}
+.sc-salon-cell.sa{background:rgba(96,165,250,0.18);border-color:rgba(96,165,250,0.40);color:#60A5FA;}
+.sc-salon-cell.ma{background:rgba(167,139,250,0.18);border-color:rgba(167,139,250,0.40);color:#A78BFA;}
+.sc-salon-cell.va{background:rgba(34,197,94,0.18);border-color:rgba(34,197,94,0.40);color:#22C55E;}
+.sc-salon-cell.lib{background:repeating-linear-gradient(45deg,rgba(255,255,255,0.02),rgba(255,255,255,0.02) 2px,transparent 2px,transparent 4px);color:transparent;}
+.sc-salon-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px;border-top:1px solid rgba(255,255,255,0.04);font-family:var(--font-mono);font-size:9px;color:#7A7F8C;}
+.sc-salon-legend span{display:inline-flex;align-items:center;gap:4px;}
+.sc-salon-legend i{width:8px;height:8px;border-radius:2px;display:inline-block;}
+
+/* ─── Aura Commerce · ticket POS ─── */
+.sc-pos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:190px;}
+@media(max-width:540px){.sc-pos{grid-template-columns:1fr;}}
+.sc-pos-grid{background:rgba(0,0,0,0.20);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;align-content:start;}
+.sc-pos-prod{background:linear-gradient(180deg,rgba(240,180,41,0.06),rgba(240,180,41,0.015));border:1px solid rgba(240,180,41,0.18);border-radius:7px;padding:7px 5px;text-align:center;cursor:pointer;transition:transform .15s,border-color .15s;font-family:var(--font-mono);font-size:8.5px;color:var(--text);font-weight:600;line-height:1.3;}
+.sc-pos-prod:hover{border-color:var(--gold);transform:translateY(-1px);}
+.sc-pos-prod b{display:block;color:var(--gold);font-size:9.5px;margin-top:3px;font-weight:800;letter-spacing:0.02em;}
+.sc-pos-ticket{background:#F5F2E8;color:#1a1a1a;border-radius:7px;padding:13px 11px;display:flex;flex-direction:column;gap:5px;font-family:'Courier New',ui-monospace,monospace;font-size:11px;box-shadow:inset 0 1px 0 rgba(0,0,0,0.04);position:relative;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),93% 100%,86% calc(100% - 6px),79% 100%,72% calc(100% - 6px),65% 100%,58% calc(100% - 6px),51% 100%,44% calc(100% - 6px),37% 100%,30% calc(100% - 6px),23% 100%,16% calc(100% - 6px),9% 100%,0 calc(100% - 12px));}
+.sc-pos-tk-h{text-align:center;border-bottom:1px dashed #888;padding-bottom:5px;margin-bottom:3px;font-weight:700;}
+.sc-pos-tk-h small{display:block;font-size:9px;font-weight:400;color:#666;letter-spacing:0.06em;margin-top:1px;}
+.sc-pos-tk-line{display:flex;justify-content:space-between;align-items:flex-start;gap:4px;font-size:10px;line-height:1.3;}
+.sc-pos-tk-line span:first-child{flex:1;}
+.sc-pos-tk-line span:last-child{font-weight:700;}
+.sc-pos-tk-total{border-top:1px dashed #888;padding-top:5px;margin-top:3px;display:flex;justify-content:space-between;font-weight:800;font-size:12px;}
+.sc-pos-tk-foot{font-size:9px;color:#666;text-align:center;margin-top:auto;font-weight:600;letter-spacing:0.04em;}
+
+/* ─── Aura Logistic · mapa de rutas con pins en vivo ─── */
+.sc-route{flex:1;background:linear-gradient(160deg,#0E1218,#141923);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px;position:relative;overflow:hidden;min-height:190px;}
+.sc-route svg{position:absolute;inset:0;width:100%;height:100%;}
+.sc-route-h{position:absolute;top:10px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:3;}
+.sc-route-h-l{font-family:var(--font-mono);font-size:9.5px;color:#9CA1AE;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
+.sc-route-h-r{font-family:var(--font-mono);font-size:9.5px;color:#22C55E;letter-spacing:0.06em;font-weight:700;display:inline-flex;align-items:center;gap:4px;}
+.sc-route-h-r::before{content:'';width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 8px #22C55E;animation:scPulseDot 1.6s infinite;}
+.sc-route-pin{position:absolute;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.sc-route-pin .moto{width:18px;height:18px;border-radius:50%;background:#22C55E;display:flex;align-items:center;justify-content:center;color:#0A0A0F;box-shadow:0 0 0 3px rgba(34,197,94,0.20),0 0 10px rgba(34,197,94,0.55);animation:scPropPin 1.8s ease-in-out infinite;}
+.sc-route-pin .moto svg{width:10px;height:10px;position:static;color:#0A0A0F;}
+.sc-route-pin.idle .moto{background:#7A7F8C;box-shadow:0 0 0 3px rgba(122,127,140,0.20);animation:none;}
+.sc-route-pin .lbl{font-family:var(--font-mono);font-size:8px;color:#fff;background:rgba(0,0,0,0.86);padding:1.5px 5px;border-radius:3px;white-space:nowrap;letter-spacing:0.04em;font-weight:700;}
+.sc-route-stop{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(240,180,41,0.55);border:1.5px solid var(--gold);transform:translate(-50%,-50%);z-index:1;}
+
 /* Smooth fade-in en cambio de sección · usa keyframe animado por JS */
 .sc-fade-in{animation:scFade .35s var(--ease) both;}
 @keyframes scFade{
@@ -756,10 +839,10 @@
       <!-- Nivel 1: Tabs por rubro -->
       <div class="sc-tabs" role="tablist" data-showcase-tabs>
         <button class="sc-tab active" data-rubro="commerce" role="tab" aria-selected="true">Aura Commerce</button>
+        <button class="sc-tab" data-rubro="prop" role="tab" aria-selected="false">Aura Prop</button>
+        <button class="sc-tab" data-rubro="wear" role="tab" aria-selected="false">Aura Wear</button>
+        <button class="sc-tab" data-rubro="salon" role="tab" aria-selected="false">Aura Salon</button>
         <button class="sc-tab" data-rubro="logistic" role="tab" aria-selected="false">Aura Logistic</button>
-        <button class="sc-tab" data-rubro="fit" role="tab" aria-selected="false">Aura Fit</button>
-        <button class="sc-tab" data-rubro="food" role="tab" aria-selected="false">Aura Food</button>
-        <button class="sc-tab" data-rubro="vet" role="tab" aria-selected="false">Aura Vet</button>
         <button class="sc-tab" data-rubro="more" role="tab" aria-selected="false">+6 más</button>
       </div>
 
@@ -781,8 +864,8 @@
               <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-2>177</div><div class="sc-stat-l" data-sc-stat-2l>Operaciones</div></div>
               <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-3>5min</div><div class="sc-stat-l" data-sc-stat-3l>Cierre</div></div>
             </div>
-            <div class="sc-rows" data-sc-rows>
-              <!-- contenido inyectado por JS -->
+            <div class="sc-canvas" data-sc-canvas>
+              <!-- contenido inyectado por JS · puede ser .sc-rows o un themed canvas -->
             </div>
             <button class="sc-cta" type="button" data-sc-cta>+ Cobrar</button>
           </div>
@@ -828,6 +911,101 @@
     layers:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2-10 5 10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>',
   };
 
+  // ─── Theme renderers · una visualización temática por rubro ───
+  // Reciben opciones { stops, pins, items… } y devuelven HTML para inyectar
+  // en .sc-canvas. Si una sección NO define `render`, cae al template de filas.
+  const THEMES = {
+    // Aura Prop · mini SVG city map con pins de propiedades
+    propMap: (data) => {
+      const pins = (data.pins || []).map(p =>
+        `<div class="sc-prop-pin ${p.t || ''}" style="left:${p.x}%;top:${p.y}%;"><span class="lbl">${p.lbl}</span><span class="dot"></span></div>`
+      ).join('');
+      return `<div class="sc-prop-map">
+        <div class="pp-h">
+          <span class="pp-h-l">${data.zone || 'CABA · 47 propiedades'}</span>
+          <span class="pp-h-r"><span class="pp-chip on">Mapa</span><span class="pp-chip">Lista</span><span class="pp-chip">Tarjetas</span></span>
+        </div>
+        <svg viewBox="0 0 400 220" preserveAspectRatio="none" aria-hidden="true">
+          <defs><pattern id="propGrid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M0 0L36 0M0 0L0 36" stroke="rgba(255,255,255,0.04)" stroke-width="1"/></pattern></defs>
+          <rect width="400" height="220" fill="url(#propGrid)"/>
+          <path d="M0 70 L400 70" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
+          <path d="M0 140 L400 140" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
+          <path d="M120 0 L120 220" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
+          <path d="M260 0 L260 220" stroke="rgba(240,180,41,0.12)" stroke-width="1.5"/>
+          <path d="M40 50 Q200 90 380 60" stroke="rgba(96,165,250,0.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        </svg>
+        ${pins}
+      </div>`;
+    },
+    // Aura Wear · cards de prendas con talles y stock
+    wear: (data) => {
+      return `<div class="sc-wear">${(data.products || []).map(p => `
+        <div class="sc-wear-card">
+          <div class="sc-wear-row">
+            <span class="sc-wear-name">${p.name}</span>
+            <span class="sc-wear-colors">${(p.colors || []).map(c => `<span class="sc-wear-color" style="background:${c};"></span>`).join('')}</span>
+          </div>
+          <div class="sc-wear-sizes">${(p.sizes || []).map(s => `<span class="sc-wear-chip ${s.t || ''}"><span>${s.k}</span><b>${s.v}</b></span>`).join('')}</div>
+        </div>`).join('')}</div>`;
+    },
+    // Aura Salon · agenda semanal con turnos
+    salon: (data) => {
+      const days = ['L','M','M','J','V'];
+      const todayIdx = data.todayIdx ?? 2;
+      const head = `<div class="sc-salon-head"><div></div>${days.map((d,i) => `<div class="sc-salon-day ${i===todayIdx?'today':''}">${d}</div>`).join('')}</div>`;
+      const rows = (data.slots || []).map(slot => {
+        const cells = slot.row.map(c => c ? `<div class="sc-salon-cell ${c.t}">${c.lbl||''}</div>` : `<div class="sc-salon-cell lib"></div>`).join('');
+        return `<div class="sc-salon-row"><div class="sc-salon-time">${slot.h}</div>${cells}</div>`;
+      }).join('');
+      return `<div class="sc-salon">${head}${rows}
+        <div class="sc-salon-legend">
+          <span><i style="background:rgba(240,180,41,0.50);"></i>Lucía</span>
+          <span><i style="background:rgba(96,165,250,0.50);"></i>Sabri</span>
+          <span><i style="background:rgba(167,139,250,0.50);"></i>Mariana</span>
+          <span><i style="background:rgba(34,197,94,0.50);"></i>Vale</span>
+        </div>
+      </div>`;
+    },
+    // Aura Commerce · POS con grid de productos + ticket
+    pos: (data) => {
+      const prods = (data.products || []).map(p => `<div class="sc-pos-prod">${p.n}<b>$${p.p}</b></div>`).join('');
+      const lines = (data.ticket || []).map(l => `<div class="sc-pos-tk-line"><span>${l.n}</span><span>$${l.p}</span></div>`).join('');
+      const total = (data.ticket || []).reduce((s,l) => s + (parseFloat((l.p+'').replace(/\./g,'').replace(',','.')) || 0), 0);
+      return `<div class="sc-pos">
+        <div class="sc-pos-grid">${prods}</div>
+        <div class="sc-pos-ticket">
+          <div class="sc-pos-tk-h">TICKET #1247<small>${data.date || '02/05 · 14:23'}</small></div>
+          ${lines}
+          <div class="sc-pos-tk-total"><span>TOTAL</span><span>$${total.toLocaleString('es-AR')}</span></div>
+          <div class="sc-pos-tk-foot">EFECTIVO · gracias por tu compra</div>
+        </div>
+      </div>`;
+    },
+    // Aura Logistic · mapa de rutas con motos en vivo
+    route: (data) => {
+      const stops = (data.stops || []).map(s => `<div class="sc-route-stop" style="left:${s.x}%;top:${s.y}%;"></div>`).join('');
+      const pins  = (data.bikes || []).map(b => `<div class="sc-route-pin ${b.idle?'idle':''}" style="left:${b.x}%;top:${b.y}%;">
+          <div class="moto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></div>
+          <div class="lbl">${b.lbl}</div>
+        </div>`).join('');
+      return `<div class="sc-route">
+        <div class="sc-route-h"><span class="sc-route-h-l">${data.zone || 'CABA · 12 cadetes activos'}</span><span class="sc-route-h-r">en vivo</span></div>
+        <svg viewBox="0 0 400 220" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M30 40 Q150 60 200 100 T380 180" stroke="rgba(34,197,94,0.45)" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+          <path d="M40 180 Q140 140 220 130 T380 60" stroke="rgba(96,165,250,0.45)" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+          <path d="M50 110 L370 110" stroke="rgba(240,180,41,0.18)" stroke-width="1"/>
+          <path d="M200 20 L200 200" stroke="rgba(240,180,41,0.10)" stroke-width="1"/>
+        </svg>
+        ${stops}${pins}
+      </div>`;
+    },
+  };
+
+  // Default rows renderer (fallback for sections without a custom theme)
+  const renderRows = (rows = []) => `<div class="sc-rows">${rows.map(([name, val, tag, label]) =>
+    `<div class="sc-row"><span class="sc-row-name">${name}</span><span class="sc-row-val">${val}</span><span class="sc-row-tag ${tag}">${label}</span></div>`
+  ).join('')}</div>`;
+
   const RUBROS = {
     commerce: {
       tabLabel: 'Aura Commerce',
@@ -836,12 +1014,18 @@
         { id:'caja',    icon:'cash',    name:'Caja',
           title:'Caja del día · Commerce',
           stats:[['$2.4M','Cobrado hoy'],['177','Operaciones'],['5min','Cierre']],
-          rows:[
-            ['Distribuidora López','$24.300','ok','Pagado'],
-            ['García, M.','$12.450','ok','Pagado'],
-            ['Pérez, J.','$8.200','warn','Pendiente'],
-            ['Almacén Sol','$45.700','ok','Pagado'],
-          ],
+          render: () => THEMES.pos({
+            date: '02/05 · 14:23',
+            products: [
+              {n:'Coca 2.25L', p:'2.450'},{n:'Pan lactal', p:'1.800'},{n:'Yerba 1kg', p:'4.200'},
+              {n:'Cerveza 1L', p:'2.100'},{n:'Galletitas', p:'1.450'},{n:'Aceite', p:'3.900'},
+            ],
+            ticket: [
+              {n:'Coca 2.25L pack 6', p:'14.500'},
+              {n:'Yerba 1kg', p:'4.200'},
+              {n:'Pan lactal x2', p:'3.600'},
+            ],
+          }),
           cta:'+ Cobrar' },
         { id:'stock',   icon:'box',     name:'Stock',
           title:'Inventario · Commerce',
@@ -875,19 +1059,181 @@
           cta:'Exportar PDF' },
       ],
     },
+    prop: {
+      tabLabel: 'Aura Prop',
+      caption: 'Vista de Aura Prop · inmobiliarias · mapa real con tu cartera',
+      sections: [
+        { id:'mapa',    icon:'home',     name:'Cartera',
+          title:'Cartera inmobiliaria · CABA',
+          stats:[['47','Activas'],['12','En proceso'],['$420K','Comisiones mes']],
+          render: () => THEMES.propMap({
+            zone: 'CABA · 47 propiedades · tiempo real',
+            pins: [
+              {x:18, y:38, lbl:'Belgrano · USD 185K', t:''},
+              {x:32, y:62, lbl:'Caballito · USD 142K', t:'alt'},
+              {x:48, y:34, lbl:'Palermo · USD 220K', t:''},
+              {x:62, y:78, lbl:'Almagro · USD 98K', t:'cold'},
+              {x:74, y:46, lbl:'Recoleta · USD 310K', t:''},
+              {x:84, y:24, lbl:'Núñez · USD 175K', t:'alt'},
+              {x:24, y:84, lbl:'Boedo · USD 85K', t:'cold'},
+            ],
+          }),
+          cta:'+ Publicar propiedad' },
+        { id:'crm',     icon:'users',    name:'Clientes CRM',
+          title:'Clientes activos · CRM',
+          stats:[['89','Interesados'],['23','Visitando'],['8','Ofertando']],
+          rows:[
+            ['Familia González','3 amb · Belgrano','warn','Visita 5/5'],
+            ['Martínez, R.','2 amb · Palermo','ok','Ofertó'],
+            ['Constructora SA','Lote · Núñez','ok','Cerrado'],
+            ['Pérez, M.','PH · Caballito','warn','Tasando'],
+          ],
+          cta:'+ Cargar interesado' },
+        { id:'visitas', icon:'calendar', name:'Visitas',
+          title:'Agenda de visitas · esta semana',
+          stats:[['18','Esta semana'],['5','Hoy'],['92%','Asistencia']],
+          rows:[
+            ['Lun 11:00 · Belgrano 1450','Familia G.','ok','Confirmada'],
+            ['Lun 16:30 · Palermo','Martínez','ok','Confirmada'],
+            ['Mar 10:00 · Caballito','Pérez M.','warn','Pendiente'],
+            ['Mar 18:00 · Recoleta','Constructora','ok','Confirmada'],
+          ],
+          cta:'+ Agendar visita' },
+        { id:'contratos',icon:'receipt', name:'Contratos',
+          title:'Contratos vigentes · ICL automático',
+          stats:[['62','Vigentes'],['7','Renuevan mes'],['100%','Al día']],
+          rows:[
+            ['García/Pérez · Belgrano','$340.000','ok','Al día'],
+            ['López/Sánchez · Palermo','$280.000','ok','Al día'],
+            ['Ruiz/Constructora','$520.000','warn','Renueva 15/5'],
+            ['Méndez/Vázquez','$195.000','ok','Al día'],
+          ],
+          cta:'Ajustar por ICL →' },
+      ],
+    },
+    wear: {
+      tabLabel: 'Aura Wear',
+      caption: 'Vista de Aura Wear · indumentaria · stock por talle y color',
+      sections: [
+        { id:'stock',   icon:'layers',   name:'Stock',
+          title:'Stock por talle y color',
+          stats:[['487','Prendas activas'],['12','Sin talles'],['$2.8M','Valor inventario']],
+          render: () => THEMES.wear({
+            products: [
+              { name:'Remera básica algodón', colors:['#fff','#000','#1F2937','#DC2626'], sizes:[
+                {k:'XS', v:8, t:''},{k:'S', v:14, t:''},{k:'M', v:6, t:'warn'},{k:'L', v:0, t:'danger'},{k:'XL', v:11, t:''}
+              ]},
+              { name:'Jean recto · azul', colors:['#1E3A8A','#0F172A'], sizes:[
+                {k:'28', v:5, t:''},{k:'30', v:9, t:''},{k:'32', v:12, t:''},{k:'34', v:3, t:'warn'},{k:'36', v:0, t:'danger'}
+              ]},
+              { name:'Buzo capucha unisex', colors:['#6B7280','#1F2937','#7C2D12'], sizes:[
+                {k:'S', v:4, t:'warn'},{k:'M', v:11, t:''},{k:'L', v:8, t:''},{k:'XL', v:6, t:''}
+              ]},
+            ],
+          }),
+          cta:'+ Cargar prenda' },
+        { id:'ventas',  icon:'cash',     name:'Ventas',
+          title:'Ventas del día · todos los canales',
+          stats:[['$348K','Vendido hoy'],['42','Tickets'],['$8.3K','Ticket promedio']],
+          rows:[
+            ['Combo 2 remeras','$24.000','ok','Mostrador'],
+            ['Jean recto + cinto','$48.500','ok','Mostrador'],
+            ['Buzo capucha','$32.000','ok','Online'],
+            ['3 medias + bóxer','$18.700','ok','Mostrador'],
+          ],
+          cta:'+ Vender' },
+        { id:'temporada',icon:'chart',   name:'Temporada',
+          title:'Análisis de temporada · otoño-invierno',
+          stats:[['+24%','vs año pasado'],['Buzos','Top categoría'],['85%','Sell-through']],
+          rows:[
+            ['Buzos capucha','138 un','ok','Estrella'],
+            ['Jeans recto','94 un','ok','Sólido'],
+            ['Camperas','52 un','warn','Lento'],
+            ['Remeras MC','12 un','danger','Liquidar'],
+          ],
+          cta:'Ver reporte completo' },
+        { id:'clientes',icon:'users',    name:'Clientes',
+          title:'Clientes frecuentes · fidelización',
+          stats:[['1.247','Clientes activos'],['68%','Recurrencia'],['$32K','LTV promedio']],
+          rows:[
+            ['Sofía González','12 compras','ok','VIP'],
+            ['Martín Ruiz','8 compras','ok','Frecuente'],
+            ['Lucía Pérez','5 compras','warn','Activa'],
+            ['Andrés Torres','3 compras','warn','Nuevo'],
+          ],
+          cta:'+ Sumar cliente' },
+      ],
+    },
+    salon: {
+      tabLabel: 'Aura Salon',
+      caption: 'Vista de Aura Salon · peluquerías y estética · agenda en vivo',
+      sections: [
+        { id:'agenda',  icon:'calendar', name:'Agenda',
+          title:'Agenda semanal · 4 profesionales',
+          stats:[['86%','Ocupación'],['142','Turnos sem'],['$420K','Facturado']],
+          render: () => THEMES.salon({
+            todayIdx: 2,
+            slots: [
+              { h:'09', row:[{t:'lu',lbl:'Lu'}, null, {t:'sa',lbl:'Sa'}, null, {t:'ma',lbl:'Ma'}] },
+              { h:'10', row:[null, {t:'ma',lbl:'Ma'}, {t:'lu',lbl:'Lu'}, {t:'va',lbl:'Va'}, null] },
+              { h:'11', row:[{t:'sa',lbl:'Sa'}, {t:'lu',lbl:'Lu'}, null, {t:'va',lbl:'Va'}, {t:'lu',lbl:'Lu'}] },
+              { h:'12', row:[null, {t:'va',lbl:'Va'}, {t:'ma',lbl:'Ma'}, null, {t:'sa',lbl:'Sa'}] },
+              { h:'14', row:[{t:'lu',lbl:'Lu'}, {t:'sa',lbl:'Sa'}, {t:'lu',lbl:'Lu'}, {t:'ma',lbl:'Ma'}, {t:'va',lbl:'Va'}] },
+              { h:'15', row:[{t:'ma',lbl:'Ma'}, null, {t:'va',lbl:'Va'}, {t:'lu',lbl:'Lu'}, {t:'sa',lbl:'Sa'}] },
+            ],
+          }),
+          cta:'+ Reservar turno' },
+        { id:'staff',   icon:'users',    name:'Staff',
+          title:'Equipo · 4 profesionales · comisiones',
+          stats:[['4','Activas'],['$320K','Comisiones mes'],['4.9★','Rating prom']],
+          rows:[
+            ['Lucía · color y mechas','38 turnos','ok','$98K com.'],
+            ['Sabrina · cortes','42 turnos','ok','$84K com.'],
+            ['Mariana · maquillaje','28 turnos','ok','$72K com.'],
+            ['Valentina · uñas','34 turnos','ok','$66K com.'],
+          ],
+          cta:'+ Sumar profesional' },
+        { id:'productos',icon:'box',     name:'Productos',
+          title:'Stock de productos · venta + uso',
+          stats:[['86','SKUs activos'],['7','Bajo stock'],['$240K','Valor stock']],
+          rows:[
+            ['Tinta L\'Oréal 6.0','24 un','ok','En stock'],
+            ['Shampoo profesional','8 un','warn','Reponer'],
+            ['Esmalte semiperm.','42 un','ok','En stock'],
+            ['Mascarilla nutritiva','3 un','danger','Crítico'],
+          ],
+          cta:'+ Producto' },
+        { id:'clientas',icon:'users',    name:'Clientas',
+          title:'Fichas de clientas · historial',
+          stats:[['486','Clientas activas'],['72%','Vuelven 60d'],['8.2','Visitas/año']],
+          rows:[
+            ['María González','últ 12/4','ok','Color + corte'],
+            ['Sofía Martínez','últ 28/4','ok','Mechas balayage'],
+            ['Lucía Ruiz','últ 5/3','warn','Reagenda?'],
+            ['Carla Pérez','últ 22/4','ok','Manicura'],
+          ],
+          cta:'+ Cargar clienta' },
+      ],
+    },
     logistic: {
       tabLabel: 'Aura Logistic',
       caption: 'Vista de Aura Logistic · usado en producción por SLE Mensajería',
       sections: [
         { id:'viajes',  icon:'truck',   name:'Viajes',
-          title:'Viajes del día · Logistic',
+          title:'Viajes del día · cadetes en vivo',
           stats:[['43','Viajes hoy'],['$284K','Facturado'],['8','En curso']],
-          rows:[
-            ['#247 · Belgrano → Caballito','$3.200','ok','Entregado'],
-            ['#248 · Recoleta → Palermo','$2.400','ok','Entregado'],
-            ['#249 · Núñez → Microcentro','$4.100','warn','En curso'],
-            ['#250 · Saavedra → Once','$3.800','warn','Asignado'],
-          ],
+          render: () => THEMES.route({
+            zone: 'CABA · 12 cadetes activos',
+            stops: [
+              {x:18, y:38},{x:42, y:62},{x:68, y:42},{x:78, y:78},{x:32, y:78},{x:60, y:24},{x:88, y:58},
+            ],
+            bikes: [
+              {x:24, y:50, lbl:'#03', idle:false},
+              {x:54, y:36, lbl:'#07', idle:false},
+              {x:72, y:64, lbl:'#11', idle:false},
+              {x:38, y:82, lbl:'#14', idle:true},
+            ],
+          }),
           cta:'+ Cargar viaje' },
         { id:'cadetes', icon:'bike',    name:'Cadetes',
           title:'Equipo · Logistic',
@@ -1063,9 +1409,39 @@
       tabLabel: '+6 más',
       caption: '6 verticales más · misma lógica adaptada al rubro',
       sections: [
+        { id:'fit',     icon:'users',   name:'Fit',
+          title:'Aura Fit · gimnasios, pilates, yoga',
+          stats:[['184','Socios activos'],['+12','Nuevos abr'],['94%','Renovación']],
+          rows:[
+            ['Membresías y cuotas','Activo','ok','Cobranza al día'],
+            ['Asistencia con QR','Activo','ok','En vivo'],
+            ['Vencimientos y avisos','Activo','ok','Auto'],
+            ['Reportes financieros','Activo','ok','Listo'],
+          ],
+          cta:'Conocer Aura Fit →' },
+        { id:'food',    icon:'pizza',   name:'Food',
+          title:'Aura Food · restaurantes y bares',
+          stats:[['43','Comandas activas'],['8min','Promedio'],['12','Mesas ocupadas']],
+          rows:[
+            ['Comandas y cocina','Activo','ok','Tiempo real'],
+            ['Salón y mesas','Activo','ok','Mapa visual'],
+            ['Carta y stock','Activo','ok','Listo'],
+            ['Caja y delivery','Activo','ok','Listo'],
+          ],
+          cta:'Conocer Aura Food →' },
+        { id:'vet',     icon:'paw',     name:'Vet',
+          title:'Aura Vet · veterinarias y clínicas',
+          stats:[['1.247','Pacientes'],['38','Vacunas hoy'],['$84K','Facturado']],
+          rows:[
+            ['Ficha de pacientes','Activo','ok','Historial'],
+            ['Vacunación y recordatorios','Activo','ok','Auto'],
+            ['Turnos online','Activo','ok','Listo'],
+            ['Farmacia y stock','Activo','ok','Listo'],
+          ],
+          cta:'Conocer Aura Vet →' },
         { id:'auto',    icon:'car',     name:'Auto',
           title:'Aura Auto · talleres mecánicos',
-          stats:[['Auto','Talleres'],['OT','Órdenes'],['Stock','Repuestos']],
+          stats:[['28','OT activas'],['12','En curso'],['$420K','Cobrado mes']],
           rows:[
             ['Órdenes de trabajo','Activo','ok','Listo'],
             ['Repuestos y stock','Activo','ok','Listo'],
@@ -1073,50 +1449,40 @@
             ['Caja y facturación','Activo','ok','Listo'],
           ],
           cta:'Conocer Aura Auto →' },
-        { id:'salon',   icon:'scissors',name:'Salon',
-          title:'Aura Salon · peluquerías y estética',
-          stats:[['Agenda','Reservas'],['Staff','Comisiones'],['Stock','Productos']],
+        { id:'tools',   icon:'box',     name:'Tools',
+          title:'Aura Tools · ferreterías y corralones',
+          stats:[['3.482','SKUs'],['62','Bajo stock'],['$8.4M','Inventario']],
           rows:[
-            ['Agenda profesional','Activo','ok','Listo'],
-            ['Servicios y catálogo','Activo','ok','Listo'],
-            ['Productos y stock','Activo','ok','Listo'],
-            ['Comisiones de staff','Activo','ok','Listo'],
+            ['Catálogo masivo (5K+ SKUs)','Activo','ok','Búsqueda fast'],
+            ['Presupuestos B2B','Activo','ok','Imprime ya'],
+            ['Lista de precios proveedores','Activo','ok','Listo'],
+            ['Caja con tarjetas + cuotas','Activo','ok','Listo'],
           ],
-          cta:'Conocer Aura Salon →' },
-        { id:'prop',    icon:'home',    name:'Prop',
-          title:'Aura Prop · inmobiliarias',
-          stats:[['Props','Catálogo'],['Visitas','Agenda'],['Cobros','Cuotas']],
+          cta:'Conocer Aura Tools →' },
+        { id:'finance', icon:'cash',    name:'Finance',
+          title:'Aura Finance · prestamistas y financieras',
+          stats:[['142','Préstamos'],['$8.94M','Cartera'],['96%','Cobrado']],
           rows:[
-            ['Ficha de propiedades','Activo','ok','Listo'],
-            ['Visitas y agenda','Activo','ok','Listo'],
-            ['Contratos de alquiler','Activo','ok','Listo'],
-            ['Comisiones de venta','Activo','ok','Listo'],
+            ['Cartera de préstamos','Activo','ok','Cuotas auto'],
+            ['Cobranza y morosidad','Activo','ok','Alertas'],
+            ['Calculadora de intereses','Activo','ok','Listo'],
+            ['Reportes financieros','Activo','ok','Listo'],
           ],
-          cta:'Conocer Aura Prop →' },
-        { id:'todos',   icon:'layers',  name:'Ver todos',
-          title:'11 verticales · 1 sistema operativo',
-          stats:[['11','Verticales'],['1','Cerebro'],['∞','Adaptación']],
-          rows:[
-            ['Aura Wear · indumentaria','Talles + colores','ok','Listo'],
-            ['Aura Tools · ferretería','Ventas + presup','ok','Listo'],
-            ['Aura Finance · préstamos','Cuotas + cobranza','ok','Listo'],
-            ['¿Tu rubro?','Cotización 48hs','warn','A medida'],
-          ],
-          cta:'Ver todos los rubros →' },
+          cta:'Conocer Aura Finance →' },
       ],
     },
   };
 
   const els = {
-    tabs: document.querySelectorAll('[data-showcase-tabs] .sc-tab'),
-    nav:  document.querySelector('[data-sc-nav]'),
-    title:document.querySelector('[data-sc-title]'),
-    s1:document.querySelector('[data-sc-stat-1]'),  s1l:document.querySelector('[data-sc-stat-1l]'),
-    s2:document.querySelector('[data-sc-stat-2]'),  s2l:document.querySelector('[data-sc-stat-2l]'),
-    s3:document.querySelector('[data-sc-stat-3]'),  s3l:document.querySelector('[data-sc-stat-3l]'),
-    rows: document.querySelector('[data-sc-rows]'),
-    cta:  document.querySelector('[data-sc-cta]'),
-    cap:  document.querySelector('[data-sc-caption]'),
+    tabs:   document.querySelectorAll('[data-showcase-tabs] .sc-tab'),
+    nav:    document.querySelector('[data-sc-nav]'),
+    title:  document.querySelector('[data-sc-title]'),
+    s1:     document.querySelector('[data-sc-stat-1]'),  s1l: document.querySelector('[data-sc-stat-1l]'),
+    s2:     document.querySelector('[data-sc-stat-2]'),  s2l: document.querySelector('[data-sc-stat-2l]'),
+    s3:     document.querySelector('[data-sc-stat-3]'),  s3l: document.querySelector('[data-sc-stat-3l]'),
+    canvas: document.querySelector('[data-sc-canvas]'),
+    cta:    document.querySelector('[data-sc-cta]'),
+    cap:    document.querySelector('[data-sc-caption]'),
   };
 
   // Helper: trigger fade-in animation on the main content area
@@ -1136,9 +1502,10 @@
     els.s1.textContent = s.stats[0][0];  els.s1l.textContent = s.stats[0][1];
     els.s2.textContent = s.stats[1][0];  els.s2l.textContent = s.stats[1][1];
     els.s3.textContent = s.stats[2][0];  els.s3l.textContent = s.stats[2][1];
-    els.rows.innerHTML = s.rows.map(([name, val, tag, label]) =>
-      `<div class="sc-row"><span class="sc-row-name">${name}</span><span class="sc-row-val">${val}</span><span class="sc-row-tag ${tag}">${label}</span></div>`
-    ).join('');
+    // Custom themed render() takes precedence; fallback to default rows
+    els.canvas.innerHTML = (typeof s.render === 'function')
+      ? s.render()
+      : renderRows(s.rows || []);
     els.cta.textContent = s.cta;
     els.cap.textContent = r.caption;
     // Update sidebar active state
