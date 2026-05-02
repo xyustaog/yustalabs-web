@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contacto — Hablemos 30 segundos | Yusta Labs</title>
-<meta name="description" content="Contactá a Yusta Labs por WhatsApp, email o formulario. Te armamos una demo con tu negocio en 48 hs. Gratis y sin compromiso.">
+<meta name="description" content="Contactá a Yusta Labs por WhatsApp, email o formulario. Te armamos una demo personalizada con tu negocio en 48 hs.">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <meta property="og:type" content="website"><meta property="og:url" content="https://yustalabs.com/contacto"><meta property="og:title" content="Contacto · Yusta Labs"><meta property="og:image" content="https://yustalabs.com/og-image.png"><meta property="og:locale" content="es_AR">
 <link rel="stylesheet" href="/assets/theme.css?v=20260429b">
@@ -19,6 +19,12 @@
 .contact-form label{display:block;font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
 .contact-form input,.contact-form select,.contact-form textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:14px;transition:border-color var(--t);}
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:none;border-color:var(--gold);}
+.contact-form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F0B429' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;cursor:pointer;}
+.contact-form select option{background:#14161C;color:#E8EAF0;padding:10px;}
+.contact-form select option:disabled{color:#5A5E69;}
+#c-rubro-otro-wrap{display:none;margin-top:10px;animation:slidedown .2s ease;}
+#c-rubro-otro-wrap.show{display:block;}
+@keyframes slidedown{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
 .contact-form textarea{resize:vertical;min-height:110px;}
 .contact-form-field{margin-bottom:14px;}
 .contact-side{display:flex;flex-direction:column;gap:14px;}
@@ -76,8 +82,8 @@
           </div>
           <div class="contact-form-field">
             <label for="c-rubro">Rubro</label>
-            <select id="c-rubro" required>
-              <option value="">Elegí un rubro...</option>
+            <select id="c-rubro" required onchange="toggleRubroOtro(this.value)">
+              <option value="" disabled selected>Elegí tu rubro…</option>
               <option value="Aura Salon">Peluquería / Estética</option>
               <option value="Aura Fit">Gimnasio</option>
               <option value="Aura Finance">Financiera / Prestamista</option>
@@ -89,8 +95,11 @@
               <option value="Aura Wear">Indumentaria</option>
               <option value="Aura Prop">Inmobiliaria</option>
               <option value="Aura Commerce">Kiosco / Almacén / Comercio</option>
-              <option value="Otro">Otro / Custom</option>
+              <option value="Otro">Otro (no está en la lista)</option>
             </select>
+            <div id="c-rubro-otro-wrap">
+              <input id="c-rubro-otro" type="text" placeholder="¿Cuál es tu rubro? Ej: lavadero, óptica, juguetería…" />
+            </div>
           </div>
         </div>
         <div class="contact-form-field">
@@ -158,6 +167,19 @@
 
 <script src="/assets/main.js" defer></script>
 <script>
+function toggleRubroOtro(val){
+  const wrap = document.getElementById('c-rubro-otro-wrap');
+  const inp  = document.getElementById('c-rubro-otro');
+  if (val === 'Otro') {
+    wrap.classList.add('show');
+    inp.required = true;
+    setTimeout(() => inp.focus(), 100);
+  } else {
+    wrap.classList.remove('show');
+    inp.required = false;
+    inp.value = '';
+  }
+}
 async function enviarForm(e){
   e.preventDefault();
   const btn = document.getElementById('contact-submit');
@@ -166,7 +188,11 @@ async function enviarForm(e){
   const n=document.getElementById('c-nombre').value;
   const b=document.getElementById('c-negocio').value;
   const t=document.getElementById('c-telefono').value;
-  const r=document.getElementById('c-rubro').value;
+  let   r=document.getElementById('c-rubro').value;
+  if (r === 'Otro') {
+    const otroVal = document.getElementById('c-rubro-otro').value.trim();
+    r = otroVal ? `Otro: ${otroVal}` : 'Otro';
+  }
   const em=document.getElementById('c-email').value;
   const m=document.getElementById('c-mensaje').value;
 
