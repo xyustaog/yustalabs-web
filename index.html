@@ -1646,6 +1646,126 @@
           cta:'+ Empresa' },
       ],
     },
+    // ─── Top-level Food (promoted from "more" subsections) ───
+    food: {
+      tabLabel: 'Aura Food',
+      caption: 'Vista de Aura Food · restaurantes / bares · cocina y mesas en tiempo real',
+      sections: [
+        { id:'cocina', icon:'pizza', name:'Cocina',
+          title:'Aura Food · cocina en tiempo real',
+          stats:[['43','Comandas activas'],['8min','Promedio'],['12','Mesas ocupadas']],
+          render: () => THEMES.food({
+            tickets: [
+              { mesa:4,  hora:'14:23', items:'Milanesa napolitana · papas · agua', t:'warn', min:'8 min' },
+              { mesa:7,  hora:'14:18', items:'Pizza muzzarella · cerveza 1L',       t:'ok',   min:'12 min' },
+              { mesa:12, hora:'14:30', items:'Ensalada caesar · agua con gas',      t:'warn', min:'2 min' },
+              { mesa:9,  hora:'14:08', items:'Suprema maryland · papas',            t:'late', min:'22 min' },
+            ],
+          }),
+          cta:'+ Nueva comanda' },
+        { id:'mesas',  icon:'grid',  name:'Mesas',
+          title:'Mapa de mesas · salón principal',
+          stats:[['12','Ocupadas'],['8','Libres'],['4','Por liberar']],
+          rows:[
+            ['Mesa 1','4 personas · 14:05','ok','En curso'],
+            ['Mesa 4','2 personas · 14:23','warn','Pidiendo'],
+            ['Mesa 7','6 personas · 14:18','ok','Comiendo'],
+            ['Mesa 9','3 personas · 14:08','danger','Demorada'],
+          ],
+          cta:'+ Asignar mesa' },
+        { id:'caja',   icon:'cash',  name:'Caja del día',
+          title:'Caja · turno tarde',
+          stats:[['$184K','Cobrado hoy'],['127','Cubiertos'],['$1.450','Ticket prom']],
+          rows:[
+            ['Mesa 7 · cerveza + pizza','$8.400','ok','Cobrado · MP'],
+            ['Mesa 12 · ensalada + agua','$3.200','ok','Cobrado · efectivo'],
+            ['Mesa 4 · milanesa + papas','$5.600','warn','Pendiente'],
+          ],
+          cta:'+ Cerrar caja' },
+      ],
+    },
+
+    // ─── Top-level Finance (promoted) ───
+    finance: {
+      tabLabel: 'Aura Finance',
+      caption: 'Vista de Aura Finance · financieras / créditos · cartera y cobranzas',
+      sections: [
+        { id:'cartera', icon:'cash', name:'Cartera',
+          title:'Aura Finance · cartera de préstamos',
+          stats:[['142','Préstamos'],['$8.94M','Cartera'],['96%','Cobrado']],
+          render: () => THEMES.finance({
+            loans: [
+              { id:'142', name:'M. González', amt:'2.500',  cuota:6,  total:12, next:'5/5 (3d)',   stat:'Al día',    t:'ok' },
+              { id:'141', name:'J. Pérez',    amt:'4.800',  cuota:3,  total:24, next:'8/5 (6d)',   stat:'Al día',    t:'ok' },
+              { id:'140', name:'L. Ruiz',     amt:'1.200',  cuota:11, total:12, next:'12/5 (10d)', stat:'Vence 10d', t:'warn' },
+              { id:'139', name:'D. Martínez', amt:'3.600',  cuota:8,  total:18, next:'2/5',        stat:'Atrasado',  t:'danger' },
+            ],
+          }),
+          cta:'+ Nuevo préstamo' },
+        { id:'cuotas',  icon:'calendar', name:'Cuotas del mes',
+          title:'Cuotas a vencer · próximos 30 días',
+          stats:[['68','A vencer'],['$1.2M','A cobrar'],['8','Atrasadas']],
+          rows:[
+            ['M. González · cuota 6/12','$208 · vence 5/5','warn','Recordatorio'],
+            ['J. Pérez · cuota 3/24','$200 · vence 8/5','ok','Programado'],
+            ['L. Ruiz · cuota 11/12','$100 · vence 12/5','ok','Programado'],
+            ['D. Martínez · cuota 8/18','$200 · vencido 2d','danger','Llamar'],
+          ],
+          cta:'+ Cobrar cuota' },
+        { id:'clientes', icon:'users', name:'Clientes',
+          title:'Clientes activos · CRM crediticio',
+          stats:[['142','Activos'],['8','En mora'],['$62K','Promedio cartera']],
+          rows:[
+            ['M. González','Cliente desde 2024 · 2 préstamos','ok','Score 8/10'],
+            ['J. Pérez','Cliente desde 2023 · 1 préstamo','ok','Score 9/10'],
+            ['D. Martínez','Cliente desde 2025 · 1 préstamo','warn','Score 5/10'],
+          ],
+          cta:'+ Cargar cliente' },
+      ],
+    },
+
+    // ─── Top-level Vet (promoted) ───
+    vet: {
+      tabLabel: 'Aura Vet',
+      caption: 'Vista de Aura Vet · veterinarias · ficha del paciente y agenda',
+      sections: [
+        { id:'paciente', icon:'paw', name:'Paciente',
+          title:'Aura Vet · ficha del paciente',
+          stats:[['1.247','Pacientes'],['38','Vacunas hoy'],['$84K','Facturado']],
+          render: () => THEMES.vet({
+            emoji:'🐶', name:'Milo',
+            meta:'Labrador · 3 años · 28kg', tag:'2 alertas',
+            vacunas:[
+              { name:'Antirrábica',          stat:'al día',     t:'ok' },
+              { name:'Triple viral (DHPP)',  stat:'al día',     t:'ok' },
+              { name:'Desparasitar',         stat:'vence 7d',   t:'warn' },
+              { name:'Antipulgas',           stat:'vencida 12d',t:'danger' },
+              { name:'Bordetella (kennel)',  stat:'al día',     t:'ok' },
+            ],
+          }),
+          cta:'+ Nueva consulta' },
+        { id:'agenda',   icon:'calendar', name:'Agenda',
+          title:'Agenda del día · turnos',
+          stats:[['18','Turnos hoy'],['12','Confirmados'],['3','Sin asistir']],
+          rows:[
+            ['09:00 · Milo (Labrador) · Rabia','Familia González','ok','Confirmado'],
+            ['10:30 · Luna (Caniche) · Control','Pérez','ok','Confirmado'],
+            ['12:00 · Rocco (Bulldog) · Cirugía','Martínez','warn','Esperando'],
+            ['15:30 · Misha (Gato) · Vacuna','Ruiz','danger','No vino'],
+          ],
+          cta:'+ Cargar turno' },
+        { id:'caja',     icon:'cash', name:'Caja del día',
+          title:'Caja · jornada en curso',
+          stats:[['$84K','Facturado hoy'],['38','Atendidos'],['$2.210','Ticket prom']],
+          rows:[
+            ['Milo · vacuna antirrábica','$3.200','ok','Cobrado · MP'],
+            ['Luna · control + desparasitar','$5.800','ok','Cobrado · efectivo'],
+            ['Rocco · cirugía + meds','$28.400','warn','Pendiente'],
+          ],
+          cta:'+ Cobrar consulta' },
+      ],
+    },
+
     more: {
       tabLabel: '+6 más',
       caption: '6 verticales más · cada uno con su propia interfaz',
