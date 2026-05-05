@@ -820,6 +820,70 @@
 .cta-box{max-width:800px;margin:0 auto;padding:clamp(40px,5vw,60px);background:var(--card);border:1px solid var(--border-accent);border-radius:var(--r-lg);position:relative;overflow:hidden;}
 .cta-box::before{content:'';position:absolute;top:-50%;left:-20%;width:140%;height:200%;background:radial-gradient(ellipse,var(--gold-glow) 0%,transparent 60%);pointer-events:none;}
 .cta-title{font-family:var(--font-display);font-size:clamp(36px,4.5vw,56px);line-height:1.05;font-weight:700;letter-spacing:-0.035em;text-transform:none;margin:0 0 20px;position:relative;color:var(--text);}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE FIX 2026-05-04 · Polish responsive sin romper desktop
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width:759px){
+  /* — Showcase tabs externos (Aura Commerce / Prop / Wear / Salon...) —
+     Indicador visual de scroll horizontal a la derecha (mask gradient) +
+     scroll-snap para que se sienta natural al deslizar. */
+  .sc-tabs{
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 32px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 32px),transparent);
+    padding-right:32px;
+  }
+  .sc-tab{scroll-snap-align:start;flex-shrink:0;}
+
+  /* — Sub-nav interno del widget (Caja / Stock / Cuentas / Reportes en mobile) — */
+  .sc-side{
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent);
+    padding-right:28px;
+  }
+  .sc-nav-i{scroll-snap-align:start;flex-shrink:0;}
+
+  /* — Stats internos: legibilidad en pantallas chicas — */
+  .sc-stats{gap:6px;}
+  .sc-stat{padding:8px 10px;}
+  .sc-stat-n{font-size:14px;line-height:1.05;}
+  .sc-stat-l{font-size:9px;line-height:1.2;letter-spacing:0.06em;}
+
+  /* — Caption del widget no se pega al borde — */
+  .sc-caption{padding-left:14px;padding-right:14px;}
+
+  /* — Showcase footer: 2 botones full-width apilados — */
+  .showcase-foot{flex-direction:column;align-items:stretch;gap:10px;}
+  .showcase-foot a.btn{width:100%;text-align:center;justify-content:center;}
+  .showcase-foot-text{order:2;text-align:center;}
+
+  /* — Hero CTA row: stack en pantallas chicas, no overflow — */
+  .hero-cta-row{flex-direction:column;align-items:stretch;gap:10px;}
+  .hero-cta-row .btn,.hero-cta-row a{width:100%;justify-content:center;}
+
+  /* — Stat cards mobile: gap reducido y números más respirados — */
+  .stats-grid{padding:0 4px;}
+}
+
+@media (max-width:430px){
+  /* Pantallas extra-chicas (iPhone SE / 13 mini / Android compactos) */
+  .sc-stats{grid-template-columns:repeat(2,1fr);}
+  .sc-stat-n{font-size:16px;}
+  .showcase-title{font-size:26px;line-height:1.08;}
+  .sc-h{font-size:14px;}
+  .sc-tab{padding:6px 11px;font-size:11px;}
+  .sc-nav-i{padding:7px 10px;font-size:11px;min-height:30px;}
+}
+
+/* — Asegurar que ningún hijo del body fuerce overflow horizontal en mobile — */
+@media (max-width:759px){
+  html,body{overflow-x:hidden;}
+  .container,section,header,footer{max-width:100%;}
+}
 </style>
 </head>
 <body>
