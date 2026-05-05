@@ -1070,13 +1070,13 @@
     <div class="showcase-card">
       <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
 
-      <!-- Nivel 1: Tabs por rubro -->
+      <!-- Nivel 1: Tabs por rubro · ORDEN: Prop → Food → Logistic → Finance → Vet → más -->
       <div class="sc-tabs" role="tablist" data-showcase-tabs>
-        <button class="sc-tab active" data-rubro="commerce" role="tab" aria-selected="true">Aura Commerce</button>
-        <button class="sc-tab" data-rubro="prop" role="tab" aria-selected="false">Aura Prop</button>
-        <button class="sc-tab" data-rubro="wear" role="tab" aria-selected="false">Aura Wear</button>
-        <button class="sc-tab" data-rubro="salon" role="tab" aria-selected="false">Aura Salon</button>
+        <button class="sc-tab active" data-rubro="prop" role="tab" aria-selected="true">Aura Prop</button>
+        <button class="sc-tab" data-rubro="food" role="tab" aria-selected="false">Aura Food</button>
         <button class="sc-tab" data-rubro="logistic" role="tab" aria-selected="false">Aura Logistic</button>
+        <button class="sc-tab" data-rubro="finance" role="tab" aria-selected="false">Aura Finance</button>
+        <button class="sc-tab" data-rubro="vet" role="tab" aria-selected="false">Aura Vet</button>
         <button class="sc-tab" data-rubro="more" role="tab" aria-selected="false">+6 más</button>
       </div>
 
@@ -1090,21 +1090,21 @@
           <!-- Main content area · cambia según tab + sidebar item -->
           <div class="sc-main">
             <div class="sc-topbar">
-              <div class="sc-h" data-sc-title>Caja del día · Commerce</div>
+              <div class="sc-h" data-sc-title>Cartera inmobiliaria · CABA</div>
               <span class="sc-pill">en vivo</span>
             </div>
             <div class="sc-stats">
-              <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-1>$2.4M</div><div class="sc-stat-l" data-sc-stat-1l>Cobrado hoy</div></div>
-              <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-2>177</div><div class="sc-stat-l" data-sc-stat-2l>Operaciones</div></div>
-              <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-3>5min</div><div class="sc-stat-l" data-sc-stat-3l>Cierre</div></div>
+              <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-1>47</div><div class="sc-stat-l" data-sc-stat-1l>Activas</div></div>
+              <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-2>12</div><div class="sc-stat-l" data-sc-stat-2l>En proceso</div></div>
+              <div class="sc-stat"><div class="sc-stat-n" data-sc-stat-3>$420K</div><div class="sc-stat-l" data-sc-stat-3l>Comisiones mes</div></div>
             </div>
             <div class="sc-canvas" data-sc-canvas>
               <!-- contenido inyectado por JS · puede ser .sc-rows o un themed canvas -->
             </div>
-            <button class="sc-cta" type="button" data-sc-cta>+ Cobrar</button>
+            <button class="sc-cta" type="button" data-sc-cta>+ Publicar propiedad</button>
           </div>
         </div>
-        <div class="sc-caption" data-sc-caption>Vista de Aura Commerce · kiosco / comercio / mayorista</div>
+        <div class="sc-caption" data-sc-caption>Vista de Aura Prop · inmobiliarias · mapa real con tu cartera</div>
       </div>
     </div>
 
@@ -1882,8 +1882,8 @@
     renderRubro(r);
   }));
 
-  // Initial render
-  renderRubro('commerce');
+  // Initial render · Aura Prop primero (el más pro · cartera + mapa)
+  renderRubro('prop');
 })();
 </script>
 
